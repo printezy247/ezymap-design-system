@@ -134,6 +134,22 @@ export default ${JSON.stringify(preset, null, 2)};
 `
 );
 
+/* ---------- docs/palette.svg (README swatch strip) ---------- */
+const pick = ["background", "surface", "surface-elevated", "foreground", "body-text", "primary", "primary-glow", "accent", "accent-glow", "status-stop"];
+const cell = 112, gap = 12;
+const sw = pick
+  .map((n, i) => {
+    const t = colors.find((c) => c.name === n);
+    const x = gap + i * (cell + gap);
+    const light = ["foreground", "body-text", "primary", "accent"].includes(n);
+    return `<g transform="translate(${x} 12)"><rect width="${cell}" height="88" rx="12" fill="${t.value}" stroke="#ffffff" stroke-opacity=".18"/><text x="10" y="74" font-family="monospace" font-size="11" fill="${light ? "#06120c" : "#f2f4f2"}">${t.value}</text></g><text x="${x}" y="122" font-family="monospace" font-size="11" fill="#a8b0ab">${n}</text>`;
+  })
+  .join("");
+writeFileSync(
+  join(root, "docs/palette.svg"),
+  `<svg xmlns="http://www.w3.org/2000/svg" width="${gap + pick.length * (cell + gap)}" height="136" viewBox="0 0 ${gap + pick.length * (cell + gap)} 136" role="img" aria-label="EzyMap colour palette"><rect width="100%" height="100%" rx="14" fill="#0a0c0b"/>${sw}</svg>\n`
+);
+
 console.log(
   `tokens: ${colors.length} colours, ${spacing.length} spacing, ${radius.length} radii, ${shadow.length} shadows, ${gradient.length} gradients, ${styles.length} type styles`
 );
