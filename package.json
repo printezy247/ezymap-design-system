@@ -1,0 +1,38 @@
+{
+  "name": "@ezymap/design-system",
+  "version": "1.0.0",
+  "description": "EzyMap design system: tokens, React components and brand assets.",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/printezy247/ezymap-design-system.git"
+  },
+  "exports": {
+    "./tokens.json": "./tokens/tokens.json",
+    "./tokens.css": "./tokens/tokens.css",
+    "./tokens": "./tokens/tokens.ts",
+    "./tailwind-preset": "./tokens/tailwind-preset.js",
+    "./components/bundle.js": "./components/bundle.js",
+    "./components/bundle.css": "./components/bundle.css",
+    "./components/index.d.ts": "./components/index.d.ts",
+    "./react": "./components/react/index.ts",
+    "./assets/*": "./assets/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "tokens/",
+    "components/",
+    "assets/",
+    "docs/",
+    "scripts/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build:tokens": "node scripts/build-tokens.mjs",
+    "docs": "node scripts/build-tokens.mjs && npx --yes serve docs"
+  }
+}

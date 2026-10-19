@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EzyMap design system</title>
+<meta name="description" content="EzyMap design system: tokens, components and logos.">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/ezymap-3d-favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/bundle.css">
+<style>
+  html { scroll-behavior: smooth; }
+  body { line-height: 1.6; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--space-4); }
+  header.top { border-bottom: 1px solid var(--border); background: var(--surface); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; padding-top: var(--space-4); padding-bottom: var(--space-4); }
+  header.top img { height: 44px; width: auto; display: block; }
+  nav a { color: var(--body-text); text-decoration: none; font-size: 14px; margin-left: var(--space-4); }
+  nav a:hover, nav a:focus-visible { color: var(--primary); }
+  section.block { padding: var(--space-20) 0 var(--space-12); border-bottom: 1px solid var(--border); }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; margin: 0; color: var(--foreground); }
+  h1 { font-size: 44px; line-height: 1.05; font-weight: 600; }
+  h2 { font-size: 36px; line-height: 1.1; font-weight: 600; margin: 8px 0 var(--space-3); }
+  h3 { font-size: 20px; font-weight: 600; margin: var(--space-8) 0 var(--space-4); }
+  .intro { padding: var(--space-20) 0 var(--space-12); }
+  .lede { max-width: 640px; color: var(--body-text); font-size: 18px; }
+  .grid { display: grid; gap: var(--space-4); }
+  .swatches { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .sw { border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; background: var(--surface); }
+  .sw .chip { height: 72px; border-bottom: 1px solid var(--border); background-image: linear-gradient(45deg, #1e2321 25%, transparent 25%, transparent 75%, #1e2321 75%), linear-gradient(45deg, #1e2321 25%, #141817 25%, #141817 75%, #1e2321 75%); background-size: 16px 16px; background-position: 0 0, 8px 8px; }
+  .sw .chip i { display: block; height: 100%; }
+  .sw .meta { padding: 10px 12px; }
+  .sw b { display: block; font-size: 14px; color: var(--foreground); }
+  .sw code, .mono { font-family: var(--font-mono); font-size: 12px; color: var(--body-text); word-break: break-all; }
+  .sw p { margin: 4px 0 0; font-size: 12px; line-height: 16px; color: var(--muted-foreground); }
+  .type-row { display: grid; grid-template-columns: 180px 1fr; gap: var(--space-4); padding: var(--space-4) 0; border-top: 1px solid var(--border); align-items: baseline; }
+  .type-row .tag { font-family: var(--font-mono); font-size: 12px; color: var(--muted-foreground); }
+  .type-row .tag b { display: block; color: var(--primary); font-weight: 500; }
+  .sample { color: var(--foreground); overflow-wrap: anywhere; }
+  .space-row { display: grid; grid-template-columns: 160px 70px 1fr; gap: var(--space-4); align-items: center; padding: 6px 0; }
+  .bar { height: 14px; background: var(--gradient-green); border-radius: 3px; }
+  .radii { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .rad { text-align: center; }
+  .rad i { display: block; height: 84px; background: var(--surface-elevated); border: 1px solid var(--accent); }
+  .rad span { display: block; margin-top: 8px; }
+  .shadows { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-8); }
+  .sh i { display: block; height: 96px; border-radius: var(--radius-xl); background: var(--gradient-metal); border: 1px solid var(--border); }
+  .sh span { display: block; margin-top: 12px; }
+  .grads { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .gr i { display: block; height: 72px; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+  .gr span { display: block; margin-top: 8px; }
+  .comp { margin-bottom: var(--space-8); }
+  .comp .stage { border: 1px solid var(--border); border-radius: var(--radius-2xl); background: var(--surface); padding: var(--space-6); }
+  .comp .stage .ezm-row { padding: 8px 0; }
+  .comp p.note { color: var(--muted-foreground); font-size: 14px; margin: 8px 0 0; }
+  .logos { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .logo { border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; background: var(--surface); }
+  .logo .art { display: flex; align-items: center; justify-content: center; height: 180px; padding: var(--space-4); background: var(--background); }
+  .logo .art.light { background: #ffffff; }
+  .logo .art img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .logo .cap { padding: 10px 12px; border-top: 1px solid var(--border); }
+  footer { padding: var(--space-12) 0; color: var(--muted-foreground); font-size: 14px; }
+  a { color: var(--primary); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #load-error { display: none; border: 1px solid var(--accent); border-radius: var(--radius-lg); padding: var(--space-4); color: var(--accent); }
+  @media (max-width: 640px) { h1 { font-size: 34px; } h2 { font-size: 30px; } .type-row { grid-template-columns: 1fr; gap: 4px; } .space-row { grid-template-columns: 110px 56px 1fr; } nav { display: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <img src="../assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap">
+    <nav aria-label="Sections">
+      <a href="#colour">Colour</a><a href="#type">Type</a><a href="#spacing">Spacing</a><a href="#radii">Radii</a><a href="#shadows">Shadows</a><a href="#components">Components</a><a href="#logos">Logos</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v1.0.0</p>
+    <h1>EzyMap design system</h1>
+    <p class="lede">Green and gold on black, with white type. Tokens, components and logos for the EzyMap Algo desk.</p>
+    <p id="load-error" role="alert">Tokens could not be loaded. Serve this folder over http (for example <code>npx serve</code>) instead of opening the file directly.</p>
+  </div>
+
+  <section class="block" id="colour"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Colour</h2><div class="grid swatches" id="colours"></div></section>
+  <section class="block" id="type"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Type scale</h2><p class="lede">Space Grotesk for display, Inter Tight for text, IBM Plex Mono for figures.</p><div id="types"></div></section>
+  <section class="block" id="spacing"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Spacing</h2><div id="spaces"></div></section>
+  <section class="block" id="radii"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Radii</h2><div class="grid radii" id="radius"></div></section>
+  <section class="block" id="shadows"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Shadows and gradients</h2><div class="grid shadows" id="shadow"></div><h3>Gradients</h3><div class="grid grads" id="gradient"></div></section>
+
+  <section class="block" id="components"><p class="eyebrow" style="color:var(--primary);margin:0">Components</p><h2>Components</h2><div id="root"></div></section>
+
+  <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logos</h2><div class="grid logos" id="logo-grid"></div></section>
+</main>
+
+<footer><div class="wrap">EzyMap design system v1.0.0 · All rights reserved. Proprietary.</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../components/bundle.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  var cssName = function (n) { return n.replace(/\./g, "\\."); };
+
+  fetch("../tokens/tokens.json").then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (t) {
+    var theme = t.color.themes[0].id;
+    t.color.tokens.forEach(function (c) {
+      var val = typeof c.value === "string" ? c.value : c.value[theme];
+      var sw = el("div", "sw", '<div class="chip"><i style="background:var(--' + cssName(c.name) + ')"></i></div><div class="meta"><b>' + esc(c.name) + '</b><code>' + esc(val) + '</code><p>' + esc(c.usage) + '</p></div>');
+      $("colours").appendChild(sw);
+    });
+    t.type.groups.forEach(function (g) {
+      g.styles.forEach(function (s) {
+        var upper = ["label-caps", "eyebrow", "flag"].indexOf(s.name) >= 0 ? "text-transform:uppercase;" : "";
+        var sample = s.sample || s.name;
+        var row = el("div", "type-row", '<div class="tag"><b>' + esc(s.name) + '</b>' + esc(s.fontSize) + ' / ' + esc(s.lineHeight) + ' · ' + esc(s.fontWeight) + '</div><div class="sample ' + esc(s.name) + '" style="' + upper + '">' + esc(sample) + '</div>');
+        $("types").appendChild(row);
+      });
+    });
+    t.spacing.tokens.forEach(function (s) {
+      $("spaces").appendChild(el("div", "space-row", '<span class="mono">' + esc(s.name) + '</span><span class="mono">' + esc(s.value) + '</span><span class="bar" style="width:' + esc(s.value) + '"></span>'));
+    });
+    t.radius.tokens.forEach(function (r) {
+      $("radius").appendChild(el("div", "rad", '<i style="border-radius:var(--' + cssName(r.name) + ')"></i><span class="mono">' + esc(r.name) + ' · ' + esc(r.value) + '</span>'));
+    });
+    t.shadow.tokens.forEach(function (s) {
+      $("shadow").appendChild(el("div", "sh", '<i style="box-shadow:var(--' + cssName(s.name) + ')"></i><span class="mono">' + esc(s.name) + '</span>'));
+    });
+    t.gradient.tokens.forEach(function (g) {
+      $("gradient").appendChild(el("div", "gr", '<i style="background:var(--' + cssName(g.name) + ')"></i><span class="mono">' + esc(g.name) + '</span>'));
+    });
+  }).catch(function () { $("load-error").style.display = "block"; });
+
+  var logos = [
+    ["ezymap-3d-horizontal-on-dark.svg", "Horizontal, on dark", ""],
+    ["ezymap-3d-horizontal-on-light.svg", "Horizontal, on light", "light"],
+    ["ezymap-3d-stacked-on-dark.svg", "Stacked, on dark", ""],
+    ["ezymap-3d-mark.svg", "Mark", ""],
+    ["ezymap-3d-appicon.png", "App icon", ""],
+    ["ezymap-3d-favicon.svg", "Favicon (SVG)", ""],
+    ["ezymap-3d-favicon.png", "Favicon (PNG)", ""],
+    ["ezymap-3d-apple-touch-180.png", "Apple touch icon 180", ""],
+    ["ezyai-mark.svg", "EzyAI mark", ""],
+    ["macro-desk-appicon.png", "Macro Desk icon", ""],
+    ["macro-desk-horizontal-on-dark.svg", "Macro Desk lockup", ""]
+  ];
+  logos.forEach(function (l) {
+    $("logo-grid").appendChild(el("div", "logo", '<div class="art ' + l[2] + '"><img src="../assets/logos/' + l[0] + '" alt="' + esc(l[1]) + '"></div><div class="cap"><b style="font-size:14px">' + esc(l[1]) + '</b><br><code class="mono">' + esc(l[0]) + '</code></div>'));
+  });
+
+  var E = window.EzyMap, h = React.createElement;
+  function Comp(name, note, node) {
+    return h("div", { className: "comp", key: name },
+      h("h3", null, name),
+      h("div", { className: "stage" }, node),
+      h("p", { className: "note" }, note));
+  }
+  var up = h("svg", { width: 14, height: 14, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.75, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true }, h("path", { d: "M3 17l6-6 4 4 8-8" }), h("path", { d: "M14 7h7v7" }));
+  var items = [
+    Comp("Button", "primary, outline and ghost in sm, md and lg.", h("div", null,
+      h("div", { className: "ezm-row" }, h(E.Button, { size: "lg" }, "Join Free Channel"), h(E.Button, { variant: "outline", size: "lg" }, "See packages"), h(E.Button, { variant: "ghost", size: "lg" }, "Ask Sarah")),
+      h("div", { className: "ezm-row" }, h(E.Button, { size: "sm" }, "Small"), h(E.Button, null, "Medium"), h(E.Button, { variant: "outline", disabled: true }, "Disabled")))),
+    Comp("Card", "Brushed-metal panel; lift for clickable cards, holo for the one key panel per view.", h("div", { className: "ezm-row", style: { alignItems: "stretch" } },
+      h(E.Card, { eyebrow: "Inside the desk", title: "Full transparency" }, h("p", { className: "ezm-card__body" }, "Entry, stop and targets, posted live.")),
+      h(E.Card, { lift: true, eyebrow: "Lift", title: "Hover me" }, h("p", { className: "ezm-card__body" }, "Rises 3px with a green underglow.")),
+      h(E.Card, { holo: true, eyebrow: "Holo", title: "Key panel" }, h("p", { className: "ezm-card__body" }, "One per view.")))),
+    Comp("HeroPill", "Hero badge or live stat.", h("div", { className: "ezm-row" }, h(E.HeroPill, { icon: up, value: "12,400" }, "members"), h(E.HeroPill, null, "Live format"))),
+    Comp("SignalFlag", "Running pulses, waiting blinks, closed states hold still.", h("div", { className: "ezm-row" },
+      ["pending", "running", "tp", "be", "sl", "cancelled"].map(function (s) { return h(E.SignalFlag, { key: s, status: s }); }))),
+    Comp("EzyAiLogo", "Gold isometric cube on a deep-green disc.", h("div", { className: "ezm-row" },
+      h(E.EzyAiLogo, { style: { width: 72, height: 72 }, title: "EzyAI" }), h(E.EzyAiLogo, { style: { width: 120, height: 120 }, withWordmark: true, title: "EzyAI" }))),
+    Comp("HudFrame", "Hairline frame with gold corner brackets.", h("div", { style: { padding: "12px 0" } },
+      h(E.HudFrame, { label: "Jack's plan", meta: "XAUUSD · H1" }, h("p", { style: { margin: 0, color: "var(--body-text)" } }, "Hold > S1: look for continuation. Break and reclaim R1: watch R2.")))),
+    Comp("StatTile", "Mono data readout.", h("div", { className: "ezm-row" },
+      h(E.StatTile, { label: "XAUUSD", value: "2,395.120", tone: "up", delta: "+12.35 (+0.53%)" }),
+      h(E.StatTile, { label: "EURUSD", value: "1.0842", tone: "down", delta: "-0.0021 (-0.19%)" }),
+      h(E.StatTile, { label: "Sample signal", value: "1:3.2" }))),
+    Comp("GridFloor", "Perspective grid with a soft green glow behind the hero object.", h(E.GridFloor, { height: 280 },
+      h("img", { src: "../assets/logos/ezymap-3d-mark.svg", alt: "EzyMap mark", style: { height: 160, width: "auto" } })))
+  ];
+  ReactDOM.createRoot($("root")).render(h(React.Fragment, null, items));
+})();
+</script>
+</body>
+</html>

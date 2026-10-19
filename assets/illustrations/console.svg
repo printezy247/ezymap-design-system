@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" width="1000" height="360" role="img" aria-label="EzyMap ALGO - counted-from-code telemetry, an isometric order book stepping up into gold, and a cumulative-R curve drawing itself">
+  <title>EzyMap ALGO - counted-from-code telemetry, an isometric order book stepping up into gold, and a cumulative-R curve drawing itself</title>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1613"></stop>
+      <stop offset="55%" stop-color="#0a0c0b"></stop>
+      <stop offset="100%" stop-color="#12100a"></stop>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2fbf71"></stop>
+      <stop offset="100%" stop-color="#c9a13a"></stop>
+    </linearGradient>
+    <linearGradient id="slabTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5fe6a0"></stop>
+      <stop offset="100%" stop-color="#2fbf71"></stop>
+    </linearGradient>
+    <linearGradient id="goldTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6c766"></stop>
+      <stop offset="100%" stop-color="#c9a13a"></stop>
+    </linearGradient>
+    <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2fbf71" stop-opacity="0.30"></stop>
+      <stop offset="100%" stop-color="#2fbf71" stop-opacity="0"></stop>
+    </linearGradient>
+    
+    <linearGradient id="fadeR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"></stop>
+      <stop offset="80%" stop-color="#ffffff" stop-opacity="1"></stop>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop>
+    </linearGradient>
+    <mask id="fadeMask" maskUnits="userSpaceOnUse" x="-12" y="-110" width="326" height="158">
+      <rect x="-12" y="-110" width="326" height="158" fill="url(#fadeR)"></rect>
+    </mask>
+    <radialGradient id="vig" cx="50%" cy="45%" r="70%">
+      <stop offset="60%" stop-color="#0a0c0b" stop-opacity="0"></stop>
+      <stop offset="100%" stop-color="#0a0c0b" stop-opacity="1"></stop>
+    </radialGradient>
+    <pattern id="iso" width="60" height="34" patternUnits="userSpaceOnUse">
+      <path d="M0 17 L30 0 L60 17 L30 34 Z" fill="none" stroke="#2fbf71" stroke-width=".5" opacity=".14"></path>
+    </pattern>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#f2f4f2" opacity=".025"></rect>
+    </pattern>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="34"></feGaussianBlur>
+    </filter>
+  </defs>
+
+  
+
+  <rect width="1000" height="360" fill="url(#sky)"></rect>
+  <g class="drift"><rect x="-60" y="0" width="1120" height="360" fill="url(#iso)"></rect></g>
+  <g class="glow">
+    <ellipse cx="250" cy="250" rx="210" ry="100" fill="#2fbf71" opacity=".07" filter="url(#soft)"></ellipse>
+    <ellipse cx="800" cy="150" rx="190" ry="90" fill="#c9a13a" opacity=".06" filter="url(#soft)"></ellipse>
+  </g>
+  <rect width="1000" height="360" fill="url(#vig)"></rect>
+
+  
+  <g class="mono" font-size="20" letter-spacing="1.2" fill="#8b948f" text-anchor="start">
+    <text x="40" y="34">ROUTES 31</text>
+    <text x="200" y="34">TABLES 22</text>
+    <text x="360" y="34">LOCALES 6</text>
+    <text x="520" y="34">STRINGS 3366</text>
+  </g>
+  <g stroke="#2fbf71" stroke-width="1" opacity=".25">
+    <path d="M178 20 L178 40"></path><path d="M338 20 L338 40"></path><path d="M498 20 L498 40"></path>
+  </g>
+
+  
+  <g transform="translate(40 120)" text-anchor="start">
+    <text x="0" y="0" font-size="46" font-weight="700" fill="#f2f4f2">EzyMap <tspan fill="#c9a13a">ALGO</tspan></text>
+    <text class="mono" x="2" y="34" font-size="19" letter-spacing="2" fill="#8b948f">SIGNALS · MACRO · AUTOPILOT</text>
+  </g>
+
+  
+  <g transform="translate(40 186)" text-anchor="start">
+    <rect x="0" y="0" width="520" height="36" rx="8" fill="#141817" stroke="#2fbf71" stroke-opacity=".35"></rect>
+    <g transform="translate(22 18)">
+      <circle class="ping" cx="0" cy="0" r="4" fill="none" stroke="#2fbf71" stroke-width="2"></circle>
+      <circle cx="0" cy="0" r="5" fill="#5fe6a0"></circle>
+    </g>
+    <text class="mono" x="42" y="24" font-size="19" letter-spacing=".8" fill="#8b948f">BOARD PUBLIC · REFRESH 60s · BATCH ≤50</text>
+  </g>
+
+  
+  <g class="mono" font-size="19" letter-spacing=".8" fill="#8b948f" text-anchor="start">
+    <text x="40" y="262">MIGRATIONS 33 · SKUS 30</text>
+    <text x="40" y="300">REPLIES 29 · COUNTED FROM CODE</text>
+  </g>
+
+  
+  <g transform="translate(440 286)">
+    <g transform="translate(0 0)"><g class="rise d1">
+      <path d="M0 0 L30 -17 L60 0 L30 17 Z" fill="url(#slabTop)"></path>
+      <path d="M0 0 L30 17 L30 46 L0 29 Z" fill="#1c7a47"></path>
+      <path d="M60 0 L30 17 L30 46 L60 29 Z" fill="#13603a"></path>
+    </g></g>
+    <g transform="translate(66 -24)"><g class="rise d2">
+      <path d="M0 0 L30 -17 L60 0 L30 17 Z" fill="url(#slabTop)"></path>
+      <path d="M0 0 L30 17 L30 52 L0 35 Z" fill="#1c7a47"></path>
+      <path d="M60 0 L30 17 L30 52 L60 35 Z" fill="#13603a"></path>
+    </g></g>
+    <g transform="translate(132 -48)"><g class="rise d3">
+      <path d="M0 0 L30 -17 L60 0 L30 17 Z" fill="url(#goldTop)"></path>
+      <path d="M0 0 L30 17 L30 58 L0 41 Z" fill="#9c7c2c"></path>
+      <path d="M60 0 L30 17 L30 58 L60 41 Z" fill="#7d6323"></path>
+    </g></g>
+  </g>
+
+  
+  <g transform="translate(660 195)">
+    <path mask="url(#fadeMask)" d="M0 0 L43 -18 L86 -12 L129 -38 L172 -30 L215 -66 L258 -58 L300 -96 L300 40 L0 40 Z" fill="url(#areaFill)"></path>
+    <path class="draw" d="M0 0 L43 -18 L86 -12 L129 -38 L172 -30 L215 -66 L258 -58 L300 -96" fill="none" stroke="url(#brand)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+    <g class="tick">
+      <circle class="ping" cx="0" cy="0" r="4" fill="none" stroke="#2fbf71" stroke-width="2"></circle>
+      <circle cx="0" cy="0" r="5" fill="#5fe6a0"></circle>
+    </g>
+  </g>
+
+  
+  <g stroke="#2fbf71" stroke-width="1.5" opacity=".45" fill="none">
+    <path d="M12 12 l30 0 M12 12 l0 30"></path>
+    <path d="M988 12 l-30 0 M988 12 l0 30"></path>
+    <path d="M12 348 l30 0 M12 348 l0 -30"></path>
+    <path d="M988 348 l-30 0 M988 348 l0 -30"></path>
+  </g>
+
+  <rect width="1000" height="360" fill="url(#scan)"></rect>
+  <rect x="0" y="355" width="1000" height="5" fill="url(#brand)"></rect>
+</svg>

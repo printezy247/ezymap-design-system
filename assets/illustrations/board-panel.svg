@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 390" width="1000" height="390" role="img" aria-label="An EzyAI signal card and its equity curve - setup score, stop-to-target progress, live R, the win-rate formula, and the six enforced status words">
+  <title>An EzyAI signal card and its equity curve, drawn the way the live board renders one</title>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0e1613"></stop>
+      <stop offset="55%" stop-color="#0a0c0b"></stop>
+      <stop offset="100%" stop-color="#12100a"></stop>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2fbf71"></stop>
+      <stop offset="100%" stop-color="#c9a13a"></stop>
+    </linearGradient>
+    <linearGradient id="sweep" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2fbf71" stop-opacity="0"></stop>
+      <stop offset="100%" stop-color="#5fe6a0" stop-opacity=".55"></stop>
+    </linearGradient>
+    <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2fbf71" stop-opacity="0.30"></stop>
+      <stop offset="100%" stop-color="#2fbf71" stop-opacity="0"></stop>
+    </linearGradient>
+    
+    <linearGradient id="fadeR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"></stop>
+      <stop offset="78%" stop-color="#ffffff" stop-opacity="1"></stop>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop>
+    </linearGradient>
+    <mask id="fadeMask" maskUnits="userSpaceOnUse" x="-12" y="-118" width="296" height="134">
+      <rect x="-12" y="-118" width="296" height="134" fill="url(#fadeR)"></rect>
+    </mask>
+    <radialGradient id="vig" cx="50%" cy="45%" r="70%">
+      <stop offset="60%" stop-color="#0a0c0b" stop-opacity="0"></stop>
+      <stop offset="100%" stop-color="#0a0c0b" stop-opacity="1"></stop>
+    </radialGradient>
+    <pattern id="iso" width="60" height="34" patternUnits="userSpaceOnUse">
+      <path d="M0 17 L30 0 L60 17 L30 34 Z" fill="none" stroke="#2fbf71" stroke-width=".5" opacity=".12"></path>
+    </pattern>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#f2f4f2" opacity=".025"></rect>
+    </pattern>
+    
+    <clipPath id="sheenClip"><rect x="64" y="164" width="323" height="10" rx="5"></rect></clipPath>
+  </defs>
+
+  
+
+  <rect width="1000" height="390" fill="url(#sky)"></rect>
+  <g class="drift"><rect x="-60" y="0" width="1120" height="390" fill="url(#iso)"></rect></g>
+  <rect width="1000" height="390" fill="url(#vig)"></rect>
+
+  
+  <rect x="40" y="56" width="580" height="250" rx="10" fill="#141817" stroke="#2fbf71" stroke-opacity=".3"></rect>
+
+  <g text-anchor="start">
+    <text x="64" y="104" font-size="30" font-weight="700" fill="#f2f4f2">XAUUSD</text>
+  </g>
+  <g transform="translate(230 80)" text-anchor="start">
+    <rect x="0" y="0" width="58" height="32" rx="6" fill="#0f7a4a"></rect>
+    <text class="mono" x="12" y="22" font-size="19" fill="#f2f4f2">BUY</text>
+  </g>
+  <g transform="translate(300 80)" text-anchor="start">
+    <rect x="0" y="0" width="104" height="32" rx="6" fill="#161a18" stroke="#2fbf71" stroke-opacity=".45"></rect>
+    <text class="mono" x="12" y="22" font-size="19" fill="#5fe6a0">RUNNING</text>
+  </g>
+  <g transform="translate(416 80)" text-anchor="start">
+    <rect x="0" y="0" width="92" height="32" rx="6" fill="#161a18" stroke="#8b948f" stroke-opacity=".45"></rect>
+    <text class="mono" x="12" y="22" font-size="19" fill="#8b948f">SAMPLE</text>
+  </g>
+
+  
+  <text class="mono" x="64" y="152" font-size="19" fill="#8b948f" text-anchor="start">SL</text>
+  <text class="mono" x="584" y="152" font-size="19" fill="#8b948f" text-anchor="end">TP</text>
+  <rect x="64" y="164" width="520" height="10" rx="5" fill="#161a18"></rect>
+  <g class="fill"><rect x="64" y="164" width="323" height="10" rx="5" fill="url(#brand)"></rect></g>
+  <g clip-path="url(#sheenClip)">
+    <g class="sheen"><rect x="64" y="164" width="140" height="10" fill="url(#sweep)"></rect></g>
+  </g>
+  <rect x="177" y="161" width="2" height="16" rx="1" fill="#8b948f"></rect>
+  
+  <rect class="tickmark" x="385.5" y="158" width="3" height="22" rx="1.5" fill="#5fe6a0"></rect>
+
+  <g class="mono" text-anchor="start">
+    <text x="64" y="216" font-size="19" letter-spacing="1.4" fill="#8b948f">SETUP</text>
+    <text x="64" y="250" font-size="26" fill="#f2f4f2">78 / 100</text>
+    <text x="220" y="216" font-size="19" letter-spacing="1.4" fill="#8b948f">LIVE R</text>
+    <text x="220" y="250" font-size="26" fill="#5fe6a0">+1.4R</text>
+    <text x="330" y="216" font-size="19" letter-spacing="1.4" fill="#8b948f">TF</text>
+    <text x="330" y="250" font-size="26" fill="#f2f4f2">H1</text>
+    <text x="410" y="216" font-size="19" letter-spacing="1.4" fill="#8b948f">ENTRY</text>
+    <text x="410" y="250" font-size="26" fill="#f2f4f2">4592 – 4596</text>
+    <text x="220" y="286" font-size="19" fill="#8b948f">derived from the last price</text>
+  </g>
+
+  
+  <rect x="650" y="56" width="310" height="250" rx="10" fill="#141817" stroke="#2fbf71" stroke-opacity=".3"></rect>
+  <g class="mono" text-anchor="start">
+    <text x="674" y="94" font-size="19" letter-spacing="1.4" fill="#8b948f">WIN RATE</text>
+    <text x="674" y="272" font-size="19" fill="#8b948f">wins / (wins + losses)</text>
+    <text x="674" y="296" font-size="19" fill="#8b948f">break-even excluded</text>
+  </g>
+  <g transform="translate(664 244)">
+    <path mask="url(#fadeMask)" d="M0 -7.2 L38 -16.8 L76 -12 L114 -40.8 L152 -31.2 L190 -62.4 L228 -84 L272 -105.6 L272 7.2 L0 7.2 Z" fill="url(#areaFill)"></path>
+    <path class="draw" d="M0 -7.2 L38 -16.8 L76 -12 L114 -40.8 L152 -31.2 L190 -62.4 L228 -84 L272 -105.6" fill="none" stroke="url(#brand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <g transform="translate(272 -105.6)"><g class="endpoint">
+      <circle class="ping" cx="0" cy="0" r="4" fill="none" stroke="#c9a13a" stroke-width="2"></circle>
+      <circle cx="0" cy="0" r="5" fill="#e6c766"></circle>
+    </g></g>
+  </g>
+
+  
+  <g class="mono" font-size="19" letter-spacing="1.1" text-anchor="start">
+    <text x="40" y="340" fill="#f2f4f2">pending</text>
+    <text x="175" y="340" fill="#f2f4f2">running</text>
+    <text x="310" y="340" fill="#5fe6a0">tp</text>
+    <text x="375" y="340" fill="#e6c766">be</text>
+    <text x="440" y="340" fill="#f2f4f2">sl</text>
+    <text x="505" y="340" fill="#f2f4f2">cancelled</text>
+  </g>
+  
+  <path d="M513 348 L513 364 L527 364" stroke="#8b948f" stroke-width="1.2" fill="none" opacity=".8"></path>
+  <text class="mono" x="535" y="370" font-size="19" fill="#8b948f" text-anchor="start">(never counted)</text>
+
+  <g stroke="#2fbf71" stroke-width="1.5" opacity=".45" fill="none">
+    <path d="M12 12 l30 0 M12 12 l0 30"></path>
+    <path d="M988 12 l-30 0 M988 12 l0 30"></path>
+    <path d="M12 378 l30 0 M12 378 l0 -30"></path>
+    <path d="M988 378 l-30 0 M988 378 l0 -30"></path>
+  </g>
+
+  <rect width="1000" height="390" fill="url(#scan)"></rect>
+  <rect x="0" y="385" width="1000" height="5" fill="url(#brand)"></rect>
+</svg>

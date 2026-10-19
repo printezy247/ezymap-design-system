@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>EzyAI</title>
+  <defs>
+    <radialGradient id="disc" cx="30%" cy="22%" r="80%">
+      <stop offset="0%" stop-color="#1c6539"></stop>
+      <stop offset="45%" stop-color="#0f3a23"></stop>
+      <stop offset="100%" stop-color="#061c11"></stop>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4dc93"></stop>
+      <stop offset="35%" stop-color="#e0bc63"></stop>
+      <stop offset="72%" stop-color="#c9a13a"></stop>
+      <stop offset="100%" stop-color="#a3802a"></stop>
+    </linearGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#34b06a"></stop>
+      <stop offset="100%" stop-color="#1a7241"></stop>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="256" fill="url(#disc)"></circle>
+  <g transform="translate(0 44)">
+    <path d="M256 116 L338 164 L256 212 L174 164 Z" fill="url(#top)"></path>
+    <path d="M174 164 L256 212 L256 308 L174 260 Z" fill="#0e3a22"></path>
+    <path d="M338 164 L338 260 L256 308 L256 212 Z" fill="#07220f"></path>
+    <path d="M256 116 L338 164 L338 260 L256 308 L174 260 L174 164 Z" fill="none" stroke="url(#gold)" stroke-width="16" stroke-linejoin="round"></path>
+    <path d="M174 164 L256 212 L338 164" fill="none" stroke="url(#gold)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path>
+    <circle cx="256" cy="212" r="13" fill="url(#gold)"></circle>
+    <circle cx="256" cy="212" r="7" fill="#0a2a18"></circle>
+  </g>
+</svg>
