@@ -136,6 +136,132 @@ const orbit = svg(
 );
 writeFileSync(join(logosDir, "ezymap-mark-animated-orbit.svg"), orbit);
 
+/* ---------- v2.2: hero animated logos (gold + fintech) ---------- */
+
+// Gold variant: every green stop in the shared defs/art is remapped to the
+// gold ramp, so the gem renders as a premium all-metal piece.
+const goldify = (s) =>
+  s
+    .replaceAll("#5be39a", "#f7e3a0")
+    .replaceAll("#2fbf71", "#e0bc63")
+    .replaceAll("#13804d", "#b38e2f")
+    .replaceAll("#14935a", "#e8c877")
+    .replaceAll("#0f7a4a", "#c9a13a")
+    .replaceAll("#073d25", "#6b531a")
+    .replaceAll("#9af0c0", "#fff3c4");
+const defsGold = goldify(defs);
+const artGold = goldify(art);
+
+// All-gold gem for premium moments (one per view).
+writeFileSync(
+  join(logosDir, "ezymap-mark-gold.svg"),
+  svg("0 0 512 512", `${defsGold}${artGold}`, 'role="img" aria-label="EzyMap gold mark"')
+);
+
+// Hero mark: the fullest animation in the set — floating gem, counter-rotating
+// orbit rings, a comet on the outer ring, a breathing halo and a sheen sweep.
+const hero = svg(
+  "0 0 640 640",
+  `${defs}<style>
+.ezm-h-float{animation:ezmHFloat 6s ease-in-out infinite;transform-box:view-box;transform-origin:center}
+.ezm-h-ring{animation:ezmHSpin 16s linear infinite;transform-box:view-box;transform-origin:320px 330px}
+.ezm-h-ring2{animation:ezmHSpin2 22s linear infinite;transform-box:view-box;transform-origin:320px 330px}
+.ezm-h-pulse{animation:ezmHPulse 3.2s ease-out infinite;transform-box:view-box;transform-origin:320px 320px}
+.ezm-h-sweep{animation:ezmHSweep 7s ease-in-out infinite}
+@keyframes ezmHFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes ezmHSpin{to{transform:rotate(360deg)}}
+@keyframes ezmHSpin2{to{transform:rotate(-360deg)}}
+@keyframes ezmHPulse{0%{transform:scale(.82);opacity:.55}100%{transform:scale(1.18);opacity:0}}
+@keyframes ezmHSweep{0%{transform:translateX(-160px)}55%,100%{transform:translateX(800px)}}
+@media (prefers-reduced-motion:reduce){.ezm-h-float,.ezm-h-ring,.ezm-h-ring2,.ezm-h-pulse,.ezm-h-sweep{animation:none}}
+</style>
+<circle class="ezm-h-pulse" cx="320" cy="320" r="185" fill="url(#mhalo)"/>
+<ellipse class="ezm-h-ring2" cx="320" cy="330" rx="252" ry="76" fill="none" stroke="#2fbf71" stroke-width="3" stroke-dasharray="4 14" opacity=".5"/>
+<ellipse class="ezm-h-ring" cx="320" cy="330" rx="228" ry="62" fill="none" stroke="#e0bc63" stroke-width="6" stroke-linecap="round" stroke-dasharray="90 550" opacity=".9"/>
+<circle r="10" fill="#f4dc93"><animateMotion dur="5s" repeatCount="indefinite" path="M90 330 A230 64 0 0 1 550 330 A230 64 0 0 1 90 330"/></circle>
+<g transform="translate(64 64)"><g class="ezm-h-float">${art}</g></g>
+<rect class="ezm-h-sweep" x="0" y="0" width="120" height="640" fill="url(#sweepg)" opacity=".5"/>`,
+  'role="img" aria-label="EzyMap hero mark"'
+);
+// sheen gradient appended as a second defs block
+const heroFixed = hero.replace(
+  "</defs>",
+  `<linearGradient id="sweepg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>`
+);
+writeFileSync(join(logosDir, "ezymap-mark-hero.svg"), heroFixed);
+
+// Fintech mark: gem floating above a candlestick cluster with a gold trend
+// line — fundamentals and momentum in one tile.
+const fintechCandles = `
+<line x1="120" y1="404" x2="392" y2="404" stroke="url(#medge)" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+<g stroke-linecap="round">
+<line x1="180" y1="360" x2="180" y2="396" stroke="url(#mgl)" stroke-width="8"/>
+<rect x="162" y="368" width="36" height="28" rx="6" fill="url(#mgl)"/>
+<line x1="256" y1="336" x2="256" y2="396" stroke="url(#mol)" stroke-width="8"/>
+<rect x="238" y="348" width="36" height="44" rx="6" fill="url(#mol)"/>
+<line x1="332" y1="312" x2="332" y2="396" stroke="url(#mgl)" stroke-width="8"/>
+<rect x="314" y="326" width="36" height="66" rx="6" fill="url(#mgd)"/>
+</g>
+<polyline points="140,392 220,372 290,344 370,318" fill="none" stroke="#0a2a18" stroke-width="14" stroke-linejoin="round" stroke-linecap="round" opacity=".3"/>
+<polyline points="140,386 220,366 290,338 370,312" fill="none" stroke="url(#medge)" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="370" cy="312" r="10" fill="#f4dc93"/>`;
+const fintech = svg(
+  "0 0 512 512",
+  `${defs}<rect width="512" height="512" rx="112" fill="#0a0c0b"/>
+<rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="#2fbf71" stroke-opacity=".3"/>
+<g transform="translate(96 18) scale(.62)">${art}</g>
+${fintechCandles}`,
+  'role="img" aria-label="EzyMap fintech mark"'
+);
+writeFileSync(join(logosDir, "ezymap-mark-fintech.svg"), fintech);
+
+// Animated app icon: gem floats inside the dark tile while a gold comet
+// travels a small orbit — the app-icon sibling of ezymap-mark-animated.
+const appiconAnim = svg(
+  "0 0 512 512",
+  `${defs}<rect width="512" height="512" rx="112" fill="url(#mground)"/>
+<g stroke="#2fbf71" stroke-opacity=".14" stroke-width="1">
+${Array.from({ length: 8 }, (_, i) => `<line x1="${64 + i * 64}" y1="0" x2="${64 + i * 64}" y2="512"/>`).join("")}
+${Array.from({ length: 8 }, (_, i) => `<line x1="0" y1="${64 + i * 64}" x2="512" y2="${64 + i * 64}"/>`).join("")}
+</g>
+<rect x="8" y="8" width="496" height="496" rx="104" fill="none" stroke="#2fbf71" stroke-opacity=".35" stroke-width="2"/>
+<style>
+.ezm-ai-float{animation:ezmAiFloat 6s ease-in-out infinite;transform-box:view-box;transform-origin:center}
+@keyframes ezmAiFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.ezm-ai-float{animation:none}}
+</style>
+<ellipse cx="256" cy="270" rx="160" ry="46" fill="none" stroke="#e0bc63" stroke-width="5" stroke-linecap="round" stroke-dasharray="60 440" opacity=".85"/>
+<g class="ezm-ai-float"><g transform="translate(76 66) scale(.705)">${art}</g></g>
+<circle r="8" fill="#f4dc93"><animateMotion dur="3.6s" repeatCount="indefinite" path="M96 270 A160 46 0 0 1 416 270 A160 46 0 0 1 96 270"/></circle>`,
+  'role="img" aria-label="EzyMap animated app icon"'
+);
+writeFileSync(join(logosDir, "ezymap-appicon-animated.svg"), appiconAnim);
+
+// Animated horizontal lockup: floating gem + wordmark with a travelling gold
+// sheen and a gold rule that marches.
+const hdefs = `${defs}<linearGradient id="wmx" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#f2f4f2"><animate attributeName="stop-color" values="#f2f4f2;#5be39a;#f2f4f2" dur="7s" repeatCount="indefinite"/></stop>
+<stop offset="1" stop-color="#e3bd5e"><animate attributeName="stop-color" values="#e3bd5e;#f4dc93;#e3bd5e" dur="7s" repeatCount="indefinite"/></stop>
+</linearGradient>
+<style>
+.ezm-hz-float{animation:ezmHzFloat 6s ease-in-out infinite;transform-box:view-box;transform-origin:110px 110px}
+.ezm-hz-march{animation:ezmHzMarch 1.6s linear infinite}
+@keyframes ezmHzFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes ezmHzMarch{to{stroke-dashoffset:-28}}
+@media (prefers-reduced-motion:reduce){.ezm-hz-float,.ezm-hz-march{animation:none}}
+</style>`;
+const horizontalAnim = svg(
+  "0 0 760 220",
+  `${hdefs}
+<g class="ezm-hz-float"><g transform="translate(14 18) scale(.36)">${art}</g></g>
+<text x="238" y="102" font-family="'Clash Display','Space Grotesk',Inter,Helvetica Neue,Arial,sans-serif" font-size="64" font-weight="700" letter-spacing="-1.5" fill="url(#wmx)">Ezy<tspan fill="#e3bd5e">Map</tspan></text>
+<text x="242" y="134" font-family="ui-monospace,'JetBrains Mono','IBM Plex Mono',Menlo,monospace" font-size="14" font-weight="500" letter-spacing="3.5" fill="#a8b0ab">ALGO · SIGNAL DESK</text>
+<line class="ezm-hz-march" x1="242" y1="152" x2="470" y2="152" stroke="url(#medge)" stroke-width="4" stroke-linecap="round" stroke-dasharray="16 12" opacity=".9"/>
+<circle cx="486" cy="152" r="6" fill="#f4dc93"/>`,
+  'role="img" aria-label="EzyMap animated lockup"'
+);
+writeFileSync(join(logosDir, "ezymap-horizontal-animated.svg"), horizontalAnim);
+
 /* ---------- product icons ---------- */
 // One rounded tile per ready EzyMap product: dark ground, green glyph,
 // one gold accent. viewBox 64, stroke-based so it stays crisp at any size.
