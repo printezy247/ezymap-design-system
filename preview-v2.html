@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EzyMap Design System v2 — Preview</title>
+<title>EzyMap Design System v2.3 — Preview</title>
 <link rel="icon" type="image/svg+xml" href="./assets/logos/ezymap-3d-favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="./tokens/tokens.css">
@@ -39,6 +39,12 @@
   .prod-tile img { width: 72px; height: 72px; }
   .prod-tile b { display: block; margin-top: 10px; font-size: 13px; font-weight: 600; color: var(--foreground); }
   .prod-tile span { font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground); }
+  .var-tile { border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--surface); padding: 18px; }
+  .var-tile h3 { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-foreground); margin: 0 0 14px; }
+  .var-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .var-cell { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .var-cell img { width: 52px; height: 52px; }
+  .var-cell span { font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground); }
   .motion-demo { border: 1px dashed var(--border-hover); border-radius: var(--radius-lg); padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 90px; background: var(--background); }
   .header-band { padding: 56px 0 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
   .header-band img { height: 64px; width: auto; }
@@ -54,15 +60,15 @@
   <div class="header-band">
     <div>
       <img src="./assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap">
-      <h1 style="margin-top:18px">Design system <span style="color:var(--accent)">v2.2.0</span></h1>
-      <p class="sub" style="margin-bottom:0">EzyMap-only brand. New motion layer, product icons, 3D logo variants, Tilt and a refreshed type system.</p>
+      <h1 style="margin-top:18px">Design system <span style="color:var(--accent)">v2.3.0</span></h1>
+      <p class="sub" style="margin-bottom:0">EzyMap-only brand. Product asset family, product motion, Reveal and ProductIcon on top of the v2/v3 motion and 3D layers.</p>
     </div>
     <div class="chips">
-      <span class="chip"><b>10</b> components</span>
-      <span class="chip"><b>27</b> logo files</span>
-      <span class="chip"><b>8</b> product icons</span>
-      <span class="chip"><b>25</b> motion utils</span>
-      <span class="chip"><b>11</b> new tokens</span>
+      <span class="chip"><b>12</b> components</span>
+      <span class="chip"><b>9</b> products ×4 variants</span>
+      <span class="chip"><b>36</b> product PNGs</span>
+      <span class="chip"><b>6</b> motion layers</span>
+      <span class="chip"><b>2</b> new tokens</span>
     </div>
   </div>
 
@@ -129,6 +135,17 @@
       <div class="card-box"><h3>ezm-marquee / animated logo</h3>
         <div class="motion-demo" style="overflow:hidden"><img src="./assets/logos/ezymap-mark-animated.svg" style="height:84px;width:auto" alt="Animated EzyMap mark"></div>
       </div>
+      <div class="card-box"><h3>ezm-product-lift · ezm-sheen · ezm-live-ping · ezm-dash-flow · v2.3</h3>
+        <div class="motion-demo" style="min-height:120px">
+          <div class="ezm-product-lift ezm-sheen" style="border:1px solid var(--border);border-radius:var(--radius-xl);padding:18px;background:var(--surface-elevated)">
+            <img src="./assets/products/ezymap-miniapp-icon.svg" style="width:64px;height:64px;display:block" alt="EzyMap Mini App">
+          </div>
+          <span class="ezm-live-ping is-live mono" style="margin-left:16px;padding:6px 12px;border-radius:9999px;border:1px solid var(--border);font-size:11px;color:var(--body-text)">LIVE</span>
+        </div>
+        <div class="motion-demo" style="margin-top:12px">
+          <svg width="100%" height="14" viewBox="0 0 200 14" aria-hidden="true"><path class="ezm-dash-flow" d="M2 7 H198" stroke="var(--primary)" stroke-width="2" fill="none" stroke-dasharray="6 8" stroke-linecap="round"/></svg>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -140,13 +157,20 @@
   </section>
 
   <section>
-    <p class="eyebrow">Brand · new in v2</p>
+    <p class="eyebrow">Brand · new in v2.3</p>
     <h2>Product icons</h2>
     <p class="sub">One app-icon tile per ready product, from <code>assets/products/</code>.</p>
-    <div class="grid g4" id="products"></div>
+    <div class="grid g3" id="products"></div>
   </section>
 
-  <footer>EzyMap design system v2.0.0 — preview sheet · proprietary</footer>
+  <section>
+    <p class="eyebrow">Brand · new in v2.3</p>
+    <h2>Product variants</h2>
+    <p class="sub">Every product ships four variants — base, animated (float + orbit ring), extrude (3D depth) and glass — as SVG plus a 256px PNG. Macro Bot's animated tile is hand-tuned.</p>
+    <div class="grid g3" id="variants"></div>
+  </section>
+
+  <footer>EzyMap design system v2.3.0 — preview sheet · proprietary</footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
@@ -189,7 +213,10 @@
     ["ezymap-3d-horizontal-on-dark.png","Lockup · PNG",""],
     ["ezymap-3d-horizontal-on-light.png","Lockup light · PNG","onlight"],
     ["ezymap-3d-stacked-on-dark.png","Stacked · PNG",""],
-    ["ezymap-3d-favicon.png","Favicon · PNG",""]
+    ["ezymap-3d-favicon.png","Favicon · PNG",""],
+    ["ezymap-mark-aurora.svg","Mark · aurora",""],
+    ["ezymap-appicon-glass.svg","App icon · glass",""],
+    ["ezymap-appicon-neon.svg","App icon · neon",""]
   ];
   var lg = document.getElementById("logos");
   logos.forEach(function (l) {
@@ -199,16 +226,28 @@
   });
 
   var prods = [
-    ["ezymap-channel-icon.svg","Channel"],["ezymap-miniapp-icon.svg","Mini App"],
-    ["ezymap-bot-icon.svg","Gated bot"],["ezymap-ticker-icon.svg","Live ticker"],
-    ["ezymap-calculators-icon.svg","Calculators"],["ezymap-exchanges-icon.svg","Exchanges"],
-    ["ezymap-pro-icon.svg","EzyMapPro"],["ezymap-ebooks-icon.svg","Ebooks"]
+    ["ezymap-channel-icon","Channel"],["ezymap-miniapp-icon","Mini App"],
+    ["ezymap-bot-icon","Gated bot"],["ezymap-ticker-icon","Live ticker"],
+    ["ezymap-calculators-icon","Calculators"],["ezymap-exchanges-icon","Exchanges"],
+    ["ezymap-pro-icon","EzyMapPro"],["ezymap-ebooks-icon","Ebooks"],
+    ["ezymap-macro-bot-icon","Macro Bot"]
   ];
   var pg = document.getElementById("products");
   prods.forEach(function (p) {
     var d = document.createElement("div"); d.className = "prod-tile";
-    d.innerHTML = '<img src="./assets/products/' + p[0] + '" alt=""><b>' + p[1] + '</b><span>' + p[0].replace("ezymap-","").replace("-icon.svg","") + "</span>";
+    d.innerHTML = '<img src="./assets/products/' + p[0] + '.svg" alt=""><b>' + p[1] + '</b><span>' + p[0].replace("ezymap-","").replace("-icon","") + "</span>";
     pg.appendChild(d);
+  });
+
+  var suffixes = [["","base"],["-animated","animated"],["-extrude","extrude"],["-glass","glass"]];
+  var vg = document.getElementById("variants");
+  prods.forEach(function (p) {
+    var d = document.createElement("div"); d.className = "var-tile";
+    var row = suffixes.map(function (s) {
+      return '<div class="var-cell"><img src="./assets/products/' + p[0] + s[0] + '.svg" alt="' + p[1] + ' ' + s[1] + '" loading="lazy"><span>' + s[1] + "</span></div>";
+    }).join("");
+    d.innerHTML = "<h3>" + p[1] + "</h3><div class=\"var-row\">" + row + "</div>";
+    vg.appendChild(d);
   });
 
   var E = window.EzyMap, h = React.createElement;
@@ -247,7 +286,18 @@
         { symbol: "EURUSD", value: "1.0842", delta: "-0.0021 (-0.19%)", tone: "down" },
         { symbol: "BTCUSD", value: "97,420", delta: "+1.8%", tone: "up" },
         { symbol: "GBPUSD", value: "1.2711", delta: "+0.04%", tone: "up" }
-      ] }))
+      ] })),
+    h("div", { className: "card-box", key: "rv" }, h("h3", null, "Reveal · ProductIcon · v2.3"),
+      Row([
+        h(E.Reveal, { key: "r", delay: 40, style: { flex: 1, minWidth: 220 } },
+          h(E.Card, { eyebrow: "Scroll", title: "Revealed on entry" },
+            h("p", { className: "ezm-card__body" }, "IntersectionObserver adds .is-inview; content stays visible with scripting off."))),
+        h("div", { key: "p", style: { display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" } },
+          h(E.ProductIcon, { product: "channel", variant: "animated", style: { width: 52, height: 52 } }),
+          h(E.ProductIcon, { product: "macro-bot", variant: "extrude", style: { width: 52, height: 52 } }),
+          h(E.ProductIcon, { product: "pro", variant: "glass", style: { width: 52, height: 52 } }),
+          h(E.ProductIcon, { product: "ticker", style: { width: 52, height: 52 } }))
+      ]))
   ];
   ReactDOM.createRoot(document.getElementById("components")).render(
     h("div", { className: "grid g2" }, items)

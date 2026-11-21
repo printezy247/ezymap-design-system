@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EzyMap Design System v3 — Motion and 3D Preview</title>
+<title>EzyMap Design System v3 — Motion, 3D and Product Preview</title>
 <link rel="icon" type="image/svg+xml" href="./assets/logos/ezymap-3d-favicon.svg">
 <link rel="stylesheet" href="./tokens/tokens.css">
 <link rel="stylesheet" href="./assets/motion/ezymap-motion.css">
 <link rel="stylesheet" href="./assets/motion/ezymap-motion-3d.css">
+<link rel="stylesheet" href="./assets/motion/ezymap-motion-product.css">
 <style>
   html { background: var(--background); }
   body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
@@ -40,6 +41,10 @@
   .btn-gold:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
   .btn-gold:hover { filter: brightness(1.08); }
   .mono { font-family: var(--font-mono); }
+  .vars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .vars > div { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .vars img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+  .vars span { font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground); }
   .beam-inner { padding: 22px; border-radius: var(--radius-xl); background: var(--surface); }
   .pill { display: inline-block; align-self: flex-start; font-family: var(--font-mono); font-size: 11px; padding: 6px 12px; border-radius: 9999px; border: 1px solid var(--border); color: var(--body-text); background: var(--surface-elevated); }
   .pill b { color: var(--primary); font-weight: 500; }
@@ -155,7 +160,68 @@
     </div>
   </section>
 
-  <footer>EzyMap design system v3 — motion and 3D preview · proprietary</footer>
+  <section>
+    <p class="eyebrow">Products · v2.3</p>
+    <h2>Product tiles in motion</h2>
+    <p class="sub">The v2.3 product layer: hover lift with a sheen sweep, a live ping ring and marching dashes — plus the animated, extrude and glass icon variants every ready product now ships.</p>
+    <div class="grid g3">
+      <div class="card">
+        <h3>Lift + sheen</h3>
+        <div class="demo-box" style="align-items:center">
+          <div class="ezm-product-lift ezm-sheen" tabindex="0" style="border:1px solid var(--border);border-radius:var(--radius-xl);padding:20px;background:var(--surface-elevated)">
+            <img src="./assets/products/ezymap-channel-icon.svg" style="width:72px;height:72px;display:block" alt="EzyMap channel">
+          </div>
+          <p>Hover or focus the tile.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Live ping</h3>
+        <div class="demo-box" style="align-items:center">
+          <span class="ezm-live-ping is-live mono" style="padding:8px 14px;border-radius:9999px;border:1px solid var(--border);background:var(--surface-elevated);font-size:12px;color:var(--body-text)">LIVE · XAUUSD H1</span>
+          <p>Expanding ring, 2.2s cycle.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Dash flow</h3>
+        <div class="demo-box">
+          <svg width="100%" height="16" viewBox="0 0 220 16" aria-hidden="true"><path class="ezm-dash-flow" d="M2 8 H218" stroke="var(--primary)" stroke-width="2" fill="none" stroke-dasharray="6 8" stroke-linecap="round"/></svg>
+          <p>Marching stroke for routes and rules.</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card">
+        <h3>Channel · 4 variants</h3>
+        <div class="vars">
+          <div><img src="./assets/products/ezymap-channel-icon.svg" alt="Channel base"><span>base</span></div>
+          <div><img src="./assets/products/ezymap-channel-icon-animated.svg" alt="Channel animated"><span>animated</span></div>
+          <div><img src="./assets/products/ezymap-channel-icon-extrude.svg" alt="Channel extrude"><span>extrude</span></div>
+          <div><img src="./assets/products/ezymap-channel-icon-glass.svg" alt="Channel glass"><span>glass</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Macro Bot · 4 variants</h3>
+        <div class="vars">
+          <div><img src="./assets/products/ezymap-macro-bot-icon.svg" alt="Macro Bot base"><span>base</span></div>
+          <div><img src="./assets/products/ezymap-macro-bot-icon-animated.svg" alt="Macro Bot animated"><span>animated</span></div>
+          <div><img src="./assets/products/ezymap-macro-bot-icon-extrude.svg" alt="Macro Bot extrude"><span>extrude</span></div>
+          <div><img src="./assets/products/ezymap-macro-bot-icon-glass.svg" alt="Macro Bot glass"><span>glass</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>EzyMapPro · 4 variants</h3>
+        <div class="vars">
+          <div><img src="./assets/products/ezymap-pro-icon.svg" alt="EzyMapPro base"><span>base</span></div>
+          <div><img src="./assets/products/ezymap-pro-icon-animated.svg" alt="EzyMapPro animated"><span>animated</span></div>
+          <div><img src="./assets/products/ezymap-pro-icon-extrude.svg" alt="EzyMapPro extrude"><span>extrude</span></div>
+          <div><img src="./assets/products/ezymap-pro-icon-glass.svg" alt="EzyMapPro glass"><span>glass</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:16px;margin-bottom:0">All nine ready products ship the same four variants in SVG and 256px PNG — see <a href="./docs/index.html#products" style="color:var(--primary)">docs/index.html</a> and <code>assets/manifest.json</code>.</p>
+  </section>
+
+  <footer>EzyMap design system v3 — motion and 3D preview · v2.3 product layer added · proprietary</footer>
 </div>
 
 <script>
