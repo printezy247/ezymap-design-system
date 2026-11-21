@@ -32,6 +32,7 @@ jobs:
         run: |
           mkdir -p _site
           cp -r docs tokens components assets _site/
+          cp preview-v2.html preview-v3.html _site/
           printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=docs/"><title>EzyMap design system</title>' > _site/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
