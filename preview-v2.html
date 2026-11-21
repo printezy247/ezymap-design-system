@@ -54,14 +54,14 @@
   <div class="header-band">
     <div>
       <img src="./assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap">
-      <h1 style="margin-top:18px">Design system <span style="color:var(--accent)">v2.0.0</span></h1>
-      <p class="sub" style="margin-bottom:0">EzyMap-only brand. New motion layer, product icons, logo variants and two new components.</p>
+      <h1 style="margin-top:18px">Design system <span style="color:var(--accent)">v2.1.0</span></h1>
+      <p class="sub" style="margin-bottom:0">EzyMap-only brand. New motion layer, product icons, 3D logo variants, Tilt and a refreshed type system.</p>
     </div>
     <div class="chips">
-      <span class="chip"><b>9</b> components</span>
-      <span class="chip"><b>17</b> logo files</span>
+      <span class="chip"><b>10</b> components</span>
+      <span class="chip"><b>22</b> logo files</span>
       <span class="chip"><b>8</b> product icons</span>
-      <span class="chip"><b>8</b> motion utils</span>
+      <span class="chip"><b>15</b> motion utils</span>
       <span class="chip"><b>11</b> new tokens</span>
     </div>
   </div>
@@ -170,6 +170,11 @@
     ["ezymap-stacked-on-light.svg","Stacked · light","onlight"],
     ["ezymap-3d-mark.svg","Mark",""],
     ["ezymap-mark-animated.svg","Mark · animated",""],
+    ["ezymap-mark-animated-orbit.svg","Mark · orbit",""],
+    ["ezymap-mark-extrude.svg","Mark · extruded 3D",""],
+    ["ezymap-mark-glass.svg","Mark · glass",""],
+    ["ezymap-mark-neon.svg","Mark · neon",""],
+    ["ezymap-mark-ghost.svg","Mark · ghost",""],
     ["ezymap-mark-line.svg","Mark · line",""],
     ["ezymap-3d-appicon.png","App icon",""],
     ["ezymap-appicon-light.svg","App icon · light","onlight"],
@@ -226,6 +231,11 @@
         h(E.EzyMapLogo, { style: { width: 84, height: 84 }, title: "EzyMap" }),
         h(E.EzyMapLogo, { style: { width: 84, height: 84 }, animated: true, title: "EzyMap" }),
         h(E.EzyMapLogo, { style: { width: 84, height: 84 }, withWordmark: true, title: "EzyMap" }))),
+    h("div", { className: "card-box", key: "tilt" }, h("h3", null, "Tilt · new"),
+      h("div", { style: { maxWidth: 280 } },
+        h(E.Tilt, { max: 12 },
+          h(E.Card, { holo: true, eyebrow: "Tilt me", title: "3D hover" },
+            h("p", { className: "ezm-card__body" }, "Move the pointer across this card."))))),
     h("div", { className: "card-box", key: "t" }, h("h3", null, "PriceTicker · new"),
       h(E.PriceTicker, { items: [
         { symbol: "XAUUSD", value: "2,395.120", delta: "+12.35 (+0.53%)", tone: "up" },

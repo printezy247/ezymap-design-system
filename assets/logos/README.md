@@ -7,6 +7,11 @@ EzyMap only — the EzyAI and Macro Desk marks were retired in v2. The brand mar
 - `ezymap-3d-mark.svg` — the gem alone, full colour.
 - `ezymap-mark-animated.svg` — the gem with a gentle float and a gold comet travelling the orbit ring. Stops under `prefers-reduced-motion`. Use once per view.
 - `ezymap-mark-line.svg` — single-colour outline variant; inherits `currentColor` for one-colour print and engraving.
+- `ezymap-mark-extrude.svg` — gem with stacked dark offset copies: real extruded depth on a rounded tile.
+- `ezymap-mark-glass.svg` — gem on a frosted translucent tile for glassmorphism surfaces.
+- `ezymap-mark-neon.svg` — gem with a phosphor drop-shadow and green halo on black.
+- `ezymap-mark-ghost.svg` — faint watermark line mark for backgrounds and documents.
+- `ezymap-mark-animated-orbit.svg` — gem floats while a dashed gold ring rotates around it. Stops under `prefers-reduced-motion`.
 - `ezymap-3d-favicon.svg` / `.png` — ring-less gem for sizes below 48px.
 
 ## Lockups

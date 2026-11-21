@@ -108,3 +108,16 @@ export interface GridFloorProps {
   style?: React.CSSProperties;
 }
 export declare function GridFloor(props: GridFloorProps): React.ReactElement;
+
+/** Pointer-tracked 3D tilt wrapper with a cursor-following glare. */
+export interface TiltProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Maximum tilt in degrees. Default 10. */
+  max?: number;
+  /** Scale applied while tilting. Default 1.02. */
+  scale?: number;
+  /** Perspective distance in px. Default 900. */
+  perspective?: number;
+  /** Disable the effect entirely. */
+  disabled?: boolean;
+}
+export declare function Tilt(props: TiltProps): React.ReactElement;

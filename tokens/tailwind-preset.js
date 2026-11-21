@@ -50,6 +50,9 @@ export default {
         ],
         "mono": [
           "var(--font-mono)"
+        ],
+        "serif": [
+          "var(--font-serif)"
         ]
       },
       "borderRadius": {

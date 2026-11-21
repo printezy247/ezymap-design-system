@@ -56,6 +56,7 @@ const classes = styles.map((s) => {
     `font-weight: ${s.fontWeight};`,
   ];
   if (s.letterSpacing) lines.push(`letter-spacing: ${s.letterSpacing};`);
+  if (s.fontStyle) lines.push(`font-style: ${s.fontStyle};`);
   if (s.name === "price") lines.push("font-variant-numeric: tabular-nums;");
   if (["label-caps", "eyebrow", "flag"].includes(s.name)) lines.push("text-transform: uppercase;");
   return `/* ${s.usage} */\n.${s.name} {\n  ${lines.join("\n  ")}\n}`;
@@ -64,7 +65,8 @@ const classes = styles.map((s) => {
 out(
   "tokens.css",
   `/* EzyMap design tokens — generated from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit. */
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
 
 :root {
 ${decl.join("\n")}
@@ -88,6 +90,7 @@ const tokens = {
   motion: map(motion),
   breakpoint: map(breakpoints),
   fontFamily: { ...families },
+  fonts: src.type.fonts ?? [],
   type: Object.fromEntries(
     styles.map((s) => [
       s.name,
@@ -97,6 +100,7 @@ const tokens = {
         lineHeight: s.lineHeight,
         fontWeight: s.fontWeight,
         ...(s.letterSpacing ? { letterSpacing: s.letterSpacing } : {}),
+        ...(s.fontStyle ? { fontStyle: s.fontStyle } : {}),
       },
     ])
   ),
