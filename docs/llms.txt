@@ -1,0 +1,31 @@
+# EzyMap design system
+
+Private design system for EzyMap (trading signals on Telegram). EzyMap is the only brand. Green (#2fbf71) and gold (#c9a13a) on near-black (#0a0c0b), white type. Version 2.4.0.
+
+Repo: https://github.com/printezy247/ezymap-design-system (private; install via `github:printezy247/ezymap-design-system#v2.4.0`)
+
+## Files agents should read first
+
+- `llms-full.txt` — complete reference: tokens, components, motion classes, assets, scripts (this folder)
+- `../tokens/tokens.json` — source of truth for all tokens (edit here, never edit generated files)
+- `../tokens/tokens.css` — generated CSS variables + type classes
+- `../components/index.d.ts` — typed props for every component
+- `../components/bundle.js` — vanilla bundle; sets `window.EzyMap` (needs `window.React`)
+- `../assets/manifest.json` — catalog of every logo, product and motion file
+- `../research/design-systems-2026.md` — design research and roadmap notes
+
+## Quick rules
+
+- Brand name is "EzyMap", one word, capital E and M. Never use EzyAI or Macro Desk as brands.
+- Macro Bot is an EzyMap product, not a brand.
+- Tokens: edit `tokens/tokens.json`, run `node scripts/build-tokens.mjs`. Never edit `tokens.css`/`tokens.ts`/`tailwind-preset.js` by hand.
+- Assets: edit `scripts/build-assets.mjs`, run `node scripts/build-assets.mjs`.
+- Every animation needs a `prefers-reduced-motion` fallback; hidden states must be gated behind `html.js` so no-script content stays visible.
+- Losses/errors use gold, never red (`status-stop` red is SignalFlag-only).
+- One primary Button and one animated-edge GlowCard per view.
+
+## Commands
+
+- Build tokens: `node scripts/build-tokens.mjs`
+- Build assets: `node scripts/build-assets.mjs`
+- Resolve an asset: `node scripts/manifest.mjs --product pro --variant glass --format png`

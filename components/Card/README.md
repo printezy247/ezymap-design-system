@@ -1,5 +1,14 @@
 # Card
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { Card } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.Card`.
+
 A brushed-metal panel (`gradient-metal`, `border` hairline, `shadow-glass`) that gives every content block its 3D depth.
 
 - **Use** for feature tiles, package tiers, signal summaries and FAQ groups. Set `lift` when the card is clickable: on hover it rises 3px and picks up the green underglow (`shadow-card-hover`).

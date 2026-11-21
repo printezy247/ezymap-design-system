@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.4.0 — spring tokens, four components, agent surface
+
+### Added
+- **Components** (16 total): `LiveBadge` (live status pill with optional ping ring), `Marquee` (seamless scroll strip with `direction`, `duration`, `pauseOnHover` and `label` props — it duplicates children internally so the loop is seamless), `Skeleton` (shimmer loading placeholder, single block or stacked lines) and `GlowCard` (`glow` breathing-edge or `beam` rotating-border variants, same slots as `Card`). All ship in React (`components/react/*.tsx`), the vanilla `window.EzyMap` bundle, `index.d.ts` typings, `bundle.css` styles and per-component READMEs.
+- **Spring easings**: `ease-spring-snappy` (`cubic-bezier(0.2, 1.4, 0.4, 1)`) and `ease-spring-gentle` (`cubic-bezier(0.33, 1.15, 0.68, 1)`) join `ease-spring` — CSS-only approximations of Motion-style spring configs, emitted to `tokens.css`, `tokens.ts` and `tailwind-preset.js`.
+- **Agent surface**: `docs/llms.txt` and `docs/llms-full.txt` (LLM-readable system reference), `mcp/server.mjs` (zero-dependency stdio MCP server with `ezymap_summary`, `ezymap_tokens`, `ezymap_components`, `ezymap_motion`, `ezymap_assets`, `ezymap_rules` tools) and `scripts/manifest.mjs` (`npm run manifest`) — a CLI resolver over `assets/manifest.json` for products, variants, formats, logos and motion files.
+- **Motion playground** (`docs/motion.html`): every motion utility across the six stylesheets, live, with usage notes and reduced-motion behaviour.
+- **3D pipeline decision** (`docs/3d-pipeline-decision.md`): SVG/PNG stays the canonical asset format; Spline and Rive documented as the evaluation path if real-time 3D is ever needed.
+- **Accessibility section** in the showcase documenting reduced-motion, no-JS, focus and colour behaviour.
+
+### Changed
+- Every component README now opens with a standard install block (React import + vanilla `window.EzyMap` usage).
+- `ezm-marquee` honours `--marquee-duration`; `.ezm-marquee--always` animates without hover and `.ezm-marquee-reverse` runs backwards.
+- `package.json` → v2.4.0; added the `manifest` script.
+
 ## 2.3.0 — product asset family, product motion, Reveal and ProductIcon
 
 ### Added

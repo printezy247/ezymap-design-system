@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"},{"name":"Tilt"},{"name":"Reveal"},{"name":"ProductIcon"}]} */
+/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"},{"name":"Tilt"},{"name":"Reveal"},{"name":"ProductIcon"},{"name":"LiveBadge"},{"name":"Marquee"},{"name":"Skeleton"},{"name":"GlowCard"}]} */
 (function () {
   var React = window.React, h = React.createElement;
   function cx() { return Array.prototype.filter.call(arguments, Boolean).join(" "); }
@@ -231,5 +231,66 @@
   }
   ProductIcon.displayName = "ProductIcon";
 
-  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker, Tilt: Tilt, Reveal: Reveal, ProductIcon: ProductIcon };
+  function LiveBadge(props) {
+    var ping = props.ping !== false;
+    var rest = omit(props, ["ping", "className", "children"]);
+    rest.className = cx("ezm-live-badge", ping && "ezm-live-ping", ping && "is-live", props.className);
+    return h("span", rest,
+      h("span", { className: "ezm-live-badge__dot", "aria-hidden": true }),
+      props.children != null ? props.children : "Live");
+  }
+  LiveBadge.displayName = "LiveBadge";
+
+  function Marquee(props) {
+    var direction = props.direction || "left";
+    var duration = props.duration || 32;
+    var pauseOnHover = props.pauseOnHover !== false;
+    var rest = omit(props, ["direction", "duration", "pauseOnHover", "label", "className", "style", "children"]);
+    rest.className = cx("ezm-marquee", direction === "right" && "ezm-marquee-reverse", !pauseOnHover && "ezm-marquee--always", props.className);
+    if (props.label) { rest.role = "region"; rest["aria-label"] = props.label; }
+    var inline = {};
+    for (var k in props.style) inline[k] = props.style[k];
+    if (duration !== 32) inline["--marquee-duration"] = duration + "s";
+    rest.style = inline;
+    var kids = props.children;
+    return h("div", rest,
+      h("div", { className: "ezm-marquee__track" }, kids, h("span", { className: "ezm-marquee__dup", "aria-hidden": true }, kids)));
+  }
+  Marquee.displayName = "Marquee";
+
+  var len = function (v, d) { return v == null ? d : typeof v === "number" ? v + "px" : v; };
+  function Skeleton(props) {
+    var lines = props.lines || 1;
+    var width = len(props.width, "100%");
+    var height = len(props.height, lines > 1 ? "14px" : "16px");
+    var rest = omit(props, ["width", "height", "lines", "className", "style"]);
+    if (lines > 1) {
+      var bars = [];
+      for (var i = 0; i < lines; i++) {
+        bars.push(h("span", { key: i, className: "ezm-skeleton ezm-skeleton--line",
+          style: { width: i === lines - 1 ? "62%" : width, height: height } }));
+      }
+      rest.className = cx("ezm-skeleton-lines", props.className);
+      return h("div", rest, bars);
+    }
+    rest.className = cx("ezm-skeleton", props.className);
+    var inline = {};
+    for (var s in props.style) inline[s] = props.style[s];
+    inline.width = width; inline.height = height;
+    rest.style = inline;
+    return h("span", rest);
+  }
+  Skeleton.displayName = "Skeleton";
+
+  function GlowCard(props) {
+    var rest = omit(props, ["variant", "eyebrow", "title", "className", "children"]);
+    rest.className = cx("ezm-card", "ezm-glow-card", props.variant === "beam" ? "ezm-beam" : "ezm-glow", props.className);
+    return h("div", rest,
+      props.eyebrow ? h("p", { className: "ezm-card__eyebrow" }, props.eyebrow) : null,
+      props.title ? h("h3", { className: "ezm-card__title" }, props.title) : null,
+      props.children);
+  }
+  GlowCard.displayName = "GlowCard";
+
+  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker, Tilt: Tilt, Reveal: Reveal, ProductIcon: ProductIcon, LiveBadge: LiveBadge, Marquee: Marquee, Skeleton: Skeleton, GlowCard: GlowCard };
 })();

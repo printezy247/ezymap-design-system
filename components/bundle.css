@@ -94,7 +94,10 @@ body { background: var(--background); color: var(--foreground); font-family: var
 .ezm-ticker__delta { font-family: var(--font-mono); font-size: 12px; font-variant-numeric: tabular-nums; color: var(--body-text); }
 .ezm-ticker__delta[data-tone="up"] { color: var(--market-up); }
 .ezm-ticker__delta[data-tone="down"] { color: var(--market-down); }
-.ezm-marquee__track { animation: ezm-marquee 32s linear infinite; }
+.ezm-marquee__track { animation: ezm-marquee var(--marquee-duration, 32s) linear infinite; }
+.ezm-marquee__dup { display: contents; }
+.ezm-marquee--always:hover .ezm-marquee__track,
+.ezm-marquee--always:focus-within .ezm-marquee__track { animation-play-state: running; }
 @keyframes ezm-marquee { to { transform: translateX(-50%); } }
 .ezm-marquee:hover .ezm-marquee__track, .ezm-marquee:focus-within .ezm-marquee__track { animation-play-state: paused; }
 
@@ -105,6 +108,27 @@ body { background: var(--background); color: var(--foreground); font-family: var
   background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.09), transparent 70%);
   opacity: 0; transition: opacity var(--duration-fast) var(--ease-standard); }
 .ezm-tilt-el:hover::after, .ezm-tilt-el:focus-visible::after { opacity: 1; }
+
+/* LiveBadge — small status pill with a live dot and optional ping ring. */
+.ezm-live-badge { display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; padding: 5px 14px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--body-text);
+  background: var(--surface-elevated); border: 1px solid var(--border); }
+.ezm-live-badge__dot { width: 8px; height: 8px; border-radius: 9999px; background: var(--primary); box-shadow: 0 0 8px var(--primary); flex-shrink: 0; }
+.ezm-live-badge.is-live .ezm-live-badge__dot { animation: ezm-sig-blink 2.2s ease-in-out infinite; }
+
+/* Skeleton — loading placeholder with the shimmer sweep (keyframes from
+   ezymap-motion.css). */
+.ezm-skeleton { position: relative; overflow: hidden; display: inline-block; border-radius: 8px;
+  background: var(--surface-elevated); vertical-align: middle; }
+.ezm-skeleton::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.14) 50%, transparent 60%);
+  transform: translateX(-100%); animation: ezm-shimmer 2.4s var(--ease-standard) infinite; }
+.ezm-skeleton-lines { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.ezm-skeleton--line { display: block; width: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ezm-live-badge.is-live .ezm-live-badge__dot, .ezm-skeleton::after { animation: none !important; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .ezm-logo-anim .ezm-logo-float, .ezm-marquee__track { animation: none !important; }

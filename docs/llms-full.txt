@@ -1,0 +1,157 @@
+# EzyMap design system — full reference (v2.4.0)
+
+Private system for EzyMap (trading signals on Telegram). EzyMap is the only brand.
+Palette: green #2fbf71 leads, gold #c9a13a is the premium accent (~20% of a view max),
+near-black #0a0c0b ground, white #f2f4f2 type. Losses use gold, never red.
+The only red in the system is `status-stop`, used solely by SignalFlag "Stopped".
+
+## Source of truth and build
+
+- `tokens/tokens.json` is the ONLY file you edit for tokens. Run `node scripts/build-tokens.mjs`
+  to regenerate `tokens/tokens.css`, `tokens/tokens.ts`, `tokens/tailwind-preset.js`, `docs/palette.svg`.
+- `scripts/build-assets.mjs` generates `assets/` SVG variants, PNG renders and `assets/manifest.json`.
+  Hand-tuned SVGs are edited in the script, not the outputs.
+- `assets/manifest.json` catalogs every logo, product file and motion stylesheet.
+  Query it with `node scripts/manifest.mjs` (see "Scripts" below).
+- Components ship three ways: `components/react/*.tsx` (source), `components/bundle.js`
+  (classic script setting `window.EzyMap`, needs `window.React`), `components/index.d.ts` (types),
+  and `components/bundle.css` (all component styles + motion imports).
+
+## Install
+
+Private package: `npm install "github:printezy247/ezymap-design-system#v2.4.0"`
+
+```css
+@import "@ezymap/design-system/tokens.css";
+@import "@ezymap/design-system/components/bundle.css"; /* includes all motion files */
+```
+
+React: `import { Button, Card } from "@ezymap/design-system/react";`
+Vanilla: load React 18 UMD + `components/bundle.js`, then `window.EzyMap.Button`.
+Tailwind v4: `@config "@ezymap/design-system/tailwind-preset";` next to the tokens.css import.
+
+## Colour tokens (35, dark default; light under [data-theme="light"])
+
+background #0a0c0b · foreground #f2f4f2 · body-text #a8b0ab · muted-foreground #7d8681 ·
+muted-foreground-elevated #8a928d (use on surface-elevated, ≥4.5:1) · surface #141817 ·
+surface-elevated #1e2321 · card = surface · popover #121514 · primary #2fbf71 ·
+primary-foreground #06120c · primary-glow #0f7a4a · primary-tint rgba(47,191,113,.12) ·
+accent #c9a13a · accent-foreground #100f06 · accent-glow #a8862c · accent-tint rgba(201,161,58,.12) ·
+secondary #161a18 · muted #161a18 · destructive = accent gold · border rgba(255,255,255,.09) ·
+border-hover rgba(255,255,255,.16) · input = border · ring = primary ·
+market-up #2fbf71 · market-down #c9a13a (gold, not red) · status-neutral #8b948f ·
+status-stop #d9534f (SignalFlag only) · grid-line rgba(47,191,113,.12) ·
+frame-line rgba(201,161,58,.22) · holo-edge rgba(47,191,113,.45)
+
+Type styles (classes in tokens.css): hero, hero-mobile, section-title, section-title-mobile,
+card-title, wordmark, display-accent (italic serif accent), lead, body, body-sm, button-lg,
+button-sm, caption, label-caps, flag, eyebrow, price.
+Font families: --font-display (Clash Display), --font-sans (General Sans), --font-mono
+(JetBrains Mono), --font-serif (Instrument Serif). Fallbacks: Space Grotesk, Inter Tight,
+IBM Plex Mono.
+
+Spacing: 4px Tailwind scale — space-1..space-20 plus control-sm/md/lg (40/44/48px).
+Radii: radius-sm 4 · md 6 · lg 8 · button-lg 10 · xl 12 · 2xl 16 · 3xl 20 · full.
+Shadows: shadow-gold, shadow-green, shadow-elevated, shadow-glass, shadow-button-primary,
+shadow-card-hover, shadow-book, shadow-holo.
+Gradients: gradient-hero, gradient-metal, gradient-gold, gradient-green, gradient-brand
+(green→gold, max once per page), gradient-hero-pill, gradient-holo-glow.
+Breakpoints: bp-sm 640 · bp-md 768 · bp-lg 1024 · bp-xl 1280 (min-widths).
+
+## Motion tokens
+
+Durations: duration-instant 80ms · fast 150ms · base 250ms · slow 600ms · xl 1200ms.
+Easings: ease-standard cubic-bezier(.2,0,0,1) · ease-emphasized cubic-bezier(.3,0,0,1) ·
+ease-exit cubic-bezier(.4,0,1,1) · ease-spring cubic-bezier(.34,1.56,.64,1) playful overshoot ·
+ease-spring-snappy cubic-bezier(.2,1.4,.4,1) firm spring (~stiffness 400/damping 25) ·
+ease-spring-gentle cubic-bezier(.33,1.15,.68,1) soft spring (~stiffness 120/damping 20).
+Rules: animate transform/opacity only (dash-flow may animate stroke-dashoffset); every
+animation needs a prefers-reduced-motion fallback; hidden states gated behind html.js.
+
+## Components (16)
+
+| Name | Props of note | Use |
+|---|---|---|
+| Button | variant primary/outline/ghost · size sm/md/lg · href | One primary per view |
+| Card | lift, holo, eyebrow, title | Brushed-metal panel; holo = one key panel/view |
+| HeroPill | icon, value | One live figure above the h1 |
+| SignalFlag | status pending/running/tp/be/sl/cancelled | Signal status; only place red appears |
+| EzyMapLogo | withWordmark, animated, title | The gem mark; never tint |
+| HudFrame | label, meta | Bracketed frame for the one must-see section |
+| StatTile | label, value, tone up/down, delta | Mono data readout |
+| GridFloor | height, glow | Perspective grid stage for a hero object |
+| PriceTicker | items[{symbol,value,delta,tone}] | Scrolling live prices, one per page |
+| Tilt | max, scale, perspective, disabled | Pointer 3D tilt + glare; rare, one or two per view |
+| Reveal | delay, once | IntersectionObserver scroll reveal; no-JS safe |
+| ProductIcon | product, variant, src, basePath, alt | Product tile from assets/products |
+| LiveBadge | ping | Live status pill with dot + ping ring |
+| Marquee | direction, duration, pauseOnHover, label | Seamless scroll strip; dup handled internally |
+| Skeleton | width, height, lines | Shimmer loading placeholder |
+| GlowCard | variant glow/beam, eyebrow, title | Card with animated edge; one per view |
+
+ProductIcon product names: channel, miniapp, bot, ticker, calculators, exchanges, pro,
+ebooks, macro-bot. Variants: default, animated, extrude, glass. Each product ships SVG +
+256px PNG for all four variants.
+
+## Motion utilities (assets/motion/)
+
+Import after tokens.css (bundle.css already imports all six files).
+
+- ezymap-motion.css: ezm-float, ezm-float-slow, ezm-float-x, ezm-blink, ezm-breathe,
+  ezm-spin-slow, ezm-rise, ezm-shimmer, ezm-pulse-ring, ezm-marquee (+ --marquee-duration,
+  ezm-marquee-reverse, ezm-marquee--always), ezm-orbit, ezm-tilt, ezm-text-shimmer, ezm-pan,
+  ezm-scan, ezm-kenburns, ezm-aurora, ezm-grid-scroll, ezm-slide-left/right, ezm-scale-in,
+  ezm-wiggle, ezm-heartbeat, ezm-caret
+- ezymap-motion-3d.css: ezm-stage, ezm-3d-turn, ezm-3d-wobble, ezm-ring-3d, ezm-flip,
+  ezm-depth, ezm-beam, ezm-glow, ezm-reveal-3d, ezm-stagger, ezm-gold-flow
+- ezymap-motion-scroll.css: ezm-scroll-progress, ezm-scroll-reveal, ezm-scroll-zoom,
+  ezm-scroll-stagger, ezm-scroll-parallax, ezm-scroll-hero-out (gated behind
+  @supports animation-timeline + no-preference)
+- ezymap-motion-text.css: ezm-words, ezm-line, ezm-underline, ezm-rotator
+- ezymap-motion-hero.css: ezm-spotlight, ezm-parallax, ezm-candle-rise, ezm-tick-up,
+  ezm-tick-down, ezm-draw, ezm-sparkle
+- ezymap-motion-product.css: ezm-product-lift, ezm-sheen, ezm-live-ping (.is-live),
+  ezm-dash-flow, ezm-js-reveal (.is-inview; hidden state needs html.js)
+- ezymap-hero-pointer.js: bindHeroPointer(root), flashTick(el,"up"|"down") — not in bundle.css
+
+Every file honours prefers-reduced-motion. See docs/motion.html for live demos.
+
+## Assets
+
+- assets/logos/: 25 files. Primary lockup ezymap-3d-horizontal-on-dark.svg; app icon for
+  avatars/Telegram; ring-less favicon below ~48px; variants include mark-animated,
+  mark-animated-orbit, mark-hero, mark-fintech, mark-gold, mark-extrude/glass/neon/ghost/line,
+  mark-aurora, appicon-glass/neon/light/animated, hero-gold, hero-fintech,
+  horizontal-animated, stacked-on-dark, PNG favicons/touch icons.
+- assets/products/: 9 products × 4 variants × (SVG + 256px PNG) + Macro Bot lockups.
+- assets/motion/: the six stylesheets + hero-pointer.js above.
+- assets/imagery, illustrations, ambassador, telegram, social, website: brand photography
+  and covers (see README brand book).
+
+## Scripts
+
+- `node scripts/build-tokens.mjs` — regenerate token outputs
+- `node scripts/build-assets.mjs` — regenerate asset variants + manifest
+- `node scripts/manifest.mjs` — query the asset catalog:
+  - `--product pro [--variant glass] [--format png]` → resolved file entry
+  - `--logo aurora [--format svg]` → logo entry
+  - `--motion [product]` → motion stylesheets
+  - `--list [logos|products|motion]` → category listing
+  - no args → summary + totals
+
+## Docs site
+
+GitHub Pages from main: https://printezy247.github.io/ezymap-design-system/
+Pages: docs/index.html (showcase), docs/motion.html (motion playground),
+preview-v2.html / preview-v3.html (root previews). This file and llms.txt are the
+agent-facing twins of those pages.
+
+## Hard rules for agents
+
+- Never introduce EzyAI, Macro Desk or any second brand.
+- Never edit generated files (tokens.css/.ts, tailwind-preset.js, manifest.json,
+  generated SVG/PNG outputs) — edit the source and rebuild.
+- Every animation ships with prefers-reduced-motion handling; progressive-enhancement
+  hidden states require html.js.
+- Don't tint the full-colour logo; don't use status-stop red outside SignalFlag;
+  don't promise trading returns in copy.

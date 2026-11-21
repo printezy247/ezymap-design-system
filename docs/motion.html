@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EzyMap motion — playground</title>
+<meta name="description" content="Every EzyMap motion utility, live. Copy the class, paste the CSS.">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/ezymap-3d-favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/bundle.css">
+<style>
+  body { line-height: 1.6; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--space-4); }
+  header.top { border-bottom: 1px solid var(--border); background: var(--surface); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; padding-top: var(--space-4); padding-bottom: var(--space-4); }
+  header.top img { height: 44px; width: auto; display: block; }
+  nav a { color: var(--body-text); text-decoration: none; font-size: 14px; margin-left: var(--space-4); }
+  nav a:hover, nav a:focus-visible { color: var(--primary); }
+  section.block { padding: var(--space-20) 0 var(--space-12); border-bottom: 1px solid var(--border); }
+  h1, h2 { font-family: var(--font-display); letter-spacing: -0.02em; margin: 0; color: var(--foreground); }
+  h1 { font-size: 44px; line-height: 1.05; font-weight: 600; }
+  h2 { font-size: 30px; line-height: 1.1; font-weight: 600; margin: 8px 0 var(--space-3); }
+  .intro { padding: var(--space-20) 0 var(--space-12); }
+  .lede { max-width: 640px; color: var(--body-text); font-size: 18px; }
+  .grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .tile { border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; background: var(--surface); }
+  .tile .stage { display: flex; align-items: center; justify-content: center; height: 150px; padding: var(--space-4); background: var(--background); position: relative; overflow: hidden; }
+  .tile .meta { padding: 10px 12px; border-top: 1px solid var(--border); }
+  .tile .meta b { display: block; font-size: 13px; color: var(--foreground); font-family: var(--font-mono); }
+  .tile .meta code { font-family: var(--font-mono); font-size: 12px; color: var(--body-text); }
+  .tile .meta p { margin: 4px 0 0; font-size: 12px; line-height: 16px; color: var(--muted-foreground); }
+  .demo-box { width: 56px; height: 56px; border-radius: 14px; }
+  .demo-gold { background: var(--gradient-gold); border: 1px solid var(--border); }
+  .demo-green { background: var(--gradient-green); border: 1px solid var(--border); }
+  .demo-metal { background: var(--gradient-metal); border: 1px solid var(--border); }
+  .file-note { color: var(--muted-foreground); font-size: 14px; margin: 0 0 var(--space-6); }
+  .file-note code { font-family: var(--font-mono); color: var(--primary); }
+  .scroll-zone { height: 180vh; display: flex; align-items: center; justify-content: center; }
+  .scroll-card { width: min(560px, 90%); }
+  footer { padding: var(--space-12) 0; color: var(--muted-foreground); font-size: 14px; }
+  a { color: var(--primary); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (max-width: 640px) { h1 { font-size: 34px; } h2 { font-size: 26px; } nav { display: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a href="index.html"><img src="../assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap"></a>
+    <nav aria-label="Sections">
+      <a href="index.html">Showcase</a><a href="#core">Core</a><a href="#3d">3D</a><a href="#scroll">Scroll</a><a href="#text">Text</a><a href="#hero">Hero</a><a href="#product">Product</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Motion · v2.4.0</p>
+    <h1>Motion playground</h1>
+    <p class="lede">Every EzyMap motion utility, live. Each class is plain CSS — copy the class name, the stylesheet already ships in <code>bundle.css</code>. Everything stops under <code>prefers-reduced-motion</code>.</p>
+  </div>
+
+  <section class="block" id="core">
+    <p class="eyebrow" style="color:var(--primary);margin:0">ezymap-motion.css</p>
+    <h2>Core motion</h2>
+    <p class="file-note">Ambient loops, hovers and entrances. <code>--marquee-duration</code> customises loop speed; stagger children with <code>--i</code>.</p>
+    <div class="grid">
+      <div class="tile"><div class="stage"><div class="ezm-float demo-box demo-green"></div></div><div class="meta"><b>ezm-float</b><code>.ezm-float</code><p>Gentle 8px bob.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-float-slow demo-box demo-green"></div></div><div class="meta"><b>ezm-float-slow</b><code>.ezm-float-slow</code><p>Slower, wider bob.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-breathe demo-box demo-green"></div></div><div class="meta"><b>ezm-breathe</b><code>.ezm-breathe</code><p>Scale pulse for hero objects.</p></div></div>
+      <div class="tile"><div class="stage"><span class="ezm-blink" style="width:14px;height:14px;border-radius:9999px;background:var(--primary);box-shadow:0 0 12px var(--primary)"></span></div><div class="meta"><b>ezm-blink</b><code>.ezm-blink</code><p>Live-dot pulse.</p></div></div>
+      <div class="tile"><div class="stage"><span class="ezm-pulse-ring" style="display:block;width:44px;height:44px;border-radius:12px;background:var(--surface-elevated);border:1px solid var(--border)"></span></div><div class="meta"><b>ezm-pulse-ring</b><code>.ezm-pulse-ring</code><p>Expanding ring.</p></div></div>
+      <div class="tile"><div class="stage ezm-shimmer"></div><div class="meta"><b>ezm-shimmer</b><code>.ezm-shimmer</code><p>Sweep for skeletons.</p></div></div>
+      <div class="tile"><div class="stage" style="overflow:hidden"><div class="ezm-marquee" style="width:100%"><div class="ezm-marquee__track"><span class="mono" style="color:var(--body-text)">XAUUSD</span><span class="mono" style="color:var(--body-text)">EURUSD</span><span class="mono" style="color:var(--body-text)">BTCUSD</span><span class="mono" style="color:var(--body-text)">GBPUSD</span><span class="mono" style="color:var(--body-text)" aria-hidden="true">XAUUSD</span><span class="mono" style="color:var(--body-text)" aria-hidden="true">EURUSD</span><span class="mono" style="color:var(--body-text)" aria-hidden="true">BTCUSD</span><span class="mono" style="color:var(--body-text)" aria-hidden="true">GBPUSD</span></div></div></div><div class="meta"><b>ezm-marquee</b><code>.ezm-marquee</code><p>Loop; pauses on hover.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-orbit" style="width:80px;height:80px;position:relative"><span style="position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:99px;background:var(--accent)"></span><div class="demo-box demo-metal" style="width:40px;height:40px;border-radius:10px"></div></div></div><div class="meta"><b>ezm-orbit</b><code>.ezm-orbit</code><p>Rotating wrapper.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-tilt demo-box demo-metal" tabindex="0"></div></div><div class="meta"><b>ezm-tilt</b><code>.ezm-tilt</code><p>CSS hover tilt.</p></div></div>
+      <div class="tile"><div class="stage"><span class="ezm-text-shimmer hero" style="font-size:22px">live <span class="display-accent">signals</span></span></div><div class="meta"><b>ezm-text-shimmer</b><code>.ezm-text-shimmer</code><p>Gradient sweep.</p></div></div>
+      <div class="tile"><div class="stage"><span class="mono" style="font-size:15px">2,395.120<span class="ezm-caret"></span></span></div><div class="meta"><b>ezm-caret</b><code>.ezm-caret</code><p>Live-feed caret.</p></div></div>
+      <div class="tile"><div class="stage"><span class="ezm-wiggle" style="display:inline-block;padding:8px 14px;border-radius:10px;border:1px solid var(--accent);color:var(--accent);font-size:13px;font-weight:600">NEW</span></div><div class="meta"><b>ezm-wiggle</b><code>.ezm-wiggle</code><p>Attention wiggle.</p></div></div>
+      <div class="tile"><div class="stage"><span class="ezm-heartbeat" style="display:block;width:24px;height:24px;border-radius:99px;background:var(--primary);box-shadow:0 0 14px var(--primary)"></span></div><div class="meta"><b>ezm-heartbeat</b><code>.ezm-heartbeat</code><p>Double-thump live dot.</p></div></div>
+      <div class="tile"><div class="stage ezm-kenburns" style="background:radial-gradient(60% 60% at 60% 40%,rgba(47,191,113,.35),transparent 70%)"></div><div class="meta"><b>ezm-kenburns</b><code>.ezm-kenburns</code><p>Slow zoom-pan.</p></div></div>
+      <div class="tile"><div class="stage ezm-aurora"><span style="font-size:18px;position:relative">aurora</span></div><div class="meta"><b>ezm-aurora</b><code>.ezm-aurora</code><p>Drifting glows.</p></div></div>
+      <div class="tile"><div class="stage ezm-grid-scroll"></div><div class="meta"><b>ezm-grid-scroll</b><code>.ezm-grid-scroll</code><p>Scrolling grid.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-rise demo-box demo-gold"></div></div><div class="meta"><b>ezm-rise</b><code>.ezm-rise</code><p>One-shot rise on load.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-scale-in demo-box demo-green"></div></div><div class="meta"><b>ezm-scale-in</b><code>.ezm-scale-in</code><p>Scale entrance.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="3d">
+    <p class="eyebrow" style="color:var(--primary);margin:0">ezymap-motion-3d.css</p>
+    <h2>3D and premium</h2>
+    <p class="file-note">Depth, beams and glows. Wrap demos in <code>.ezm-stage</code> for the perspective context.</p>
+    <div class="grid">
+      <div class="tile"><div class="stage ezm-stage"><div class="ezm-3d-turn demo-box demo-gold"></div></div><div class="meta"><b>ezm-3d-turn</b><code>.ezm-3d-turn</code><p>Y-axis turn.</p></div></div>
+      <div class="tile"><div class="stage ezm-stage"><div class="ezm-3d-wobble demo-box demo-green"></div></div><div class="meta"><b>ezm-3d-wobble</b><code>.ezm-3d-wobble</code><p>X/Y wobble + lift.</p></div></div>
+      <div class="tile"><div class="stage ezm-stage" style="perspective:600px"><div style="position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center"><div class="ezm-ring-3d" style="position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent)"></div><div class="demo-box demo-metal" style="width:32px;height:32px;border-radius:9px"></div></div></div><div class="meta"><b>ezm-ring-3d</b><code>.ezm-ring-3d</code><p>Tilted orbit ring.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-flip" tabindex="0" style="position:relative;width:140px;height:80px"><div class="ezm-flip__inner" style="position:relative;width:100%;height:100%;transform-style:preserve-3d"><div class="ezm-flip__face" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--border);background:var(--surface-elevated)"><span class="mono">front</span></div><div class="ezm-flip__face ezm-flip__back" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--gradient-gold);color:#0a0c0b"><span class="mono">back</span></div></div></div></div><div class="meta"><b>ezm-flip</b><code>.ezm-flip</code><p>Hover/focus flip.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-depth" tabindex="0" style="width:130px;height:76px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">hover</span></div></div><div class="meta"><b>ezm-depth</b><code>.ezm-depth</code><p>Lifts toward viewer.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-beam" style="width:130px;height:76px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">beam</span></div></div><div class="meta"><b>ezm-beam</b><code>.ezm-beam</code><p>Rotating border beam.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-glow" style="width:130px;height:76px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">live</span></div></div><div class="meta"><b>ezm-glow</b><code>.ezm-glow</code><p>Breathing glow.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-stagger" style="display:flex;gap:8px"><span class="ezm-reveal-3d" style="width:26px;height:48px;border-radius:8px;background:var(--gradient-green)"></span><span class="ezm-reveal-3d" style="width:26px;height:68px;border-radius:8px;background:var(--gradient-green)"></span><span class="ezm-reveal-3d" style="width:26px;height:38px;border-radius:8px;background:var(--gradient-green)"></span><span class="ezm-reveal-3d" style="width:26px;height:58px;border-radius:8px;background:var(--gradient-green)"></span></div></div><div class="meta"><b>ezm-reveal-3d / ezm-stagger</b><code>.ezm-stagger</code><p>Staggered entrance.</p></div></div>
+      <div class="tile"><div class="stage"><span class="ezm-gold-flow" style="display:inline-block;padding:10px 18px;border-radius:10px;font-weight:600;letter-spacing:0.04em">PREMIUM</span></div><div class="meta"><b>ezm-gold-flow</b><code>.ezm-gold-flow</code><p>Moving gold gradient.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="scroll">
+    <p class="eyebrow" style="color:var(--primary);margin:0">ezymap-motion-scroll.css</p>
+    <h2>Scroll-driven</h2>
+    <p class="file-note">Gated behind <code>@supports (animation-timeline)</code> and <code>no-preference</code> — unsupported browsers get the final state. Scroll down: the cards reveal, zoom and stagger. Set <code>--i</code> on stagger children, <code>--ezm-parallax</code> for drift distance.</p>
+    <div class="scroll-zone">
+      <div class="ezm-scroll-stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;width:min(720px,92%)">
+        <div class="tile ezm-scroll-reveal" style="--i:0"><div class="stage"><div class="demo-box demo-green ezm-scroll-zoom"></div></div><div class="meta"><b>ezm-scroll-reveal</b><code>.ezm-scroll-reveal</code><p>Fade + rise on entry.</p></div></div>
+        <div class="tile ezm-scroll-zoom" style="--i:1"><div class="stage"><div class="demo-box demo-gold"></div></div><div class="meta"><b>ezm-scroll-zoom</b><code>.ezm-scroll-zoom</code><p>Scale-up reveal.</p></div></div>
+        <div class="tile" style="--i:2"><div class="stage"><div class="demo-box demo-metal"></div></div><div class="meta"><b>ezm-scroll-parallax</b><code>.ezm-scroll-parallax</code><p>Wrap the stage for drift.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="text">
+    <p class="eyebrow" style="color:var(--primary);margin:0">ezymap-motion-text.css</p>
+    <h2>Text motion</h2>
+    <p class="file-note">Headline entrances. Set <code>--i</code> on word/line children for stagger.</p>
+    <div class="grid" style="grid-template-columns:1fr">
+      <div class="tile"><div class="stage" style="flex-direction:column;gap:14px;align-items:flex-start">
+        <h3 class="ezm-words" style="margin:0;font-size:24px"><span style="--i:0">Trade</span> <span style="--i:1">the</span> <span style="--i:2">desk,</span> <span style="--i:3">not</span> <span style="--i:4">the</span> <span style="--i:5">noise.</span></h3>
+        <div>
+          <span class="ezm-line" style="font-size:24px"><span style="--i:0">Masked line rise</span></span>
+          <span class="ezm-line" style="font-size:24px"><span style="--i:1">for big headlines</span></span>
+        </div>
+        <p style="margin:0">Signals with <span class="ezm-underline" style="color:var(--primary);font-weight:600">full transparency</span> posted live.</p>
+        <p style="margin:0">Markets: <span class="ezm-rotator" style="--n:3;color:var(--accent);font-weight:600"><span class="ezm-rotator__track"><span>Gold</span><span>Forex</span><span>Crypto</span><span>Gold</span></span></span></p>
+      </div><div class="meta"><b>ezm-words · ezm-line · ezm-underline · ezm-rotator</b><code>.ezm-*</code><p>All four text utilities on one stage.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="hero">
+    <p class="eyebrow" style="color:var(--primary);margin:0">ezymap-motion-hero.css</p>
+    <h2>Hero motion</h2>
+    <p class="file-note">Pointer-reactive layers pair with <code>ezm-hero-pointer.js</code> (<code>bindHeroPointer</code>, <code>flashTick</code>). Chart draws need <code>pathLength="1"</code>.</p>
+    <div class="grid">
+      <div class="tile"><div class="stage ezm-spotlight" style="background:radial-gradient(60% 60% at 50% 40%,rgba(47,191,113,.18),transparent 70%)"><div class="demo-box demo-metal"></div></div><div class="meta"><b>ezm-spotlight</b><code>.ezm-spotlight</code><p>Pointer spotlight (needs JS vars).</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-candle-rise" style="display:flex;align-items:flex-end;gap:6px;height:90px"><span style="width:16px;height:40%;background:var(--primary);border-radius:3px 3px 0 0;--i:0"></span><span style="width:16px;height:65%;background:var(--primary);border-radius:3px 3px 0 0;--i:1"></span><span style="width:16px;height:50%;background:var(--primary);border-radius:3px 3px 0 0;--i:2"></span><span style="width:16px;height:80%;background:var(--primary);border-radius:3px 3px 0 0;--i:3"></span><span style="width:16px;height:60%;background:var(--accent);border-radius:3px 3px 0 0;--i:4"></span></div></div><div class="meta"><b>ezm-candle-rise</b><code>.ezm-candle-rise</code><p>Candles grow on load.</p></div></div>
+      <div class="tile"><div class="stage"><span class="ezm-tick-up mono" style="padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface-elevated);font-size:18px">2,395.120</span></div><div class="meta"><b>ezm-tick-up / ezm-tick-down</b><code>.ezm-tick-*</code><p>Price flash on change.</p></div></div>
+      <div class="tile"><div class="stage"><svg width="200" height="70" viewBox="0 0 200 70" aria-hidden="true"><path class="ezm-draw" pathLength="1" d="M10 55 L60 40 L110 48 L160 20 L190 12" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round"/></svg></div><div class="meta"><b>ezm-draw</b><code>.ezm-draw</code><p>SVG line draws on.</p></div></div>
+      <div class="tile"><div class="stage"><svg width="80" height="80" viewBox="0 0 80 80" aria-hidden="true"><path class="ezm-sparkle" style="--i:0" d="M40 20 l4 12 12 4 -12 4 -4 12 -4 -12 -12 -4 12 -4 z" fill="var(--accent)"/><path class="ezm-sparkle" style="--i:1" d="M62 44 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z" fill="var(--primary)"/></svg></div><div class="meta"><b>ezm-sparkle</b><code>.ezm-sparkle</code><p>Twinkle for gold accents.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="product">
+    <p class="eyebrow" style="color:var(--primary);margin:0">ezymap-motion-product.css</p>
+    <h2>Product motion</h2>
+    <p class="file-note">Tile hovers, sheen, live pings, dash flow and the Reveal component's styles.</p>
+    <div class="grid">
+      <div class="tile"><div class="stage"><div class="ezm-product-lift ezm-sheen" tabindex="0" style="width:88px;height:88px;border-radius:20px;background:var(--gradient-metal);border:1px solid var(--border);display:flex;align-items:center;justify-content:center"><img src="../assets/products/ezymap-channel-icon.svg" alt="" style="width:56px;height:56px"></div></div><div class="meta"><b>ezm-product-lift + ezm-sheen</b><code>.ezm-product-lift .ezm-sheen</code><p>Hover lift + sheen sweep.</p></div></div>
+      <div class="tile"><div class="stage"><span class="ezm-live-ping is-live" style="display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:9999px;border:1px solid var(--border);background:var(--surface-elevated);font-size:13px;font-weight:600"><span style="width:8px;height:8px;border-radius:99px;background:var(--primary)"></span>LIVE</span></div><div class="meta"><b>ezm-live-ping</b><code>.ezm-live-ping.is-live</code><p>Expanding ping ring.</p></div></div>
+      <div class="tile"><div class="stage"><svg width="200" height="48" viewBox="0 0 200 48" aria-hidden="true"><defs><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2fbf71"/><stop offset="1" stop-color="#e0bc63"/></linearGradient></defs><path class="ezm-dash-flow" d="M8 32 L60 14 L112 36 L164 16 L192 26" fill="none" stroke="url(#mg2)" stroke-width="4" stroke-linecap="round" stroke-dasharray="14 10"/></svg></div><div class="meta"><b>ezm-dash-flow</b><code>.ezm-dash-flow</code><p>Marching SVG dashes.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="eyebrow" style="color:var(--primary);margin:0">Accessibility</p>
+    <h2>Reduced motion</h2>
+    <p class="lede" style="font-size:16px">Every utility above stops animating under <code>prefers-reduced-motion: reduce</code> — loops freeze at their rest state, entrances show the final frame, and scroll-driven classes simply don't run. The Reveal component's hidden state only applies after JavaScript adds <code>html.js</code>, so content is never invisible with scripting off.</p>
+  </section>
+</main>
+
+<footer><div class="wrap">EzyMap design system v2.4.0 · <a href="index.html">Showcase</a> · <a href="../llms.txt">llms.txt</a></div></footer>
+</body>
+</html>

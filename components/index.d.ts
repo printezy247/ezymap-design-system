@@ -151,3 +151,43 @@ export interface ProductIconProps extends React.ImgHTMLAttributes<HTMLImageEleme
   alt?: string;
 }
 export declare function ProductIcon(props: ProductIconProps): React.ReactElement;
+
+/** Small "live" status pill with a green dot and optional expanding ping ring. */
+export interface LiveBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Show the expanding ping ring. Default true. */
+  ping?: boolean;
+}
+export declare function LiveBadge(props: LiveBadgeProps): React.ReactElement;
+
+/** Seamless scrolling strip; children are duplicated internally for the loop. */
+export interface MarqueeProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Scroll direction. Default "left". */
+  direction?: "left" | "right";
+  /** Seconds per loop. Default 32. */
+  duration?: number;
+  /** Pause on hover/focus. Default true. */
+  pauseOnHover?: boolean;
+  /** Accessible label for the strip. */
+  label?: string;
+}
+export declare function Marquee(props: MarqueeProps): React.ReactElement;
+
+/** Loading placeholder with the shimmer sweep. */
+export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Width as CSS length or number (px). */
+  width?: string | number;
+  /** Height as CSS length or number (px). Default 16. */
+  height?: string | number;
+  /** Render N stacked bars instead of one block. */
+  lines?: number;
+}
+export declare function Skeleton(props: SkeletonProps): React.ReactElement;
+
+/** Premium card surface with an animated edge: breathing glow or rotating beam. */
+export interface GlowCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** glow = soft breathing green edge · beam = rotating gold/green border beam. Default "glow". */
+  variant?: "glow" | "beam";
+  eyebrow?: React.ReactNode;
+  title?: React.ReactNode;
+}
+export declare function GlowCard(props: GlowCardProps): React.ReactElement;

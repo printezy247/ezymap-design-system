@@ -1,7 +1,7 @@
 // EzyMap design tokens — generated from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit.
 export const tokens = {
   "name": "EzyMap",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "color": {
     "background": "#0a0c0b",
     "foreground": "#f2f4f2",
@@ -132,7 +132,9 @@ export const tokens = {
     "ease-emphasized": "cubic-bezier(0.3, 0, 0, 1)",
     "ease-exit": "cubic-bezier(0.4, 0, 1, 1)",
     "duration-xl": "1200ms",
-    "ease-spring": "cubic-bezier(0.34, 1.56, 0.64, 1)"
+    "ease-spring": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    "ease-spring-snappy": "cubic-bezier(0.2, 1.4, 0.4, 1)",
+    "ease-spring-gentle": "cubic-bezier(0.33, 1.15, 0.68, 1)"
   },
   "breakpoint": {
     "bp-sm": "640px",

@@ -1,5 +1,14 @@
 # PriceTicker
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { PriceTicker } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.PriceTicker`.
+
 A scrolling strip of live prices: symbol, mono value and signed delta, in a bordered band on `surface`.
 
 - **Use** under a hero or above a chart panel to show the desk is live. One per page.
