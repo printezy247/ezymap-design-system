@@ -1,5 +1,14 @@
 # StatTile
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { StatTile } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.StatTile`.
+
 A mono data readout on a brushed-metal tile: label, value and an optional delta line.
 
 - **Use** for live prices, risk figures, member counts and plan parameters (entry, stop, target), set in rows or a column beside a chart.

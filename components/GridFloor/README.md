@@ -1,5 +1,14 @@
 # GridFloor
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { GridFloor } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.GridFloor`.
+
 A stage made of a perspective grid floor (`grid-line`) and a soft radial glow (`gradient-holo-glow`). It centres one hero object, which reads as standing in 3D space.
 
 - **Use** behind the hero object of a page, banner, ebook cover or tier image: the EzyMap gem, a tilted chart panel or a stack of isometric slabs. Use one per surface.

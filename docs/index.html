@@ -73,28 +73,28 @@
   <div class="wrap">
     <img src="../assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap">
     <nav aria-label="Sections">
-      <a href="#whats-new">What's new</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#spacing">Spacing</a><a href="#radii">Radii</a><a href="#shadows">Shadows</a><a href="#components">Components</a><a href="#motion">Motion</a><a href="#products">Products</a><a href="#logos">Logos</a>
+      <a href="#whats-new">What's new</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#spacing">Spacing</a><a href="#radii">Radii</a><a href="#shadows">Shadows</a><a href="#components">Components</a><a href="#motion">Motion</a><a href="motion.html">Motion playground</a><a href="#products">Products</a><a href="#logos">Logos</a><a href="#accessibility">Accessibility</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
   <div class="intro">
-    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.3.0</p>
+    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.4.0</p>
     <h1>EzyMap design system</h1>
     <p class="lede">Green and gold on black, with white type. Tokens, components and logos for the EzyMap Algo desk.</p>
     <p id="load-error" role="alert">Tokens could not be loaded. Serve this folder over http (for example <code>npx serve</code>) instead of opening the file directly.</p>
   </div>
 
-  <section class="block" id="whats-new"><p class="eyebrow" style="color:var(--primary);margin:0">v2.3.0</p><h2>What's new</h2>
+  <section class="block" id="whats-new"><p class="eyebrow" style="color:var(--primary);margin:0">v2.4.0</p><h2>What's new</h2>
     <ul class="lede" style="padding-left:20px">
-      <li><strong>Product asset family</strong> (<code>assets/products/</code>): every ready product — channel, Mini App, gated bot, live ticker, calculators, exchanges &amp; bots, EzyMapPro, ebooks and Macro Bot — now ships four variants: base, <code>-animated</code> (float + orbit ring), <code>-extrude</code> (3D depth) and <code>-glass</code> (frosted tile), each as SVG plus a 256px PNG.</li>
-      <li><strong>New logo variants</strong> (<code>assets/logos/</code>): <code>ezymap-mark-aurora.svg</code> (teal/cyan ramp for data-viz surfaces), <code>ezymap-appicon-glass.svg</code> and <code>ezymap-appicon-neon.svg</code>.</li>
-      <li><strong>Asset manifest</strong> (<code>assets/manifest.json</code>): generated catalog of every logo, product file and motion stylesheet, with format and animation flags.</li>
-      <li><strong>Product motion</strong> (<code>assets/motion/ezymap-motion-product.css</code>): <code>ezm-product-lift</code>, <code>ezm-sheen</code>, <code>ezm-live-ping</code>, <code>ezm-dash-flow</code> and <code>ezm-js-reveal</code>. All honour <code>prefers-reduced-motion</code>.</li>
-      <li><strong>New tokens</strong>: <code>duration-xl</code> (1200ms) and <code>ease-spring</code> (playful overshoot) in <code>tokens/tokens.json</code>, emitted to CSS, TypeScript and the Tailwind preset.</li>
-      <li><strong>New components</strong>: <code>Reveal</code> (JS scroll-reveal fallback) and <code>ProductIcon</code> (product tile with variant support), in React, vanilla bundle and typings.</li>
-      <li><a href="../preview-v3.html"><code>preview-v3.html</code></a>: standalone preview of the hero logos and 3D demos.</li>
+      <li><strong>Four new components</strong> (16 total): <code>LiveBadge</code> (live status pill with ping ring), <code>Marquee</code> (seamless scroll strip with direction/duration controls), <code>Skeleton</code> (shimmer loading placeholder) and <code>GlowCard</code> (card with breathing glow or rotating border beam) — in React, vanilla bundle and typings.</li>
+      <li><strong>Spring motion tokens</strong>: <code>ease-spring-snappy</code> and <code>ease-spring-gentle</code> join <code>ease-spring</code> — cubic-bezier approximations of Motion-style springs for CSS-only consumers.</li>
+      <li><strong>Agent ergonomics</strong>: <code>docs/llms.txt</code> + <code>docs/llms-full.txt</code> (LLM-readable system reference), <code>docs/motion.html</code> (live motion playground), <code>scripts/manifest.mjs</code> (asset resolver CLI, also <code>npm run manifest</code>) and <code>mcp/server.mjs</code> (zero-dependency MCP server exposing tokens, components, motion and assets to AI agents).</li>
+      <li><strong>Install snippets</strong>: every component README now opens with a copy-paste React + vanilla install block.</li>
+      <li><strong>3D pipeline decision</strong> (<code>docs/3d-pipeline-decision.md</code>): SVG/PNG stays canonical; Spline/Rive documented as the revisit path for real-time 3D.</li>
+      <li><strong>Accessibility section</strong> below documents reduced-motion, no-script and focus behaviour.</li>
+      <li>Marquee tracks now honour <code>--marquee-duration</code> and <code>.ezm-marquee--always</code>.</li>
     </ul>
   </section>
   <section class="block" id="colour"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Colour</h2><div class="grid swatches" id="colours"></div></section>
@@ -149,9 +149,22 @@
   <section class="block" id="products"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Product icons</h2><p class="lede">One app-icon tile per ready product, from <code>assets/products/</code>. Every product also ships <code>-animated</code>, <code>-extrude</code> and <code>-glass</code> variants in SVG and 256px PNG — see the variant grid below.</p><div class="grid logos" id="product-grid"></div><h3>Variants</h3><div class="grid logos" id="product-variant-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))"></div></section>
 
   <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logos</h2><div class="grid logos" id="logo-grid"></div></section>
+
+  <section class="block" id="accessibility"><p class="eyebrow" style="color:var(--primary);margin:0">Accessibility</p><h2>Built to be usable by everyone</h2>
+    <div class="lede" style="font-size:16px">
+      <ul style="padding-left:20px">
+        <li><strong>Reduced motion.</strong> Every animation in the six motion stylesheets stops under <code>prefers-reduced-motion: reduce</code> — loops freeze at rest, entrances show the final frame, scroll-driven classes don't run. Try it: enable "reduce motion" in your OS accessibility settings and reload this page.</li>
+        <li><strong>No JavaScript.</strong> Content is never hidden without scripting. The Reveal component's hidden state only applies after mount adds <code>html.js</code>; scroll-driven motion is gated behind <code>@supports (animation-timeline)</code> and <code>no-preference</code>.</li>
+        <li><strong>Keyboard.</strong> All interactive elements show a 2px <code>accent</code> focus ring offset from the background; product tiles, flip cards and depth cards are focusable and respond to <code>:focus-visible</code>.</li>
+        <li><strong>Colour.</strong> Text pairs are AA-checked per surface (see token usage notes); up/down market states always pair colour with a sign or arrow, and the only red is SignalFlag "Stopped".</li>
+        <li><strong>Images.</strong> <code>ProductIcon</code> and <code>EzyMapLogo</code> ship sensible default alt text; decorative marks use <code>aria-hidden</code>. Marquee strips pause on hover and focus.</li>
+      </ul>
+      <p style="margin-top:16px">Live demos of every motion utility, including the reduced-motion behaviour, are on the <a href="motion.html">motion playground</a>.</p>
+    </div>
+  </section>
 </main>
 
-<footer><div class="wrap">EzyMap design system v2.3.0 · All rights reserved. Proprietary.</div></footer>
+<footer><div class="wrap">EzyMap design system v2.4.0 · All rights reserved. Proprietary.</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
@@ -298,7 +311,22 @@
       h(E.ProductIcon, { product: "channel", variant: "animated", basePath: "../assets/products", style: { width: 64, height: 64 } }),
       h(E.ProductIcon, { product: "macro-bot", variant: "extrude", basePath: "../assets/products", style: { width: 64, height: 64 } }),
       h(E.ProductIcon, { product: "pro", variant: "glass", basePath: "../assets/products", style: { width: 64, height: 64 } }),
-      h(E.ProductIcon, { product: "ticker", basePath: "../assets/products", style: { width: 64, height: 64 } })))
+      h(E.ProductIcon, { product: "ticker", basePath: "../assets/products", style: { width: 64, height: 64 } }))),
+    Comp("LiveBadge", "Live status pill: green dot, optional expanding ping ring. Use only for genuinely live states.", h("div", { className: "ezm-row", style: { alignItems: "center" } },
+      h(E.LiveBadge, null, "Prices live"),
+      h(E.LiveBadge, { ping: false }, "Bot online"))),
+    Comp("Marquee", "Seamless scroll strip; duplicates children internally. direction, duration (s) and pauseOnHover props.", h(E.Marquee, { duration: 18, label: "Products", style: { borderBlock: "1px solid var(--border)", padding: "12px 0" } },
+      h("span", { className: "mono", style: { color: "var(--body-text)", padding: "0 16px" } }, "EzyMap Algo"),
+      h("span", { className: "mono", style: { color: "var(--body-text)", padding: "0 16px" } }, "EzyMapPro"),
+      h("span", { className: "mono", style: { color: "var(--body-text)", padding: "0 16px" } }, "Macro Bot"),
+      h("span", { className: "mono", style: { color: "var(--body-text)", padding: "0 16px" } }, "Ebooks"))),
+    Comp("Skeleton", "Shimmer loading placeholder — one block or stacked lines. Keep the footprint of the content it replaces.", h("div", { style: { maxWidth: 320 } },
+      h("div", { className: "ezm-row", style: { alignItems: "center" } },
+        h(E.Skeleton, { width: 48, height: 48, style: { borderRadius: 12 } }),
+        h("div", { style: { flex: 1 } }, h(E.Skeleton, { width: "70%", height: 14 }), h("div", { style: { height: 8 } }), h(E.Skeleton, { lines: 2, width: "90%" }))))),
+    Comp("GlowCard", "The premium surface: brushed-metal card with a breathing glow or rotating border beam. One per view.", h("div", { className: "ezm-row", style: { alignItems: "stretch" } },
+      h(E.GlowCard, { eyebrow: "Live desk", title: "Glow", style: { flex: 1 } }, h("p", { className: "ezm-card__body" }, "Breathing green/gold edge for live content.")),
+      h(E.GlowCard, { variant: "beam", eyebrow: "Hero", title: "Beam", style: { flex: 1 } }, h("p", { className: "ezm-card__body" }, "Rotating conic border for the one hero panel."))))
   ];
   ReactDOM.createRoot($("root")).render(h(React.Fragment, null, items));
 })();

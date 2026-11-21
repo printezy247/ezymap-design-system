@@ -1,5 +1,14 @@
 # EzyMapLogo
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { EzyMapLogo } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.EzyMapLogo`.
+
 The EzyMap gem mark: a faceted diamond (green crown, gold base) carrying a gold rising route line, wrapped in an orbit ring. Full colour — never tint it.
 
 - **Use** for the EzyMap brand wherever a mark is needed: nav, hero, loading states, product tiles. Pair with `withWordmark` only at 96px and up.

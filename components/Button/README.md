@@ -1,5 +1,14 @@
 # Button
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { Button } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.Button`.
+
 A bevelled glass button: `primary` is green glass for the one action the view is for, `outline` is gold glass for the secondary path, and `ghost` is plain text for tertiary links.
 
 - **Use** `primary` once per view, usually "Join Free Channel" to the EzyMap Algo Telegram channel. Use `outline` for "See packages" or "Get the free ebook", and `ghost` for "Ask Sarah" or navigation.

@@ -82,7 +82,12 @@
   align-items: center;
   gap: var(--space-8);
   width: max-content;
-  animation: ezm-marquee 32s linear infinite;
+  animation: ezm-marquee var(--marquee-duration, 32s) linear infinite;
+}
+.ezm-marquee__dup { display: contents; }
+.ezm-marquee--always:hover .ezm-marquee__track,
+.ezm-marquee--always:focus-within .ezm-marquee__track {
+  animation-play-state: running;
 }
 .ezm-marquee:hover .ezm-marquee__track,
 .ezm-marquee:focus-within .ezm-marquee__track {

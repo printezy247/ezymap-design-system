@@ -1,5 +1,14 @@
 # HudFrame
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { HudFrame } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.HudFrame`.
+
 A hairline frame with gold corner brackets and mono labels notched into its edges. It is the futuristic wrapper for the one section a reader must not miss.
 
 - **Use** for Jack's plan, a trade setup, a checklist, a disclaimer or a key quote. Use one per view, two at most.

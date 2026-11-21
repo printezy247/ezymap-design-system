@@ -1,5 +1,14 @@
 # HeroPill
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { HeroPill } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.HeroPill`.
+
 A dark bevelled pill with a green hairline that sits above the hero headline and carries one live figure and a label.
 
 - **Use** once, above the h1, for example "640 Active Members · Est. 2021". The figure should be live data (the Telegram member count).

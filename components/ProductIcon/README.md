@@ -1,5 +1,14 @@
 # ProductIcon
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { ProductIcon } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.ProductIcon`.
+
 Renders one of the ready-product app-icon tiles from `assets/products/` as an `<img>`.
 
 - **Use** on product cards, tier tables, store listings and cross-promotion tiles — anywhere a product needs its mark.

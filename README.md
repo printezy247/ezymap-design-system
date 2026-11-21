@@ -9,13 +9,13 @@
 
 **Green and gold on black, with white type. Tokens, React components and brand assets for the EzyMap Algo desk.**
 
-![version](https://img.shields.io/badge/version-2.3.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
+![version](https://img.shields.io/badge/version-2.4.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
 ![license](https://img.shields.io/badge/license-proprietary-c9a13a?style=for-the-badge&labelColor=0a0c0b)
 ![react](https://img.shields.io/badge/React-18-2fbf71?style=for-the-badge&logo=react&logoColor=white&labelColor=0a0c0b)
 ![tailwind](https://img.shields.io/badge/Tailwind-v4-c9a13a?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=0a0c0b)
 ![deps](https://img.shields.io/badge/build_deps-0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
 
-[**Showcase**](docs/index.html) · [**Tokens**](tokens/tokens.json) · [**Components**](components/) · [**Assets**](assets/) · [**Voice**](docs/voice.md) · [**Changelog**](CHANGELOG.md)
+[**Showcase**](docs/index.html) · [**Motion playground**](docs/motion.html) · [**Tokens**](tokens/tokens.json) · [**Components**](components/) · [**Assets**](assets/) · [**Voice**](docs/voice.md) · [**Changelog**](CHANGELOG.md)
 
 <img src="assets/social/banner-og-1200x630.png" alt="EzyMap Algo" width="720">
 
@@ -42,18 +42,19 @@
 | 🔤 Type styles | **17** | Clash Display · General Sans · JetBrains Mono · Instrument Serif |
 | 📐 Spacing / radius | **14 / 8** | 4px Tailwind scale |
 | 🧊 Shadows / gradients | **8 / 7** | brushed-metal depth |
-| 🎞️ Motion tokens | **9** | durations + easings |
+| 🎞️ Motion tokens | **11** | durations + spring easings |
 | 📏 Breakpoints | **4** | mobile-first widths |
-| 🧩 Components | **12** | React + TypeScript |
+| 🧩 Components | **16** | React + TypeScript + vanilla bundle |
 | 🖼️ Logos | **30** | 3D gem set, EzyMap only |
 | 🧩 Product icons | **9 products × 4 variants** | animated, extrude and glass tiles, SVG + PNG |
+| 🤖 Agent surface | **llms.txt + MCP** | `docs/llms*.txt`, `mcp/server.mjs`, `scripts/manifest.mjs` |
 
 ## Quick start
 
-Install from the private GitHub repo named in `package.json` (`repository`), pinned to the `v2.0.0` tag:
+Install from the private GitHub repo named in `package.json` (`repository`), pinned to the `v2.4.0` tag:
 
 ```bash
-npm install "github:<owner>/ezymap-design-system#v2.3.0"
+npm install "github:<owner>/ezymap-design-system#v2.4.0"
 ```
 
 <details open>
@@ -158,8 +159,18 @@ Writes the animated mark, light app icon, line mark, stacked-on-light lockup and
 | `Tilt` | pointer-tracked 3D tilt with cursor glare | [README](components/Tilt/README.md) |
 | `Reveal` | scroll-into-view reveal (JS fallback) | [README](components/Reveal/README.md) |
 | `ProductIcon` | ready-product tile, four variants | [README](components/ProductIcon/README.md) |
+| `LiveBadge` | live status pill with ping ring | [README](components/LiveBadge/README.md) |
+| `Marquee` | seamless scroll strip | [README](components/Marquee/README.md) |
+| `Skeleton` | shimmer loading placeholder | [README](components/Skeleton/README.md) |
+| `GlowCard` | card with breathing glow or border beam | [README](components/GlowCard/README.md) |
 
-Motion utilities ship as plain CSS in six files under `assets/motion/` (`ezymap-motion.css`, `-3d`, `-scroll`, `-text`, `-hero`, `-product`) — import them after `tokens.css` on any page, React or not. `assets/manifest.json` catalogs every asset.
+Motion utilities ship as plain CSS in six files under `assets/motion/` (`ezymap-motion.css`, `-3d`, `-scroll`, `-text`, `-hero`, `-product`) — import them after `tokens.css` on any page, React or not. Live demos are on the [motion playground](docs/motion.html). `assets/manifest.json` catalogs every asset.
+
+### For AI agents
+
+- [`docs/llms.txt`](docs/llms.txt) / [`docs/llms-full.txt`](docs/llms-full.txt) — LLM-readable reference (tokens, components, motion, rules).
+- [`mcp/server.mjs`](mcp/server.mjs) — zero-dependency MCP server (`ezymap_summary`, `ezymap_tokens`, `ezymap_components`, `ezymap_motion`, `ezymap_assets`, `ezymap_rules`); see [mcp/README.md](mcp/README.md).
+- `node scripts/manifest.mjs` — CLI asset resolver (`--product`, `--logo`, `--motion`, `--list`).
 
 ## How it fits together
 
@@ -275,7 +286,7 @@ EzyMap is a premium trading desk that lives inside Telegram. Everything built on
 
 - The 3D gem set in `assets/logos` is the only logo set. No legacy logo or favicon is included.
 - Fonts are CDN-hosted (Fontshare + Google Fonts), so no font files are stored.
-- Components are authored in this repo (`components/react/*.tsx`) and compiled to `bundle.js`/`bundle.css` by hand — no build step. Button, Card, HeroPill, SignalFlag, EzyMapLogo, HudFrame, StatTile, GridFloor, PriceTicker, Tilt, Reveal and ProductIcon each ship a React version, vanilla-bundle export and README. Select, Sonner, SignalCard and landing-page sections were not brought in.
+- Components are authored in this repo (`components/react/*.tsx`) and compiled to `bundle.js`/`bundle.css` by hand — no build step. Button, Card, HeroPill, SignalFlag, EzyMapLogo, HudFrame, StatTile, GridFloor, PriceTicker, Tilt, Reveal, ProductIcon, LiveBadge, Marquee, Skeleton and GlowCard each ship a React version, vanilla-bundle export and README. Select, Sonner, SignalCard and landing-page sections were not brought in.
 - Skipped variables: `--gradient-glow`, `--gradient-gold-glow` and `--shadow-inset-gold` (all `none`). Animated neon CTA styles were also skipped.
 
 </details>

@@ -112,7 +112,9 @@ export default {
         "standard": "var(--ease-standard)",
         "emphasized": "var(--ease-emphasized)",
         "exit": "var(--ease-exit)",
-        "spring": "var(--ease-spring)"
+        "spring": "var(--ease-spring)",
+        "spring-snappy": "var(--ease-spring-snappy)",
+        "spring-gentle": "var(--ease-spring-gentle)"
       },
       "screens": {
         "sm": "640px",

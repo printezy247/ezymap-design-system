@@ -1,5 +1,14 @@
 # Tilt
 
+## Install
+
+```tsx
+import "@ezymap/design-system/components/bundle.css";
+import { Tilt } from "@ezymap/design-system/react";
+```
+
+Vanilla: load React 18 UMD, then `components/bundle.js`; use `window.EzyMap.Tilt`.
+
 A wrapper that tilts its child in 3D toward the pointer and adds a soft glare that follows the cursor. The trending card treatment for product tiles and key panels.
 
 - **Use** on one or two hero cards per view — a product tile, the pricing panel, a logo lockup. Do not wrap every card; the effect reads best when rare.
