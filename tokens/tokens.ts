@@ -1,7 +1,7 @@
 // EzyMap design tokens — generated from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit.
 export const tokens = {
   "name": "EzyMap",
-  "version": 1,
+  "version": 2,
   "color": {
     "background": "#0a0c0b",
     "foreground": "#f2f4f2",
@@ -82,6 +82,21 @@ export const tokens = {
     "gradient-brand": "linear-gradient(103deg, #2fbf71 0%, #c9a13a 100%)",
     "gradient-hero-pill": "linear-gradient(125deg, #1b201d 0%, #0f1311 100%)",
     "gradient-holo-glow": "radial-gradient(ellipse 60% 45% at 50% 60%, rgba(47, 191, 113, 0.22), rgba(47, 191, 113, 0) 70%)"
+  },
+  "motion": {
+    "duration-instant": "80ms",
+    "duration-fast": "150ms",
+    "duration-base": "250ms",
+    "duration-slow": "600ms",
+    "ease-standard": "cubic-bezier(0.2, 0, 0, 1)",
+    "ease-emphasized": "cubic-bezier(0.3, 0, 0, 1)",
+    "ease-exit": "cubic-bezier(0.4, 0, 1, 1)"
+  },
+  "breakpoint": {
+    "bp-sm": "640px",
+    "bp-md": "768px",
+    "bp-lg": "1024px",
+    "bp-xl": "1280px"
   },
   "fontFamily": {
     "display": "\"Space Grotesk\", \"Inter Tight\", system-ui, sans-serif",
@@ -202,6 +217,8 @@ export type SpacingToken = keyof typeof tokens.spacing;
 export type RadiusToken = keyof typeof tokens.radius;
 export type ShadowToken = keyof typeof tokens.shadow;
 export type GradientToken = keyof typeof tokens.gradient;
+export type MotionToken = keyof typeof tokens.motion;
+export type BreakpointToken = keyof typeof tokens.breakpoint;
 export type TypeStyle = keyof typeof tokens.type;
 
 export default tokens;

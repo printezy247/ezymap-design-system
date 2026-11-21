@@ -44,16 +44,37 @@ export interface SignalFlagProps {
 }
 export declare function SignalFlag(props: SignalFlagProps): React.ReactElement;
 
-/** The EzyAI mark: gold isometric cube on a dark green disc. */
-export interface EzyAiLogoProps {
+/** The EzyMap gem mark: faceted diamond, rising route line, gold orbit ring. */
+export interface EzyMapLogoProps {
   className?: string;
   style?: React.CSSProperties;
-  /** Adds "EzyAI" under the cube. Only at 64px and up. */
+  /** Adds the "EzyMap" wordmark under the gem. Only at 96px and up. */
   withWordmark?: boolean;
-  /** Accessible name; omit when the word EzyAI is already beside it. */
+  /** Gentle float plus a gold comet travelling the orbit ring. */
+  animated?: boolean;
+  /** Accessible name; omit when the word EzyMap is already beside it. */
   title?: string;
 }
-export declare function EzyAiLogo(props: EzyAiLogoProps): React.ReactElement;
+export declare function EzyMapLogo(props: EzyMapLogoProps): React.ReactElement;
+
+export interface TickerItem {
+  /** Pair or instrument label, e.g. "XAUUSD". */
+  symbol: React.ReactNode;
+  /** Formatted price in mono. */
+  value: React.ReactNode;
+  /** Signed change, e.g. "+12.35 (+0.53%)". */
+  delta?: React.ReactNode;
+  /** up = market-up green, down = market-down gold. */
+  tone?: "up" | "down";
+}
+/** Scrolling price strip; the track is duplicated internally for a seamless loop. */
+export interface PriceTickerProps {
+  items: TickerItem[];
+  /** Accessible label for the strip. */
+  label?: string;
+  className?: string;
+}
+export declare function PriceTicker(props: PriceTickerProps): React.ReactElement;
 
 /** Hairline frame with gold corner brackets and optional mono labels: the futuristic wrapper for a key section. */
 export interface HudFrameProps extends React.HTMLAttributes<HTMLDivElement> {

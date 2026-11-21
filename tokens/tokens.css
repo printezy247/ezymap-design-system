@@ -78,6 +78,19 @@
   --gradient-brand: linear-gradient(103deg, #2fbf71 0%, #c9a13a 100%);
   --gradient-hero-pill: linear-gradient(125deg, #1b201d 0%, #0f1311 100%);
   --gradient-holo-glow: radial-gradient(ellipse 60% 45% at 50% 60%, rgba(47, 191, 113, 0.22), rgba(47, 191, 113, 0) 70%);
+  /* Motion */
+  --duration-instant: 80ms;
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 600ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  /* Breakpoints */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
   /* Font families */
   --font-display: "Space Grotesk", "Inter Tight", system-ui, sans-serif;
   --font-sans: "Inter Tight", system-ui, sans-serif;

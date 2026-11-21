@@ -75,3 +75,23 @@ body { background: var(--background); color: var(--foreground); font-family: var
 .ezm-floor__glow { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 45% at 50% 60%, rgba(47,191,113,0.22), rgba(47,191,113,0) 70%); }
 .ezm-floor__svg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 55%; }
 .ezm-floor__content { position: relative; z-index: 1; height: 100%; display: flex; align-items: center; justify-content: center; }
+
+/* EzyMapLogo animation + PriceTicker — motion tokens from tokens.css */
+.ezm-logo-anim .ezm-logo-float { animation: ezm-float var(--duration-slow) var(--ease-standard) infinite; transform-box: view-box; transform-origin: center; }
+@keyframes ezm-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+.ezm-ticker { border-block: 1px solid var(--border); background: var(--surface); padding: 10px 0; }
+.ezm-ticker__item { display: inline-flex; align-items: baseline; gap: 10px; padding: 0 var(--space-4); white-space: nowrap; }
+.ezm-ticker__symbol { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--muted-foreground); }
+.ezm-ticker__value { font-family: var(--font-mono); font-size: 15px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--foreground); }
+.ezm-ticker__delta { font-family: var(--font-mono); font-size: 12px; font-variant-numeric: tabular-nums; color: var(--body-text); }
+.ezm-ticker__delta[data-tone="up"] { color: var(--market-up); }
+.ezm-ticker__delta[data-tone="down"] { color: var(--market-down); }
+.ezm-marquee__track { animation: ezm-marquee 32s linear infinite; }
+@keyframes ezm-marquee { to { transform: translateX(-50%); } }
+.ezm-marquee:hover .ezm-marquee__track, .ezm-marquee:focus-within .ezm-marquee__track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ezm-logo-anim .ezm-logo-float, .ezm-marquee__track { animation: none !important; }
+  .ezm-marquee { overflow-x: auto; }
+}

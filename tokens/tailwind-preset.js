@@ -96,6 +96,23 @@ export default {
         "gradient-brand": "var(--gradient-brand)",
         "gradient-hero-pill": "var(--gradient-hero-pill)",
         "gradient-holo-glow": "var(--gradient-holo-glow)"
+      },
+      "transitionDuration": {
+        "instant": "var(--duration-instant)",
+        "fast": "var(--duration-fast)",
+        "base": "var(--duration-base)",
+        "slow": "var(--duration-slow)"
+      },
+      "transitionTimingFunction": {
+        "standard": "var(--ease-standard)",
+        "emphasized": "var(--ease-emphasized)",
+        "exit": "var(--ease-exit)"
+      },
+      "screens": {
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px"
       }
     }
   }
