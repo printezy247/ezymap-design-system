@@ -105,12 +105,14 @@ export default {
         "instant": "var(--duration-instant)",
         "fast": "var(--duration-fast)",
         "base": "var(--duration-base)",
-        "slow": "var(--duration-slow)"
+        "slow": "var(--duration-slow)",
+        "xl": "var(--duration-xl)"
       },
       "transitionTimingFunction": {
         "standard": "var(--ease-standard)",
         "emphasized": "var(--ease-emphasized)",
-        "exit": "var(--ease-exit)"
+        "exit": "var(--ease-exit)",
+        "spring": "var(--ease-spring)"
       },
       "screens": {
         "sm": "640px",

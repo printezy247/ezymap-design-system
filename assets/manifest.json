@@ -1,0 +1,518 @@
+{
+  "name": "EzyMap",
+  "version": "2.3.0",
+  "generatedBy": "scripts/build-assets.mjs",
+  "categories": {
+    "logos": [
+      {
+        "file": "assets/logos/ezymap-3d-appicon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-3d-favicon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-3d-horizontal-on-dark.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-3d-horizontal-on-light.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-3d-mark.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-3d-stacked-on-dark.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-appicon-animated.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/logos/ezymap-appicon-glass.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-appicon-light.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-appicon-neon.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-hero-fintech.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/logos/ezymap-hero-gold.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/logos/ezymap-horizontal-animated.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/logos/ezymap-mark-animated-orbit.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/logos/ezymap-mark-animated.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/logos/ezymap-mark-aurora.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/logos/ezymap-mark-extrude.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-mark-fintech.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-mark-ghost.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-mark-glass.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-mark-gold.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-mark-hero.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/logos/ezymap-mark-line.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-mark-neon.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-stacked-on-light.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      }
+    ],
+    "products": [
+      {
+        "file": "assets/products/ezymap-bot-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-bot-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-bot-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-bot-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-calculators-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-calculators-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-calculators-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-calculators-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-channel-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-channel-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-channel-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-channel-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-ebooks-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-ebooks-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-ebooks-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-ebooks-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-exchanges-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-exchanges-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-exchanges-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-exchanges-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-macro-bot-horizontal-on-dark.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-macro-bot-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-macro-bot-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-macro-bot-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-macro-bot-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-miniapp-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-miniapp-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-miniapp-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-miniapp-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-pro-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-pro-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-pro-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-pro-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-ticker-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-ticker-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-ticker-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-ticker-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      }
+    ],
+    "motion": [
+      {
+        "file": "assets/motion/ezymap-motion-3d.css",
+        "format": "css"
+      },
+      {
+        "file": "assets/motion/ezymap-motion-hero.css",
+        "format": "css"
+      },
+      {
+        "file": "assets/motion/ezymap-motion-product.css",
+        "format": "css"
+      },
+      {
+        "file": "assets/motion/ezymap-motion-scroll.css",
+        "format": "css"
+      },
+      {
+        "file": "assets/motion/ezymap-motion-text.css",
+        "format": "css"
+      },
+      {
+        "file": "assets/motion/ezymap-motion.css",
+        "format": "css"
+      }
+    ]
+  },
+  "totals": {
+    "logoFiles": 25,
+    "productFiles": 37,
+    "pngRenders": 36
+  }
+}

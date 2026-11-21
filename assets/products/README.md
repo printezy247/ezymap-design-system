@@ -2,6 +2,8 @@
 
 One rounded app-icon tile per ready EzyMap product: dark brushed ground, green glyph, one gold accent. 64×64 viewBox, stroke-based, crisp at any size.
 
+Every product ships four variants — `ezymap-<product>-icon.svg` plus `-animated` (glyph float + rotating gold ring), `-extrude` (offset-copy 3D depth) and `-glass` (frosted tile) — each also rendered as a 256px PNG. Regenerate all of them with `node scripts/build-assets.mjs`; `assets/manifest.json` lists every file.
+
 | File | Product |
 |---|---|
 | `ezymap-channel-icon.svg` | Free Telegram channel — megaphone |

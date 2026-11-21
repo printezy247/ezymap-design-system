@@ -8,3 +8,5 @@ export * from "./StatTile";
 export * from "./GridFloor";
 export * from "./PriceTicker";
 export * from "./Tilt";
+export * from "./Reveal";
+export * from "./ProductIcon";

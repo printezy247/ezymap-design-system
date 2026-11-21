@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"},{"name":"Tilt"}]} */
+/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"},{"name":"Tilt"},{"name":"Reveal"},{"name":"ProductIcon"}]} */
 (function () {
   var React = window.React, h = React.createElement;
   function cx() { return Array.prototype.filter.call(arguments, Boolean).join(" "); }
@@ -171,5 +171,65 @@
   }
   Tilt.displayName = "Tilt";
 
-  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker, Tilt: Tilt };
+  function Reveal(props) {
+    var ref = React.useRef(null);
+    var once = props.once !== false;
+    var delay = props.delay || 0;
+    var rest = omit(props, ["delay", "once", "className", "style", "children"]);
+    rest.ref = ref;
+    rest.className = props.className;
+    var inline = {};
+    for (var k in props.style) inline[k] = props.style[k];
+    if (delay) inline["--reveal-delay"] = delay + "ms";
+    rest.style = inline;
+    React.useEffect(function () {
+      var el = ref.current;
+      if (!el) return;
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || typeof IntersectionObserver === "undefined") { el.classList.add("is-inview"); return; }
+      document.documentElement.classList.add("js");
+      el.classList.add("ezm-js-reveal");
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-inview");
+            if (once) io.unobserve(entry.target);
+          } else if (!once) {
+            entry.target.classList.remove("is-inview");
+          }
+        });
+      }, { threshold: 0.15 });
+      io.observe(el);
+      return function () { io.disconnect(); };
+    }, [once]);
+    return h("div", rest, props.children);
+  }
+  Reveal.displayName = "Reveal";
+
+  var PRODUCT_FILES = {
+    channel: "ezymap-channel-icon", miniapp: "ezymap-miniapp-icon", bot: "ezymap-bot-icon",
+    ticker: "ezymap-ticker-icon", calculators: "ezymap-calculators-icon", exchanges: "ezymap-exchanges-icon",
+    pro: "ezymap-pro-icon", ebooks: "ezymap-ebooks-icon", "macro-bot": "ezymap-macro-bot-icon"
+  };
+  var PRODUCT_LABELS = {
+    channel: "EzyMap channel", miniapp: "EzyMap Mini App", bot: "EzyMap gated bot",
+    ticker: "EzyMap live ticker", calculators: "EzyMap calculators", exchanges: "EzyMap exchanges and bots",
+    pro: "EzyMapPro", ebooks: "EzyMap ebooks", "macro-bot": "EzyMap Macro Bot"
+  };
+  function ProductIcon(props) {
+    var product = props.product || "channel";
+    var variant = props.variant || "default";
+    var basePath = (props.basePath || "assets/products").replace(/\/$/, "");
+    var suffix = variant === "default" ? "" : "-" + variant;
+    var rest = omit(props, ["product", "src", "variant", "basePath", "alt", "className"]);
+    rest.className = cx("ezm-product-icon", props.className);
+    rest.src = props.src || (basePath + "/" + PRODUCT_FILES[product] + suffix + ".svg");
+    rest.alt = props.alt != null ? props.alt : PRODUCT_LABELS[product];
+    if (!rest.loading) rest.loading = "lazy";
+    if (!rest.decoding) rest.decoding = "async";
+    return h("img", rest);
+  }
+  ProductIcon.displayName = "ProductIcon";
+
+  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker, Tilt: Tilt, Reveal: Reveal, ProductIcon: ProductIcon };
 })();
