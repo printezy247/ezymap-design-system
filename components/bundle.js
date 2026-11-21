@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"}]} */
+/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"},{"name":"Tilt"}]} */
 (function () {
   var React = window.React, h = React.createElement;
   function cx() { return Array.prototype.filter.call(arguments, Boolean).join(" "); }
@@ -132,5 +132,44 @@
       h("div", { className: "ezm-floor__content" }, props.children));
   }
 
-  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker };
+  function Tilt(props) {
+    var ref = React.useRef(null);
+    var reduceRef = React.useRef(false);
+    React.useEffect(function () {
+      var mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      reduceRef.current = mq.matches;
+      function on() { reduceRef.current = mq.matches; }
+      if (mq.addEventListener) mq.addEventListener("change", on); else mq.addListener(on);
+      return function () { if (mq.removeEventListener) mq.removeEventListener("change", on); else mq.removeListener(on); };
+    }, []);
+    var max = props.max != null ? props.max : 10;
+    var scale = props.scale != null ? props.scale : 1.02;
+    var persp = props.perspective || 900;
+    var rest = omit(props, ["max", "scale", "perspective", "disabled", "className", "style", "children", "onPointerMove", "onPointerLeave"]);
+    rest.ref = ref;
+    rest.className = cx("ezm-tilt-el", props.className);
+    rest.style = Object.assign({ transformStyle: "preserve-3d", willChange: "transform" }, props.style);
+    rest.onPointerMove = function (e) {
+      if (props.onPointerMove) props.onPointerMove(e);
+      var el = ref.current;
+      if (!el || props.disabled || reduceRef.current) return;
+      var r = el.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+      el.style.setProperty("--mx", (px + 0.5) * 100 + "%");
+      el.style.setProperty("--my", (py + 0.5) * 100 + "%");
+      el.style.transition = "transform 60ms linear";
+      el.style.transform = "perspective(" + persp + "px) rotateX(" + (-py * max).toFixed(2) + "deg) rotateY(" + (px * max).toFixed(2) + "deg) scale(" + scale + ")";
+    };
+    rest.onPointerLeave = function (e) {
+      if (props.onPointerLeave) props.onPointerLeave(e);
+      var el = ref.current;
+      if (!el) return;
+      el.style.transition = "transform var(--duration-base) var(--ease-emphasized)";
+      el.style.transform = "";
+    };
+    return h("div", rest, props.children);
+  }
+  Tilt.displayName = "Tilt";
+
+  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker, Tilt: Tilt };
 })();

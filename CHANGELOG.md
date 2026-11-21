@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.1.0 — type refresh, more 3D and motion
+
+### Added
+- **Fonts**: display is now Clash Display (Fontshare) with Space Grotesk fallback; body is General Sans (Fontshare) with Inter Tight fallback; mono is JetBrains Mono with IBM Plex Mono fallback; new `serif` family (Instrument Serif) powers the `display-accent` italic editorial style. The font registry is documented in `type.fonts` and exported in `tokens.ts`.
+- **Logo variants** (`assets/logos/`): `ezymap-mark-extrude.svg` (extruded 3D tile), `ezymap-mark-glass.svg` (frosted glass), `ezymap-mark-neon.svg` (phosphor glow), `ezymap-mark-ghost.svg` (watermark), `ezymap-mark-animated-orbit.svg` (floating gem + rotating gold ring).
+- **Motion utilities** (`assets/motion/ezymap-motion.css`): `ezm-float-x`, `ezm-breathe`, `ezm-orbit`, `ezm-tilt` (CSS hover tilt), `ezm-text-shimmer`, `ezm-pan`, `ezm-scan` — all with `prefers-reduced-motion` fallbacks.
+- **Component**: `Tilt` — pointer-tracked 3D tilt with cursor glare (`max`, `scale`, `perspective`, `disabled`), in React, vanilla bundle and typings.
+
+### Changed
+- Showcase (`docs/index.html`) shows the new type scale, 7 new motion tiles, 5 new logo variants and the Tilt demo; version strings bumped to v2.1.0.
+
 ## 2.0.0 — design-system refresh
 
 EzyMap is now the only brand. The EzyAI mark, the Macro Desk icon and lockup, and the `EzyAiLogo` component are removed.

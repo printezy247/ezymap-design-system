@@ -1,7 +1,7 @@
 // EzyMap design tokens — generated from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit.
 export const tokens = {
   "name": "EzyMap",
-  "version": 2,
+  "version": "2.1.0",
   "color": {
     "background": "#0a0c0b",
     "foreground": "#f2f4f2",
@@ -99,10 +99,48 @@ export const tokens = {
     "bp-xl": "1280px"
   },
   "fontFamily": {
-    "display": "\"Space Grotesk\", \"Inter Tight\", system-ui, sans-serif",
-    "sans": "\"Inter Tight\", system-ui, sans-serif",
-    "mono": "\"IBM Plex Mono\", ui-monospace, monospace"
+    "display": "\"Clash Display\", \"Space Grotesk\", system-ui, sans-serif",
+    "sans": "\"General Sans\", \"Inter Tight\", system-ui, sans-serif",
+    "mono": "\"JetBrains Mono\", \"IBM Plex Mono\", ui-monospace, monospace",
+    "serif": "\"Instrument Serif\", Georgia, serif"
   },
+  "fonts": [
+    {
+      "name": "Clash Display",
+      "foundry": "Fontshare",
+      "role": "display",
+      "axes": "wght 400-700",
+      "usage": "Headlines and the wordmark. The 2025 workhorse-plus-signature display face; falls back to Space Grotesk."
+    },
+    {
+      "name": "General Sans",
+      "foundry": "Fontshare",
+      "role": "sans",
+      "axes": "wght 400-700",
+      "usage": "Body and UI text. Neutral grotesk that pairs with Clash Display; falls back to Inter Tight."
+    },
+    {
+      "name": "JetBrains Mono",
+      "foundry": "Google Fonts",
+      "role": "mono",
+      "axes": "wght 400-600 (variable)",
+      "usage": "Prices, levels, eyebrows and code. Developer-grade legibility for tabular figures."
+    },
+    {
+      "name": "Instrument Serif",
+      "foundry": "Google Fonts",
+      "role": "accent",
+      "axes": "ital 0-1",
+      "usage": "Italic editorial accent inside headlines and quotes. Used sparingly, gold-adjacent moments only."
+    },
+    {
+      "name": "Space Grotesk / Inter Tight / IBM Plex Mono",
+      "foundry": "Google Fonts",
+      "role": "fallback",
+      "axes": "static weights",
+      "usage": "Previous v2 families, kept loaded as graceful fallbacks if the Fontshare CDN is unreachable."
+    }
+  ],
   "type": {
     "hero": {
       "family": "display",
@@ -144,6 +182,14 @@ export const tokens = {
       "lineHeight": "24px",
       "fontWeight": 700,
       "letterSpacing": "-0.025em"
+    },
+    "display-accent": {
+      "family": "serif",
+      "fontSize": "30px",
+      "lineHeight": 1.15,
+      "fontWeight": 400,
+      "letterSpacing": "-0.01em",
+      "fontStyle": "italic"
     },
     "lead": {
       "family": "sans",

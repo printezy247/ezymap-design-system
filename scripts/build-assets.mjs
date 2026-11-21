@@ -76,6 +76,66 @@ writeFileSync(
   svg("0 0 800 800", `${stackedDefs}${stackedLight}`, 'role="img" aria-label="EzyMap stacked lockup"')
 );
 
+// Extruded 3D: two dark offset copies behind the mark give real depth on a tile.
+const extrude = svg(
+  "0 0 512 512",
+  `${defs}<rect width="512" height="512" rx="112" fill="#0a0c0b"/>
+<rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="#2fbf71" stroke-opacity=".3"/>
+<g transform="translate(18 22)" opacity=".5" style="filter:brightness(.12)">${art}</g>
+<g transform="translate(9 11)" opacity=".7" style="filter:brightness(.3)">${art}</g>
+<g transform="translate(51.2 46) scale(.8)">${art}</g>`,
+  'role="img" aria-label="EzyMap extruded 3D mark"'
+);
+writeFileSync(join(logosDir, "ezymap-mark-extrude.svg"), extrude);
+
+// Frosted glass tile: translucent white gradients over the dark ground, for
+// glassmorphism surfaces where the mark sits on a panel, not a solid tile.
+const glass = svg(
+  "0 0 512 512",
+  `${defs}<rect width="512" height="512" rx="112" fill="#101413"/>
+<rect x="10" y="10" width="492" height="492" rx="104" fill="#ffffff" opacity=".05"/>
+<rect x="10" y="10" width="492" height="246" rx="104" fill="#ffffff" opacity=".07"/>
+<rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="#ffffff" stroke-opacity=".22"/>
+<line x1="60" y1="70" x2="452" y2="70" stroke="#ffffff" stroke-opacity=".28" stroke-width="3" stroke-linecap="round"/>
+<g transform="translate(51.2 46) scale(.8)">${art}</g>`,
+  'role="img" aria-label="EzyMap glass mark"'
+);
+writeFileSync(join(logosDir, "ezymap-mark-glass.svg"), glass);
+
+// Neon: black tile, green halo, mark with a phosphor drop-shadow.
+const neon = svg(
+  "0 0 512 512",
+  `${defs}<rect width="512" height="512" rx="112" fill="#050807"/>
+<circle cx="256" cy="262" r="180" fill="url(#mhalo)"/>
+<rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="#2fbf71" stroke-opacity=".45"/>
+<g transform="translate(51.2 46) scale(.8)" style="filter:drop-shadow(0 0 20px rgba(47,191,113,.55)) drop-shadow(0 0 5px rgba(190,255,220,.5))">${art}</g>`,
+  'role="img" aria-label="EzyMap neon mark"'
+);
+writeFileSync(join(logosDir, "ezymap-mark-neon.svg"), neon);
+
+// Ghost watermark: faint line mark for backgrounds and document watermarks.
+const ghost = svg(
+  "0 0 512 512",
+  `<g fill="none" stroke="#2fbf71" stroke-width="10" stroke-linejoin="round" stroke-linecap="round" opacity=".12">${lineArt}</g>`,
+  'role="img" aria-label="EzyMap ghost watermark"'
+);
+writeFileSync(join(logosDir, "ezymap-mark-ghost.svg"), ghost);
+
+// Orbit variant: gem floats while a dashed gold ring rotates around it.
+const orbit = svg(
+  "0 0 512 512",
+  `${defs}<style>
+.ezm-oo-float{animation:ezmOoFloat 6s ease-in-out infinite;transform-box:view-box;transform-origin:center}
+.ezm-oo-ring{animation:ezmOoSpin 14s linear infinite;transform-box:view-box;transform-origin:center}
+@keyframes ezmOoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes ezmOoSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.ezm-oo-float,.ezm-oo-ring{animation:none}}
+</style><ellipse class="ezm-oo-ring" cx="256" cy="262" rx="212" ry="60" fill="none" stroke="#e0bc63" stroke-width="4" stroke-dasharray="60 480" opacity=".8"/>
+<g class="ezm-oo-float">${art}</g>`,
+  'role="img" aria-label="EzyMap orbit mark"'
+);
+writeFileSync(join(logosDir, "ezymap-mark-animated-orbit.svg"), orbit);
+
 /* ---------- product icons ---------- */
 // One rounded tile per ready EzyMap product: dark ground, green glyph,
 // one gold accent. viewBox 64, stroke-based so it stays crisp at any size.
@@ -163,4 +223,4 @@ for (const [name, svgText] of Object.entries(products)) {
   writeFileSync(join(productsDir, `${name}.svg`), svgText);
 }
 
-console.log(`assets: ${4} logo variants, ${Object.keys(products).length} product icons`);
+console.log(`assets: ${Object.keys(products).length} product icons (+ logo variants in assets/logos/)`);

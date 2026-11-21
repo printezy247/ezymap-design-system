@@ -92,16 +92,113 @@
   to { transform: translateX(-50%); }
 }
 
+/* Horizontal drift, the sideways sibling of ezm-float. */
+.ezm-float-x {
+  animation: ezm-float-x var(--duration-slow) var(--ease-standard) infinite;
+}
+@keyframes ezm-float-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+/* Gentle breathing scale for hero objects and live badges. */
+.ezm-breathe {
+  animation: ezm-breathe 4s var(--ease-standard) infinite;
+}
+@keyframes ezm-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.045); }
+}
+
+/* Rotating wrapper for orbit effects: position a child at the top centre
+   of a square box and it travels a circle. Pair with ezm-float on the child. */
+.ezm-orbit {
+  animation: ezm-spin 12s linear infinite;
+}
+
+/* 3D hover tilt for cards and product tiles. CSS-only version: fixed tilt on
+   hover. For pointer-tracked tilt use the Tilt component (or set
+   --tilt-x / --tilt-y from JS). */
+.ezm-tilt {
+  transition: transform var(--duration-base) var(--ease-emphasized);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.ezm-tilt:hover,
+.ezm-tilt:focus-visible {
+  transform: perspective(900px) rotateX(7deg) rotateY(-9deg);
+}
+
+/* Pointer-tracked tilt lives on the Tilt component (.ezm-tilt-el in bundle.css). */
+
+/* Shimmering gradient text for one accent word per headline. */
+.ezm-text-shimmer {
+  background: linear-gradient(110deg, var(--foreground) 35%, var(--primary) 50%, var(--foreground) 65%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ezm-text-shimmer 3.5s var(--ease-standard) infinite;
+}
+@keyframes ezm-text-shimmer {
+  from { background-position: 120% 0; }
+  to { background-position: -20% 0; }
+}
+
+/* Slow gradient pan for premium surfaces: pair with a gradient background. */
+.ezm-pan {
+  background-size: 200% 200%;
+  animation: ezm-pan 9s var(--ease-standard) infinite alternate;
+}
+@keyframes ezm-pan {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+/* Scanning sheen for HUD frames and live panels. */
+.ezm-scan {
+  position: relative;
+  overflow: hidden;
+}
+.ezm-scan::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -30%;
+  height: 30%;
+  background: linear-gradient(to bottom, transparent, rgba(47, 191, 113, 0.12), transparent);
+  animation: ezm-scan 2.8s var(--ease-standard) infinite;
+  pointer-events: none;
+}
+@keyframes ezm-scan {
+  from { transform: translateY(0); }
+  to { transform: translateY(433%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ezm-float,
   .ezm-float-slow,
+  .ezm-float-x,
+  .ezm-breathe,
+  .ezm-orbit,
   .ezm-blink,
   .ezm-spin-slow,
   .ezm-rise,
   .ezm-shimmer::after,
   .ezm-pulse-ring::after,
-  .ezm-marquee__track {
+  .ezm-marquee__track,
+  .ezm-text-shimmer,
+  .ezm-pan,
+  .ezm-scan::after {
     animation: none !important;
+  }
+  .ezm-tilt {
+    transition: none !important;
+  }
+  .ezm-tilt:hover,
+  .ezm-tilt:focus-visible {
+    transform: none;
   }
   /* Without motion the ticker becomes a plain scrollable strip. */
   .ezm-marquee {

@@ -80,14 +80,14 @@
 
 <main class="wrap">
   <div class="intro">
-    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.0.0</p>
+    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.1.0</p>
     <h1>EzyMap design system</h1>
     <p class="lede">Green and gold on black, with white type. Tokens, components and logos for the EzyMap Algo desk.</p>
     <p id="load-error" role="alert">Tokens could not be loaded. Serve this folder over http (for example <code>npx serve</code>) instead of opening the file directly.</p>
   </div>
 
   <section class="block" id="colour"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Colour</h2><div class="grid swatches" id="colours"></div></section>
-  <section class="block" id="type"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Type scale</h2><p class="lede">Space Grotesk for display, Inter Tight for text, IBM Plex Mono for figures.</p><div id="types"></div></section>
+  <section class="block" id="type"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Type scale</h2><p class="lede">Clash Display for headlines, General Sans for text, JetBrains Mono for figures, Instrument Serif for editorial accents. Space Grotesk, Inter Tight and IBM Plex Mono stay loaded as fallbacks.</p><div id="types"></div></section>
   <section class="block" id="spacing"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Spacing</h2><div id="spaces"></div></section>
   <section class="block" id="radii"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Radii</h2><div class="grid radii" id="radius"></div></section>
   <section class="block" id="shadows"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Shadows and gradients</h2><div class="grid shadows" id="shadow"></div><h3>Gradients</h3><div class="grid grads" id="gradient"></div></section>
@@ -101,6 +101,14 @@
     <div class="sw"><div class="chip ezm-shimmer" style="height:120px"></div><div class="meta"><b>ezm-shimmer</b><code>.ezm-shimmer</code><p>Sweep for skeletons and premium surfaces.</p></div></div>
     <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><span class="ezm-pulse-ring" style="display:block;width:40px;height:40px;border-radius:12px;background:var(--surface-elevated);border:1px solid var(--border)"></span></div><div class="meta"><b>ezm-pulse-ring</b><code>.ezm-pulse-ring</code><p>Expanding ring on live elements.</p></div></div>
     <div class="sw"><div class="chip ezm-marquee" style="height:120px;display:flex;align-items:center"><div class="ezm-marquee__track" style="gap:24px"><span class="mono" style="color:var(--body-text)">XAUUSD 2,395.12</span><span class="mono" style="color:var(--body-text)">EURUSD 1.0842</span><span class="mono" style="color:var(--body-text)">BTCUSD 97,420</span><span class="mono" style="color:var(--body-text)">XAUUSD 2,395.12</span><span class="mono" style="color:var(--body-text)">EURUSD 1.0842</span><span class="mono" style="color:var(--body-text)">BTCUSD 97,420</span></div></div><div class="meta"><b>ezm-marquee</b><code>.ezm-marquee</code><p>Seamless loop; pauses on hover.</p></div></div>
+    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-float-x"><div style="width:56px;height:56px;border-radius:14px;background:var(--gradient-gold);border:1px solid var(--border)"></div></div></div><div class="meta"><b>ezm-float-x</b><code>.ezm-float-x</code><p>Horizontal drift for wide stages.</p></div></div>
+    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-breathe" style="width:56px;height:56px;border-radius:14px;background:var(--gradient-green);border:1px solid var(--border)"></div></div><div class="meta"><b>ezm-breathe</b><code>.ezm-breathe</code><p>Gentle scale pulse for hero objects.</p></div></div>
+    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center;position:relative"><div class="ezm-orbit" style="width:72px;height:72px;position:relative"><span style="position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:99px;background:var(--accent)"></span></div></div><div class="meta"><b>ezm-orbit</b><code>.ezm-orbit</code><p>Rotating wrapper; child orbits the centre.</p></div></div>
+    <div class="sw"><div class="chip ezm-tilt" style="height:120px;display:flex;align-items:center;justify-content:center"><div style="width:64px;height:64px;border-radius:16px;background:var(--gradient-metal);border:1px solid var(--accent)"></div></div><div class="meta"><b>ezm-tilt</b><code>.ezm-tilt</code><p>CSS-only 3D hover tilt. Pointer-tracked version is the Tilt component.</p></div></div>
+    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><span class="ezm-text-shimmer hero" style="font-size:26px">live <span class="display-accent">signals</span></span></div><div class="meta"><b>ezm-text-shimmer</b><code>.ezm-text-shimmer</code><p>Gradient sweep for one accent word.</p></div></div>
+    <div class="sw"><div class="chip ezm-pan" style="height:120px;background:linear-gradient(120deg,var(--primary),var(--accent),var(--primary))"></div><div class="meta"><b>ezm-pan</b><code>.ezm-pan</code><p>Slow gradient drift on premium surfaces.</p></div></div>
+    <div class="sw"><div class="chip ezm-scan" style="height:120px;display:flex;align-items:center;justify-content:center"><span class="mono" style="color:var(--body-text)">HUD scan</span></div><div class="meta"><b>ezm-scan</b><code>.ezm-scan</code><p>Sheen sweep for live panels.</p></div></div>
+    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><img src="../assets/logos/ezymap-mark-animated-orbit.svg" alt="Animated orbit EzyMap mark" style="height:88px;width:auto"></div><div class="meta"><b>ezm-mark-animated-orbit</b><code>assets/logos/ezymap-mark-animated-orbit.svg</code><p>Gem floats while a gold ring rotates. New 3D variant.</p></div></div>
   </div></section>
 
   <section class="block" id="products"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Product icons</h2><p class="lede">One app-icon tile per ready product, from <code>assets/products/</code>.</p><div class="grid logos" id="product-grid"></div></section>
@@ -108,7 +116,7 @@
   <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logos</h2><div class="grid logos" id="logo-grid"></div></section>
 </main>
 
-<footer><div class="wrap">EzyMap design system v2.0.0 · All rights reserved. Proprietary.</div></footer>
+<footer><div class="wrap">EzyMap design system v2.1.0 · All rights reserved. Proprietary.</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
@@ -155,6 +163,11 @@
     ["ezymap-3d-stacked-on-dark.svg", "Stacked, on dark", ""],
     ["ezymap-3d-mark.svg", "Mark", ""],
     ["ezymap-mark-animated.svg", "Mark, animated", ""],
+    ["ezymap-mark-animated-orbit.svg", "Mark, orbit ring", ""],
+    ["ezymap-mark-extrude.svg", "Mark, extruded 3D", ""],
+    ["ezymap-mark-glass.svg", "Mark, glass tile", ""],
+    ["ezymap-mark-neon.svg", "Mark, neon", ""],
+    ["ezymap-mark-ghost.svg", "Mark, ghost watermark", ""],
     ["ezymap-mark-line.svg", "Mark, line (currentColor)", ""],
     ["ezymap-3d-appicon.png", "App icon", ""],
     ["ezymap-appicon-light.svg", "App icon, light", "light"],
@@ -218,7 +231,11 @@
       h(E.StatTile, { label: "EURUSD", value: "1.0842", tone: "down", delta: "-0.0021 (-0.19%)" }),
       h(E.StatTile, { label: "Sample signal", value: "1:3.2" }))),
     Comp("GridFloor", "Perspective grid with a soft green glow behind the hero object.", h(E.GridFloor, { height: 280 },
-      h("img", { src: "../assets/logos/ezymap-3d-mark.svg", alt: "EzyMap mark", style: { height: 160, width: "auto" } })))
+      h("img", { src: "../assets/logos/ezymap-3d-mark.svg", alt: "EzyMap mark", style: { height: 160, width: "auto" } }))),
+    Comp("Tilt", "Pointer-tracked 3D tilt with a cursor glare. Wrap any card or tile; honours prefers-reduced-motion.", h("div", { style: { maxWidth: 320 } },
+      h(E.Tilt, { max: 12 },
+        h(E.Card, { holo: true, eyebrow: "Tilt me", title: "3D hover" },
+          h("p", { className: "ezm-card__body" }, "Move the pointer across this card.")))))
   ];
   ReactDOM.createRoot($("root")).render(h(React.Fragment, null, items));
 })();

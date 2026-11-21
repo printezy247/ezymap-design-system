@@ -1,5 +1,6 @@
 /* EzyMap design tokens — generated from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit. */
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
 
 :root {
   /* Colour */
@@ -92,9 +93,10 @@
   --bp-lg: 1024px;
   --bp-xl: 1280px;
   /* Font families */
-  --font-display: "Space Grotesk", "Inter Tight", system-ui, sans-serif;
-  --font-sans: "Inter Tight", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Clash Display", "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "General Sans", "Inter Tight", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  --font-serif: "Instrument Serif", Georgia, serif;
 }
 
 /* Type styles */
@@ -149,6 +151,16 @@
   line-height: 24px;
   font-weight: 700;
   letter-spacing: -0.025em;
+}
+
+/* Editorial serif moment inside a display headline. One italic accent per view. */
+.display-accent {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-style: italic;
 }
 
 /* Intro paragraph under a section title. */

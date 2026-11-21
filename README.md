@@ -9,7 +9,7 @@
 
 **Green and gold on black, with white type. Tokens, React components and brand assets for the EzyMap Algo desk.**
 
-![version](https://img.shields.io/badge/version-2.0.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
+![version](https://img.shields.io/badge/version-2.1.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
 ![license](https://img.shields.io/badge/license-proprietary-c9a13a?style=for-the-badge&labelColor=0a0c0b)
 ![react](https://img.shields.io/badge/React-18-2fbf71?style=for-the-badge&logo=react&logoColor=white&labelColor=0a0c0b)
 ![tailwind](https://img.shields.io/badge/Tailwind-v4-c9a13a?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=0a0c0b)
@@ -39,13 +39,13 @@
 | | Count | Where |
 |---|:---:|---|
 | 🎨 Colour tokens | **34** | `tokens/tokens.json` |
-| 🔤 Type styles | **16** | Space Grotesk · Inter Tight · IBM Plex Mono |
+| 🔤 Type styles | **17** | Clash Display · General Sans · JetBrains Mono · Instrument Serif |
 | 📐 Spacing / radius | **14 / 8** | 4px Tailwind scale |
 | 🧊 Shadows / gradients | **8 / 7** | brushed-metal depth |
 | 🎞️ Motion tokens | **7** | durations + easings |
 | 📏 Breakpoints | **4** | mobile-first widths |
-| 🧩 Components | **9** | React + TypeScript |
-| 🖼️ Logos | **17** | 3D gem set, EzyMap only |
+| 🧩 Components | **10** | React + TypeScript |
+| 🖼️ Logos | **22** | 3D gem set, EzyMap only |
 | 🧩 Product icons | **8** | one tile per ready product |
 
 ## Quick start
@@ -53,7 +53,7 @@
 Install from the private GitHub repo named in `package.json` (`repository`), pinned to the `v2.0.0` tag:
 
 ```bash
-npm install "github:<owner>/ezymap-design-system#v2.0.0"
+npm install "github:<owner>/ezymap-design-system#v2.1.0"
 ```
 
 <details open>
@@ -237,10 +237,10 @@ EzyMap is a premium trading desk that lives inside Telegram. Everything built on
 - Use `gradient-brand` (green → gold) at most once per page, for the CTA band, a gradient tick or one brand phrase.
 
 #### Type
-- Load Google Fonts: Space Grotesk 500/600/700, Inter Tight 400/500/600, IBM Plex Mono 400/500 (`https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap`).
-- Set headings in `display` (Space Grotesk 600, −0.02em, 1.05–1.1 leading): `hero` for the h1 and `section-title` for h2s. On mobile, step down to `hero-mobile` and `section-title-mobile`.
-- Set UI and copy in `sans` (Inter Tight): `body` for paragraphs and `body-sm` for most UI.
-- Set numbers, prices and eyebrows in `mono` (IBM Plex Mono). Each section opens with an `eyebrow` in `primary`, then a `section-title`, then a `lead` or `body` subtitle in `body-text`.
+- Fonts load from Fontshare (Clash Display 400–700, General Sans 400–700) and Google Fonts (Instrument Serif, JetBrains Mono 400–600). `tokens.css` and `bundle.css` already `@import` both; the previous families (Space Grotesk, Inter Tight, IBM Plex Mono) stay loaded as fallbacks.
+- Set headings in `display` (Clash Display 600, −0.02em, 1.05–1.1 leading): `hero` for the h1 and `section-title` for h2s. On mobile, step down to `hero-mobile` and `section-title-mobile`. One italic `display-accent` (Instrument Serif) per view is allowed inside a headline.
+- Set UI and copy in `sans` (General Sans): `body` for paragraphs and `body-sm` for most UI.
+- Set numbers, prices and eyebrows in `mono` (JetBrains Mono). Each section opens with an `eyebrow` in `primary`, then a `section-title`, then a `lead` or `body` subtitle in `body-text`.
 
 #### Spacing, radii, layout
 - Use the 4px Tailwind scale. Pad cards with `space-6`, gap grids with `space-8` and pad sections vertically with `space-20`. On phones, use a `space-4` gutter.
@@ -271,8 +271,8 @@ EzyMap is a premium trading desk that lives inside Telegram. Everything built on
 <summary><b>Not synced</b> — what this release leaves out</summary>
 
 - The 3D gem set in `assets/logos` is the only logo set. No legacy logo or favicon is included.
-- Fonts are Google-hosted, so no font files are stored.
-- Components are authored in this repo (`components/react/*.tsx`) and compiled to `bundle.js`/`bundle.css` by hand — no build step. Button, Card, HeroPill, SignalFlag, EzyMapLogo, HudFrame, StatTile, GridFloor and PriceTicker each ship a React version, vanilla-bundle export and README. Select, Sonner, SignalCard and landing-page sections were not brought in.
+- Fonts are CDN-hosted (Fontshare + Google Fonts), so no font files are stored.
+- Components are authored in this repo (`components/react/*.tsx`) and compiled to `bundle.js`/`bundle.css` by hand — no build step. Button, Card, HeroPill, SignalFlag, EzyMapLogo, HudFrame, StatTile, GridFloor, PriceTicker and Tilt each ship a React version, vanilla-bundle export and README. Select, Sonner, SignalCard and landing-page sections were not brought in.
 - Skipped variables: `--gradient-glow`, `--gradient-gold-glow` and `--shadow-inset-gold` (all `none`). Animated neon CTA styles were also skipped.
 
 </details>

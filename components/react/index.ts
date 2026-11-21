@@ -7,3 +7,4 @@ export * from "./HudFrame";
 export * from "./StatTile";
 export * from "./GridFloor";
 export * from "./PriceTicker";
+export * from "./Tilt";
