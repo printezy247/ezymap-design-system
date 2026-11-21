@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EzyMap Design System v2 — Preview</title>
+<link rel="icon" type="image/svg+xml" href="./assets/logos/ezymap-3d-favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="./tokens/tokens.css">
+<link rel="stylesheet" href="./components/bundle.css">
+<link rel="stylesheet" href="./assets/motion/ezymap-motion.css">
+<style>
+  html { background: var(--background); }
+  body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 48px 0; border-top: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); margin: 0 0 10px; }
+  h1 { font-family: var(--font-display); font-size: 52px; line-height: 1.05; font-weight: 600; letter-spacing: -.02em; margin: 0 0 12px; }
+  h2 { font-family: var(--font-display); font-size: 30px; line-height: 1.15; font-weight: 600; letter-spacing: -.02em; margin: 0 0 6px; }
+  .sub { color: var(--body-text); font-size: 15px; max-width: 720px; margin: 0 0 28px; }
+  .grid { display: grid; gap: 16px; }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .card-box { border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--surface); padding: 20px; }
+  .card-box h3 { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-foreground); margin: 0 0 14px; }
+  .swatch { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+  .swatch i { display: block; height: 56px; }
+  .swatch span { display: block; padding: 8px 10px; font-family: var(--font-mono); font-size: 11px; color: var(--body-text); }
+  .type-sample { padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .type-sample:last-child { border-bottom: 0; }
+  .type-tag { font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground); margin-bottom: 4px; }
+  .logo-tile { border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--surface); overflow: hidden; }
+  .logo-tile .art { height: 150px; display: flex; align-items: center; justify-content: center; padding: 16px; background: var(--background); }
+  .logo-tile .art.onlight { background: #fff; }
+  .logo-tile img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .logo-tile .cap { padding: 10px 12px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground); }
+  .prod-tile { border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--surface); padding: 20px; text-align: center; }
+  .prod-tile img { width: 72px; height: 72px; }
+  .prod-tile b { display: block; margin-top: 10px; font-size: 13px; font-weight: 600; color: var(--foreground); }
+  .prod-tile span { font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground); }
+  .motion-demo { border: 1px dashed var(--border-hover); border-radius: var(--radius-lg); padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 90px; background: var(--background); }
+  .header-band { padding: 56px 0 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .header-band img { height: 64px; width: auto; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-family: var(--font-mono); font-size: 11px; padding: 6px 12px; border-radius: 9999px; border: 1px solid var(--border); color: var(--body-text); background: var(--surface); }
+  .chip b { color: var(--primary); font-weight: 500; }
+  footer { padding: 32px 0 56px; color: var(--muted-foreground); font-size: 12px; font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header-band">
+    <div>
+      <img src="./assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap">
+      <h1 style="margin-top:18px">Design system <span style="color:var(--accent)">v2.0.0</span></h1>
+      <p class="sub" style="margin-bottom:0">EzyMap-only brand. New motion layer, product icons, logo variants and two new components.</p>
+    </div>
+    <div class="chips">
+      <span class="chip"><b>9</b> components</span>
+      <span class="chip"><b>17</b> logo files</span>
+      <span class="chip"><b>8</b> product icons</span>
+      <span class="chip"><b>8</b> motion utils</span>
+      <span class="chip"><b>11</b> new tokens</span>
+    </div>
+  </div>
+
+  <section>
+    <p class="eyebrow">Foundations</p>
+    <h2>Colour</h2>
+    <p class="sub">Key tokens from <code>tokens/tokens.json</code> — green leads, gold accents, white type on near-black.</p>
+    <div class="grid g4" id="swatches"></div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Foundations</p>
+    <h2>Type &amp; depth</h2>
+    <div class="grid g2">
+      <div class="card-box">
+        <h3>Type styles</h3>
+        <div class="type-sample"><div class="type-tag">hero · Space Grotesk 600</div><div class="hero" style="font-size:40px">Professional signals, live.</div></div>
+        <div class="type-sample"><div class="type-tag">section-title</div><div class="section-title" style="font-size:26px">Every call carries entry, stop and targets.</div></div>
+        <div class="type-sample"><div class="type-tag">body · Inter Tight</div><div class="body">Analysis from a 10-year veteran trader, delivered on Telegram with full transparency.</div></div>
+        <div class="type-sample"><div class="type-tag">price · IBM Plex Mono</div><div class="price" style="font-size:22px">2,395.120 <span style="color:var(--market-up)">+12.35</span></div></div>
+        <div class="type-sample"><div class="type-tag">eyebrow / flag</div><div><span class="eyebrow" style="color:var(--primary)">Live format</span> <span class="flag" style="color:var(--primary)">Sample signal</span></div></div>
+      </div>
+      <div class="card-box">
+        <h3>Surfaces, radii, shadows, gradients</h3>
+        <div class="grid g2" style="gap:12px">
+          <div class="swatch"><i style="background:var(--background)"></i><span>background #0a0c0b</span></div>
+          <div class="swatch"><i style="background:var(--surface)"></i><span>surface #141817</span></div>
+          <div class="swatch"><i style="background:var(--surface-elevated)"></i><span>surface-elevated</span></div>
+          <div class="swatch"><i style="background:var(--gradient-metal);border-bottom:1px solid var(--border)"></i><span>gradient-metal</span></div>
+          <div class="swatch"><i style="background:var(--gradient-green)"></i><span>gradient-green</span></div>
+          <div class="swatch"><i style="background:var(--gradient-gold)"></i><span>gradient-gold</span></div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
+          <div style="width:44px;height:44px;border-radius:var(--radius-lg);background:var(--surface-elevated);border:1px solid var(--accent)"></div>
+          <div style="width:44px;height:44px;border-radius:var(--radius-xl);background:var(--surface-elevated);border:1px solid var(--accent)"></div>
+          <div style="width:44px;height:44px;border-radius:var(--radius-2xl);background:var(--surface-elevated);border:1px solid var(--accent)"></div>
+          <div style="width:44px;height:44px;border-radius:var(--radius-full);background:var(--surface-elevated);border:1px solid var(--accent)"></div>
+          <span class="mono" style="font-size:11px;color:var(--muted-foreground)">radius-lg → 2xl → full</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Components</p>
+    <h2>Components</h2>
+    <p class="sub">All nine, rendered from <code>components/bundle.js</code>.</p>
+    <div id="components"></div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Motion · new in v2</p>
+    <h2>Motion layer</h2>
+    <p class="sub"><code>assets/motion/ezymap-motion.css</code> + motion tokens (<code>--duration-*</code>, <code>--ease-*</code>). Transform/opacity only; everything stops under <code>prefers-reduced-motion</code>.</p>
+    <div class="grid g3">
+      <div class="card-box"><h3>ezm-float / ezm-blink / ezm-spin-slow</h3>
+        <div class="motion-demo"><div class="ezm-float"><img src="./assets/logos/ezymap-3d-mark.svg" style="height:72px;width:auto" alt=""></div></div>
+        <div class="motion-demo" style="margin-top:12px"><span class="ezm-blink" style="width:12px;height:12px;border-radius:99px;background:var(--primary);box-shadow:0 0 10px var(--primary)"></span><span class="mono" style="margin-left:12px;font-size:11px;color:var(--muted-foreground)">live dot</span><svg class="ezm-spin-slow" width="26" height="26" viewBox="0 0 26 26" style="margin-left:auto"><circle cx="13" cy="13" r="10" fill="none" stroke="var(--border-hover)" stroke-width="2"/><path d="M13 3a10 10 0 0 1 10 10" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="card-box"><h3>ezm-shimmer / ezm-pulse-ring / ezm-rise</h3>
+        <div class="motion-demo ezm-shimmer" style="height:90px"><div style="width:70%;height:14px;border-radius:6px;background:var(--surface-elevated)"></div></div>
+        <div class="motion-demo" style="margin-top:12px"><span class="ezm-pulse-ring" style="display:block;width:44px;height:44px;border-radius:12px;background:var(--surface-elevated);border:1px solid var(--border)"></span><span class="ezm-rise mono" style="margin-left:12px;font-size:11px;color:var(--body-text)">rising panel</span></div>
+      </div>
+      <div class="card-box"><h3>ezm-marquee / animated logo</h3>
+        <div class="motion-demo" style="overflow:hidden"><img src="./assets/logos/ezymap-mark-animated.svg" style="height:84px;width:auto" alt="Animated EzyMap mark"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Brand · new in v2</p>
+    <h2>Logo family</h2>
+    <p class="sub">EzyMap gem only — EzyAI and Macro Desk retired. New: animated mark, light app icon, line mark, stacked-on-light.</p>
+    <div class="grid g4" id="logos"></div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Brand · new in v2</p>
+    <h2>Product icons</h2>
+    <p class="sub">One app-icon tile per ready product, from <code>assets/products/</code>.</p>
+    <div class="grid g4" id="products"></div>
+  </section>
+
+  <footer>EzyMap design system v2.0.0 — preview sheet · proprietary</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="./components/bundle.js"></script>
+<script>
+(function () {
+  var names = ["background","surface","surface-elevated","foreground","body-text","primary","primary-glow","accent","accent-glow","market-up","market-down","status-stop"];
+  var hex = {"background":"#0a0c0b","surface":"#141817","surface-elevated":"#1e2321","foreground":"#f2f4f2","body-text":"#a8b0ab","primary":"#2fbf71","primary-glow":"#0f7a4a","accent":"#c9a13a","accent-glow":"#8f7024","market-up":"#2fbf71","market-down":"#c9a13a","status-stop":"#d9534f"};
+  var sw = document.getElementById("swatches");
+  names.forEach(function (n) {
+    var d = document.createElement("div"); d.className = "swatch";
+    d.innerHTML = '<i style="background:var(--' + n + ')"></i><span>' + n + " " + hex[n] + "</span>";
+    sw.appendChild(d);
+  });
+
+  var logos = [
+    ["ezymap-3d-horizontal-on-dark.svg","Horizontal · dark",""],
+    ["ezymap-3d-horizontal-on-light.svg","Horizontal · light","onlight"],
+    ["ezymap-3d-stacked-on-dark.svg","Stacked · dark",""],
+    ["ezymap-stacked-on-light.svg","Stacked · light","onlight"],
+    ["ezymap-3d-mark.svg","Mark",""],
+    ["ezymap-mark-animated.svg","Mark · animated",""],
+    ["ezymap-mark-line.svg","Mark · line",""],
+    ["ezymap-3d-appicon.png","App icon",""],
+    ["ezymap-appicon-light.svg","App icon · light","onlight"],
+    ["ezymap-3d-favicon.svg","Favicon",""],
+    ["ezymap-3d-apple-touch-180.png","Apple touch",""],
+    ["ezymap-3d-mark.png","Mark · PNG",""],
+    ["ezymap-3d-horizontal-on-dark.png","Lockup · PNG",""],
+    ["ezymap-3d-horizontal-on-light.png","Lockup light · PNG","onlight"],
+    ["ezymap-3d-stacked-on-dark.png","Stacked · PNG",""],
+    ["ezymap-3d-favicon.png","Favicon · PNG",""]
+  ];
+  var lg = document.getElementById("logos");
+  logos.forEach(function (l) {
+    var d = document.createElement("div"); d.className = "logo-tile";
+    d.innerHTML = '<div class="art ' + l[2] + '"><img src="./assets/logos/' + l[0] + '" alt="' + l[1] + '"></div><div class="cap">' + l[1] + "</div>";
+    lg.appendChild(d);
+  });
+
+  var prods = [
+    ["ezymap-channel-icon.svg","Channel"],["ezymap-miniapp-icon.svg","Mini App"],
+    ["ezymap-bot-icon.svg","Gated bot"],["ezymap-ticker-icon.svg","Live ticker"],
+    ["ezymap-calculators-icon.svg","Calculators"],["ezymap-exchanges-icon.svg","Exchanges"],
+    ["ezymap-pro-icon.svg","EzyMapPro"],["ezymap-ebooks-icon.svg","Ebooks"]
+  ];
+  var pg = document.getElementById("products");
+  prods.forEach(function (p) {
+    var d = document.createElement("div"); d.className = "prod-tile";
+    d.innerHTML = '<img src="./assets/products/' + p[0] + '" alt=""><b>' + p[1] + '</b><span>' + p[0].replace("ezymap-","").replace("-icon.svg","") + "</span>";
+    pg.appendChild(d);
+  });
+
+  var E = window.EzyMap, h = React.createElement;
+  function Row(children) { return h("div", { className: "ezm-row", style: { padding: "10px 0" } }, children); }
+  var up = h("svg", { width: 14, height: 14, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.75, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true }, h("path", { d: "M3 17l6-6 4 4 8-8" }), h("path", { d: "M14 7h7v7" }));
+  var items = [
+    h("div", { className: "card-box", key: "b" }, h("h3", null, "Button"),
+      Row(h(E.Button, { size: "lg" }, "Join Free Channel"), h(E.Button, { variant: "outline", size: "lg" }, "See packages"), h(E.Button, { variant: "ghost", size: "lg" }, "Ask Sarah")),
+      Row(h(E.Button, { size: "sm" }, "Small"), h(E.Button, null, "Medium"), h(E.Button, { variant: "outline", disabled: true }, "Disabled"))),
+    h("div", { className: "card-box", key: "c" }, h("h3", null, "Card"),
+      Row(
+        h(E.Card, { eyebrow: "Inside the desk", title: "Full transparency" }, h("p", { className: "ezm-card__body" }, "Entry, stop and targets, posted live.")),
+        h(E.Card, { lift: true, eyebrow: "Lift", title: "Hover me" }, h("p", { className: "ezm-card__body" }, "Rises 3px with a green underglow.")),
+        h(E.Card, { holo: true, eyebrow: "Holo", title: "Key panel" }, h("p", { className: "ezm-card__body" }, "One per view.")))),
+    h("div", { className: "card-box", key: "p" }, h("h3", null, "HeroPill · SignalFlag · StatTile"),
+      Row(h(E.HeroPill, { icon: up, value: "12,400" }, "members"), h(E.HeroPill, null, "Live format")),
+      Row(["pending","running","tp","be","sl","cancelled"].map(function (s) { return h(E.SignalFlag, { key: s, status: s, style: { marginRight: 6 } }); })),
+      Row(h(E.StatTile, { label: "XAUUSD", value: "2,395.120", tone: "up", delta: "+12.35 (+0.53%)" }),
+          h(E.StatTile, { label: "EURUSD", value: "1.0842", tone: "down", delta: "-0.0021" }),
+          h(E.StatTile, { label: "Sample signal", value: "1:3.2" }))),
+    h("div", { className: "card-box", key: "h" }, h("h3", null, "HudFrame · GridFloor · EzyMapLogo"),
+      h("div", { style: { padding: "8px 0 18px" } },
+        h(E.HudFrame, { label: "Jack's plan", meta: "XAUUSD · H1" }, h("p", { style: { margin: 0, color: "var(--body-text)" } }, "Hold > S1: look for continuation."))),
+      Row(
+        h(E.EzyMapLogo, { style: { width: 84, height: 84 }, title: "EzyMap" }),
+        h(E.EzyMapLogo, { style: { width: 84, height: 84 }, animated: true, title: "EzyMap" }),
+        h(E.EzyMapLogo, { style: { width: 84, height: 84 }, withWordmark: true, title: "EzyMap" }))),
+    h("div", { className: "card-box", key: "t" }, h("h3", null, "PriceTicker · new"),
+      h(E.PriceTicker, { items: [
+        { symbol: "XAUUSD", value: "2,395.120", delta: "+12.35 (+0.53%)", tone: "up" },
+        { symbol: "EURUSD", value: "1.0842", delta: "-0.0021 (-0.19%)", tone: "down" },
+        { symbol: "BTCUSD", value: "97,420", delta: "+1.8%", tone: "up" },
+        { symbol: "GBPUSD", value: "1.2711", delta: "+0.04%", tone: "up" }
+      ] }))
+  ];
+  ReactDOM.createRoot(document.getElementById("components")).render(
+    h("div", { className: "grid g2" }, items)
+  );
+})();
+</script>
+</body>
+</html>
