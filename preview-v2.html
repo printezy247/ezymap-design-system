@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EzyMap Design System v2.3 — Preview</title>
+<title>EzyMap Design System v2.4 — Preview</title>
 <link rel="icon" type="image/svg+xml" href="./assets/logos/ezymap-3d-favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="./tokens/tokens.css">
@@ -60,15 +60,16 @@
   <div class="header-band">
     <div>
       <img src="./assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap">
-      <h1 style="margin-top:18px">Design system <span style="color:var(--accent)">v2.3.0</span></h1>
-      <p class="sub" style="margin-bottom:0">EzyMap-only brand. Product asset family, product motion, Reveal and ProductIcon on top of the v2/v3 motion and 3D layers.</p>
+      <h1 style="margin-top:18px">Design system <span style="color:var(--accent)">v2.4.0</span></h1>
+      <p class="sub" style="margin-bottom:0">EzyMap-only brand. Four new components (LiveBadge, Marquee, Skeleton, GlowCard), spring easings and an agent surface — llms.txt + a zero-dep MCP server — on top of the v2/v3 motion and 3D layers.</p>
     </div>
     <div class="chips">
-      <span class="chip"><b>12</b> components</span>
+      <span class="chip"><b>16</b> components</span>
       <span class="chip"><b>9</b> products ×4 variants</span>
       <span class="chip"><b>36</b> product PNGs</span>
       <span class="chip"><b>6</b> motion layers</span>
-      <span class="chip"><b>2</b> new tokens</span>
+      <span class="chip"><b>+2</b> spring easings</span>
+      <span class="chip"><b>MCP</b> server</span>
     </div>
   </div>
 
@@ -115,14 +116,14 @@
   <section>
     <p class="eyebrow">Components</p>
     <h2>Components</h2>
-    <p class="sub">All nine, rendered from <code>components/bundle.js</code>.</p>
+    <p class="sub">All sixteen, rendered from <code>components/bundle.js</code>. Install snippets live in each component README; agent docs in <code>docs/llms.txt</code>.</p>
     <div id="components"></div>
   </section>
 
   <section>
     <p class="eyebrow">Motion · new in v2</p>
     <h2>Motion layer</h2>
-    <p class="sub"><code>assets/motion/ezymap-motion.css</code> + motion tokens (<code>--duration-*</code>, <code>--ease-*</code>). Transform/opacity only; everything stops under <code>prefers-reduced-motion</code>.</p>
+    <p class="sub"><code>assets/motion/ezymap-motion.css</code> + motion tokens (<code>--duration-*</code>, <code>--ease-*</code>, incl. spring easings). Transform/opacity only; everything stops under <code>prefers-reduced-motion</code>. Live demos of every utility: <a href="./docs/motion.html" style="color:var(--primary)">motion playground</a>.</p>
     <div class="grid g3">
       <div class="card-box"><h3>ezm-float / ezm-blink / ezm-spin-slow</h3>
         <div class="motion-demo"><div class="ezm-float"><img src="./assets/logos/ezymap-3d-mark.svg" style="height:72px;width:auto" alt=""></div></div>
@@ -170,7 +171,7 @@
     <div class="grid g3" id="variants"></div>
   </section>
 
-  <footer>EzyMap design system v2.3.0 — preview sheet · proprietary</footer>
+  <footer>EzyMap design system v2.4.0 — preview sheet · proprietary</footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
@@ -297,7 +298,27 @@
           h(E.ProductIcon, { product: "macro-bot", variant: "extrude", style: { width: 52, height: 52 } }),
           h(E.ProductIcon, { product: "pro", variant: "glass", style: { width: 52, height: 52 } }),
           h(E.ProductIcon, { product: "ticker", style: { width: 52, height: 52 } }))
-      ]))
+      ])),
+    h("div", { className: "card-box", key: "n24" }, h("h3", null, "LiveBadge · Marquee · Skeleton · GlowCard · v2.4"),
+      Row([
+        h(E.LiveBadge, { key: "lb" }, "Prices live"),
+        h(E.LiveBadge, { key: "lb2", ping: false }, "Bot online")
+      ]),
+      Row([
+        h(E.Skeleton, { key: "sk", width: 220, height: 14 }),
+        h("div", { key: "sk2", style: { width: 220 } }, h(E.Skeleton, { lines: 3 }))
+      ]),
+      Row([
+        h(E.GlowCard, { key: "g1", eyebrow: "Glow", title: "Live desk", style: { flex: 1, minWidth: 200 } },
+          h("p", { className: "ezm-card__body" }, "Breathing edge for live content.")),
+        h(E.GlowCard, { key: "g2", variant: "beam", eyebrow: "Beam", title: "Hero panel", style: { flex: 1, minWidth: 200 } },
+          h("p", { className: "ezm-card__body" }, "Rotating border for the one hero."))
+      ]),
+      Row(
+        h(E.Marquee, { key: "mq", duration: 18, label: "Products", style: { flex: 1, minWidth: 220, borderBlock: "1px solid var(--border)", padding: "8px 0" } },
+          ["EzyMap Algo", "EzyMapPro", "Macro Bot", "Ebooks"].map(function (n) {
+            return h("span", { key: n, className: "mono", style: { color: "var(--body-text)", padding: "0 14px", whiteSpace: "nowrap" } }, n);
+          }))))
   ];
   ReactDOM.createRoot(document.getElementById("components")).render(
     h("div", { className: "grid g2" }, items)
