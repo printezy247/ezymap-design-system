@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="EzyMap line mark"><title>EzyMap</title><g fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"><path d="M50 262 A206 58 0 0 1 462 262" fill="none" stroke="currentColor" stroke-width="5" opacity=".55"/><polygon points="256,44 92,250 256,316" fill="none"/>
+<polygon points="256,44 256,316 420,250" fill="none"/>
+<polygon points="92,250 256,470 256,316" fill="none"/>
+<polygon points="256,316 256,470 420,250" fill="none"/>
+<polygon points="256,44 174,147 256,180" fill="none"/>
+<polygon points="92,250 174,360 256,316" fill="currentColor" opacity=".18"/>
+<polyline points="140,242 184,220 216,234 256,182 292,202 326,164" fill="none" stroke="currentColor" stroke-width="16" stroke-linejoin="round" stroke-linecap="round" opacity=".35"/>
+<polyline points="140,236 184,214 216,228 256,176 292,196 326,158" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="326" cy="158" r="13" fill="currentColor" stroke="currentColor" stroke-width="6"/>
+<circle cx="140" cy="236" r="7" fill="none"/>
+<polygon points="256,44 420,250 256,470 92,250" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/>
+<polyline points="92,250 256,316 420,250" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/>
+<line x1="256" y1="316" x2="256" y2="470" stroke="currentColor" stroke-width="2" opacity=".5"/>
+<line x1="256" y1="44" x2="256" y2="316" stroke="currentColor" stroke-width="2" opacity=".45"/><path d="M50 262 A206 58 0 0 0 462 262" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="420" cy="296" r="9" fill="currentColor"/><circle cx="420" cy="296" r="18" fill="currentColor" opacity=".2"/></g></svg>

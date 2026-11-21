@@ -1,0 +1,110 @@
+/* EzyMap motion utilities. Import after tokens.css.
+   Rules: animate transform and opacity only, honour the motion tokens,
+   and every animation has a prefers-reduced-motion fallback. */
+
+.ezm-float {
+  animation: ezm-float var(--duration-slow) var(--ease-standard) infinite;
+}
+@keyframes ezm-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.ezm-float-slow {
+  animation: ezm-float 9s var(--ease-standard) infinite;
+}
+
+.ezm-blink {
+  animation: ezm-blink 1.6s var(--ease-standard) infinite;
+}
+@keyframes ezm-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.ezm-spin-slow {
+  animation: ezm-spin 14s linear infinite;
+}
+@keyframes ezm-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ezm-rise {
+  animation: ezm-rise var(--duration-base) var(--ease-emphasized) both;
+}
+@keyframes ezm-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Shimmer sweep for skeletons and premium surfaces. */
+.ezm-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.ezm-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.14) 50%, transparent 60%);
+  transform: translateX(-100%);
+  animation: ezm-shimmer 2.4s var(--ease-standard) infinite;
+}
+@keyframes ezm-shimmer {
+  to { transform: translateX(100%); }
+}
+
+/* Expanding ring, for live badges and the logo halo. */
+.ezm-pulse-ring {
+  position: relative;
+}
+.ezm-pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 1px solid var(--primary);
+  opacity: 0;
+  animation: ezm-pulse-ring 2.2s var(--ease-standard) infinite;
+  pointer-events: none;
+}
+@keyframes ezm-pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Marquee: duplicate the track once in markup; -50% loops seamlessly. */
+.ezm-marquee {
+  overflow: hidden;
+}
+.ezm-marquee__track {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  width: max-content;
+  animation: ezm-marquee 32s linear infinite;
+}
+.ezm-marquee:hover .ezm-marquee__track,
+.ezm-marquee:focus-within .ezm-marquee__track {
+  animation-play-state: paused;
+}
+@keyframes ezm-marquee {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ezm-float,
+  .ezm-float-slow,
+  .ezm-blink,
+  .ezm-spin-slow,
+  .ezm-rise,
+  .ezm-shimmer::after,
+  .ezm-pulse-ring::after,
+  .ezm-marquee__track {
+    animation: none !important;
+  }
+  /* Without motion the ticker becomes a plain scrollable strip. */
+  .ezm-marquee {
+    overflow-x: auto;
+  }
+}

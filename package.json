@@ -1,6 +1,6 @@
 {
   "name": "@ezymap/design-system",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "EzyMap design system: tokens, React components and brand assets.",
   "private": true,
   "license": "UNLICENSED",
@@ -33,6 +33,8 @@
   ],
   "scripts": {
     "build:tokens": "node scripts/build-tokens.mjs",
-    "docs": "node scripts/build-tokens.mjs && npx --yes serve docs"
+    "docs": "node scripts/build-tokens.mjs && npx --yes serve docs",
+    "build:assets": "node scripts/build-assets.mjs",
+    "build": "node scripts/build-tokens.mjs && node scripts/build-assets.mjs"
   }
 }

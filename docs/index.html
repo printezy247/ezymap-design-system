@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="../tokens/tokens.css">
 <link rel="stylesheet" href="../components/bundle.css">
+<link rel="stylesheet" href="../assets/motion/ezymap-motion.css">
 <style>
   html { scroll-behavior: smooth; }
   body { line-height: 1.6; }
@@ -72,14 +73,14 @@
   <div class="wrap">
     <img src="../assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap">
     <nav aria-label="Sections">
-      <a href="#colour">Colour</a><a href="#type">Type</a><a href="#spacing">Spacing</a><a href="#radii">Radii</a><a href="#shadows">Shadows</a><a href="#components">Components</a><a href="#logos">Logos</a>
+      <a href="#colour">Colour</a><a href="#type">Type</a><a href="#spacing">Spacing</a><a href="#radii">Radii</a><a href="#shadows">Shadows</a><a href="#components">Components</a><a href="#motion">Motion</a><a href="#products">Products</a><a href="#logos">Logos</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
   <div class="intro">
-    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v1.0.0</p>
+    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.0.0</p>
     <h1>EzyMap design system</h1>
     <p class="lede">Green and gold on black, with white type. Tokens, components and logos for the EzyMap Algo desk.</p>
     <p id="load-error" role="alert">Tokens could not be loaded. Serve this folder over http (for example <code>npx serve</code>) instead of opening the file directly.</p>
@@ -93,10 +94,21 @@
 
   <section class="block" id="components"><p class="eyebrow" style="color:var(--primary);margin:0">Components</p><h2>Components</h2><div id="root"></div></section>
 
+  <section class="block" id="motion"><p class="eyebrow" style="color:var(--primary);margin:0">Motion</p><h2>Motion utilities</h2><p class="lede">From <code>assets/motion/ezymap-motion.css</code>. Transform and opacity only; all of it stops under <code>prefers-reduced-motion</code>.</p><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+    <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><img src="../assets/logos/ezymap-mark-animated.svg" alt="Animated EzyMap mark" style="height:88px;width:auto"></div><div class="meta"><b>ezm-mark-animated</b><code>assets/logos/ezymap-mark-animated.svg</code><p>Float + orbit comet, once per view.</p></div></div>
+    <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><div class="ezm-float"><div style="width:56px;height:56px;border-radius:14px;background:var(--gradient-metal);border:1px solid var(--border)"></div></div></div><div class="meta"><b>ezm-float</b><code>.ezm-float</code><p>Gentle 8px bob, 6s cycle.</p></div></div>
+    <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><span class="ezm-blink" style="width:14px;height:14px;border-radius:9999px;background:var(--primary);box-shadow:0 0 12px var(--primary)"></span></div><div class="meta"><b>ezm-blink</b><code>.ezm-blink</code><p>Live-dot pulse for badges.</p></div></div>
+    <div class="sw"><div class="chip ezm-shimmer" style="height:120px"></div><div class="meta"><b>ezm-shimmer</b><code>.ezm-shimmer</code><p>Sweep for skeletons and premium surfaces.</p></div></div>
+    <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><span class="ezm-pulse-ring" style="display:block;width:40px;height:40px;border-radius:12px;background:var(--surface-elevated);border:1px solid var(--border)"></span></div><div class="meta"><b>ezm-pulse-ring</b><code>.ezm-pulse-ring</code><p>Expanding ring on live elements.</p></div></div>
+    <div class="sw"><div class="chip ezm-marquee" style="height:120px;display:flex;align-items:center"><div class="ezm-marquee__track" style="gap:24px"><span class="mono" style="color:var(--body-text)">XAUUSD 2,395.12</span><span class="mono" style="color:var(--body-text)">EURUSD 1.0842</span><span class="mono" style="color:var(--body-text)">BTCUSD 97,420</span><span class="mono" style="color:var(--body-text)">XAUUSD 2,395.12</span><span class="mono" style="color:var(--body-text)">EURUSD 1.0842</span><span class="mono" style="color:var(--body-text)">BTCUSD 97,420</span></div></div><div class="meta"><b>ezm-marquee</b><code>.ezm-marquee</code><p>Seamless loop; pauses on hover.</p></div></div>
+  </div></section>
+
+  <section class="block" id="products"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Product icons</h2><p class="lede">One app-icon tile per ready product, from <code>assets/products/</code>.</p><div class="grid logos" id="product-grid"></div></section>
+
   <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logos</h2><div class="grid logos" id="logo-grid"></div></section>
 </main>
 
-<footer><div class="wrap">EzyMap design system v1.0.0 · All rights reserved. Proprietary.</div></footer>
+<footer><div class="wrap">EzyMap design system v2.0.0 · All rights reserved. Proprietary.</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
@@ -142,16 +154,30 @@
     ["ezymap-3d-horizontal-on-light.svg", "Horizontal, on light", "light"],
     ["ezymap-3d-stacked-on-dark.svg", "Stacked, on dark", ""],
     ["ezymap-3d-mark.svg", "Mark", ""],
+    ["ezymap-mark-animated.svg", "Mark, animated", ""],
+    ["ezymap-mark-line.svg", "Mark, line (currentColor)", ""],
     ["ezymap-3d-appicon.png", "App icon", ""],
+    ["ezymap-appicon-light.svg", "App icon, light", "light"],
     ["ezymap-3d-favicon.svg", "Favicon (SVG)", ""],
     ["ezymap-3d-favicon.png", "Favicon (PNG)", ""],
-    ["ezymap-3d-apple-touch-180.png", "Apple touch icon 180", ""],
-    ["ezyai-mark.svg", "EzyAI mark", ""],
-    ["macro-desk-appicon.png", "Macro Desk icon", ""],
-    ["macro-desk-horizontal-on-dark.svg", "Macro Desk lockup", ""]
+    ["ezymap-3d-apple-touch-180.png", "Apple touch icon 180", ""]
   ];
   logos.forEach(function (l) {
     $("logo-grid").appendChild(el("div", "logo", '<div class="art ' + l[2] + '"><img src="../assets/logos/' + l[0] + '" alt="' + esc(l[1]) + '"></div><div class="cap"><b style="font-size:14px">' + esc(l[1]) + '</b><br><code class="mono">' + esc(l[0]) + '</code></div>'));
+  });
+
+  var products = [
+    ["ezymap-channel-icon.svg", "Channel"],
+    ["ezymap-miniapp-icon.svg", "Mini App"],
+    ["ezymap-bot-icon.svg", "Gated bot"],
+    ["ezymap-ticker-icon.svg", "Live ticker"],
+    ["ezymap-calculators-icon.svg", "Calculators"],
+    ["ezymap-exchanges-icon.svg", "Exchanges & bots"],
+    ["ezymap-pro-icon.svg", "EzyMapPro"],
+    ["ezymap-ebooks-icon.svg", "Ebooks"]
+  ];
+  products.forEach(function (p) {
+    $("product-grid").appendChild(el("div", "logo", '<div class="art"><img src="../assets/products/' + p[0] + '" alt="' + esc(p[1]) + ' icon" style="height:96px;width:96px"></div><div class="cap"><b style="font-size:14px">' + esc(p[1]) + '</b><br><code class="mono">' + esc(p[0]) + '</code></div>'));
   });
 
   var E = window.EzyMap, h = React.createElement;
@@ -173,8 +199,18 @@
     Comp("HeroPill", "Hero badge or live stat.", h("div", { className: "ezm-row" }, h(E.HeroPill, { icon: up, value: "12,400" }, "members"), h(E.HeroPill, null, "Live format"))),
     Comp("SignalFlag", "Running pulses, waiting blinks, closed states hold still.", h("div", { className: "ezm-row" },
       ["pending", "running", "tp", "be", "sl", "cancelled"].map(function (s) { return h(E.SignalFlag, { key: s, status: s }); }))),
-    Comp("EzyAiLogo", "Gold isometric cube on a deep-green disc.", h("div", { className: "ezm-row" },
-      h(E.EzyAiLogo, { style: { width: 72, height: 72 }, title: "EzyAI" }), h(E.EzyAiLogo, { style: { width: 120, height: 120 }, withWordmark: true, title: "EzyAI" }))),
+    Comp("EzyMapLogo", "The EzyMap gem. Static, animated, and with wordmark.", h("div", { className: "ezm-row" },
+      h(E.EzyMapLogo, { style: { width: 72, height: 72 }, title: "EzyMap" }),
+      h(E.EzyMapLogo, { style: { width: 120, height: 120 }, animated: true, title: "EzyMap" }),
+      h(E.EzyMapLogo, { style: { width: 96, height: 96 }, withWordmark: true, title: "EzyMap" }))),
+    Comp("PriceTicker", "Scrolling live prices; pauses on hover, scrolls under reduced motion.", h(E.PriceTicker, {
+      items: [
+        { symbol: "XAUUSD", value: "2,395.120", delta: "+12.35 (+0.53%)", tone: "up" },
+        { symbol: "EURUSD", value: "1.0842", delta: "-0.0021 (-0.19%)", tone: "down" },
+        { symbol: "BTCUSD", value: "97,420", delta: "+1.8%", tone: "up" },
+        { symbol: "GBPUSD", value: "1.2711", delta: "+0.04%", tone: "up" }
+      ]
+    })),
     Comp("HudFrame", "Hairline frame with gold corner brackets.", h("div", { style: { padding: "12px 0" } },
       h(E.HudFrame, { label: "Jack's plan", meta: "XAUUSD · H1" }, h("p", { style: { margin: 0, color: "var(--body-text)" } }, "Hold > S1: look for continuation. Break and reclaim R1: watch R2.")))),
     Comp("StatTile", "Mono data readout.", h("div", { className: "ezm-row" },

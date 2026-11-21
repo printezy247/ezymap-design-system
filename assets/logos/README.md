@@ -1,11 +1,24 @@
 # Logos
 
-- `ezymap-3d-horizontal-on-dark.svg` is the primary lockup: the 3D gem beside "EzyMap" ("Ezy" in white, "Map" in gold) with an "ALGO · SIGNAL DESK" mono line. Use it on `background` or `surface`.
-- `ezymap-3d-horizontal-on-light.svg` is the same lockup with ink "Ezy" and deep-green "Map", for white grounds such as documents and partner decks.
-- `ezymap-3d-stacked-on-dark.svg` stacks the gem above the wordmark. Use it for square and centred placements.
-- `ezymap-3d-mark.svg` is the gem alone: a faceted diamond with a green crown and gold base, carrying a gold rising route line and wrapped in an orbit ring. It is full colour, so never tint it.
-- `ezymap-3d-appicon.png` puts the gem on a rounded dark tile with a grid and gold rim. Use it for the Telegram avatar, app icons and social profile pictures.
-- `macro-desk-appicon.png` and `macro-desk-horizontal-on-dark.svg` are the Macro & Crypto Desk sub-brand: an isometric heat-tile slab in green and gold.
-- `ezyai-mark.svg` is the EzyAI product mark: a gold isometric cube on a deep-green disc. Use it only for the EzyAI product, or use the `EzyAiLogo` component.
-- `ezymap-3d-favicon.svg` and `ezymap-3d-favicon.png` are the ring-less gem for sizes below 48px. `ezymap-3d-apple-touch-180.png` is the 180px touch icon.
-- Every SVG lockup also has a PNG render with the same name. `ezymap-3d-appicon.svg` and `macro-desk-appicon.svg` are the vector app icons.
+EzyMap only — the EzyAI and Macro Desk marks were retired in v2. The brand mark is the 3D gem: a faceted diamond with a green crown and gold base, a gold rising route line inside, and an orbit ring. It is full colour, so never tint it.
+
+## Mark
+
+- `ezymap-3d-mark.svg` — the gem alone, full colour.
+- `ezymap-mark-animated.svg` — the gem with a gentle float and a gold comet travelling the orbit ring. Stops under `prefers-reduced-motion`. Use once per view.
+- `ezymap-mark-line.svg` — single-colour outline variant; inherits `currentColor` for one-colour print and engraving.
+- `ezymap-3d-favicon.svg` / `.png` — ring-less gem for sizes below 48px.
+
+## Lockups
+
+- `ezymap-3d-horizontal-on-dark.svg` — primary lockup (gem + "EzyMap" + "ALGO · SIGNAL DESK" line) for `background`/`surface`.
+- `ezymap-3d-horizontal-on-light.svg` — ink wordmark for white grounds (documents, partner decks).
+- `ezymap-3d-stacked-on-dark.svg` / `ezymap-stacked-on-light.svg` — gem above the wordmark for square and centred placements.
+
+## App icons and avatars
+
+- `ezymap-3d-appicon.svg` / `.png` — gem on a dark rounded tile with grid and gold rim: Telegram avatar, app icons, social profiles.
+- `ezymap-appicon-light.svg` — same tile on a light ground for light-mode UIs.
+- `ezymap-3d-apple-touch-180.png` — 180px iOS touch icon.
+
+Every SVG lockup also has a PNG render with the same name where a raster is needed. Product icons live in `../products/`; motion utilities in `../motion/`.

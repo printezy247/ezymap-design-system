@@ -23,6 +23,8 @@ const spacing = src.spacing.tokens;
 const radius = src.radius.tokens;
 const shadow = src.shadow.tokens;
 const gradient = src.gradient.tokens;
+const motion = src.motion?.tokens ?? [];
+const breakpoints = src.breakpoint?.tokens ?? [];
 const families = src.type.families;
 const styles = src.type.groups.flatMap((g) => g.styles.map((s) => ({ ...s, family: g.family })));
 
@@ -39,6 +41,10 @@ section("Shadow");
 for (const t of shadow) decl.push(`  --${cssName(t.name)}: ${t.value};`);
 section("Gradient");
 for (const t of gradient) decl.push(`  --${cssName(t.name)}: ${t.value};`);
+section("Motion");
+for (const t of motion) decl.push(`  --${cssName(t.name)}: ${t.value};`);
+section("Breakpoints");
+for (const t of breakpoints) decl.push(`  --${cssName(t.name)}: ${t.value};`);
 section("Font families");
 for (const [k, val] of Object.entries(families)) decl.push(`  --font-${k}: ${val};`);
 
@@ -79,6 +85,8 @@ const tokens = {
   radius: map(radius),
   shadow: map(shadow),
   gradient: map(gradient),
+  motion: map(motion),
+  breakpoint: map(breakpoints),
   fontFamily: { ...families },
   type: Object.fromEntries(
     styles.map((s) => [
@@ -104,6 +112,8 @@ export type SpacingToken = keyof typeof tokens.spacing;
 export type RadiusToken = keyof typeof tokens.radius;
 export type ShadowToken = keyof typeof tokens.shadow;
 export type GradientToken = keyof typeof tokens.gradient;
+export type MotionToken = keyof typeof tokens.motion;
+export type BreakpointToken = keyof typeof tokens.breakpoint;
 export type TypeStyle = keyof typeof tokens.type;
 
 export default tokens;
@@ -121,6 +131,14 @@ const preset = {
       boxShadow: refs(shadow),
       spacing: refs(spacing),
       backgroundImage: refs(gradient),
+      transitionDuration: Object.fromEntries(
+        motion.filter((t) => t.name.startsWith("duration-")).map((t) => [t.name.slice(9), v(t.name)])
+      ),
+      transitionTimingFunction: Object.fromEntries(
+        motion.filter((t) => t.name.startsWith("ease-")).map((t) => [t.name.slice(5), v(t.name)])
+      ),
+      // Media queries cannot read var(), so screens use literal values.
+      screens: Object.fromEntries(breakpoints.map((t) => [t.name.replace(/^bp-/, ""), t.value])),
     },
   },
 };
