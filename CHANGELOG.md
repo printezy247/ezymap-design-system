@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased — 3D motion pack and gold/fintech hero logos
+
+### Added
+- **3D and motion pack** (`assets/motion/ezymap-motion-3d.css`): `ezm-stage`, `ezm-3d-turn`, `ezm-3d-wobble`, `ezm-ring-3d`, `ezm-flip`, `ezm-depth`, `ezm-beam`, `ezm-glow`, `ezm-reveal-3d` with `ezm-stagger`, and `ezm-gold-flow`. Each animation has a `prefers-reduced-motion` fallback.
+- **Hero logos** (`assets/logos/`): `ezymap-hero-gold.svg` (gold gem with orbit, halo and sparkles) and `ezymap-hero-fintech.svg` (gem with an animated bar chart and price route).
+- **Preview** (`preview-v3.html`): demos for the hero logos and the 3D motion utilities.
+
+### Changed
+- `ezm-glow` now animates the opacity of a `::before` layer instead of `box-shadow`.
+- `components/bundle.css` imports `assets/motion/ezymap-motion-3d.css`, so the 3D motion classes ship with the bundle.
+
+### Not yet included
+- The React components and the design tokens are unchanged. The new classes are available to them but no component uses them yet.
+
 ## 2.2.0 — hero motion and animated logos
 
 ### Added

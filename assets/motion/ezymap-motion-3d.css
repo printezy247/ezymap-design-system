@@ -1,0 +1,195 @@
+/* EzyMap 3D and motion pack v3. Import after ezymap-motion.css and tokens.css.
+   Rules: animate transform and opacity where possible, honour the motion tokens,
+   and every animation has a prefers-reduced-motion fallback. */
+
+@property --ezm-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* Perspective container for 3D children. */
+.ezm-stage {
+  perspective: 1000px;
+  perspective-origin: 50% 40%;
+}
+
+/* Continuous Y-axis turn, like a coin or gem on a stand. */
+.ezm-3d-turn {
+  transform-style: preserve-3d;
+  animation: ezm-3d-turn 12s linear infinite;
+}
+@keyframes ezm-3d-turn {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+/* Slow wobble in X and Y with a small lift, for hero objects. */
+.ezm-3d-wobble {
+  transform-style: preserve-3d;
+  animation: ezm-3d-wobble 7s var(--ease-standard) infinite;
+}
+@keyframes ezm-3d-wobble {
+  0%, 100% { transform: rotateX(8deg) rotateY(-12deg) translateY(0); }
+  50% { transform: rotateX(-6deg) rotateY(12deg) translateY(-10px); }
+}
+
+/* Flat ring lying on a tilted plane, spinning like an orbit around an object.
+   Place it as a child of an element with .ezm-stage. */
+.ezm-ring-3d {
+  transform: rotateX(68deg);
+  transform-style: preserve-3d;
+  animation: ezm-ring-3d 14s linear infinite;
+}
+@keyframes ezm-ring-3d {
+  from { transform: rotateX(68deg) rotateZ(0deg); }
+  to { transform: rotateX(68deg) rotateZ(360deg); }
+}
+
+/* Card flip on hover or keyboard focus. Markup:
+   .ezm-flip > .ezm-flip__inner > (.ezm-flip__face + .ezm-flip__face.ezm-flip__back) */
+.ezm-flip {
+  position: relative;
+  perspective: 1000px;
+}
+.ezm-flip__inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform var(--duration-slow) var(--ease-emphasized);
+}
+.ezm-flip:hover .ezm-flip__inner,
+.ezm-flip:focus-within .ezm-flip__inner {
+  transform: rotateY(180deg);
+}
+.ezm-flip__face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.ezm-flip__back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+/* Depth lift on hover: the element moves toward the viewer and tilts slightly. */
+.ezm-depth {
+  transform-style: preserve-3d;
+  transition:
+    transform var(--duration-base) var(--ease-emphasized),
+    box-shadow var(--duration-base) var(--ease-standard);
+}
+.ezm-depth:hover,
+.ezm-depth:focus-visible {
+  transform: translateZ(18px) rotateX(4deg);
+  box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(224, 188, 99, 0.25);
+}
+
+/* Rotating conic border beam. Works on any element with border-radius. */
+.ezm-beam {
+  position: relative;
+  isolation: isolate;
+}
+.ezm-beam::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--ezm-angle),
+    transparent 0deg,
+    var(--accent) 60deg,
+    var(--primary) 120deg,
+    transparent 180deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: ezm-beam 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes ezm-beam {
+  to { --ezm-angle: 360deg; }
+}
+
+/* Breathing green and gold glow for live or featured surfaces.
+   The gold layer is a pseudo-element whose opacity animates, so the
+   animation runs on the compositor (opacity) instead of box-shadow. */
+.ezm-glow {
+  position: relative;
+  isolation: isolate;
+  box-shadow: 0 0 18px rgba(47, 191, 113, 0.18);
+}
+.ezm-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 0 34px rgba(224, 188, 99, 0.32);
+  opacity: 0;
+  animation: ezm-glow 3s var(--ease-standard) infinite;
+  pointer-events: none;
+}
+@keyframes ezm-glow {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Entrance: rises out of a slight X rotation. Pair with .ezm-stagger. */
+.ezm-reveal-3d {
+  transform-origin: 50% 0;
+  animation: ezm-reveal-3d var(--duration-slow) var(--ease-emphasized) both;
+}
+@keyframes ezm-reveal-3d {
+  from { opacity: 0; transform: perspective(900px) rotateX(-22deg) translateY(16px); }
+  to { opacity: 1; transform: perspective(900px) rotateX(0deg) translateY(0); }
+}
+
+/* Staggered delays for direct children of .ezm-stagger. */
+.ezm-stagger > :nth-child(1) { animation-delay: 0ms; }
+.ezm-stagger > :nth-child(2) { animation-delay: 90ms; }
+.ezm-stagger > :nth-child(3) { animation-delay: 180ms; }
+.ezm-stagger > :nth-child(4) { animation-delay: 270ms; }
+.ezm-stagger > :nth-child(5) { animation-delay: 360ms; }
+.ezm-stagger > :nth-child(6) { animation-delay: 450ms; }
+
+/* Moving gold gradient, for premium buttons and badges. */
+.ezm-gold-flow {
+  background-image: linear-gradient(100deg, #8f7024 0%, #e0bc63 30%, #f7e3a0 50%, #e0bc63 70%, #8f7024 100%);
+  background-size: 250% 100%;
+  color: #0a0c0b;
+  animation: ezm-gold-flow 6s linear infinite;
+}
+@keyframes ezm-gold-flow {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ezm-3d-turn,
+  .ezm-3d-wobble,
+  .ezm-ring-3d,
+  .ezm-reveal-3d,
+  .ezm-beam::before,
+  .ezm-glow::before,
+  .ezm-gold-flow {
+    animation: none !important;
+  }
+  .ezm-ring-3d {
+    transform: rotateX(68deg);
+  }
+  .ezm-flip__inner,
+  .ezm-depth {
+    transition: none !important;
+  }
+  .ezm-flip:hover .ezm-flip__inner,
+  .ezm-flip:focus-within .ezm-flip__inner {
+    transform: none;
+  }
+  .ezm-depth:hover,
+  .ezm-depth:focus-visible {
+    transform: none;
+  }
+}
