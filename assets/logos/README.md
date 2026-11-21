@@ -12,6 +12,11 @@ EzyMap only — the EzyAI and Macro Desk marks were retired in v2. The brand mar
 - `ezymap-mark-neon.svg` — gem with a phosphor drop-shadow and green halo on black.
 - `ezymap-mark-ghost.svg` — faint watermark line mark for backgrounds and documents.
 - `ezymap-mark-animated-orbit.svg` — gem floats while a dashed gold ring rotates around it. Stops under `prefers-reduced-motion`.
+- `ezymap-mark-hero.svg` — flagship hero animation: float, counter-rotating rings, comet, halo pulse and a sheen sweep. One per view.
+- `ezymap-mark-fintech.svg` — gem floating over a candlestick cluster with a gold trend line; for trading and markets surfaces.
+- `ezymap-mark-gold.svg` — all-metal gold variant of the gem for premium, one-per-view moments.
+- `ezymap-horizontal-animated.svg` — animated lockup: floating gem, sheen wordmark and a marching gold rule.
+- `ezymap-appicon-animated.svg` — animated app-icon tile (float + orbiting comet) for heroes and store pages.
 - `ezymap-3d-favicon.svg` / `.png` — ring-less gem for sizes below 48px.
 
 ## Lockups

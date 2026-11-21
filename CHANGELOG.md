@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.0 — hero motion and animated logos
+
+### Added
+- **Hero animated logos** (`assets/logos/`): `ezymap-mark-hero.svg` (float + counter-rotating orbit rings + comet + halo pulse + sheen sweep), `ezymap-mark-fintech.svg` (gem over a candlestick cluster with a gold trend line), `ezymap-mark-gold.svg` (all-metal gold gem), `ezymap-horizontal-animated.svg` (sheen wordmark + marching gold rule) and `ezymap-appicon-animated.svg` (floating gem + orbiting comet on the app tile). All honour `prefers-reduced-motion`.
+- **Motion utilities** (`assets/motion/ezymap-motion.css`): `ezm-kenburns`, `ezm-marquee-reverse`, `ezm-slide-left`, `ezm-slide-right`, `ezm-scale-in`, `ezm-wiggle`, `ezm-heartbeat`, `ezm-aurora`, `ezm-grid-scroll`, `ezm-caret` — all with `prefers-reduced-motion` fallbacks.
+
+### Changed
+- Showcase gains 11 new motion tiles and 5 new animated logo entries; version strings bumped to v2.2.0.
+
 ## 2.1.0 — type refresh, more 3D and motion
 
 ### Added
