@@ -1,6 +1,20 @@
 # Changelog
 
-## Unreleased — 3D motion pack and gold/fintech hero logos
+## 2.3.0 — product asset family, product motion, Reveal and ProductIcon
+
+### Added
+- **Product variants** (`assets/products/`): all nine ready products — channel, Mini App, gated bot, live ticker, calculators, exchanges & bots, EzyMapPro, ebooks and Macro Bot — now ship four variants: base, `-animated` (glyph float + rotating gold ring), `-extrude` (offset-copy 3D depth) and `-glass` (frosted tile), each as SVG plus a 256px PNG rendered by `scripts/build-assets.mjs`. Macro Bot's hand-tuned animated tile is preserved.
+- **New logo variants** (`assets/logos/`): `ezymap-mark-aurora.svg` (teal/cyan ramp for data-viz surfaces), `ezymap-appicon-glass.svg` and `ezymap-appicon-neon.svg`.
+- **Asset manifest** (`assets/manifest.json`): generated catalog of every logo, product file and motion stylesheet with format and animation flags.
+- **Product motion** (`assets/motion/ezymap-motion-product.css`): `ezm-product-lift` (hover lift + green underglow), `ezm-sheen` (sheen sweep on hover/focus), `ezm-live-ping` (expanding ring for live badges), `ezm-dash-flow` (marching SVG dashes) and `ezm-js-reveal` (Reveal component styles). All honour `prefers-reduced-motion`; imported by `components/bundle.css`.
+- **Tokens**: `duration-xl` (1200ms) and `ease-spring` (`cubic-bezier(0.34, 1.56, 0.64, 1)` overshoot) added to `tokens/tokens.json` and emitted to `tokens.css`, `tokens.ts` and `tailwind-preset.js`.
+- **Components**: `Reveal` (IntersectionObserver scroll reveal; the hidden state is gated behind `html.js` so content stays visible with scripting off, and reduced motion skips the reveal) and `ProductIcon` (`product` + `variant` + `basePath` props for the product tiles), in React, vanilla `bundle.js` and `index.d.ts`.
+
+### Changed
+- `scripts/build-assets.mjs` now generates the product variants, PNG renders and `assets/manifest.json`; it degrades gracefully when ImageMagick is unavailable.
+- Showcase (`docs/index.html`) shows v2.3.0: new what's-new, product variant grid, new motion tiles, new logo entries and demos for `Reveal` and `ProductIcon`.
+
+## 2.2.1 — 3D motion pack and gold/fintech hero logos
 
 ### Added
 - **3D and motion pack** (`assets/motion/ezymap-motion-3d.css`): `ezm-stage`, `ezm-3d-turn`, `ezm-3d-wobble`, `ezm-ring-3d`, `ezm-flip`, `ezm-depth`, `ezm-beam`, `ezm-glow`, `ezm-reveal-3d` with `ezm-stagger`, and `ezm-gold-flow`. Each animation has a `prefers-reduced-motion` fallback.
@@ -18,9 +32,6 @@
 - Motion durations use `--duration-*` tokens in `ezymap-motion-hero.css`. Stagger delays stay as literal values.
 - `muted-foreground-elevated` (`#8a928d`, 4.99:1 on `surface-elevated`) is a new token for labels on raised surfaces. `muted-foreground` is 4.25:1 there and fails AA for normal text.
 - Light theme: `tokens/tokens.json` has light values for all 35 colour tokens. `scripts/build-tokens.mjs` emits them under `[data-theme="light"]` in `tokens.css`, with matching `colorThemes` output in `tokens.ts`.
-
-### Not yet included
-- The React components are unchanged. The new motion classes are available to them but no component uses them yet.
 
 ## 2.2.0 — hero motion and animated logos
 

@@ -2,7 +2,8 @@
 // Generates the EzyMap SVG asset family from the existing 3D mark geometry.
 // Run: node scripts/build-assets.mjs
 // Outputs: assets/logos/* variants and assets/products/* app icons.
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -349,4 +350,180 @@ for (const [name, svgText] of Object.entries(products)) {
   writeFileSync(join(productsDir, `${name}.svg`), svgText);
 }
 
-console.log(`assets: ${Object.keys(products).length} product icons (+ logo variants in assets/logos/)`);
+/* ---------- v2.3: extra logo variants ---------- */
+
+// Aurora: cool teal/cyan ramp for data-viz and dashboard surfaces.
+const aurorify = (s) =>
+  s
+    .replaceAll("#5be39a", "#7df0e4")
+    .replaceAll("#2fbf71", "#2dd4bf")
+    .replaceAll("#13804d", "#0d9488")
+    .replaceAll("#14935a", "#2dd4bf")
+    .replaceAll("#0f7a4a", "#14b8a6")
+    .replaceAll("#073d25", "#115e59")
+    .replaceAll("#9af0c0", "#c8fff8");
+writeFileSync(
+  join(logosDir, "ezymap-mark-aurora.svg"),
+  svg("0 0 512 512", `${aurorify(defs)}${aurorify(art)}`, 'role="img" aria-label="EzyMap aurora mark"')
+);
+
+// Glass app icon: frosted tile for glassmorphism heroes and the Mini App.
+writeFileSync(
+  join(logosDir, "ezymap-appicon-glass.svg"),
+  svg(
+    "0 0 512 512",
+    `${defs}<rect width="512" height="512" rx="112" fill="#101413"/>
+<rect x="10" y="10" width="492" height="492" rx="104" fill="#ffffff" opacity=".05"/>
+<rect x="10" y="10" width="492" height="246" rx="104" fill="#ffffff" opacity=".07"/>
+<rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="#ffffff" stroke-opacity=".22"/>
+<line x1="60" y1="70" x2="452" y2="70" stroke="#ffffff" stroke-opacity=".28" stroke-width="3" stroke-linecap="round"/>
+<g transform="translate(51.2 46) scale(.8)">${art}</g>`,
+    'role="img" aria-label="EzyMap glass app icon"'
+  )
+);
+
+// Neon app icon: black tile, phosphor gem, green halo — stream overlays.
+writeFileSync(
+  join(logosDir, "ezymap-appicon-neon.svg"),
+  svg(
+    "0 0 512 512",
+    `${defs}<rect width="512" height="512" rx="112" fill="#050807"/>
+<circle cx="256" cy="270" r="180" fill="url(#mhalo)"/>
+<rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="#2fbf71" stroke-opacity=".45"/>
+<g transform="translate(51.2 46) scale(.8)" style="filter:drop-shadow(0 0 20px rgba(47,191,113,.55)) drop-shadow(0 0 5px rgba(190,255,220,.5))">${art}</g>`,
+    'role="img" aria-label="EzyMap neon app icon"'
+  )
+);
+
+/* ---------- v2.3: product variants (animated / extrude / glass) + PNGs ---------- */
+
+// Every base product icon (ezymap-*-icon.svg, including the hand-made Macro
+// Bot tile) gets three variants: a floating animated tile, an extruded 3D
+// tile and a frosted glass tile. PNG renders at 256px ship alongside when
+// ImageMagick is available; the script still succeeds without it.
+const productFiles = readdirSync(productsDir)
+  .filter((f) => /^ezymap-.+-icon\.svg$/.test(f))
+  .sort();
+
+const splitIcon = (src) => {
+  const d = src.match(/<defs>[\s\S]*?<\/defs>/)?.[0] ?? "";
+  const body = src.split(/<\/defs>/)[1]?.replace(/<\/?svg[^>]*>/g, "").trim() ?? "";
+  const tileMatch = body.match(/<rect[^>]*\/>/);
+  const tile = tileMatch ? tileMatch[0] : "";
+  const rest = tile ? body.slice(tileMatch.index + tile.length) : body;
+  return { d, tile, rest };
+};
+
+const productTitle = (file) =>
+  file
+    .replace(/^ezymap-|-icon\.svg$/g, "")
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+const variantSvg = (viewBox, inner, label) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" width="${viewBox.split(" ")[2]}" height="${viewBox.split(" ")[3]}" role="img"><title>${label}</title>${inner}</svg>\n`;
+
+const png = (svgPath, pngPath) => {
+  try {
+    execFileSync("convert", ["-background", "none", "-density", "288", "-resize", "256x256", svgPath, pngPath]);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+let pngCount = 0;
+const renderPng = (name) => {
+  const svgPath = join(productsDir, `${name}.svg`);
+  if (existsSync(svgPath) && png(svgPath, join(productsDir, `${name}.png`))) pngCount++;
+};
+
+for (const file of productFiles) {
+  const base = file.replace(/\.svg$/, "");
+  const { d, tile, rest } = splitIcon(readFileSync(join(productsDir, file), "utf8"));
+  const label = `EzyMap ${productTitle(file)}`;
+
+  // Animated: glyph floats, a dashed gold ring rotates around the tile.
+  // Hand-tuned animations (Macro Bot) are kept: only write when absent.
+  const animatedPath = join(productsDir, `${base}-animated.svg`);
+  if (!existsSync(animatedPath))
+  writeFileSync(
+    animatedPath,
+    variantSvg(
+      "0 0 64 64",
+      `${d}<style>
+.ezm-pf-float{animation:ezmPfFloat 5s ease-in-out infinite;transform-box:view-box;transform-origin:center}
+.ezm-pf-ring{animation:ezmPfSpin 9s linear infinite;transform-box:view-box;transform-origin:32px 32px}
+@keyframes ezmPfFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+@keyframes ezmPfSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.ezm-pf-float,.ezm-pf-ring{animation:none}}
+</style>${tile}
+<g class="ezm-pf-float">${rest}</g>
+<g class="ezm-pf-ring"><rect x="4" y="4" width="56" height="56" rx="14" fill="none" stroke="#e0bc63" stroke-width="1.4" stroke-dasharray="7 9" opacity=".65"/></g>`,
+      `${label} animated`
+    )
+  );
+
+  // Extruded 3D: two dark offset copies behind the tile for real depth.
+  writeFileSync(
+    join(productsDir, `${base}-extrude.svg`),
+    variantSvg(
+      "0 0 64 64",
+      `${d}<g transform="translate(2 2.5)" opacity=".5" style="filter:brightness(.14)">${tile}${rest}</g>
+<g transform="translate(1 1.25)" opacity=".75" style="filter:brightness(.32)">${tile}${rest}</g>
+${tile}${rest}`,
+      `${label} extruded 3D`
+    )
+  );
+
+  // Glass: frosted translucent tile for glassmorphism surfaces.
+  const glassBody = `${tile}${rest}`.replace('fill="url(#pg)"', 'fill="#141817" opacity=".55"');
+  writeFileSync(
+    join(productsDir, `${base}-glass.svg`),
+    variantSvg(
+      "0 0 64 64",
+      `${d}<rect width="64" height="64" rx="16" fill="#101413"/>
+<rect x="2" y="2" width="60" height="28" rx="13" fill="#ffffff" opacity=".09"/>
+${glassBody}
+<rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#ffffff" stroke-opacity=".25"/>`,
+      `${label} glass`
+    )
+  );
+
+  for (const suffix of ["", "-animated", "-extrude", "-glass"]) renderPng(`${base}${suffix}`);
+}
+
+/* ---------- v2.3: asset manifest ---------- */
+
+// Catalog every shipped asset so consumers can discover variants without
+// scraping the directories. Motion utilities are CSS, listed by class name.
+const motionDir = join(root, "assets/motion");
+const listSvgs = (dir) =>
+  readdirSync(dir)
+    .filter((f) => f.endsWith(".svg"))
+    .sort()
+    .map((f) => ({
+      file: `assets/${dir === logosDir ? "logos" : "products"}/${f}`,
+      formats: existsSync(join(dir, f.replace(/\.svg$/, ".png"))) ? ["svg", "png"] : ["svg"],
+      animated: /animated|hero|orbit|aurora/.test(f),
+    }));
+const manifest = {
+  name: "EzyMap",
+  version: "2.3.0",
+  generatedBy: "scripts/build-assets.mjs",
+  categories: {
+    logos: listSvgs(logosDir),
+    products: listSvgs(productsDir),
+    motion: readdirSync(motionDir)
+      .filter((f) => f.endsWith(".css"))
+      .sort()
+      .map((f) => ({ file: `assets/motion/${f}`, format: "css" })),
+  },
+  totals: { logoFiles: listSvgs(logosDir).length, productFiles: listSvgs(productsDir).length, pngRenders: pngCount },
+};
+writeFileSync(join(root, "assets/manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
+
+console.log(
+  `assets: ${Object.keys(products).length} product icons, ${productFiles.length} products x 3 variants, ` +
+    `${pngCount} PNG renders, manifest.json (${manifest.totals.logoFiles} logos / ${manifest.totals.productFiles} product files)`
+);

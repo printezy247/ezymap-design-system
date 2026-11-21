@@ -121,3 +121,33 @@ export interface TiltProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
 export declare function Tilt(props: TiltProps): React.ReactElement;
+
+/** Scroll-into-view reveal (JS fallback for browsers without animation-timeline). */
+export interface RevealProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Stagger delay in ms, applied as --reveal-delay. */
+  delay?: number;
+  /** Reveal once (default true) or every time the element enters the viewport. */
+  once?: boolean;
+}
+export declare function Reveal(props: RevealProps): React.ReactElement;
+
+export type ProductIconName =
+  | "channel"
+  | "miniapp"
+  | "bot"
+  | "ticker"
+  | "calculators"
+  | "exchanges"
+  | "pro"
+  | "ebooks"
+  | "macro-bot";
+export type ProductIconVariant = "default" | "animated" | "extrude" | "glass";
+/** Product app-icon tile from assets/products. */
+export interface ProductIconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  product?: ProductIconName;
+  src?: string;
+  variant?: ProductIconVariant;
+  basePath?: string;
+  alt?: string;
+}
+export declare function ProductIcon(props: ProductIconProps): React.ReactElement;

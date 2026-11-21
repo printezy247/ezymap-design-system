@@ -80,20 +80,22 @@
 
 <main class="wrap">
   <div class="intro">
-    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.2.0 · 3D motion pack unreleased</p>
+    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.3.0</p>
     <h1>EzyMap design system</h1>
     <p class="lede">Green and gold on black, with white type. Tokens, components and logos for the EzyMap Algo desk.</p>
     <p id="load-error" role="alert">Tokens could not be loaded. Serve this folder over http (for example <code>npx serve</code>) instead of opening the file directly.</p>
   </div>
 
-  <section class="block" id="whats-new"><p class="eyebrow" style="color:var(--primary);margin:0">Unreleased</p><h2>What's new</h2>
+  <section class="block" id="whats-new"><p class="eyebrow" style="color:var(--primary);margin:0">v2.3.0</p><h2>What's new</h2>
     <ul class="lede" style="padding-left:20px">
-      <li><code>assets/motion/ezymap-motion-3d.css</code>: 3D and motion utilities (turn, wobble, orbit ring, flip, depth lift, beam, glow, staggered 3D reveal, gold flow). Each one stops under <code>prefers-reduced-motion</code>.</li>
-      <li><code>assets/logos/ezymap-hero-gold.svg</code> and <code>assets/logos/ezymap-hero-fintech.svg</code>: two animated hero logos, listed under Logos.</li>
-      <li><code>components/bundle.css</code> imports the 3D pack, so the classes ship with the bundle.</li>
+      <li><strong>Product asset family</strong> (<code>assets/products/</code>): every ready product — channel, Mini App, gated bot, live ticker, calculators, exchanges &amp; bots, EzyMapPro, ebooks and Macro Bot — now ships four variants: base, <code>-animated</code> (float + orbit ring), <code>-extrude</code> (3D depth) and <code>-glass</code> (frosted tile), each as SVG plus a 256px PNG.</li>
+      <li><strong>New logo variants</strong> (<code>assets/logos/</code>): <code>ezymap-mark-aurora.svg</code> (teal/cyan ramp for data-viz surfaces), <code>ezymap-appicon-glass.svg</code> and <code>ezymap-appicon-neon.svg</code>.</li>
+      <li><strong>Asset manifest</strong> (<code>assets/manifest.json</code>): generated catalog of every logo, product file and motion stylesheet, with format and animation flags.</li>
+      <li><strong>Product motion</strong> (<code>assets/motion/ezymap-motion-product.css</code>): <code>ezm-product-lift</code>, <code>ezm-sheen</code>, <code>ezm-live-ping</code>, <code>ezm-dash-flow</code> and <code>ezm-js-reveal</code>. All honour <code>prefers-reduced-motion</code>.</li>
+      <li><strong>New tokens</strong>: <code>duration-xl</code> (1200ms) and <code>ease-spring</code> (playful overshoot) in <code>tokens/tokens.json</code>, emitted to CSS, TypeScript and the Tailwind preset.</li>
+      <li><strong>New components</strong>: <code>Reveal</code> (JS scroll-reveal fallback) and <code>ProductIcon</code> (product tile with variant support), in React, vanilla bundle and typings.</li>
       <li><a href="../preview-v3.html"><code>preview-v3.html</code></a>: standalone preview of the hero logos and 3D demos.</li>
     </ul>
-    <p class="note" style="color:var(--muted-foreground);font-size:14px">The React components and design tokens are unchanged. No component uses the new classes yet.</p>
   </section>
   <section class="block" id="colour"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Colour</h2><div class="grid swatches" id="colours"></div></section>
   <section class="block" id="type"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Type scale</h2><p class="lede">Clash Display for headlines, General Sans for text, JetBrains Mono for figures, Instrument Serif for editorial accents. Space Grotesk, Inter Tight and IBM Plex Mono stay loaded as fallbacks.</p><div id="types"></div></section>
@@ -103,7 +105,7 @@
 
   <section class="block" id="components"><p class="eyebrow" style="color:var(--primary);margin:0">Components</p><h2>Components</h2><div id="root"></div></section>
 
-  <section class="block" id="motion"><p class="eyebrow" style="color:var(--primary);margin:0">Motion</p><h2>Motion utilities</h2><p class="lede">From <code>assets/motion/ezymap-motion.css</code> and <code>assets/motion/ezymap-motion-3d.css</code> (unreleased). Every animation stops under <code>prefers-reduced-motion</code>.</p><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+  <section class="block" id="motion"><p class="eyebrow" style="color:var(--primary);margin:0">Motion</p><h2>Motion utilities</h2><p class="lede">From <code>assets/motion/ezymap-motion.css</code>, <code>ezymap-motion-3d.css</code>, <code>ezymap-motion-scroll.css</code>, <code>ezymap-motion-text.css</code>, <code>ezymap-motion-hero.css</code> and <code>ezymap-motion-product.css</code>. Every animation stops under <code>prefers-reduced-motion</code>.</p><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
     <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><img src="../assets/logos/ezymap-mark-animated.svg" alt="Animated EzyMap mark" style="height:88px;width:auto"></div><div class="meta"><b>ezm-mark-animated</b><code>assets/logos/ezymap-mark-animated.svg</code><p>Float + orbit comet, once per view.</p></div></div>
     <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><div class="ezm-float"><div style="width:56px;height:56px;border-radius:14px;background:var(--gradient-metal);border:1px solid var(--border)"></div></div></div><div class="meta"><b>ezm-float</b><code>.ezm-float</code><p>Gentle 8px bob, 6s cycle.</p></div></div>
     <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><span class="ezm-blink" style="width:14px;height:14px;border-radius:9999px;background:var(--primary);box-shadow:0 0 12px var(--primary)"></span></div><div class="meta"><b>ezm-blink</b><code>.ezm-blink</code><p>Live-dot pulse for badges.</p></div></div>
@@ -139,14 +141,17 @@
     <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-glow" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">live</span></div></div><div class="meta"><b>ezm-glow</b><code>.ezm-glow</code><p>Breathing green and gold glow for live surfaces.</p></div></div>
     <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-stagger" style="display:flex;gap:8px"><span class="ezm-reveal-3d" style="width:28px;height:52px;border-radius:8px;background:var(--gradient-green)"></span><span class="ezm-reveal-3d" style="width:28px;height:72px;border-radius:8px;background:var(--gradient-green)"></span><span class="ezm-reveal-3d" style="width:28px;height:40px;border-radius:8px;background:var(--gradient-green)"></span><span class="ezm-reveal-3d" style="width:28px;height:64px;border-radius:8px;background:var(--gradient-green)"></span></div></div><div class="meta"><b>ezm-reveal-3d / ezm-stagger</b><code>.ezm-stagger</code><p>Staggered 3D entrance for lists and grids.</p></div></div>
     <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><span class="ezm-gold-flow" style="display:inline-block;padding:10px 18px;border-radius:10px;font-weight:600;letter-spacing:0.04em">PREMIUM</span></div><div class="meta"><b>ezm-gold-flow</b><code>.ezm-gold-flow</code><p>Moving gold gradient for premium buttons and badges.</p></div></div>
+    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-product-lift ezm-sheen" tabindex="0" style="width:88px;height:88px;border-radius:20px;background:var(--gradient-metal);border:1px solid var(--border);display:flex;align-items:center;justify-content:center"><img src="../assets/products/ezymap-channel-icon.svg" alt="" style="width:56px;height:56px"></div></div><div class="meta"><b>ezm-product-lift / ezm-sheen</b><code>.ezm-product-lift .ezm-sheen</code><p>Hover lift with underglow plus a sheen sweep for product tiles.</p></div></div>
+    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><span class="ezm-live-ping is-live" style="display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:9999px;border:1px solid var(--border);background:var(--surface-elevated);font-size:13px;font-weight:600"><span style="width:8px;height:8px;border-radius:99px;background:var(--primary)"></span>LIVE</span></div><div class="meta"><b>ezm-live-ping</b><code>.ezm-live-ping.is-live</code><p>Expanding ping ring for live badges. Add .is-live to run.</p></div></div>
+    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><svg width="180" height="40" viewBox="0 0 180 40" aria-hidden="true"><defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2fbf71"/><stop offset="1" stop-color="#e0bc63"/></linearGradient></defs><path class="ezm-dash-flow" d="M8 26 L52 10 L96 30 L140 12 L172 24" fill="none" stroke="url(#mg)" stroke-width="4" stroke-linecap="round" stroke-dasharray="14 10"/></svg></div><div class="meta"><b>ezm-dash-flow</b><code>.ezm-dash-flow</code><p>Marching dashes for SVG rules and route lines.</p></div></div>
   </div></section>
 
-  <section class="block" id="products"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Product icons</h2><p class="lede">One app-icon tile per ready product, from <code>assets/products/</code>.</p><div class="grid logos" id="product-grid"></div></section>
+  <section class="block" id="products"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Product icons</h2><p class="lede">One app-icon tile per ready product, from <code>assets/products/</code>. Every product also ships <code>-animated</code>, <code>-extrude</code> and <code>-glass</code> variants in SVG and 256px PNG — see the variant grid below.</p><div class="grid logos" id="product-grid"></div><h3>Variants</h3><div class="grid logos" id="product-variant-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))"></div></section>
 
   <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logos</h2><div class="grid logos" id="logo-grid"></div></section>
 </main>
 
-<footer><div class="wrap">EzyMap design system v2.2.0 · All rights reserved. Proprietary.</div></footer>
+<footer><div class="wrap">EzyMap design system v2.3.0 · All rights reserved. Proprietary.</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
@@ -208,6 +213,9 @@
     ["ezymap-mark-line.svg", "Mark, line (currentColor)", ""],
     ["ezymap-3d-appicon.png", "App icon", ""],
     ["ezymap-appicon-light.svg", "App icon, light", "light"],
+    ["ezymap-appicon-glass.svg", "App icon, glass", ""],
+    ["ezymap-appicon-neon.svg", "App icon, neon", ""],
+    ["ezymap-mark-aurora.svg", "Mark, aurora teal", ""],
     ["ezymap-3d-favicon.svg", "Favicon (SVG)", ""],
     ["ezymap-3d-favicon.png", "Favicon (PNG)", ""],
     ["ezymap-3d-apple-touch-180.png", "Apple touch icon 180", ""]
@@ -224,10 +232,18 @@
     ["ezymap-calculators-icon.svg", "Calculators"],
     ["ezymap-exchanges-icon.svg", "Exchanges & bots"],
     ["ezymap-pro-icon.svg", "EzyMapPro"],
-    ["ezymap-ebooks-icon.svg", "Ebooks"]
+    ["ezymap-ebooks-icon.svg", "Ebooks"],
+    ["ezymap-macro-bot-icon.svg", "Macro Bot"]
   ];
   products.forEach(function (p) {
     $("product-grid").appendChild(el("div", "logo", '<div class="art"><img src="../assets/products/' + p[0] + '" alt="' + esc(p[1]) + ' icon" style="height:96px;width:96px"></div><div class="cap"><b style="font-size:14px">' + esc(p[1]) + '</b><br><code class="mono">' + esc(p[0]) + '</code></div>'));
+  });
+  var variantNames = ["animated", "extrude", "glass"];
+  products.forEach(function (p) {
+    variantNames.forEach(function (v) {
+      var file = p[0].replace(/\.svg$/, "-" + v + ".svg");
+      $("product-variant-grid").appendChild(el("div", "logo", '<div class="art"><img src="../assets/products/' + file + '" alt="' + esc(p[1]) + ' ' + v + '" style="height:72px;width:72px"></div><div class="cap"><b style="font-size:13px">' + esc(p[1]) + ' · ' + v + '</b><br><code class="mono">' + esc(file) + '</code></div>'));
+    });
   });
 
   var E = window.EzyMap, h = React.createElement;
@@ -272,7 +288,17 @@
     Comp("Tilt", "Pointer-tracked 3D tilt with a cursor glare. Wrap any card or tile; honours prefers-reduced-motion.", h("div", { style: { maxWidth: 320 } },
       h(E.Tilt, { max: 12 },
         h(E.Card, { holo: true, eyebrow: "Tilt me", title: "3D hover" },
-          h("p", { className: "ezm-card__body" }, "Move the pointer across this card.")))))
+          h("p", { className: "ezm-card__body" }, "Move the pointer across this card."))))),
+    Comp("Reveal", "Fades and rises into view on scroll — the JS fallback where animation-timeline is missing. Scroll to see it; honours prefers-reduced-motion.",
+      h("div", { style: { minHeight: 60 } },
+        h(E.Reveal, { delay: 80 },
+          h(E.Card, { eyebrow: "Scroll down", title: "This card revealed itself" },
+            h("p", { className: "ezm-card__body" }, "IntersectionObserver added .is-inview when the card entered the viewport."))))),
+    Comp("ProductIcon", "Ready-product tile with variant support: default, animated, extrude, glass. Pass basePath to where assets/products is served.", h("div", { className: "ezm-row", style: { alignItems: "center" } },
+      h(E.ProductIcon, { product: "channel", variant: "animated", basePath: "../assets/products", style: { width: 64, height: 64 } }),
+      h(E.ProductIcon, { product: "macro-bot", variant: "extrude", basePath: "../assets/products", style: { width: 64, height: 64 } }),
+      h(E.ProductIcon, { product: "pro", variant: "glass", basePath: "../assets/products", style: { width: 64, height: 64 } }),
+      h(E.ProductIcon, { product: "ticker", basePath: "../assets/products", style: { width: 64, height: 64 } })))
   ];
   ReactDOM.createRoot($("root")).render(h(React.Fragment, null, items));
 })();

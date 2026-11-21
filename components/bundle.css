@@ -5,6 +5,7 @@
 @import url("../assets/motion/ezymap-motion-scroll.css");
 @import url("../assets/motion/ezymap-motion-text.css");
 @import url("../assets/motion/ezymap-motion-hero.css");
+@import url("../assets/motion/ezymap-motion-product.css");
 
 body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; margin: 0; }
 

@@ -9,7 +9,7 @@
 
 **Green and gold on black, with white type. Tokens, React components and brand assets for the EzyMap Algo desk.**
 
-![version](https://img.shields.io/badge/version-2.2.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
+![version](https://img.shields.io/badge/version-2.3.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
 ![license](https://img.shields.io/badge/license-proprietary-c9a13a?style=for-the-badge&labelColor=0a0c0b)
 ![react](https://img.shields.io/badge/React-18-2fbf71?style=for-the-badge&logo=react&logoColor=white&labelColor=0a0c0b)
 ![tailwind](https://img.shields.io/badge/Tailwind-v4-c9a13a?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=0a0c0b)
@@ -42,18 +42,18 @@
 | 🔤 Type styles | **17** | Clash Display · General Sans · JetBrains Mono · Instrument Serif |
 | 📐 Spacing / radius | **14 / 8** | 4px Tailwind scale |
 | 🧊 Shadows / gradients | **8 / 7** | brushed-metal depth |
-| 🎞️ Motion tokens | **7** | durations + easings |
+| 🎞️ Motion tokens | **9** | durations + easings |
 | 📏 Breakpoints | **4** | mobile-first widths |
-| 🧩 Components | **10** | React + TypeScript |
-| 🖼️ Logos | **27** | 3D gem set, EzyMap only |
-| 🧩 Product icons | **8** | one tile per ready product |
+| 🧩 Components | **12** | React + TypeScript |
+| 🖼️ Logos | **30** | 3D gem set, EzyMap only |
+| 🧩 Product icons | **9 products × 4 variants** | animated, extrude and glass tiles, SVG + PNG |
 
 ## Quick start
 
 Install from the private GitHub repo named in `package.json` (`repository`), pinned to the `v2.0.0` tag:
 
 ```bash
-npm install "github:<owner>/ezymap-design-system#v2.2.0"
+npm install "github:<owner>/ezymap-design-system#v2.3.0"
 ```
 
 <details open>
@@ -155,8 +155,11 @@ Writes the animated mark, light app icon, line mark, stacked-on-light lockup and
 | `HudFrame` | hairline frame with gold corner brackets | [README](components/HudFrame/README.md) |
 | `StatTile` | mono data readout | [README](components/StatTile/README.md) |
 | `GridFloor` | perspective grid stage with green glow | [README](components/GridFloor/README.md) |
+| `Tilt` | pointer-tracked 3D tilt with cursor glare | [README](components/Tilt/README.md) |
+| `Reveal` | scroll-into-view reveal (JS fallback) | [README](components/Reveal/README.md) |
+| `ProductIcon` | ready-product tile, four variants | [README](components/ProductIcon/README.md) |
 
-Motion utilities (`ezm-float`, `ezm-blink`, `ezm-shimmer`, `ezm-pulse-ring`, `ezm-marquee`, `ezm-rise`, `ezm-spin-slow`) ship as plain CSS in `assets/motion/ezymap-motion.css` — import it after `tokens.css` on any page, React or not.
+Motion utilities ship as plain CSS in six files under `assets/motion/` (`ezymap-motion.css`, `-3d`, `-scroll`, `-text`, `-hero`, `-product`) — import them after `tokens.css` on any page, React or not. `assets/manifest.json` catalogs every asset.
 
 ## How it fits together
 
@@ -258,7 +261,7 @@ EzyMap is a premium trading desk that lives inside Telegram. Everything built on
 
 ### Iconography
 - Use Lucide icons at stroke width 1.75, coloured with `primary` or `accent` and sized 14–20px beside text. No emoji and no filled icon sets.
-- Logos live in `assets/logos`. The primary mark is the 3D EzyMap gem: a faceted diamond with a green crown and gold base, carrying a gold rising route line and wrapped in a gold orbit ring. Use `ezymap-3d-horizontal-on-dark.svg` as the default lockup, the app icon for avatars and Telegram, and the ring-less favicon below 48px. EzyMap is the only brand — the retired EzyAI and Macro Desk marks are not part of this system. One icon tile per ready product (channel, Mini App, gated bot, live ticker, calculators, exchanges & bots, EzyMapPro, ebooks) lives in `assets/products`.
+- Logos live in `assets/logos`. The primary mark is the 3D EzyMap gem: a faceted diamond with a green crown and gold base, carrying a gold rising route line and wrapped in a gold orbit ring. Use `ezymap-3d-horizontal-on-dark.svg` as the default lockup, the app icon for avatars and Telegram, and the ring-less favicon below 48px. EzyMap is the only brand — the retired EzyAI and Macro Desk marks are not part of this system. One icon tile per ready product (channel, Mini App, gated bot, live ticker, calculators, exchanges & bots, EzyMapPro, ebooks, Macro Bot) lives in `assets/products` — each in four variants (base, animated, extruded 3D, glass) as SVG plus a 256px PNG.
 
 ### Imagery
 - Product photography is cinematic, dark and low-key, lit in green and gold, showing trading desks, monitors and devices. See `assets/imagery`.
@@ -272,7 +275,7 @@ EzyMap is a premium trading desk that lives inside Telegram. Everything built on
 
 - The 3D gem set in `assets/logos` is the only logo set. No legacy logo or favicon is included.
 - Fonts are CDN-hosted (Fontshare + Google Fonts), so no font files are stored.
-- Components are authored in this repo (`components/react/*.tsx`) and compiled to `bundle.js`/`bundle.css` by hand — no build step. Button, Card, HeroPill, SignalFlag, EzyMapLogo, HudFrame, StatTile, GridFloor, PriceTicker and Tilt each ship a React version, vanilla-bundle export and README. Select, Sonner, SignalCard and landing-page sections were not brought in.
+- Components are authored in this repo (`components/react/*.tsx`) and compiled to `bundle.js`/`bundle.css` by hand — no build step. Button, Card, HeroPill, SignalFlag, EzyMapLogo, HudFrame, StatTile, GridFloor, PriceTicker, Tilt, Reveal and ProductIcon each ship a React version, vanilla-bundle export and README. Select, Sonner, SignalCard and landing-page sections were not brought in.
 - Skipped variables: `--gradient-glow`, `--gradient-gold-glow` and `--shadow-inset-gold` (all `none`). Animated neon CTA styles were also skipped.
 
 </details>

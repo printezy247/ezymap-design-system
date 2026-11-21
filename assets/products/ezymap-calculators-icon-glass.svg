@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img"><title>EzyMap Calculators glass</title><defs>
+<linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#171a19"/><stop offset="1" stop-color="#0c0f0e"/></linearGradient>
+<linearGradient id="pe" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5be39a"/><stop offset="1" stop-color="#2fbf71"/></linearGradient>
+</defs><rect width="64" height="64" rx="16" fill="#101413"/>
+<rect x="2" y="2" width="60" height="28" rx="13" fill="#ffffff" opacity=".09"/>
+<rect width="64" height="64" rx="16" fill="#141817" opacity=".55" stroke="#2fbf71" stroke-opacity=".35"/>
+<g fill="none" stroke="url(#pe)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="21" y="9" width="22" height="46" rx="4"/>
+<rect x="26" y="15" width="12" height="7" rx="1.5" fill="#e0bc63" stroke="none" opacity=".9"/>
+<circle cx="27" cy="28" r="1.5" fill="url(#pe)" stroke="none"/>
+<circle cx="33" cy="28" r="1.5" fill="url(#pe)" stroke="none"/>
+<circle cx="39" cy="28" r="1.5" fill="url(#pe)" stroke="none"/>
+<circle cx="27" cy="36" r="1.5" fill="url(#pe)" stroke="none"/>
+<circle cx="33" cy="36" r="1.5" fill="url(#pe)" stroke="none"/>
+<circle cx="39" cy="36" r="1.5" fill="#e0bc63" stroke="none"/>
+<rect x="27" y="43" width="10" height="4" rx="1" fill="url(#pe)" stroke="none"/>
+</g>
+<rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#ffffff" stroke-opacity=".25"/></svg>
