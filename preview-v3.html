@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EzyMap Design System v3 — Motion and 3D Preview</title>
+<link rel="icon" type="image/svg+xml" href="./assets/logos/ezymap-3d-favicon.svg">
+<link rel="stylesheet" href="./tokens/tokens.css">
+<link rel="stylesheet" href="./assets/motion/ezymap-motion.css">
+<link rel="stylesheet" href="./assets/motion/ezymap-motion-3d.css">
+<style>
+  html { background: var(--background); }
+  body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 56px 0; border-top: 1px solid var(--border); }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); margin: 0 0 10px; }
+  h1 { font-family: var(--font-display); font-size: clamp(36px, 6vw, 60px); line-height: 1.05; font-weight: 600; letter-spacing: -.02em; margin: 0 0 14px; }
+  h2 { font-family: var(--font-display); font-size: 30px; line-height: 1.15; font-weight: 600; letter-spacing: -.02em; margin: 0 0 8px; }
+  .sub { color: var(--body-text); font-size: 15px; max-width: 720px; margin: 0 0 28px; }
+  .grid { display: grid; gap: 16px; }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .card { border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--surface); padding: 22px; }
+  .card h3 { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-foreground); margin: 0 0 14px; }
+  .hero { padding: 72px 0 56px; }
+  .hero-logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: center; margin-top: 40px; }
+  .hero-logo { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .hero-logo .stage { width: 220px; height: 220px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .hero-logo img { width: 200px; height: 200px; object-fit: contain; }
+  .hero-logo .ring { position: absolute; width: 230px; height: 230px; border-radius: 50%; border: 2px solid var(--accent); opacity: .55; }
+  .hero-logo figcaption { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-foreground); }
+  .demo-box { min-height: 150px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .demo-box p { margin: 0; color: var(--body-text); font-size: 14px; }
+  .flip-face { min-height: 150px; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 22px; border-radius: var(--radius-xl); border: 1px solid var(--border); background: var(--surface-elevated); box-sizing: border-box; }
+  .flip-back { background: var(--surface); border-color: var(--accent); }
+  .flip-face b { font-family: var(--font-display); font-size: 18px; }
+  .flip-face span { font-size: 13px; color: var(--body-text); }
+  .tilt3d { transition: transform .35s var(--ease-standard); transform-style: preserve-3d; will-change: transform; }
+  .btn-gold { display: inline-flex; align-items: center; justify-content: center; align-self: flex-start; padding: 12px 20px; border: 0; border-radius: var(--radius-lg); font-family: var(--font-display); font-weight: 600; font-size: 15px; cursor: pointer; }
+  .btn-gold:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+  .btn-gold:hover { filter: brightness(1.08); }
+  .mono { font-family: var(--font-mono); }
+  .beam-inner { padding: 22px; border-radius: var(--radius-xl); background: var(--surface); }
+  .pill { display: inline-block; align-self: flex-start; font-family: var(--font-mono); font-size: 11px; padding: 6px 12px; border-radius: 9999px; border: 1px solid var(--border); color: var(--body-text); background: var(--surface-elevated); }
+  .pill b { color: var(--primary); font-weight: 500; }
+  .ticker-track { gap: 32px; padding: 14px 0; font-family: var(--font-mono); font-size: 13px; color: var(--body-text); }
+  .ticker-track b { color: var(--primary); font-weight: 500; }
+  @media (max-width: 900px) {
+    .g3, .g2, .hero-logos { grid-template-columns: 1fr; }
+    .wrap { padding: 0 20px; }
+  }
+  footer { padding: 32px 0 56px; color: var(--muted-foreground); font-size: 12px; font-family: var(--font-mono); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero ezm-aurora">
+    <p class="eyebrow">Brand · v3 motion</p>
+    <h1>Gold, fintech and <span class="ezm-text-shimmer">the EzyMap mark</span>, in motion.</h1>
+    <p class="sub">Three animated hero logos built on the design tokens. Motion is transform and opacity only, and everything stops under prefers-reduced-motion.</p>
+    <div class="hero-logos ezm-stage">
+      <figure class="hero-logo">
+        <div class="stage">
+          <span class="ring ezm-pulse-ring"></span>
+          <img src="./assets/logos/ezymap-hero-gold.svg" alt="EzyMap gold hero logo">
+        </div>
+        <figcaption>Gold</figcaption>
+      </figure>
+      <figure class="hero-logo">
+        <div class="stage">
+          <img src="./assets/logos/ezymap-hero-fintech.svg" alt="EzyMap fintech hero logo">
+        </div>
+        <figcaption>Fintech</figcaption>
+      </figure>
+      <figure class="hero-logo">
+        <div class="stage">
+          <span class="ezm-ring-3d ring" style="border-width:1.5px"></span>
+          <img class="ezm-3d-turn" src="./assets/logos/ezymap-3d-mark.svg" alt="EzyMap 3D mark">
+        </div>
+        <figcaption>EzyMap</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <section>
+    <p class="eyebrow">3D</p>
+    <h2>Depth and tilt</h2>
+    <p class="sub">Pointer-tracked tilt, a flip card, a depth lift, and a rotating border beam.</p>
+    <div class="grid g3 ezm-stagger">
+      <div class="card ezm-reveal-3d">
+        <h3>Pointer tilt</h3>
+        <div class="demo-box tilt3d" id="tilt-demo" style="border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;background:var(--surface-elevated)">
+          <b style="font-family:var(--font-display);font-size:18px">Move over this panel</b>
+          <p>Tracks the pointer and tilts up to 14 degrees.</p>
+        </div>
+      </div>
+      <div class="card ezm-reveal-3d">
+        <h3>Flip on hover or focus</h3>
+        <div class="ezm-flip" tabindex="0">
+          <div class="ezm-flip__inner">
+            <div class="flip-face ezm-flip__face">
+              <b>Live desk</b>
+              <span>Entry, stop and targets, posted live.</span>
+            </div>
+            <div class="flip-face flip-back ezm-flip__face ezm-flip__back">
+              <b>Full transparency</b>
+              <span>Every call is logged with its outcome.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card ezm-reveal-3d">
+        <h3>Depth lift and border beam</h3>
+        <div class="ezm-beam" style="border-radius:var(--radius-xl)">
+          <div class="beam-inner ezm-depth" tabindex="0">
+            <b style="font-family:var(--font-display);font-size:18px">Featured signal</b>
+            <p style="margin:8px 0 0;font-size:13px;color:var(--body-text)">Hover or focus to lift it toward you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Motion</p>
+    <h2>Glow, gold and ticker</h2>
+    <p class="sub">Breathing glow, moving gold gradient, and a marquee that pauses on hover.</p>
+    <div class="grid g3">
+      <div class="card">
+        <h3>Breathing glow</h3>
+        <div class="ezm-glow" style="border-radius:var(--radius-xl);padding:22px;background:var(--surface-elevated);border:1px solid var(--border)">
+          <span class="pill"><b>LIVE</b> · XAUUSD H1</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Moving gold</h3>
+        <button type="button" class="btn-gold ezm-gold-flow">Join the desk</button>
+      </div>
+      <div class="card">
+        <h3>Marquee</h3>
+        <div class="ezm-marquee">
+          <div class="ezm-marquee__track ticker-track">
+            <span><b>XAUUSD</b> 2,395.120 +0.53%</span>
+            <span><b>EURUSD</b> 1.0842 −0.19%</span>
+            <span><b>BTCUSD</b> 97,420 +1.8%</span>
+            <span><b>GBPUSD</b> 1.2711 +0.04%</span>
+            <span><b>XAUUSD</b> 2,395.120 +0.53%</span>
+            <span><b>EURUSD</b> 1.0842 −0.19%</span>
+            <span><b>BTCUSD</b> 97,420 +1.8%</span>
+            <span><b>GBPUSD</b> 1.2711 +0.04%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>EzyMap design system v3 — motion and 3D preview · proprietary</footer>
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
+  var el = document.getElementById("tilt-demo");
+  if (!el) return;
+  el.addEventListener("pointermove", function (e) {
+    var r = el.getBoundingClientRect();
+    var x = (e.clientX - r.left) / r.width - 0.5;
+    var y = (e.clientY - r.top) / r.height - 0.5;
+    el.style.transform = "perspective(900px) rotateX(" + (-y * 14).toFixed(2) + "deg) rotateY(" + (x * 14).toFixed(2) + "deg)";
+  });
+  el.addEventListener("pointerleave", function () {
+    el.style.transform = "";
+  });
+})();
+</script>
+</body>
+</html>
