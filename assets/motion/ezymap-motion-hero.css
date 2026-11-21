@@ -1,0 +1,115 @@
+/* EzyMap hero motion: pointer-reactive layers, price feedback and chart reveals.
+   Import after tokens.css. Pair the pointer classes with
+   assets/motion/ezymap-hero-pointer.js, which sets --px, --py, --mx and --my.
+   Without the script the layers sit at their rest position. */
+
+/* Soft green spotlight that follows the pointer inside the hero.
+   --mx and --my are pixel offsets from the hero centre. */
+.ezm-spotlight {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.ezm-spotlight::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46rem;
+  height: 46rem;
+  margin: -23rem 0 0 -23rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(47, 191, 113, 0.16), rgba(47, 191, 113, 0));
+  transform: translate3d(var(--mx, 0px), var(--my, 0px), 0);
+  transition: transform var(--duration-base) var(--ease-standard);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Pointer parallax. --px and --py run from -1 to 1. Set --depth per layer
+   (1 is subtle, 3 is strong; negative values move the opposite way).
+   Use a wrapper if the element already animates transform (ezm-float etc.). */
+.ezm-parallax {
+  transform: translate3d(
+    calc(var(--px, 0) * var(--depth, 1) * 14px),
+    calc(var(--py, 0) * var(--depth, 1) * 14px),
+    0
+  );
+  transition: transform var(--duration-base) var(--ease-standard);
+  will-change: transform;
+}
+
+/* Candles grow from their base, one after another. Set --i on each child.
+   Works on HTML elements and on SVG shapes. */
+.ezm-candle-rise > * {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: ezm-candle-rise var(--duration-slow) var(--ease-emphasized) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+@keyframes ezm-candle-rise {
+  from { opacity: 0; transform: scaleY(0); }
+}
+
+/* Price flash. Add .ezm-tick-up or .ezm-tick-down when a value changes
+   (flashTick() in the pointer script does this and cleans up). */
+.ezm-tick-up,
+.ezm-tick-down {
+  position: relative;
+  isolation: isolate;
+}
+.ezm-tick-up::after,
+.ezm-tick-down::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  animation: ezm-tick var(--duration-slow) var(--ease-standard) both;
+}
+.ezm-tick-up::after { background: rgba(47, 191, 113, 0.28); }
+.ezm-tick-down::after { background: color-mix(in srgb, var(--market-down) 28%, transparent); }
+@keyframes ezm-tick {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Draw an SVG line on. Give the path pathLength="1" so the dash maths holds
+   for any length. Set animation-delay inline to sequence several paths. */
+.ezm-draw {
+  stroke-dasharray: 1;
+  animation: ezm-draw 1.6s var(--ease-emphasized) both;
+}
+@keyframes ezm-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Twinkling sparkle for gold accents. Set --i to offset each sparkle. */
+.ezm-sparkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ezm-sparkle 2.8s var(--ease-standard) infinite;
+  animation-delay: calc(var(--i, 0) * 420ms);
+}
+@keyframes ezm-sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(45deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ezm-candle-rise > *,
+  .ezm-tick-up::after,
+  .ezm-tick-down::after,
+  .ezm-draw,
+  .ezm-sparkle {
+    animation: none !important;
+  }
+  .ezm-spotlight::before,
+  .ezm-parallax {
+    transition: none !important;
+    transform: none;
+  }
+}

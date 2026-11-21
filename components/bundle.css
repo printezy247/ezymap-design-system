@@ -2,6 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
 
 @import url("../assets/motion/ezymap-motion-3d.css");
+@import url("../assets/motion/ezymap-motion-scroll.css");
+@import url("../assets/motion/ezymap-motion-text.css");
+@import url("../assets/motion/ezymap-motion-hero.css");
 
 body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; margin: 0; }
 

@@ -1,0 +1,86 @@
+/* EzyMap text and headline motion. Import after tokens.css.
+   Base styles are the final state, so the keyframes only declare "from".
+   Under prefers-reduced-motion the text simply shows, fully revealed. */
+
+/* Word-by-word reveal. Wrap each word in a span with --i set and keep a
+   space between spans:
+   <h1 class="ezm-words"><span style="--i:0">Trade</span> <span style="--i:1">smarter</span></h1> */
+.ezm-words > span {
+  display: inline-block;
+  animation: ezm-word-in var(--duration-slow) var(--ease-emphasized) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+@keyframes ezm-word-in {
+  from { opacity: 0; transform: translateY(0.5em); }
+}
+
+/* Masked line rise for large headlines. Each line is a .ezm-line with one
+   inner span. The mask clips the span until it slides up into view. */
+.ezm-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.ezm-line > span {
+  display: block;
+  animation: ezm-line-up var(--duration-slow) var(--ease-emphasized) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+@keyframes ezm-line-up {
+  from { transform: translateY(105%); }
+}
+
+/* Gradient underline that draws left to right under one accent word. */
+.ezm-underline {
+  position: relative;
+  display: inline-block;
+}
+.ezm-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.12em;
+  height: 0.08em;
+  min-height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), var(--accent, #e0bc63));
+  transform-origin: left center;
+  animation: ezm-underline-draw var(--duration-slow) var(--ease-emphasized) 400ms both;
+}
+@keyframes ezm-underline-draw {
+  from { transform: scaleX(0); }
+}
+
+/* Rotating keyword, pure CSS. Set --n to the number of words and repeat the
+   first word at the end of the list so the loop is seamless:
+   <span class="ezm-rotator" style="--n:3"><span class="ezm-rotator__track">
+   <span>Gold</span><span>Forex</span><span>Crypto</span><span>Gold</span></span></span> */
+.ezm-rotator {
+  display: inline-block;
+  height: 1.2em;
+  line-height: 1.2;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.ezm-rotator__track {
+  display: block;
+  animation: ezm-rotator calc(var(--n, 3) * 2.2s) steps(var(--n, 3)) infinite;
+}
+.ezm-rotator__track > * {
+  display: block;
+  height: 1.2em;
+}
+@keyframes ezm-rotator {
+  to { transform: translateY(calc(var(--n, 3) * -1.2em)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ezm-words > span,
+  .ezm-line > span,
+  .ezm-underline::after,
+  .ezm-rotator__track {
+    animation: none !important;
+  }
+}

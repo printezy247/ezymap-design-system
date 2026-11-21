@@ -6,13 +6,21 @@
 - **3D and motion pack** (`assets/motion/ezymap-motion-3d.css`): `ezm-stage`, `ezm-3d-turn`, `ezm-3d-wobble`, `ezm-ring-3d`, `ezm-flip`, `ezm-depth`, `ezm-beam`, `ezm-glow`, `ezm-reveal-3d` with `ezm-stagger`, and `ezm-gold-flow`. Each animation has a `prefers-reduced-motion` fallback.
 - **Hero logos** (`assets/logos/`): `ezymap-hero-gold.svg` (gold gem with orbit, halo and sparkles) and `ezymap-hero-fintech.svg` (gem with an animated bar chart and price route).
 - **Preview** (`preview-v3.html`): demos for the hero logos and the 3D motion utilities.
+- **Scroll-driven motion** (`assets/motion/ezymap-motion-scroll.css`): `ezm-scroll-progress`, `ezm-scroll-reveal`, `ezm-scroll-zoom`, `ezm-scroll-stagger`, `ezm-scroll-parallax`, `ezm-scroll-hero-out`. Gated behind `@supports (animation-timeline: view())` and `prefers-reduced-motion: no-preference`, so unsupported browsers show the final state.
+- **Text motion** (`assets/motion/ezymap-motion-text.css`): `ezm-words`, `ezm-line`, `ezm-underline`, `ezm-rotator`.
+- **Hero motion** (`assets/motion/ezymap-motion-hero.css`): `ezm-spotlight`, `ezm-parallax`, `ezm-candle-rise`, `ezm-tick-up` and `ezm-tick-down`, `ezm-draw`, `ezm-sparkle`.
+- **Pointer helper** (`assets/motion/ezymap-hero-pointer.js`): `bindHeroPointer(root)` feeds `--px`, `--py`, `--mx` and `--my` to the hero classes, and `flashTick(el, "up" | "down")` triggers the price flash. Both do nothing under reduced motion.
+- **Macro Bot assets** (`assets/products/`): `ezymap-macro-bot-icon.svg`, `ezymap-macro-bot-icon-animated.svg` and `ezymap-macro-bot-horizontal-on-dark.svg`, drawn in the product-tile style of the current system.
 
 ### Changed
 - `ezm-glow` now animates the opacity of a `::before` layer instead of `box-shadow`.
-- `components/bundle.css` imports `assets/motion/ezymap-motion-3d.css`, so the 3D motion classes ship with the bundle.
+- `components/bundle.css` imports the 3D, scroll, text and hero motion files, so their classes ship with the bundle. `ezymap-hero-pointer.js` is not in the bundle.
+- Motion durations use `--duration-*` tokens in `ezymap-motion-hero.css`. Stagger delays stay as literal values.
+- `muted-foreground-elevated` (`#8a928d`, 4.99:1 on `surface-elevated`) is a new token for labels on raised surfaces. `muted-foreground` is 4.25:1 there and fails AA for normal text.
+- Light theme: `tokens/tokens.json` has light values for all 35 colour tokens. `scripts/build-tokens.mjs` emits them under `[data-theme="light"]` in `tokens.css`, with matching `colorThemes` output in `tokens.ts`.
 
 ### Not yet included
-- The React components and the design tokens are unchanged. The new classes are available to them but no component uses them yet.
+- The React components are unchanged. The new motion classes are available to them but no component uses them yet.
 
 ## 2.2.0 — hero motion and animated logos
 

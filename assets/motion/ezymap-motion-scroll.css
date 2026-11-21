@@ -1,0 +1,81 @@
+/* EzyMap scroll-driven motion. Import after tokens.css.
+   Progressive enhancement: everything here is gated behind
+   @supports (animation-timeline: view()) and prefers-reduced-motion: no-preference.
+   Browsers without support, and users who reduce motion, get the final static
+   state, so no content is ever hidden. Only transform and opacity animate. */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Reading-progress bar pinned to the top of the viewport. */
+    .ezm-scroll-progress {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 3px;
+      z-index: 50;
+      background: linear-gradient(90deg, var(--primary), var(--accent, #e0bc63));
+      transform-origin: 0 50%;
+      pointer-events: none;
+      animation: ezm-scroll-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+    @keyframes ezm-scroll-progress {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    /* Fade and rise as the element enters the viewport. */
+    .ezm-scroll-reveal {
+      animation: ezm-scroll-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 28%;
+    }
+    @keyframes ezm-scroll-reveal {
+      from { opacity: 0; transform: translateY(32px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scale-up reveal for cards and product tiles. */
+    .ezm-scroll-zoom {
+      animation: ezm-scroll-zoom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    @keyframes ezm-scroll-zoom {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Children reveal one after another as the parent scrolls in.
+       Set --i (0, 1, 2 ...) on each child. */
+    .ezm-scroll-stagger > * {
+      animation: ezm-scroll-reveal linear both;
+      animation-timeline: view();
+      animation-range:
+        entry calc(var(--i, 0) * 6%)
+        cover calc(24% + var(--i, 0) * 6%);
+    }
+
+    /* Parallax drift while the element crosses the viewport.
+       Distance is --ezm-parallax (default 40px). Put it on a wrapper,
+       not on an element that already animates transform. */
+    .ezm-scroll-parallax {
+      animation: ezm-scroll-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+    @keyframes ezm-scroll-parallax {
+      from { transform: translateY(var(--ezm-parallax, 40px)); }
+      to { transform: translateY(calc(var(--ezm-parallax, 40px) * -1)); }
+    }
+
+    /* Hero content fades and lifts away as it leaves the viewport. */
+    .ezm-scroll-hero-out {
+      animation: ezm-scroll-hero-out linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 85%;
+    }
+    @keyframes ezm-scroll-hero-out {
+      to { opacity: 0; transform: translateY(-48px) scale(0.98); }
+    }
+  }
+}
