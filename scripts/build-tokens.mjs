@@ -14,11 +14,18 @@ const out = (file, text) => writeFileSync(join(root, "tokens", file), text);
 const cssName = (n) => n.replace(/\./g, "\\.");
 const v = (n) => `var(--${cssName(n)})`;
 
-// Colour value for the first theme (EzyMap ships a single dark theme).
-const theme = src.color.themes[0].id;
-const colorVal = (t) => (typeof t.value === "string" ? t.value : t.value[theme] ?? Object.values(t.value)[0]);
+// The first theme is the default and goes on :root. Other themes apply under [data-theme="<id>"].
+// A token without a value for a theme falls back to the default theme's value.
+const [defaultTheme, ...altThemes] = src.color.themes.map((t) => t.id);
+const colorVal = (t, id) => (typeof t.value === "string" ? t.value : t.value[id] ?? t.value[defaultTheme] ?? Object.values(t.value)[0]);
 
-const colors = src.color.tokens.map((t) => ({ name: t.name, value: colorVal(t), usage: t.usage }));
+const colors = src.color.tokens.map((t) => ({ name: t.name, value: colorVal(t, defaultTheme), usage: t.usage }));
+const altColors = Object.fromEntries(
+  altThemes.map((id) => [id, src.color.tokens.map((t) => ({ name: t.name, value: colorVal(t, id) }))])
+);
+const themeBlocks = altThemes
+  .map((id) => `\n[data-theme="${id}"] {\n${altColors[id].map((t) => `  --${cssName(t.name)}: ${t.value};`).join("\n")}\n}\n`)
+  .join("");
 const spacing = src.spacing.tokens;
 const radius = src.radius.tokens;
 const shadow = src.shadow.tokens;
@@ -71,7 +78,7 @@ out(
 :root {
 ${decl.join("\n")}
 }
-
+${themeBlocks}
 /* Type styles */
 ${classes.join("\n\n")}
 `
@@ -83,6 +90,7 @@ const tokens = {
   name: src.name,
   version: src.version,
   color: map(colors),
+  colorThemes: Object.fromEntries(altThemes.map((id) => [id, map(altColors[id])])),
   spacing: map(spacing),
   radius: map(radius),
   shadow: map(shadow),

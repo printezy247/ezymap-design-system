@@ -10,6 +10,7 @@ export default {
         "foreground": "var(--foreground)",
         "body-text": "var(--body-text)",
         "muted-foreground": "var(--muted-foreground)",
+        "muted-foreground-elevated": "var(--muted-foreground-elevated)",
         "surface": "var(--surface)",
         "surface-elevated": "var(--surface-elevated)",
         "card": "var(--card)",
