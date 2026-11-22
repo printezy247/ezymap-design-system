@@ -6,6 +6,7 @@
 @import url("../assets/motion/ezymap-motion-text.css");
 @import url("../assets/motion/ezymap-motion-hero.css");
 @import url("../assets/motion/ezymap-motion-product.css");
+@import url("../assets/motion/ezymap-motion-depth.css");
 
 body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; margin: 0; }
 
@@ -16,9 +17,9 @@ body { background: var(--background); color: var(--foreground); font-family: var
 .ezm-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--accent); }
 .ezm-btn:disabled, .ezm-btn[aria-disabled="true"] { pointer-events: none; opacity: 0.5; cursor: not-allowed; }
 .ezm-btn svg { pointer-events: none; flex-shrink: 0; }
-.ezm-btn--sm { min-height: 40px; border-radius: 8px; padding: 8px 16px; font-size: 13px; }
-.ezm-btn--md { min-height: 44px; border-radius: 8px; padding: 10px 20px; font-size: 14px; }
-.ezm-btn--lg { min-height: 48px; border-radius: 10px; padding: 12px 24px; font-size: 15px; }
+.ezm-btn--sm { min-height: 40px; border-radius: 9999px; padding: 8px 16px; font-size: 13px; }
+.ezm-btn--md { min-height: 44px; border-radius: 9999px; padding: 10px 20px; font-size: 14px; }
+.ezm-btn--lg { min-height: 48px; border-radius: var(--radius-button-lg); padding: 12px 24px; font-size: 15px; }
 .ezm-btn--primary { color: var(--primary-foreground);
   background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 100%, white 15%) 0%, var(--primary) 55%, var(--primary-glow) 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -3px 6px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.35), 0 10px 24px rgba(47,191,113,0.22); }
@@ -130,8 +131,45 @@ body { background: var(--background); color: var(--foreground); font-family: var
   .ezm-live-badge.is-live .ezm-live-badge__dot, .ezm-skeleton::after { animation: none !important; }
 }
 
+/* CardStack — Apple-style 3D stacked cards (v2.6). */
+.ezm-stack-3d { display: flex; flex-direction: column; align-items: center; }
+.ezm-stack-item { position: relative; }
+.ezm-stack-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-elevated);
+  transition: transform var(--duration-slow) var(--ease-emphasized);
+  transform: translateY(0);
+  transform-origin: bottom center;
+  will-change: transform;
+}
+.ezm-stack-card__title { font-family: var(--font-display); font-weight: 500; font-size: 15px; }
+.ezm-stack-card__subtitle { font-size: 12px; color: var(--muted-foreground); }
+.ezm-stack-item:hover .ezm-stack-card,
+.ezm-stack-item:focus-within .ezm-stack-card { transform: translateY(-10px) rotateX(8deg); }
+.ezm-stack-3d:hover .ezm-stack-item:not(:hover) .ezm-stack-card { transform: translateY(var(--space-2)); }
+
+/* CursorSpotlight — page-level pointer spotlight (v2.6). */
+.ezm-cursor-spotlight { position: relative; isolation: isolate; }
+.ezm-cursor-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(closest-side at var(--mx, 50%) var(--my, 50%), rgba(47, 191, 113, 0.26), rgba(47, 191, 113, 0) 72%);
+  filter: blur(20px);
+  transition: background-position var(--duration-fast) var(--ease-standard);
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ezm-logo-anim .ezm-logo-float, .ezm-marquee__track { animation: none !important; }
   .ezm-marquee { overflow-x: auto; }
   .ezm-tilt-el, .ezm-tilt-el::after { transition: none !important; }
+  .ezm-stack-card { transform: none !important; }
 }

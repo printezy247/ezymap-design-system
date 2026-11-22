@@ -140,7 +140,9 @@ export type ProductIconName =
   | "exchanges"
   | "pro"
   | "ebooks"
-  | "macro-bot";
+  | "macro-bot"
+  | "crypto"
+  | "forex";
 export type ProductIconVariant = "default" | "animated" | "extrude" | "glass";
 /** Product app-icon tile from assets/products. */
 export interface ProductIconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -191,3 +193,44 @@ export interface GlowCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: React.ReactNode;
 }
 export declare function GlowCard(props: GlowCardProps): React.ReactElement;
+
+/** Deck of Apple-style 3D stacked glass cards; the front card springs up on hover. */
+export interface CardStackProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Cards front to back. Only the front is interactive; hover pops it. */
+  items: { title?: React.ReactNode; subtitle?: React.ReactNode }[];
+  /** Max cards shown, from front. Default 3. */
+  max?: number;
+  /** Vertical step between cards in px. Default 10. */
+  gap?: number;
+}
+export declare function CardStack(props: CardStackProps): React.ReactElement;
+
+/** Page-level pointer spotlight: a soft green glow follows the cursor. */
+export interface CursorSpotlightProps extends React.HTMLAttributes<HTMLDivElement> {}
+export declare function CursorSpotlight(props: CursorSpotlightProps): React.ReactElement;
+
+/** Slowly rotating 3D ring of glass cards. Pauses on hover and focus. */
+export interface Carousel3DItem {
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+}
+export interface Carousel3DProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Cards placed evenly around the ring. */
+  items: Carousel3DItem[];
+  /** Card width in px. Default 160. */
+  itemWidth?: number;
+  /** Card height in px. Default 200. */
+  itemHeight?: number;
+}
+export declare function Carousel3D(props: Carousel3DProps): React.ReactElement;
+
+/** Gold coin that spins on its vertical axis. Children render on the face. */
+export interface Coin3DProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Coin diameter in px. Default 72. */
+  size?: number;
+}
+export declare function Coin3D(props: Coin3DProps): React.ReactElement;
+
+/** Pointer-driven depth container. Sets --px and --py on the root. */
+export interface Parallax3DProps extends React.HTMLAttributes<HTMLDivElement> {}
+export declare function Parallax3D(props: Parallax3DProps): React.ReactElement;

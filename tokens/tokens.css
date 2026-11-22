@@ -49,8 +49,8 @@
   --space-5: 20px;
   --space-6: 24px;
   --space-8: 32px;
-  --space-12: 48px;
-  --space-20: 80px;
+  --space-12: 56px;
+  --space-20: 96px;
   --control-sm: 40px;
   --control-md: 44px;
   --control-lg: 48px;
@@ -58,10 +58,10 @@
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
-  --radius-button-lg: 10px;
-  --radius-xl: 12px;
-  --radius-2xl: 16px;
-  --radius-3xl: 20px;
+  --radius-button-lg: 9999px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
   --radius-full: 9999px;
   /* Shadow */
   --shadow-gold: 0 1px 2px rgba(0, 0, 0, 0.4);
@@ -81,14 +81,14 @@
   --gradient-hero-pill: linear-gradient(125deg, #1b201d 0%, #0f1311 100%);
   --gradient-holo-glow: radial-gradient(ellipse 60% 45% at 50% 60%, rgba(47, 191, 113, 0.22), rgba(47, 191, 113, 0) 70%);
   /* Motion */
-  --duration-instant: 80ms;
-  --duration-fast: 150ms;
-  --duration-base: 250ms;
-  --duration-slow: 600ms;
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-base: 300ms;
+  --duration-slow: 500ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
-  --duration-xl: 1200ms;
+  --duration-xl: 900ms;
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-spring-snappy: cubic-bezier(0.2, 1.4, 0.4, 1);
   --ease-spring-gentle: cubic-bezier(0.33, 1.15, 0.68, 1);
@@ -106,7 +106,7 @@
 
 [data-theme="light"] {
   --background: #f6f7f5;
-  --foreground: #0a0c0b;
+  --foreground: #1d1d1f;
   --body-text: #3b4540;
   --muted-foreground: #5f6b65;
   --muted-foreground-elevated: #56615b;
@@ -143,56 +143,56 @@
 }
 
 /* Type styles */
-/* The one h1 per page (34px on mobile). */
+/* The one h1 per page (32px on mobile). */
 .hero {
   font-family: var(--font-display);
   font-size: 44px;
-  line-height: 1.05;
+  line-height: 1.1;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.022em;
 }
 
 /* h1 below the sm breakpoint. */
 .hero-mobile {
   font-family: var(--font-display);
-  font-size: 34px;
-  line-height: 1.05;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-/* h2 section titles (30px on mobile). */
-.section-title {
-  font-family: var(--font-display);
-  font-size: 36px;
+  font-size: 32px;
   line-height: 1.1;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.022em;
+}
+
+/* h2 section titles (26px on mobile). */
+.section-title {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 /* h2 below sm. */
 .section-title-mobile {
   font-family: var(--font-display);
-  font-size: 30px;
-  line-height: 1.1;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 26px;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 /* Card and modal titles. */
 .card-title {
   font-family: var(--font-display);
-  font-size: 20px;
-  line-height: 28px;
-  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
 }
 
 /* Header wordmark beside the mark. */
 .wordmark {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 15px;
   line-height: 24px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.025em;
 }
 

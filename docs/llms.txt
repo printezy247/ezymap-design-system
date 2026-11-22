@@ -1,8 +1,8 @@
 # EzyMap design system
 
-Private design system for EzyMap (trading signals on Telegram). EzyMap is the only brand. Green (#2fbf71) and gold (#c9a13a) on near-black (#0a0c0b), white type. Version 2.4.0.
+Private design system for EzyMap (trading signals on Telegram). EzyMap is the only brand. Green (#2fbf71) and gold (#c9a13a) on near-black (#0a0c0b), white type. Version 2.6.1.
 
-Repo: https://github.com/printezy247/ezymap-design-system (private; install via `github:printezy247/ezymap-design-system#v2.4.0`)
+Repo: https://github.com/printezy247/ezymap-design-system (private; install via `github:printezy247/ezymap-design-system#v2.6.1`)
 
 ## Files agents should read first
 

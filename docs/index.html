@@ -21,8 +21,8 @@
   nav a:hover, nav a:focus-visible { color: var(--primary); }
   section.block { padding: var(--space-20) 0 var(--space-12); border-bottom: 1px solid var(--border); }
   h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; margin: 0; color: var(--foreground); }
-  h1 { font-size: 44px; line-height: 1.05; font-weight: 600; }
-  h2 { font-size: 36px; line-height: 1.1; font-weight: 600; margin: 8px 0 var(--space-3); }
+  h1 { font-size: 44px; line-height: 1.1; font-weight: 600; letter-spacing: -.022em; }
+  h2 { font-size: 30px; line-height: 1.15; font-weight: 400; letter-spacing: -.01em; margin: 8px 0 var(--space-3); }
   h3 { font-size: 20px; font-weight: 600; margin: var(--space-8) 0 var(--space-4); }
   .intro { padding: var(--space-20) 0 var(--space-12); }
   .lede { max-width: 640px; color: var(--body-text); font-size: 18px; }
@@ -65,7 +65,7 @@
   a { color: var(--primary); }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   #load-error { display: none; border: 1px solid var(--accent); border-radius: var(--radius-lg); padding: var(--space-4); color: var(--accent); }
-  @media (max-width: 640px) { h1 { font-size: 34px; } h2 { font-size: 30px; } .type-row { grid-template-columns: 1fr; gap: 4px; } .space-row { grid-template-columns: 110px 56px 1fr; } nav { display: none; } }
+  @media (max-width: 640px) { h1 { font-size: 32px; } h2 { font-size: 26px; } .type-row { grid-template-columns: 1fr; gap: 4px; } .space-row { grid-template-columns: 110px 56px 1fr; } nav { display: none; } }
 </style>
 </head>
 <body>
@@ -80,14 +80,17 @@
 
 <main class="wrap">
   <div class="intro">
-    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.4.0</p>
+    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.6.1</p>
     <h1>EzyMap design system</h1>
     <p class="lede">Green and gold on black, with white type. Tokens, components and logos for the EzyMap Algo desk.</p>
     <p id="load-error" role="alert">Tokens could not be loaded. Serve this folder over http (for example <code>npx serve</code>) instead of opening the file directly.</p>
   </div>
 
-  <section class="block" id="whats-new"><p class="eyebrow" style="color:var(--primary);margin:0">v2.4.0</p><h2>What's new</h2>
+  <section class="block" id="whats-new"><p class="eyebrow" style="color:var(--primary);margin:0">v2.6.1</p><h2>What's new</h2>
     <ul class="lede" style="padding-left:20px">
+      <li><strong>Macro Trader Bot redesign</strong>: the gem is replaced by a fundamental-trading glyph (candlestick cluster + rising macro line). New variations as per the EzyAI set: gold, white, black. See the <a href="../assets/logos/ezymap-mark-macro-trader-bot.svg">base mark</a> and the bottom logo area.</li>
+      <li><strong>Apple-inspired motion growth</strong>: spring pops and blur entrances, particle bursts, orbit dots, a rotating cube, 3D marker orbits and a pulsing brand glow (CardStack, CursorSpotlight). New products `crypto` + `forex` from trading research. More at <a href="motion.html" style="color:var(--primary)">the motion playground</a>.</li>
+      <li><strong>Apple-inspired language</strong>: pill buttons, larger section gaps (56/96px), cards at 16–24px, display heads at weight 400–500 with −0.022em tracking, nearer-black foreground on light mode.</li>
       <li><strong>Four new components</strong> (16 total): <code>LiveBadge</code> (live status pill with ping ring), <code>Marquee</code> (seamless scroll strip with direction/duration controls), <code>Skeleton</code> (shimmer loading placeholder) and <code>GlowCard</code> (card with breathing glow or rotating border beam) — in React, vanilla bundle and typings.</li>
       <li><strong>Spring motion tokens</strong>: <code>ease-spring-snappy</code> and <code>ease-spring-gentle</code> join <code>ease-spring</code> — cubic-bezier approximations of Motion-style springs for CSS-only consumers.</li>
       <li><strong>Agent ergonomics</strong>: <code>docs/llms.txt</code> + <code>docs/llms-full.txt</code> (LLM-readable system reference), <code>docs/motion.html</code> (live motion playground), <code>scripts/manifest.mjs</code> (asset resolver CLI, also <code>npm run manifest</code>) and <code>mcp/server.mjs</code> (zero-dependency MCP server exposing tokens, components, motion and assets to AI agents).</li>
@@ -148,7 +151,11 @@
 
   <section class="block" id="products"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Product icons</h2><p class="lede">One app-icon tile per ready product, from <code>assets/products/</code>. Every product also ships <code>-animated</code>, <code>-extrude</code> and <code>-glass</code> variants in SVG and 256px PNG — see the variant grid below.</p><div class="grid logos" id="product-grid"></div><h3>Variants</h3><div class="grid logos" id="product-variant-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))"></div></section>
 
-  <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logos</h2><div class="grid logos" id="logo-grid"></div></section>
+  <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logo families (3)</h2><p class="lede">The logo area shows three categories: the main EzyMap mark, the EzyAI logo variations (ingested from the EzyMap designresources, untouched), and the Macro Trader logo variations.</p>
+    <h3>EzyMap — main mark</h3><div class="grid logos" id="logo-grid"></div>
+    <h3>EzyAI — logo variations</h3><div class="grid logos" id="ezyai-grid"></div>
+    <h3>Macro Trader — logo variations</h3><div class="grid logos" id="macro-trader-grid"></div>
+  </section>
 
   <section class="block" id="accessibility"><p class="eyebrow" style="color:var(--primary);margin:0">Accessibility</p><h2>Built to be usable by everyone</h2>
     <div class="lede" style="font-size:16px">
@@ -164,7 +171,7 @@
   </section>
 </main>
 
-<footer><div class="wrap">EzyMap design system v2.4.0 · All rights reserved. Proprietary.</div></footer>
+<footer><div class="wrap">EzyMap design system v2.6.1 · All rights reserved. Proprietary.</div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
@@ -235,6 +242,36 @@
   ];
   logos.forEach(function (l) {
     $("logo-grid").appendChild(el("div", "logo", '<div class="art ' + l[2] + '"><img src="../assets/logos/' + l[0] + '" alt="' + esc(l[1]) + '"></div><div class="cap"><b style="font-size:14px">' + esc(l[1]) + '</b><br><code class="mono">' + esc(l[0]) + '</code></div>'));
+  });
+
+  var ezyaiFiles = [
+    ["ezyai-mark.png", "Mark"],
+    ["ezyai-lockup-horizontal.png", "Lockup, horizontal"],
+    ["ezyai-lockup-stacked.png", "Lockup, stacked"],
+    ["ezyai-banner-1280x320.png", "Banner, 1280×320"],
+    ["ezyai-avatar-512.png", "Avatar, 512"],
+    ["mark-E-fullcolour-1024.png", "Mark, full colour (v2.2)"],
+    ["mark-F-gold-1024.png", "Mark, gold"],
+    ["mark-G-white-1024.png", "Mark, white"],
+    ["mark-H-black-1024.png", "Mark, black"],
+    ["lockup-I-horizontal-light.png", "Lockup, horizontal, light"],
+    ["lockup-J-horizontal-dark.png", "Lockup, horizontal, dark"],
+    ["lockup-K-stacked.png", "Lockup, stacked"],
+    ["pfp-A-green-512.png", "PFP, green"],
+    ["pfp-B-black-512.png", "PFP, black"],
+    ["pfp-C-wordmark-512.png", "PFP, wordmark"],
+    ["pfp-D-gold-512.png", "PFP, gold"]
+  ];
+  ezyaiFiles.forEach(function (l) {
+    $("ezyai-grid").appendChild(el("div", "logo", '<div class="art"><img src="../assets/ezyai-logos/' + l[0] + '" alt="' + esc(l[1]) + '"></div><div class="cap"><b style="font-size:14px">' + esc(l[1]) + '</b><br><code class="mono">' + esc(l[0]) + '</code></div>'));
+  });
+
+  ["ezymap-mark-macro-trader-bot.svg", "Macro Trader mark, base"],
+  ["ezymap-mark-macro-trader-bot-gold.svg", "Macro Trader mark, gold"],
+  ["ezymap-mark-macro-trader-bot-white.svg", "Macro Trader mark, white"],
+  ["ezymap-mark-macro-trader-bot-black.svg", "Macro Trader mark, black"]
+  ].forEach(function (l) {
+    $("macro-trader-grid").appendChild(el("div", "logo", '<div class="art"><img src="../assets/logos/' + l[0] + '" alt="' + esc(l[1]) + '"></div><div class="cap"><b style="font-size:14px">' + esc(l[1]) + '</b><br><code class="mono">' + esc(l[0]) + '</code></div>'));
   });
 
   var products = [

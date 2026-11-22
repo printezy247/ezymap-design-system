@@ -14,3 +14,8 @@ export * from "./LiveBadge";
 export * from "./Marquee";
 export * from "./Skeleton";
 export * from "./GlowCard";
+export * from "./CardStack";
+export * from "./CursorSpotlight";
+export * from "./Carousel3D";
+export * from "./Coin3D";
+export * from "./Parallax3D";

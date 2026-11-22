@@ -1,6 +1,6 @@
 {
   "name": "EzyMap",
-  "version": "2.3.0",
+  "version": "2.6.1",
   "generatedBy": "scripts/build-assets.mjs",
   "categories": {
     "logos": [
@@ -172,6 +172,34 @@
         "animated": false
       },
       {
+        "file": "assets/logos/ezymap-mark-macro-trader-bot-black.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-mark-macro-trader-bot-gold.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-mark-macro-trader-bot-white.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/logos/ezymap-mark-macro-trader-bot.svg",
+        "formats": [
+          "svg"
+        ],
+        "animated": false
+      },
+      {
         "file": "assets/logos/ezymap-mark-neon.svg",
         "formats": [
           "svg"
@@ -284,6 +312,38 @@
         "animated": false
       },
       {
+        "file": "assets/products/ezymap-crypto-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-crypto-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-crypto-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-crypto-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
         "file": "assets/products/ezymap-ebooks-icon-animated.svg",
         "formats": [
           "svg",
@@ -341,6 +401,38 @@
       },
       {
         "file": "assets/products/ezymap-exchanges-icon.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-forex-icon-animated.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": true
+      },
+      {
+        "file": "assets/products/ezymap-forex-icon-extrude.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-forex-icon-glass.svg",
+        "formats": [
+          "svg",
+          "png"
+        ],
+        "animated": false
+      },
+      {
+        "file": "assets/products/ezymap-forex-icon.svg",
         "formats": [
           "svg",
           "png"
@@ -489,6 +581,10 @@
         "format": "css"
       },
       {
+        "file": "assets/motion/ezymap-motion-depth.css",
+        "format": "css"
+      },
+      {
         "file": "assets/motion/ezymap-motion-hero.css",
         "format": "css"
       },
@@ -511,8 +607,8 @@
     ]
   },
   "totals": {
-    "logoFiles": 25,
-    "productFiles": 37,
-    "pngRenders": 36
+    "logoFiles": 29,
+    "productFiles": 45,
+    "pngRenders": 44
   }
 }

@@ -167,7 +167,66 @@
   to { background-position: 100% 50%; }
 }
 
+/* ---------- v2.6: Apple-inspired 3D additions ---------- */
+
+/* Rotating cube with three material facets (metal, green, gold). */
+.ezm-cube-3d { transform-style: preserve-3d; animation: ezm-cube-3d 12s linear infinite; }
+@keyframes ezm-cube-3d {
+  from { transform: rotateX(-10deg) rotateY(0deg); }
+  to { transform: rotateX(-10deg) rotateY(360deg); }
+}
+.ezm-cube-3d > .ezm-cube-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.ezm-cube-3d > .ezm-cube-face:nth-child(1) { background: var(--gradient-metal); transform: translateZ(30px); }
+.ezm-cube-3d > .ezm-cube-face:nth-child(2) { background: var(--gradient-green); transform: rotateY(90deg) translateZ(30px); }
+.ezm-cube-3d > .ezm-cube-face:nth-child(3) { background: var(--gradient-gold); transform: rotateY(-90deg) translateZ(30px); }
+
+/* 3D spring entrance (ease-spring-gentle). */
+.ezm-spring-in { animation: ezm-spring-in var(--duration-slow) var(--ease-spring-gentle) both; }
+@keyframes ezm-spring-in {
+  from { opacity: 0; transform: scale(0.5); }
+}
+
+/* Orbiting dots: markers travel around a tilted ring around a centre. */
+.ezm-orbit-3d {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  transform-style: preserve-3d;
+  animation: ezm-orbit-3d-ring 10s linear infinite;
+}
+@keyframes ezm-orbit-3d-ring { to { transform: rotateX(45deg) rotateZ(360deg); } }
+.ezm-orbit-3d > .ezm-orbit-3d-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translate(-50%, -58px) translateZ(0);
+  animation: ezm-orbit-3d 8s linear infinite;
+  animation-delay: calc(var(--i, 0) * 0.7s);
+}
+@keyframes ezm-orbit-3d {
+  from { transform: translate(-50%, -58px) translateZ(0) rotateY(0deg); }
+  50% { transform: translate(-50%, -58px) translateZ(0) rotateY(180deg); }
+  to { transform: translate(-50%, -58px) translateZ(0) rotateY(360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .ezm-cube-3d,
+  .ezm-spring-in,
+  .ezm-orbit-3d,
+  .ezm-orbit-3d > .ezm-orbit-3d-marker,
   .ezm-3d-turn,
   .ezm-3d-wobble,
   .ezm-ring-3d,

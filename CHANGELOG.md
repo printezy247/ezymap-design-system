@@ -1,5 +1,33 @@
 # Changelog
 
+## 2.6.1 — Macro Trader Bot: fundamental glyph, EzyAI-style variations
+
+### Changed
+- `ezymap-mark-macro-trader-bot.svg`: the gem is replaced by a dark rounded tile holding a fundamental-trading glyph — a candlestick cluster (fundamentals) plus a rising macro line. Colors stay on the EzyMap palette: gold and green candles, gold trend line.
+- New variations as per the EzyAI set: `ezymap-mark-macro-trader-bot-gold.svg`, `ezymap-mark-macro-trader-bot-white.svg`, `ezymap-mark-macro-trader-bot-black.svg`.
+- `docs/index.html` — the Macro Trader logo area lists the four variations.
+
+## 2.6.0 — more 3D and animation, trading-research assets
+
+### Added
+- **Products from trading research** (yfinance, 2026-11): `crypto` (stacked coins + gold trend arrow) and `forex` (two currency bills crossing) product icons — 4 variants + PNGs each via `node scripts/build-assets.mjs`.
+- **Components**: `CardStack` (Apple-style 3D stacked cards — the front card springs up with `translateY(-10px) rotateX(8deg)` on hover) and `CursorSpotlight` (page-level pointer spotlight that follows the cursor; writes `--mx`/`--my`). Both ship in `components/react/*`, the vanilla `bundle.js`, `index.d.ts` and `react/index.ts`.
+- **Motion — Apple-inspired additions:** `ezm-spring-pop` (spring entrance, ease-spring-gentle), `ezm-blur-in` (blur crossfade), `ezm-hover-glow` (halo on hover/focus), `ezm-particle-burst` (upward sparkles, one per `--i` child), `ezm-dematerialize` + `ezm-demat-open` (collapse-to-dot reveal), `ezm-orbit-dots` (CSS radial orbit); `ezm-cube-3d` (rotating metal/green/gold cube), `ezm-spring-in`, `ezm-orbit-3d` (tilted marker ring); `ezm-auto-glow` (pulsing brand glow); `ezm-scroll-blur` (fade-through blur). Every utility has a `prefers-reduced-motion` fallback.
+- **Playground**: `docs/motion.html` grows the spring-pop/blur-in/hover-glow/particle-burst/orbit-dots/dematerialize core tiles, the cube/spring/orbit-3d tiles, the auto-glow hero tile and the scroll-blur scroll tile.
+
+### Changed
+- `assets/manifest.json` version → 2.6.0. Version strings in README, llms.txt, llms-full.txt, mcp/README.md and the previews.
+
+## 2.5.0 — Apple-inspired language
+
+### Changed
+- **Typography:** hero 44px at 1.1 leading with −0.022em, section titles step down to 30px (mobile 26px) at weight 400, card titles 18px, wordmark 15px. Display heads are Clash Display 400–500, not 600.
+- **Spacing:** section gaps step up (`space-12` 56px, `space-20` 96px).
+- **Radius:** cards 16–24px, buttons are pills (`radius-button-lg` 9999px, sm/md 9999px).
+- **Motion:** shorter durations (instant 100ms, fast 200ms, base 300ms, slow 500ms, xl 900ms).
+- **Light text:** foreground is #1d1d1f, as on Apple pages.
+- README, `docs/llms*.txt`, previews and the showcases updated to the new values.
+
 ## 2.4.0 — spring tokens, four components, agent surface
 
 ### Added

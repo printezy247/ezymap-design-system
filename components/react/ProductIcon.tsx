@@ -10,7 +10,9 @@ export type ProductIconName =
   | "exchanges"
   | "pro"
   | "ebooks"
-  | "macro-bot";
+  | "macro-bot"
+  | "crypto"
+  | "forex";
 
 export type ProductIconVariant = "default" | "animated" | "extrude" | "glass";
 
@@ -37,6 +39,8 @@ const FILES: Record<ProductIconName, string> = {
   pro: "ezymap-pro-icon",
   ebooks: "ezymap-ebooks-icon",
   "macro-bot": "ezymap-macro-bot-icon",
+  crypto: "ezymap-crypto-icon",
+  forex: "ezymap-forex-icon",
 };
 
 const LABELS: Record<ProductIconName, string> = {
@@ -49,6 +53,8 @@ const LABELS: Record<ProductIconName, string> = {
   pro: "EzyMapPro",
   ebooks: "EzyMap ebooks",
   "macro-bot": "EzyMap Macro Bot",
+  crypto: "EzyMap crypto",
+  forex: "EzyMap forex",
 };
 
 /** Product app-icon tile from assets/products. Pair with .ezm-product-lift or

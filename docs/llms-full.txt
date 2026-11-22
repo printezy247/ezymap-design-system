@@ -1,4 +1,4 @@
-# EzyMap design system — full reference (v2.4.0)
+# EzyMap design system — full reference (v2.6.1)
 
 Private system for EzyMap (trading signals on Telegram). EzyMap is the only brand.
 Palette: green #2fbf71 leads, gold #c9a13a is the premium accent (~20% of a view max),
@@ -19,7 +19,7 @@ The only red in the system is `status-stop`, used solely by SignalFlag "Stopped"
 
 ## Install
 
-Private package: `npm install "github:printezy247/ezymap-design-system#v2.4.0"`
+Private package: `npm install "github:printezy247/ezymap-design-system#v2.6.1"`
 
 ```css
 @import "@ezymap/design-system/tokens.css";
@@ -51,7 +51,7 @@ Font families: --font-display (Clash Display), --font-sans (General Sans), --fon
 IBM Plex Mono.
 
 Spacing: 4px Tailwind scale — space-1..space-20 plus control-sm/md/lg (40/44/48px).
-Radii: radius-sm 4 · md 6 · lg 8 · button-lg 10 · xl 12 · 2xl 16 · 3xl 20 · full.
+Radii: radius-sm 4 · md 6 · lg 8 · button-lg 9999 · xl 16 · 2xl 20 · 3xl 24 · full.
 Shadows: shadow-gold, shadow-green, shadow-elevated, shadow-glass, shadow-button-primary,
 shadow-card-hover, shadow-book, shadow-holo.
 Gradients: gradient-hero, gradient-metal, gradient-gold, gradient-green, gradient-brand
@@ -90,7 +90,7 @@ animation needs a prefers-reduced-motion fallback; hidden states gated behind ht
 | GlowCard | variant glow/beam, eyebrow, title | Card with animated edge; one per view |
 
 ProductIcon product names: channel, miniapp, bot, ticker, calculators, exchanges, pro,
-ebooks, macro-bot. Variants: default, animated, extrude, glass. Each product ships SVG +
+ebooks, macro-bot, crypto, forex. Variants: default, animated, extrude, glass. Each product ships SVG +
 256px PNG for all four variants.
 
 ## Motion utilities (assets/motion/)
@@ -123,7 +123,8 @@ Every file honours prefers-reduced-motion. See docs/motion.html for live demos.
   mark-animated-orbit, mark-hero, mark-fintech, mark-gold, mark-extrude/glass/neon/ghost/line,
   mark-aurora, appicon-glass/neon/light/animated, hero-gold, hero-fintech,
   horizontal-animated, stacked-on-dark, PNG favicons/touch icons.
-- assets/products/: 9 products × 4 variants × (SVG + 256px PNG) + Macro Bot lockups.
+- assets/products/: 11 products × 4 variants × (SVG + 256px PNG) + Macro Bot lockups
+  (10 base icons × 4, incl. crypto + forex from trading research).
 - assets/motion/: the six stylesheets + hero-pointer.js above.
 - assets/imagery, illustrations, ambassador, telegram, social, website: brand photography
   and covers (see README brand book).

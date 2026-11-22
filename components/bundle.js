@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"},{"name":"Tilt"},{"name":"Reveal"},{"name":"ProductIcon"},{"name":"LiveBadge"},{"name":"Marquee"},{"name":"Skeleton"},{"name":"GlowCard"}]} */
+/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"},{"name":"Tilt"},{"name":"Reveal"},{"name":"ProductIcon"},{"name":"LiveBadge"},{"name":"Marquee"},{"name":"Skeleton"},{"name":"GlowCard"},{"name":"CardStack"},{"name":"CursorSpotlight"},{"name":"Carousel3D"},{"name":"Coin3D"},{"name":"Parallax3D"}]} */
 (function () {
   var React = window.React, h = React.createElement;
   function cx() { return Array.prototype.filter.call(arguments, Boolean).join(" "); }
@@ -209,12 +209,14 @@
   var PRODUCT_FILES = {
     channel: "ezymap-channel-icon", miniapp: "ezymap-miniapp-icon", bot: "ezymap-bot-icon",
     ticker: "ezymap-ticker-icon", calculators: "ezymap-calculators-icon", exchanges: "ezymap-exchanges-icon",
-    pro: "ezymap-pro-icon", ebooks: "ezymap-ebooks-icon", "macro-bot": "ezymap-macro-bot-icon"
+    pro: "ezymap-pro-icon", ebooks: "ezymap-ebooks-icon", "macro-bot": "ezymap-macro-bot-icon",
+    crypto: "ezymap-crypto-icon", forex: "ezymap-forex-icon"
   };
   var PRODUCT_LABELS = {
     channel: "EzyMap channel", miniapp: "EzyMap Mini App", bot: "EzyMap gated bot",
     ticker: "EzyMap live ticker", calculators: "EzyMap calculators", exchanges: "EzyMap exchanges and bots",
-    pro: "EzyMapPro", ebooks: "EzyMap ebooks", "macro-bot": "EzyMap Macro Bot"
+    pro: "EzyMapPro", ebooks: "EzyMap ebooks", "macro-bot": "EzyMap Macro Bot",
+    crypto: "EzyMap crypto", forex: "EzyMap forex"
   };
   function ProductIcon(props) {
     var product = props.product || "channel";
@@ -292,5 +294,101 @@
   }
   GlowCard.displayName = "GlowCard";
 
-  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker, Tilt: Tilt, Reveal: Reveal, ProductIcon: ProductIcon, LiveBadge: LiveBadge, Marquee: Marquee, Skeleton: Skeleton, GlowCard: GlowCard };
+  function CardStack(props) {
+    var visible = (props.items || []).slice(0, Math.max(1, props.max != null ? props.max : 3));
+    var rest = omit(props, ["items", "max", "gap", "className", "style", "children"]);
+    rest.className = cx("ezm-stack-3d", props.className);
+    rest.style = Object.assign({ gap: (props.gap != null ? props.gap : 10) + "px" }, props.style);
+    rest.children = visible.map(function (item, i) {
+      return h("div", { key: i, className: "ezm-stack-item" },
+        h("div", { className: "ezm-stack-card" },
+          item.title != null ? h("h4", { className: "ezm-stack-card__title" }, item.title) : null,
+          item.subtitle != null ? h("p", { className: "ezm-stack-card__subtitle" }, item.subtitle) : null));
+    });
+    return h("div", rest);
+  }
+  CardStack.displayName = "CardStack";
+
+  function CursorSpotlight(props) {
+    var ref = React.useRef(null);
+    var xy = React.useState([50, 50]);
+    var x = xy[0], setXy = xy[1];
+    React.useEffect(function () {
+      var el = ref.current;
+      if (!el || typeof document === "undefined") return;
+      function on(e) {
+        var r = el.getBoundingClientRect();
+        if (!r.width) return;
+        setXy([
+          Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100)),
+          Math.min(100, Math.max(0, ((e.clientY - r.top) / r.height) * 100))
+        ]);
+      }
+      document.addEventListener("pointermove", on);
+      return function () { document.removeEventListener("pointermove", on); };
+    }, []);
+    var rest = omit(props, ["className", "style"]);
+    rest.ref = ref;
+    rest.className = cx("ezm-cursor-spotlight", props.className);
+    rest.style = Object.assign({ "--mx": x[0] + "%", "--my": x[1] + "%" }, props.style);
+    return h("div", rest, props.children);
+  }
+  CursorSpotlight.displayName = "CursorSpotlight";
+
+  function Carousel3D(props) {
+    var itemW = props.itemWidth != null ? props.itemWidth : 160;
+    var itemH = props.itemHeight != null ? props.itemHeight : 200;
+    var items = props.items || [];
+    var n = Math.max(1, items.length);
+    var rest = omit(props, ["items", "itemWidth", "itemHeight", "className", "style"]);
+    rest.className = cx("ezm-carousel-3d", props.className);
+    rest.style = Object.assign({ "--item-w": itemW + "px", "--item-h": itemH + "px" }, props.style);
+    rest.children = h("div", { className: "ezm-carousel-3d__ring", style: { "--n": n } },
+      items.map(function (item, i) {
+        return h("div", { key: i, className: "ezm-carousel-3d__item", style: { "--i": i } },
+          item.title != null ? h("h4", { className: "ezm-carousel-3d__title" }, item.title) : null,
+          item.subtitle != null ? h("p", { className: "ezm-carousel-3d__subtitle" }, item.subtitle) : null);
+      }));
+    return h("div", rest);
+  }
+  Carousel3D.displayName = "Carousel3D";
+
+  function Coin3D(props) {
+    var rest = omit(props, ["size", "className", "style"]);
+    rest.className = cx("ezm-coin-3d", props.className);
+    rest.style = Object.assign({ "--size": (props.size != null ? props.size : 72) + "px" }, props.style);
+    return h("span", rest, props.children);
+  }
+  Coin3D.displayName = "Coin3D";
+
+  function Parallax3D(props) {
+    var ref = React.useRef(null);
+    var rest = omit(props, ["className", "style", "onPointerMove", "onPointerLeave"]);
+    function clamp(v) { return Math.min(1, Math.max(-1, v)); }
+    function move(e) {
+      var el = ref.current;
+      if (el) {
+        var r = el.getBoundingClientRect();
+        if (r.width && r.height) {
+          el.style.setProperty("--px", clamp(((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
+          el.style.setProperty("--py", clamp(((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
+        }
+      }
+      if (props.onPointerMove) props.onPointerMove(e);
+    }
+    function leave(e) {
+      var el = ref.current;
+      if (el) { el.style.setProperty("--px", "0"); el.style.setProperty("--py", "0"); }
+      if (props.onPointerLeave) props.onPointerLeave(e);
+    }
+    rest.ref = ref;
+    rest.className = cx("ezm-parallax-3d", props.className);
+    rest.style = props.style;
+    rest.onPointerMove = move;
+    rest.onPointerLeave = leave;
+    return h("div", rest, props.children);
+  }
+  Parallax3D.displayName = "Parallax3D";
+
+  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker, Tilt: Tilt, Reveal: Reveal, ProductIcon: ProductIcon, LiveBadge: LiveBadge, Marquee: Marquee, Skeleton: Skeleton, GlowCard: GlowCard, CardStack: CardStack, CursorSpotlight: CursorSpotlight, Carousel3D: Carousel3D, Coin3D: Coin3D, Parallax3D: Parallax3D };
 })();

@@ -56,7 +56,7 @@
 
 <main class="wrap">
   <div class="intro">
-    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Motion · v2.4.0</p>
+    <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Motion · v2.6.1</p>
     <h1>Motion playground</h1>
     <p class="lede">Every EzyMap motion utility, live. Each class is plain CSS — copy the class name, the stylesheet already ships in <code>bundle.css</code>. Everything stops under <code>prefers-reduced-motion</code>.</p>
   </div>
@@ -84,6 +84,13 @@
       <div class="tile"><div class="stage ezm-grid-scroll"></div><div class="meta"><b>ezm-grid-scroll</b><code>.ezm-grid-scroll</code><p>Scrolling grid.</p></div></div>
       <div class="tile"><div class="stage"><div class="ezm-rise demo-box demo-gold"></div></div><div class="meta"><b>ezm-rise</b><code>.ezm-rise</code><p>One-shot rise on load.</p></div></div>
       <div class="tile"><div class="stage"><div class="ezm-scale-in demo-box demo-green"></div></div><div class="meta"><b>ezm-scale-in</b><code>.ezm-scale-in</code><p>Scale entrance.</p></div></div>
+      <div class="tile"><div class="stage ezm-spring-pop" style="width:92px;height:92px;background:var(--gradient-green);border-radius:22px"></div><div class="meta"><b>ezm-spring-pop</b><code>.ezm-spring-pop</code><p>Spring entrance, ease-spring-gentle.</p></div></div>
+      <div class="tile"><div class="stage ezm-blur-in demo-green"></div><div class="meta"><b>ezm-blur-in</b><code>.ezm-blur-in</code><p>Blur crossfade entrance.</p></div></div>
+      <div class="tile ezm-hover-glow"><div class="stage"><div class="demo-box demo-metal" style="width:80px;height:80px;border-radius:14px"></div></div><div class="meta"><b>ezm-hover-glow</b><code>.ezm-hover-glow</code><p>Glow halo on hover/focus.</p></div></div>
+      <div class="tile"><div class="stage ezm-particle-burst" style="position:relative"><span style="--i:0;position:absolute;top:30px;left:50%;width:5px;height:5px;border-radius:50%;background:var(--primary)"></span><span style="--i:1;position:absolute;top:6px;left:34%;width:6px;height:6px;border-radius:50%;background:var(--accent)"></span><span style="--i:2;position:absolute;top:3px;left:70%;width:4px;height:4px;border-radius:50%;background:var(--primary)"></span></div><div class="meta"><b>ezm-particle-burst</b><code>.ezm-particle-burst &gt; .ezm-particle</code><p>Upward sparkles, one per --i child.</p></div></div>
+      <div class="tile"><div class="stage ezm-orbit-dots"><span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span></div><div class="meta"><b>ezm-orbit-dots</b><code>.ezm-orbit-dots</code><p>Six dots orbit a centre.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-dematerialize demo-metal" style="width:80px;height:80px;border-radius:18px"></div></div><div class="meta"><b>ezm-dematerialize</b><code>.ezm-dematerialize</code><p>Starts collapsed, opens on load.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-dematerialize ezm-demat-open demo-metal" style="width:80px;height:80px;border-radius:18px"></div></div><div class="meta"><b>ezm-demat-open</b><code>.ezm-demat-open</code><p>Adds to open the group.</p></div></div>
     </div>
   </section>
 
@@ -101,6 +108,9 @@
       <div class="tile"><div class="stage"><div class="ezm-glow" style="width:130px;height:76px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">live</span></div></div><div class="meta"><b>ezm-glow</b><code>.ezm-glow</code><p>Breathing glow.</p></div></div>
       <div class="tile"><div class="stage"><div class="ezm-stagger" style="display:flex;gap:8px"><span class="ezm-reveal-3d" style="width:26px;height:48px;border-radius:8px;background:var(--gradient-green)"></span><span class="ezm-reveal-3d" style="width:26px;height:68px;border-radius:8px;background:var(--gradient-green)"></span><span class="ezm-reveal-3d" style="width:26px;height:38px;border-radius:8px;background:var(--gradient-green)"></span><span class="ezm-reveal-3d" style="width:26px;height:58px;border-radius:8px;background:var(--gradient-green)"></span></div></div><div class="meta"><b>ezm-reveal-3d / ezm-stagger</b><code>.ezm-stagger</code><p>Staggered entrance.</p></div></div>
       <div class="tile"><div class="stage"><span class="ezm-gold-flow" style="display:inline-block;padding:10px 18px;border-radius:10px;font-weight:600;letter-spacing:0.04em">PREMIUM</span></div><div class="meta"><b>ezm-gold-flow</b><code>.ezm-gold-flow</code><p>Moving gold gradient.</p></div></div>
+      <div class="tile"><div class="stage ezm-stage" style="width:90px;height:90px"><div class="ezm-cube-3d" style="width:60px;height:60px"><div class="ezm-cube-face ezm-cube-face--metal"></div><div class="ezm-cube-face ezm-cube-face--green"></div><div class="ezm-cube-face ezm-cube-face--gold"></div></div></div><div class="meta"><b>ezm-cube-3d</b><code>.ezm-cube-3d &gt; .ezm-cube-face</code><p>Rotating metal/green/gold cube.</p></div></div>
+      <div class="tile"><div class="stage ezm-spring-in demo-metal" style="width:100px;height:100px;border-radius:24px"></div><div class="meta"><b>ezm-spring-in</b><code>.ezm-spring-in</code><p>Spring entrance pop.</p></div></div>
+      <div class="tile"><div class="stage ezm-stage" style="width:130px;height:130px"><span class="ezm-orbit-3d-marker" style="--i:0"></span><span class="ezm-orbit-3d-marker" style="--i:1"></span><span class="ezm-orbit-3d-marker" style="--i:2"></span></div><div class="meta"><b>ezm-orbit-3d</b><code>.ezm-orbit-3d &gt; .ezm-orbit-3d-marker</code><p>Tilted ring of markers, set --i per marker.</p></div></div>
     </div>
   </section>
 
@@ -113,6 +123,7 @@
         <div class="tile ezm-scroll-reveal" style="--i:0"><div class="stage"><div class="demo-box demo-green ezm-scroll-zoom"></div></div><div class="meta"><b>ezm-scroll-reveal</b><code>.ezm-scroll-reveal</code><p>Fade + rise on entry.</p></div></div>
         <div class="tile ezm-scroll-zoom" style="--i:1"><div class="stage"><div class="demo-box demo-gold"></div></div><div class="meta"><b>ezm-scroll-zoom</b><code>.ezm-scroll-zoom</code><p>Scale-up reveal.</p></div></div>
         <div class="tile" style="--i:2"><div class="stage"><div class="demo-box demo-metal"></div></div><div class="meta"><b>ezm-scroll-parallax</b><code>.ezm-scroll-parallax</code><p>Wrap the stage for drift.</p></div></div>
+        <div class="tile ezm-scroll-blur" style="--i:3"><div class="stage"><div class="demo-box demo-green"></div></div><div class="meta"><b>ezm-scroll-blur</b><code>.ezm-scroll-blur</code><p>Fade-through blur on entry.</p></div></div>
       </div>
     </div>
   </section>
@@ -144,6 +155,7 @@
       <div class="tile"><div class="stage"><span class="ezm-tick-up mono" style="padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface-elevated);font-size:18px">2,395.120</span></div><div class="meta"><b>ezm-tick-up / ezm-tick-down</b><code>.ezm-tick-*</code><p>Price flash on change.</p></div></div>
       <div class="tile"><div class="stage"><svg width="200" height="70" viewBox="0 0 200 70" aria-hidden="true"><path class="ezm-draw" pathLength="1" d="M10 55 L60 40 L110 48 L160 20 L190 12" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round"/></svg></div><div class="meta"><b>ezm-draw</b><code>.ezm-draw</code><p>SVG line draws on.</p></div></div>
       <div class="tile"><div class="stage"><svg width="80" height="80" viewBox="0 0 80 80" aria-hidden="true"><path class="ezm-sparkle" style="--i:0" d="M40 20 l4 12 12 4 -12 4 -4 12 -4 -12 -12 -4 12 -4 z" fill="var(--accent)"/><path class="ezm-sparkle" style="--i:1" d="M62 44 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z" fill="var(--primary)"/></svg></div><div class="meta"><b>ezm-sparkle</b><code>.ezm-sparkle</code><p>Twinkle for gold accents.</p></div></div>
+      <div class="tile"><div class="stage ezm-auto-glow"><div class="demo-box demo-metal"></div></div><div class="meta"><b>ezm-auto-glow</b><code>.ezm-auto-glow</code><p>Pulsing brand glow on featured panels.</p></div></div>
     </div>
   </section>
 
@@ -165,6 +177,6 @@
   </section>
 </main>
 
-<footer><div class="wrap">EzyMap design system v2.4.0 · <a href="index.html">Showcase</a> · <a href="../llms.txt">llms.txt</a></div></footer>
+<footer><div class="wrap">EzyMap design system v2.6.1 · <a href="index.html">Showcase</a> · <a href="../llms.txt">llms.txt</a></div></footer>
 </body>
 </html>
