@@ -9,7 +9,7 @@
 
 **Green and gold on black, with white type. Tokens, React components and brand assets for the EzyMap Algo desk.**
 
-![version](https://img.shields.io/badge/version-2.4.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
+![version](https://img.shields.io/badge/version-2.7.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
 ![license](https://img.shields.io/badge/license-proprietary-c9a13a?style=for-the-badge&labelColor=0a0c0b)
 ![react](https://img.shields.io/badge/React-18-2fbf71?style=for-the-badge&logo=react&logoColor=white&labelColor=0a0c0b)
 ![tailwind](https://img.shields.io/badge/Tailwind-v4-c9a13a?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=0a0c0b)
@@ -46,15 +46,15 @@
 | 📏 Breakpoints | **4** | mobile-first widths |
 | 🧩 Components | **16** | React + TypeScript + vanilla bundle |
 | 🖼️ Logos | **30** | 3D gem set, EzyMap only |
-| 🧩 Product icons | **9 products × 4 variants** | animated, extrude and glass tiles, SVG + PNG |
+| 🧩 Product icons | **11 products × 4 variants** | animated, extrude and glass tiles, SVG + PNG; `crypto` + `forex` from trading research |
 | 🤖 Agent surface | **llms.txt + MCP** | `docs/llms*.txt`, `mcp/server.mjs`, `scripts/manifest.mjs` |
 
 ## Quick start
 
-Install from the private GitHub repo named in `package.json` (`repository`), pinned to the `v2.4.0` tag:
+Install from the private GitHub repo named in `package.json` (`repository`), pinned to the `v2.7.0` tag:
 
 ```bash
-npm install "github:<owner>/ezymap-design-system#v2.4.0"
+npm install "github:<owner>/ezymap-design-system#v2.7.0"
 ```
 
 <details open>
@@ -163,6 +163,8 @@ Writes the animated mark, light app icon, line mark, stacked-on-light lockup and
 | `Marquee` | seamless scroll strip | [README](components/Marquee/README.md) |
 | `Skeleton` | shimmer loading placeholder | [README](components/Skeleton/README.md) |
 | `GlowCard` | card with breathing glow or border beam | [README](components/GlowCard/README.md) |
+| `CardStack` | Apple-style 3D stacked cards; the front card springs up on hover | [README](components/CardStack/README.md) |
+| `CursorSpotlight` | page-level pointer spotlight: a soft green glow follows the cursor | [README](components/CursorSpotlight/README.md) |
 
 Motion utilities ship as plain CSS in six files under `assets/motion/` (`ezymap-motion.css`, `-3d`, `-scroll`, `-text`, `-hero`, `-product`) — import them after `tokens.css` on any page, React or not. Live demos are on the [motion playground](docs/motion.html). `assets/manifest.json` catalogs every asset.
 
@@ -194,7 +196,7 @@ flowchart LR
 ezymap-design-system/
 ├── tokens/        tokens.json (source) · tokens.css · tokens.ts · tailwind-preset.js
 ├── components/    bundle.js/.css · index.d.ts · react/*.tsx · <Name>/README.md
-├── assets/        logos · products · motion · telegram · social · website · ambassador · imagery · illustrations
+├── assets/        logos · ezyai-logos · products · motion · telegram · social · website · ambassador · imagery · illustrations
 ├── docs/          index.html showcase · voice.md · brand-brief.md · palette.svg
 ├── scripts/       build-tokens.mjs · build-assets.mjs
 └── .github/       workflows/pages.yml
@@ -252,14 +254,14 @@ EzyMap is a premium trading desk that lives inside Telegram. Everything built on
 
 #### Type
 - Fonts load from Fontshare (Clash Display 400–700, General Sans 400–700) and Google Fonts (Instrument Serif, JetBrains Mono 400–600). `tokens.css` and `bundle.css` already `@import` both; the previous families (Space Grotesk, Inter Tight, IBM Plex Mono) stay loaded as fallbacks.
-- Set headings in `display` (Clash Display 600, −0.02em, 1.05–1.1 leading): `hero` for the h1 and `section-title` for h2s. On mobile, step down to `hero-mobile` and `section-title-mobile`. One italic `display-accent` (Instrument Serif) per view is allowed inside a headline.
+- Set headings in `display` (Clash Display 400–600, −0.022em): `hero` for the h1 (1.1 leading) and `section-title` for h2s (1.15). On mobile, step down to `hero-mobile` and `section-title-mobile`. One italic `display-accent` (Instrument Serif) per view is allowed inside a headline.
 - Set UI and copy in `sans` (General Sans): `body` for paragraphs and `body-sm` for most UI.
 - Set numbers, prices and eyebrows in `mono` (JetBrains Mono). Each section opens with an `eyebrow` in `primary`, then a `section-title`, then a `lead` or `body` subtitle in `body-text`.
 
 #### Spacing, radii, layout
 - Use the 4px Tailwind scale. Pad cards with `space-6`, gap grids with `space-8` and pad sections vertically with `space-20`. On phones, use a `space-4` gutter.
 - Controls are at least `control-md` (44px) tall.
-- Radii: buttons use `radius-lg` (lg size: `radius-button-lg`), cards use `radius-xl`, hero panels and modals use `radius-2xl`, and pills and flags use `radius-full`.
+- Radii: buttons are pills (`radius-button-lg` 9999px; sm/md 9999px), cards use `radius-xl` (16px), hero panels and modals use `radius-2xl` (20px), and pills and flags use `radius-full`.
 - Centre content in a max-width column. Section headers are centred, with a max width of about 672px.
 
 #### Motion

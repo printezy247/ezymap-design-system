@@ -1,7 +1,7 @@
 // EzyMap design tokens — generated from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit.
 export const tokens = {
   "name": "EzyMap",
-  "version": "2.4.0",
+  "version": "2.7.0",
   "color": {
     "background": "#0a0c0b",
     "foreground": "#f2f4f2",
@@ -42,7 +42,7 @@ export const tokens = {
   "colorThemes": {
     "light": {
       "background": "#f6f7f5",
-      "foreground": "#0a0c0b",
+      "foreground": "#1d1d1f",
       "body-text": "#3b4540",
       "muted-foreground": "#5f6b65",
       "muted-foreground-elevated": "#56615b",
@@ -88,8 +88,8 @@ export const tokens = {
     "space-5": "20px",
     "space-6": "24px",
     "space-8": "32px",
-    "space-12": "48px",
-    "space-20": "80px",
+    "space-12": "56px",
+    "space-20": "96px",
     "control-sm": "40px",
     "control-md": "44px",
     "control-lg": "48px"
@@ -98,10 +98,10 @@ export const tokens = {
     "radius-sm": "4px",
     "radius-md": "6px",
     "radius-lg": "8px",
-    "radius-button-lg": "10px",
-    "radius-xl": "12px",
-    "radius-2xl": "16px",
-    "radius-3xl": "20px",
+    "radius-button-lg": "9999px",
+    "radius-xl": "16px",
+    "radius-2xl": "20px",
+    "radius-3xl": "24px",
     "radius-full": "9999px"
   },
   "shadow": {
@@ -124,14 +124,14 @@ export const tokens = {
     "gradient-holo-glow": "radial-gradient(ellipse 60% 45% at 50% 60%, rgba(47, 191, 113, 0.22), rgba(47, 191, 113, 0) 70%)"
   },
   "motion": {
-    "duration-instant": "80ms",
-    "duration-fast": "150ms",
-    "duration-base": "250ms",
-    "duration-slow": "600ms",
+    "duration-instant": "100ms",
+    "duration-fast": "200ms",
+    "duration-base": "300ms",
+    "duration-slow": "500ms",
     "ease-standard": "cubic-bezier(0.2, 0, 0, 1)",
     "ease-emphasized": "cubic-bezier(0.3, 0, 0, 1)",
     "ease-exit": "cubic-bezier(0.4, 0, 1, 1)",
-    "duration-xl": "1200ms",
+    "duration-xl": "900ms",
     "ease-spring": "cubic-bezier(0.34, 1.56, 0.64, 1)",
     "ease-spring-snappy": "cubic-bezier(0.2, 1.4, 0.4, 1)",
     "ease-spring-gentle": "cubic-bezier(0.33, 1.15, 0.68, 1)"
@@ -189,42 +189,42 @@ export const tokens = {
     "hero": {
       "family": "display",
       "fontSize": "44px",
-      "lineHeight": 1.05,
+      "lineHeight": 1.1,
       "fontWeight": 600,
-      "letterSpacing": "-0.02em"
+      "letterSpacing": "-0.022em"
     },
     "hero-mobile": {
       "family": "display",
-      "fontSize": "34px",
-      "lineHeight": 1.05,
+      "fontSize": "32px",
+      "lineHeight": 1.1,
       "fontWeight": 600,
-      "letterSpacing": "-0.02em"
+      "letterSpacing": "-0.022em"
     },
     "section-title": {
       "family": "display",
-      "fontSize": "36px",
-      "lineHeight": 1.1,
-      "fontWeight": 600,
-      "letterSpacing": "-0.02em"
+      "fontSize": "30px",
+      "lineHeight": 1.15,
+      "fontWeight": 400,
+      "letterSpacing": "-0.01em"
     },
     "section-title-mobile": {
       "family": "display",
-      "fontSize": "30px",
-      "lineHeight": 1.1,
-      "fontWeight": 600,
-      "letterSpacing": "-0.02em"
+      "fontSize": "26px",
+      "lineHeight": 1.15,
+      "fontWeight": 400,
+      "letterSpacing": "-0.01em"
     },
     "card-title": {
       "family": "display",
-      "fontSize": "20px",
-      "lineHeight": "28px",
-      "fontWeight": 600
+      "fontSize": "18px",
+      "lineHeight": "24px",
+      "fontWeight": 500
     },
     "wordmark": {
       "family": "display",
-      "fontSize": "17px",
+      "fontSize": "15px",
       "lineHeight": "24px",
-      "fontWeight": 700,
+      "fontWeight": 500,
       "letterSpacing": "-0.025em"
     },
     "display-accent": {

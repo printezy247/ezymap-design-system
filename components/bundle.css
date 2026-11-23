@@ -6,6 +6,7 @@
 @import url("../assets/motion/ezymap-motion-text.css");
 @import url("../assets/motion/ezymap-motion-hero.css");
 @import url("../assets/motion/ezymap-motion-product.css");
+@import url("../assets/motion/ezymap-motion-depth.css");
 
 body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; margin: 0; }
 
@@ -16,9 +17,9 @@ body { background: var(--background); color: var(--foreground); font-family: var
 .ezm-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--accent); }
 .ezm-btn:disabled, .ezm-btn[aria-disabled="true"] { pointer-events: none; opacity: 0.5; cursor: not-allowed; }
 .ezm-btn svg { pointer-events: none; flex-shrink: 0; }
-.ezm-btn--sm { min-height: 40px; border-radius: 8px; padding: 8px 16px; font-size: 13px; }
-.ezm-btn--md { min-height: 44px; border-radius: 8px; padding: 10px 20px; font-size: 14px; }
-.ezm-btn--lg { min-height: 48px; border-radius: 10px; padding: 12px 24px; font-size: 15px; }
+.ezm-btn--sm { min-height: 40px; border-radius: 9999px; padding: 8px 16px; font-size: 13px; }
+.ezm-btn--md { min-height: 44px; border-radius: 9999px; padding: 10px 20px; font-size: 14px; }
+.ezm-btn--lg { min-height: 48px; border-radius: var(--radius-button-lg); padding: 12px 24px; font-size: 15px; }
 .ezm-btn--primary { color: var(--primary-foreground);
   background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 100%, white 15%) 0%, var(--primary) 55%, var(--primary-glow) 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -3px 6px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.35), 0 10px 24px rgba(47,191,113,0.22); }
@@ -130,8 +131,152 @@ body { background: var(--background); color: var(--foreground); font-family: var
   .ezm-live-badge.is-live .ezm-live-badge__dot, .ezm-skeleton::after { animation: none !important; }
 }
 
+/* CardStack — Apple-style 3D stacked cards (v2.6). */
+.ezm-stack-3d { display: flex; flex-direction: column; align-items: center; }
+.ezm-stack-item { position: relative; }
+.ezm-stack-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-elevated);
+  transition: transform var(--duration-slow) var(--ease-emphasized);
+  transform: translateY(0);
+  transform-origin: bottom center;
+  will-change: transform;
+}
+.ezm-stack-card__title { font-family: var(--font-display); font-weight: 500; font-size: 15px; }
+.ezm-stack-card__subtitle { font-size: 12px; color: var(--muted-foreground); }
+.ezm-stack-item:hover .ezm-stack-card,
+.ezm-stack-item:focus-within .ezm-stack-card { transform: translateY(-10px) rotateX(8deg); }
+.ezm-stack-3d:hover .ezm-stack-item:not(:hover) .ezm-stack-card { transform: translateY(var(--space-2)); }
+
+/* CursorSpotlight — page-level pointer spotlight (v2.6). */
+.ezm-cursor-spotlight { position: relative; isolation: isolate; }
+.ezm-cursor-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(closest-side at var(--mx, 50%) var(--my, 50%), rgba(47, 191, 113, 0.26), rgba(47, 191, 113, 0) 72%);
+  filter: blur(20px);
+  transition: background-position var(--duration-fast) var(--ease-standard);
+  pointer-events: none;
+}
+
+/* Trading pack (v2.8) — Sparkline, DeltaBadge, PriceFlash, OrderBook, RiskMeter, TradeCard,
+   CandleStrip, SessionClock, HeatGrid, FeedStatus. Up is market-up green, down is market-down gold. */
+.ezm-spark { --spark: var(--body-text); display: inline-block; vertical-align: middle; overflow: visible; }
+.ezm-spark[data-tone="up"] { --spark: var(--market-up); }
+.ezm-spark[data-tone="down"] { --spark: var(--market-down); }
+.ezm-spark__line { fill: none; stroke: var(--spark); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 1; stroke-dashoffset: 0; animation: ezm-tr-draw var(--duration-xl) var(--ease-standard) both; }
+.ezm-spark__area { fill: var(--spark); opacity: 0.14; stroke: none; }
+.ezm-spark__dot { fill: var(--spark); }
+@keyframes ezm-tr-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+.ezm-delta { --delta: var(--body-text); display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--delta);
+  background: color-mix(in srgb, var(--delta) 12%, transparent); border: 1px solid color-mix(in srgb, var(--delta) 35%, transparent); }
+.ezm-delta[data-tone="up"] { --delta: var(--market-up); }
+.ezm-delta[data-tone="down"] { --delta: var(--market-down); }
+.ezm-delta__arrow { font-size: 9px; line-height: 1; }
+
+.ezm-price { display: inline-block; padding: 0 4px; border-radius: 4px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--foreground); }
+.ezm-price[data-flash="up"] { animation: ezm-tr-flash-up 700ms var(--ease-standard); }
+.ezm-price[data-flash="down"] { animation: ezm-tr-flash-down 700ms var(--ease-standard); }
+@keyframes ezm-tr-flash-up { 0% { color: var(--market-up); background: color-mix(in srgb, var(--market-up) 35%, transparent); } 100% { background: transparent; } }
+@keyframes ezm-tr-flash-down { 0% { color: var(--market-down); background: color-mix(in srgb, var(--market-down) 35%, transparent); } 100% { background: transparent; } }
+
+.ezm-book { min-width: 240px; overflow: hidden; border: 1px solid var(--border); border-radius: 12px; font-family: var(--font-mono); font-size: 12px; font-variant-numeric: tabular-nums;
+  background: linear-gradient(160deg, #171a19 0%, #101312 55%, #0c0f0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 10px rgba(0,0,0,0.3); }
+.ezm-book__head, .ezm-book__row { display: grid; grid-template-columns: repeat(3, 1fr); padding: 4px 12px; text-align: right; }
+.ezm-book__head { padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground); }
+.ezm-book__head > :first-child, .ezm-book__row > :first-child { text-align: left; }
+.ezm-book__row { position: relative; isolation: isolate; color: var(--body-text); }
+.ezm-book__row::before { content: ""; position: absolute; inset: 1px 0 1px auto; z-index: -1; width: calc(var(--depth, 0) * 100%);
+  background: color-mix(in srgb, var(--side) 16%, transparent); transition: width var(--duration-base) var(--ease-standard); }
+.ezm-book__row[data-side="bid"] { --side: var(--market-up); }
+.ezm-book__row[data-side="ask"] { --side: var(--market-down); }
+.ezm-book__price { color: var(--side); }
+.ezm-book__spread { display: flex; justify-content: space-between; padding: 6px 12px; border-block: 1px solid var(--border); background: var(--surface); color: var(--muted-foreground); }
+
+.ezm-risk { --risk: var(--market-up); display: inline-flex; flex-direction: column; align-items: center; gap: 2px; width: 140px; }
+.ezm-risk[data-level="medium"] { --risk: var(--accent); }
+.ezm-risk[data-level="high"] { --risk: #d9534f; }
+.ezm-risk__svg { width: 100%; height: auto; }
+.ezm-risk__track, .ezm-risk__fill { fill: none; stroke-width: 8; stroke-linecap: round; }
+.ezm-risk__track { stroke: var(--border); }
+.ezm-risk__fill { stroke: var(--risk); transition: stroke-dasharray var(--duration-slow) var(--ease-emphasized), stroke var(--duration-base) var(--ease-standard); }
+.ezm-risk[data-empty] .ezm-risk__fill { opacity: 0; }
+.ezm-risk__value { margin-top: -22px; font-family: var(--font-mono); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--foreground); }
+.ezm-risk__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-foreground); }
+
+.ezm-trade { --side: var(--market-up); display: flex; flex-direction: column; gap: 12px; min-width: 260px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; color: var(--card-foreground);
+  background: linear-gradient(160deg, #171a19 0%, #101312 55%, #0c0f0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 10px rgba(0,0,0,0.3), 0 16px 40px rgba(0,0,0,0.35); }
+.ezm-trade[data-side="sell"] { --side: var(--market-down); }
+.ezm-trade__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ezm-trade__pair { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--foreground); }
+.ezm-trade__side { padding: 2px 8px; border-radius: 9999px; border: 1px solid color-mix(in srgb, var(--side) 45%, transparent); background: color-mix(in srgb, var(--side) 12%, transparent);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--side); }
+.ezm-trade__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.ezm-trade__cell { padding: 8px 10px; border-radius: 8px; background: var(--surface); }
+.ezm-trade__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-foreground); }
+.ezm-trade__value { margin-top: 2px; font-family: var(--font-mono); font-size: 15px; font-variant-numeric: tabular-nums; color: var(--foreground); }
+.ezm-trade__cell[data-kind="sl"] .ezm-trade__value { color: #d9534f; }
+.ezm-trade__cell[data-kind="tp"] .ezm-trade__value { color: var(--market-up); }
+.ezm-trade__rr { display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 12px; color: var(--body-text); }
+
+.ezm-candles { display: inline-block; vertical-align: middle; overflow: visible; }
+.ezm-candles__c { --c: var(--market-up); transform-box: fill-box; transform-origin: 50% 100%; animation: ezm-tr-candle var(--duration-slow) var(--ease-standard) both; animation-delay: calc(var(--i, 0) * 30ms); }
+.ezm-candles__c[data-tone="down"] { --c: var(--market-down); }
+.ezm-candles__c line { stroke: var(--c); stroke-width: 1; }
+.ezm-candles__c rect { fill: var(--c); }
+@keyframes ezm-tr-candle { from { opacity: 0; transform: scaleY(0.2); } to { opacity: 1; transform: scaleY(1); } }
+
+.ezm-sessions { display: flex; flex-direction: column; gap: 10px; min-width: 280px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px;
+  background: linear-gradient(160deg, #171a19 0%, #101312 55%, #0c0f0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 10px rgba(0,0,0,0.3); }
+.ezm-sessions__row { display: grid; grid-template-columns: 96px minmax(0, 1fr) 52px; align-items: center; gap: 12px; }
+.ezm-sessions__name { font-size: 13px; font-weight: 600; color: var(--foreground); }
+.ezm-sessions__hours { font-family: var(--font-mono); font-size: 10px; color: var(--muted-foreground); }
+.ezm-sessions__track { position: relative; height: 8px; overflow: hidden; border-radius: 9999px; background: var(--surface-elevated); }
+.ezm-sessions__seg { position: absolute; top: 0; bottom: 0; left: calc(var(--l) * 100%); width: calc(var(--w) * 100%); background: color-mix(in srgb, var(--muted-foreground) 55%, transparent); }
+.ezm-sessions__row[data-open="true"] .ezm-sessions__seg { background: var(--market-up); }
+.ezm-sessions__now { position: absolute; top: 0; bottom: 0; left: calc(var(--now, 0) * 100%); width: 2px; background: var(--accent); }
+.ezm-sessions__state { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; text-align: right; color: var(--muted-foreground); }
+.ezm-sessions__row[data-open="true"] .ezm-sessions__state { color: var(--market-up); }
+
+.ezm-heat { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 6px; }
+.ezm-heat__tile { --tone: var(--muted-foreground); display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+  background: color-mix(in srgb, var(--tone) calc(8% + var(--k, 0) * 52%), var(--surface)); transition: background-color var(--duration-base) var(--ease-standard); }
+.ezm-heat__tile[data-tone="up"] { --tone: var(--market-up); }
+.ezm-heat__tile[data-tone="down"] { --tone: var(--market-down); }
+.ezm-heat__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--foreground); }
+.ezm-heat__change { font-family: var(--font-mono); font-size: 12px; font-variant-numeric: tabular-nums; color: var(--foreground); }
+
+.ezm-feed { --feed: var(--market-up); display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 9999px; border: 1px solid var(--border);
+  background: var(--surface-elevated); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--body-text); }
+.ezm-feed[data-status="delayed"] { --feed: var(--accent); }
+.ezm-feed[data-status="offline"] { --feed: #d9534f; }
+.ezm-feed__dot { width: 8px; height: 8px; flex-shrink: 0; border-radius: 9999px; color: var(--feed); background: var(--feed); box-shadow: 0 0 0 0 currentColor; }
+.ezm-feed[data-status="live"] .ezm-feed__dot { animation: ezm-sig-pulse 1800ms ease-out infinite; }
+.ezm-feed__ms { font-family: var(--font-mono); font-weight: 400; font-variant-numeric: tabular-nums; color: var(--muted-foreground); }
+
+@media (max-width: 640px) {
+  .ezm-heat { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ezm-sessions__row { grid-template-columns: 80px minmax(0, 1fr) 48px; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ezm-spark__line, .ezm-candles__c, .ezm-price[data-flash], .ezm-feed[data-status="live"] .ezm-feed__dot { animation: none !important; }
+  .ezm-risk__fill, .ezm-book__row::before, .ezm-heat__tile { transition: none !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ezm-logo-anim .ezm-logo-float, .ezm-marquee__track { animation: none !important; }
   .ezm-marquee { overflow-x: auto; }
   .ezm-tilt-el, .ezm-tilt-el::after { transition: none !important; }
+  .ezm-stack-card { transform: none !important; }
 }

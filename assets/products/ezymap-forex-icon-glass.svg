@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img"><title>EzyMap Forex glass</title><defs>
+<linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#171a19"/><stop offset="1" stop-color="#0c0f0e"/></linearGradient>
+<linearGradient id="pe" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5be39a"/><stop offset="1" stop-color="#2fbf71"/></linearGradient>
+</defs><rect width="64" height="64" rx="16" fill="#101413"/>
+<rect x="2" y="2" width="60" height="28" rx="13" fill="#ffffff" opacity=".09"/>
+<rect width="64" height="64" rx="16" fill="#141817" opacity=".55" stroke="#2fbf71" stroke-opacity=".35"/>
+<g fill="none" stroke="url(#pe)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="20" y="16" width="16" height="16" rx="3" fill="none"/>
+<rect x="30" y="26" width="14" height="14" rx="3" fill="none" opacity=".8"/>
+<path d="M18 44l8-7 8 7" fill="none" stroke="#e0bc63" stroke-width="2.4"/>
+</g>
+<rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#ffffff" stroke-opacity=".25"/></svg>

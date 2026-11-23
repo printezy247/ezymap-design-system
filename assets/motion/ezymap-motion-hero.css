@@ -99,7 +99,24 @@
   50% { opacity: 1; transform: scale(1) rotate(45deg); }
 }
 
+/* Auto-breathing glow for featured panels (Apple-style pulse with scroll). */
+.ezm-auto-glow { position: relative; isolation: isolate; }
+.ezm-auto-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(closest-side at 50% 30%, rgba(47, 191, 113, 0.22), transparent 72%);
+  animation: ezm-auto-glow 8s var(--ease-standard) infinite alternate;
+  pointer-events: none;
+}
+@keyframes ezm-auto-glow {
+  from { background-position: 50% 25%; opacity: 0.5; }
+  to { background-position: 50% 70%; opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .ezm-auto-glow::before { animation: none !important; }
   .ezm-candle-rise > *,
   .ezm-tick-up::after,
   .ezm-tick-down::after,

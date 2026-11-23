@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"},{"name":"Tilt"},{"name":"Reveal"},{"name":"ProductIcon"},{"name":"LiveBadge"},{"name":"Marquee"},{"name":"Skeleton"},{"name":"GlowCard"}]} */
+/* @ds-bundle: {"format":4,"namespace":"EzyMap","components":[{"name":"Button"},{"name":"Card"},{"name":"HeroPill"},{"name":"SignalFlag"},{"name":"EzyMapLogo"},{"name":"HudFrame"},{"name":"StatTile"},{"name":"GridFloor"},{"name":"PriceTicker"},{"name":"Tilt"},{"name":"Reveal"},{"name":"ProductIcon"},{"name":"LiveBadge"},{"name":"Marquee"},{"name":"Skeleton"},{"name":"GlowCard"},{"name":"CardStack"},{"name":"CursorSpotlight"},{"name":"Carousel3D"},{"name":"Coin3D"},{"name":"Parallax3D"},{"name":"Sparkline"},{"name":"DeltaBadge"},{"name":"PriceFlash"},{"name":"OrderBook"},{"name":"RiskMeter"},{"name":"TradeCard"},{"name":"CandleStrip"},{"name":"SessionClock"},{"name":"HeatGrid"},{"name":"FeedStatus"}]} */
 (function () {
   var React = window.React, h = React.createElement;
   function cx() { return Array.prototype.filter.call(arguments, Boolean).join(" "); }
@@ -209,12 +209,14 @@
   var PRODUCT_FILES = {
     channel: "ezymap-channel-icon", miniapp: "ezymap-miniapp-icon", bot: "ezymap-bot-icon",
     ticker: "ezymap-ticker-icon", calculators: "ezymap-calculators-icon", exchanges: "ezymap-exchanges-icon",
-    pro: "ezymap-pro-icon", ebooks: "ezymap-ebooks-icon", "macro-bot": "ezymap-macro-bot-icon"
+    pro: "ezymap-pro-icon", ebooks: "ezymap-ebooks-icon", "macro-bot": "ezymap-macro-bot-icon",
+    crypto: "ezymap-crypto-icon", forex: "ezymap-forex-icon"
   };
   var PRODUCT_LABELS = {
     channel: "EzyMap channel", miniapp: "EzyMap Mini App", bot: "EzyMap gated bot",
     ticker: "EzyMap live ticker", calculators: "EzyMap calculators", exchanges: "EzyMap exchanges and bots",
-    pro: "EzyMapPro", ebooks: "EzyMap ebooks", "macro-bot": "EzyMap Macro Bot"
+    pro: "EzyMapPro", ebooks: "EzyMap ebooks", "macro-bot": "EzyMap Macro Bot",
+    crypto: "EzyMap crypto", forex: "EzyMap forex"
   };
   function ProductIcon(props) {
     var product = props.product || "channel";
@@ -292,5 +294,346 @@
   }
   GlowCard.displayName = "GlowCard";
 
-  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker, Tilt: Tilt, Reveal: Reveal, ProductIcon: ProductIcon, LiveBadge: LiveBadge, Marquee: Marquee, Skeleton: Skeleton, GlowCard: GlowCard };
+  function CardStack(props) {
+    var visible = (props.items || []).slice(0, Math.max(1, props.max != null ? props.max : 3));
+    var rest = omit(props, ["items", "max", "gap", "className", "style", "children"]);
+    rest.className = cx("ezm-stack-3d", props.className);
+    rest.style = Object.assign({ gap: (props.gap != null ? props.gap : 10) + "px" }, props.style);
+    rest.children = visible.map(function (item, i) {
+      return h("div", { key: i, className: "ezm-stack-item" },
+        h("div", { className: "ezm-stack-card" },
+          item.title != null ? h("h4", { className: "ezm-stack-card__title" }, item.title) : null,
+          item.subtitle != null ? h("p", { className: "ezm-stack-card__subtitle" }, item.subtitle) : null));
+    });
+    return h("div", rest);
+  }
+  CardStack.displayName = "CardStack";
+
+  function CursorSpotlight(props) {
+    var ref = React.useRef(null);
+    var xy = React.useState([50, 50]);
+    var x = xy[0], setXy = xy[1];
+    React.useEffect(function () {
+      var el = ref.current;
+      if (!el || typeof document === "undefined") return;
+      function on(e) {
+        var r = el.getBoundingClientRect();
+        if (!r.width) return;
+        setXy([
+          Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100)),
+          Math.min(100, Math.max(0, ((e.clientY - r.top) / r.height) * 100))
+        ]);
+      }
+      document.addEventListener("pointermove", on);
+      return function () { document.removeEventListener("pointermove", on); };
+    }, []);
+    var rest = omit(props, ["className", "style"]);
+    rest.ref = ref;
+    rest.className = cx("ezm-cursor-spotlight", props.className);
+    rest.style = Object.assign({ "--mx": x[0] + "%", "--my": x[1] + "%" }, props.style);
+    return h("div", rest, props.children);
+  }
+  CursorSpotlight.displayName = "CursorSpotlight";
+
+  function Carousel3D(props) {
+    var itemW = props.itemWidth != null ? props.itemWidth : 160;
+    var itemH = props.itemHeight != null ? props.itemHeight : 200;
+    var items = props.items || [];
+    var n = Math.max(1, items.length);
+    var rest = omit(props, ["items", "itemWidth", "itemHeight", "className", "style"]);
+    rest.className = cx("ezm-carousel-3d", props.className);
+    rest.style = Object.assign({ "--item-w": itemW + "px", "--item-h": itemH + "px" }, props.style);
+    rest.children = h("div", { className: "ezm-carousel-3d__ring", style: { "--n": n } },
+      items.map(function (item, i) {
+        return h("div", { key: i, className: "ezm-carousel-3d__item", style: { "--i": i } },
+          item.title != null ? h("h4", { className: "ezm-carousel-3d__title" }, item.title) : null,
+          item.subtitle != null ? h("p", { className: "ezm-carousel-3d__subtitle" }, item.subtitle) : null);
+      }));
+    return h("div", rest);
+  }
+  Carousel3D.displayName = "Carousel3D";
+
+  function Coin3D(props) {
+    var rest = omit(props, ["size", "className", "style"]);
+    rest.className = cx("ezm-coin-3d", props.className);
+    rest.style = Object.assign({ "--size": (props.size != null ? props.size : 72) + "px" }, props.style);
+    return h("span", rest, props.children);
+  }
+  Coin3D.displayName = "Coin3D";
+
+  function Parallax3D(props) {
+    var ref = React.useRef(null);
+    var rest = omit(props, ["className", "style", "onPointerMove", "onPointerLeave"]);
+    function clamp(v) { return Math.min(1, Math.max(-1, v)); }
+    function move(e) {
+      var el = ref.current;
+      if (el) {
+        var r = el.getBoundingClientRect();
+        if (r.width && r.height) {
+          el.style.setProperty("--px", clamp(((e.clientX - r.left) / r.width) * 2 - 1).toFixed(3));
+          el.style.setProperty("--py", clamp(((e.clientY - r.top) / r.height) * 2 - 1).toFixed(3));
+        }
+      }
+      if (props.onPointerMove) props.onPointerMove(e);
+    }
+    function leave(e) {
+      var el = ref.current;
+      if (el) { el.style.setProperty("--px", "0"); el.style.setProperty("--py", "0"); }
+      if (props.onPointerLeave) props.onPointerLeave(e);
+    }
+    rest.ref = ref;
+    rest.className = cx("ezm-parallax-3d", props.className);
+    rest.style = props.style;
+    rest.onPointerMove = move;
+    rest.onPointerLeave = leave;
+    return h("div", rest, props.children);
+  }
+  Parallax3D.displayName = "Parallax3D";
+
+  /* Trading pack (v2.8) */
+  function isNum(n) { return typeof n === "number" && isFinite(n); }
+  function fmtNum(n, d) { return isNum(n) ? n.toFixed(d) : "\u2014"; }
+
+  function Sparkline(props) {
+    var w = props.width != null ? props.width : 120, ht = props.height != null ? props.height : 32;
+    var data = (props.values || []).filter(isNum);
+    if (data.length < 2) return null;
+    var pad = 2, lo = Math.min.apply(null, data), hi = Math.max.apply(null, data), last = data.length - 1;
+    function px(i) { return pad + (i * (w - 2 * pad)) / last; }
+    function py(v) { return hi === lo ? ht / 2 : ht - pad - ((v - lo) / (hi - lo)) * (ht - 2 * pad); }
+    var line = data.map(function (v, i) { return (i ? "L" : "M") + px(i).toFixed(2) + " " + py(v).toFixed(2); }).join(" ");
+    var fill = line + " L" + px(last).toFixed(2) + " " + (ht - pad) + " L" + px(0).toFixed(2) + " " + (ht - pad) + " Z";
+    var tone = props.tone || "auto";
+    tone = tone === "auto" ? (data[last] >= data[0] ? "up" : "down") : (tone === "neutral" ? undefined : tone);
+    var rest = omit(props, ["values", "width", "height", "tone", "area", "label", "className"]);
+    rest.className = cx("ezm-spark", props.className);
+    rest.viewBox = "0 0 " + w + " " + ht;
+    rest.width = w; rest.height = ht;
+    rest.role = "img";
+    rest["aria-label"] = props.label || "Price trend";
+    rest["data-tone"] = tone;
+    return h("svg", rest,
+      props.area === false ? null : h("path", { className: "ezm-spark__area", d: fill }),
+      h("path", { className: "ezm-spark__line", d: line, pathLength: 1 }),
+      h("circle", { className: "ezm-spark__dot", cx: px(last), cy: py(data[last]), r: 2 }));
+  }
+  Sparkline.displayName = "Sparkline";
+
+  function DeltaBadge(props) {
+    var dec = props.decimals != null ? props.decimals : 2;
+    var suffix = props.suffix != null ? props.suffix : "%";
+    var finite = isNum(props.value);
+    var r = finite ? Number(props.value.toFixed(dec)) : 0;
+    var tone = !finite || r === 0 ? "flat" : (r > 0 ? "up" : "down");
+    var sign = tone === "up" ? "+" : (tone === "down" ? "\u2212" : "");
+    var arrow = tone === "up" ? "\u25B2" : (tone === "down" ? "\u25BC" : "\u25AC");
+    var rest = omit(props, ["value", "decimals", "suffix", "className"]);
+    rest.className = cx("ezm-delta", props.className);
+    rest["data-tone"] = tone;
+    return h("span", rest,
+      h("span", { className: "ezm-delta__arrow", "aria-hidden": "true" }, arrow),
+      finite ? sign + Math.abs(r).toFixed(dec) + suffix : "\u2014");
+  }
+  DeltaBadge.displayName = "DeltaBadge";
+
+  function PriceFlash(props) {
+    var prev = React.useRef(props.value);
+    var st = React.useState(null), flash = st[0], setFlash = st[1];
+    React.useEffect(function () {
+      if (!isNum(props.value) || !isNum(prev.current)) { prev.current = props.value; return; }
+      if (props.value === prev.current) return;
+      var dir = props.value > prev.current ? "up" : "down";
+      prev.current = props.value;
+      setFlash(function (f) { return { dir: dir, id: f ? f.id + 1 : 1 }; });
+    }, [props.value]);
+    var rest = omit(props, ["value", "decimals", "className"]);
+    rest.key = flash ? flash.id : 0;
+    rest.className = cx("ezm-price", props.className);
+    rest["data-flash"] = flash ? flash.dir : undefined;
+    return h("span", rest, fmtNum(props.value, props.decimals != null ? props.decimals : 2));
+  }
+  PriceFlash.displayName = "PriceFlash";
+
+  function OrderBook(props) {
+    var n = props.levels != null ? props.levels : 6;
+    var dec = props.decimals != null ? props.decimals : 2;
+    var sdec = props.sizeDecimals != null ? props.sizeDecimals : 2;
+    function clean(list) { return (list || []).filter(function (l) { return l && isNum(l.price) && isNum(l.size); }); }
+    function cumulate(list) {
+      var t = 0;
+      return list.map(function (l) { t += l.size; return { price: l.price, size: l.size, total: t }; });
+    }
+    var b = cumulate(clean(props.bids).sort(function (p, q) { return q.price - p.price; }).slice(0, n));
+    var a = cumulate(clean(props.asks).sort(function (p, q) { return p.price - q.price; }).slice(0, n));
+    var max = Math.max(b.length ? b[b.length - 1].total : 0, a.length ? a[a.length - 1].total : 0) || 1;
+    var spread = a.length && b.length ? a[0].price - b[0].price : null;
+    function row(side) {
+      return function (l, i) {
+        return h("div", { key: side + i, className: "ezm-book__row", "data-side": side, style: { "--depth": (l.total / max).toFixed(3) } },
+          h("span", { className: "ezm-book__price" }, l.price.toFixed(dec)),
+          h("span", null, l.size.toFixed(sdec)),
+          h("span", null, l.total.toFixed(sdec)));
+      };
+    }
+    var rest = omit(props, ["bids", "asks", "levels", "decimals", "sizeDecimals", "className"]);
+    rest.className = cx("ezm-book", props.className);
+    rest.role = "group";
+    rest["aria-label"] = props["aria-label"] || "Order book";
+    return h("div", rest,
+      h("div", { className: "ezm-book__head" }, h("span", null, "Price"), h("span", null, "Size"), h("span", null, "Total")),
+      a.slice().reverse().map(row("ask")),
+      h("div", { className: "ezm-book__spread" }, h("span", null, "Spread"), h("span", null, spread == null ? "\u2014" : spread.toFixed(dec))),
+      b.map(row("bid")));
+  }
+  OrderBook.displayName = "OrderBook";
+
+  function RiskMeter(props) {
+    var v = isNum(props.value) ? Math.min(100, Math.max(0, props.value)) : 0;
+    var label = props.label != null ? props.label : "Risk";
+    var arc = "M10 60 A50 50 0 0 1 110 60";
+    var rest = omit(props, ["value", "label", "className"]);
+    rest.className = cx("ezm-risk", props.className);
+    rest["data-level"] = v < 34 ? "low" : (v < 67 ? "medium" : "high");
+    rest["data-empty"] = v === 0 ? "" : undefined;
+    rest.role = "meter";
+    rest["aria-label"] = label;
+    rest["aria-valuemin"] = 0;
+    rest["aria-valuemax"] = 100;
+    rest["aria-valuenow"] = Math.round(v);
+    return h("div", rest,
+      h("svg", { className: "ezm-risk__svg", viewBox: "0 0 120 68", "aria-hidden": "true", focusable: "false" },
+        h("path", { className: "ezm-risk__track", d: arc, pathLength: 100 }),
+        h("path", { className: "ezm-risk__fill", d: arc, pathLength: 100, style: { strokeDasharray: v + " 100" } })),
+      h("div", { className: "ezm-risk__value" }, Math.round(v)),
+      h("div", { className: "ezm-risk__label" }, label));
+  }
+  RiskMeter.displayName = "RiskMeter";
+
+  function TradeCard(props) {
+    var dec = props.decimals != null ? props.decimals : 2;
+    var targets = props.targets || [];
+    var risk = Math.abs(props.entry - props.stopLoss);
+    var reward = targets.length ? Math.abs(targets[0] - props.entry) : NaN;
+    var rr = risk > 0 && isNum(reward) ? reward / risk : null;
+    function cell(kind, label, value) {
+      return h("div", { key: label, className: "ezm-trade__cell", "data-kind": kind },
+        h("div", { className: "ezm-trade__label" }, label),
+        h("div", { className: "ezm-trade__value" }, fmtNum(value, dec)));
+    }
+    var rest = omit(props, ["pair", "side", "entry", "stopLoss", "targets", "status", "decimals", "className"]);
+    rest.className = cx("ezm-trade", props.className);
+    rest["data-side"] = props.side;
+    return h("div", rest,
+      h("div", { className: "ezm-trade__head" },
+        h("div", { className: "ezm-trade__pair" }, props.pair,
+          h("span", { className: "ezm-trade__side" }, props.side === "buy" ? "Buy" : "Sell")),
+        props.status ? h(SignalFlag, { status: props.status }) : null),
+      h("div", { className: "ezm-trade__grid" },
+        cell("entry", "Entry", props.entry),
+        cell("sl", "Stop loss", props.stopLoss),
+        targets.map(function (t, i) { return cell("tp", "TP" + (i + 1), t); })),
+      rr != null ? h("div", { className: "ezm-trade__rr" }, h("span", null, "Risk : reward"), h("span", null, "1 : " + rr.toFixed(2))) : null);
+  }
+  TradeCard.displayName = "TradeCard";
+
+  function CandleStrip(props) {
+    var w = props.width != null ? props.width : 160, ht = props.height != null ? props.height : 56;
+    var data = (props.candles || []).filter(function (c) { return c && isNum(c.open) && isNum(c.high) && isNum(c.low) && isNum(c.close); });
+    if (!data.length) return null;
+    var pad = 2;
+    var hi = Math.max.apply(null, data.map(function (c) { return c.high; }));
+    var lo = Math.min.apply(null, data.map(function (c) { return c.low; }));
+    function py(v) { return hi === lo ? ht / 2 : ht - pad - ((v - lo) / (hi - lo)) * (ht - 2 * pad); }
+    var slot = w / data.length, bodyW = Math.max(2, slot * 0.6);
+    var rest = omit(props, ["candles", "width", "height", "label", "className"]);
+    rest.className = cx("ezm-candles", props.className);
+    rest.viewBox = "0 0 " + w + " " + ht;
+    rest.width = w; rest.height = ht;
+    rest.role = "img";
+    rest["aria-label"] = props.label || "Candlestick chart";
+    return h("svg", rest, data.map(function (c, i) {
+      var mid = slot * i + slot / 2;
+      return h("g", { key: i, className: "ezm-candles__c", "data-tone": c.close >= c.open ? "up" : "down", style: { "--i": i } },
+        h("line", { x1: mid, x2: mid, y1: py(c.high), y2: py(c.low) }),
+        h("rect", { x: mid - bodyW / 2, y: Math.min(py(c.open), py(c.close)), width: bodyW, height: Math.max(1, Math.abs(py(c.open) - py(c.close))), rx: 1 }));
+    }));
+  }
+  CandleStrip.displayName = "CandleStrip";
+
+  var DEFAULT_SESSIONS = [
+    { name: "Sydney", open: 22, close: 7 },
+    { name: "Tokyo", open: 0, close: 9 },
+    { name: "London", open: 8, close: 17 },
+    { name: "New York", open: 13, close: 22 }
+  ];
+  function sessionOpen(hr, s) { return s.open < s.close ? hr >= s.open && hr < s.close : hr >= s.open || hr < s.close; }
+  function sessionSegs(s) { return s.open < s.close ? [[s.open, s.close]] : [[s.open, 24], [0, s.close]]; }
+  function pad2(n) { return (n < 10 ? "0" : "") + n; }
+  function fmtHour(hr) { return pad2(Math.floor(hr) % 24) + ":" + pad2(Math.round((hr - Math.floor(hr)) * 60)); }
+
+  function SessionClock(props) {
+    var st = React.useState(function () { return new Date(); }), tick = st[0], setTick = st[1];
+    React.useEffect(function () {
+      if (props.now) return;
+      var id = setInterval(function () { setTick(new Date()); }, 30000);
+      return function () { clearInterval(id); };
+    }, [props.now]);
+    var current = props.now || tick;
+    var hr = current.getUTCHours() + current.getUTCMinutes() / 60;
+    var sessions = props.sessions || DEFAULT_SESSIONS;
+    var rest = omit(props, ["sessions", "now", "className", "style"]);
+    rest.className = cx("ezm-sessions", props.className);
+    rest.role = "group";
+    rest["aria-label"] = "Market sessions";
+    rest.style = Object.assign({ "--now": hr / 24 }, props.style);
+    return h("div", rest, sessions.map(function (s) {
+      var open = sessionOpen(hr, s);
+      return h("div", { key: s.name, className: "ezm-sessions__row", "data-open": open },
+        h("div", null,
+          h("div", { className: "ezm-sessions__name" }, s.name),
+          h("div", { className: "ezm-sessions__hours" }, fmtHour(s.open) + "\u2013" + fmtHour(s.close) + " UTC")),
+        h("div", { className: "ezm-sessions__track", "aria-hidden": "true" },
+          sessionSegs(s).map(function (seg, i) {
+            return h("span", { key: i, className: "ezm-sessions__seg", style: { "--l": seg[0] / 24, "--w": (seg[1] - seg[0]) / 24 } });
+          }),
+          h("span", { className: "ezm-sessions__now" })),
+        h("span", { className: "ezm-sessions__state" }, open ? "Open" : "Closed"));
+    }));
+  }
+  SessionClock.displayName = "SessionClock";
+
+  function HeatGrid(props) {
+    var cols = props.columns != null ? props.columns : 4;
+    var cap = props.max > 0 ? props.max : (props.max == null ? 3 : 1);
+    var dec = props.decimals != null ? props.decimals : 2;
+    var rest = omit(props, ["items", "columns", "max", "decimals", "className", "style"]);
+    rest.className = cx("ezm-heat", props.className);
+    rest.role = "list";
+    rest.style = Object.assign({ "--cols": cols }, props.style);
+    return h("div", rest, (props.items || []).map(function (item, i) {
+      var c = isNum(item.change) ? item.change : 0;
+      var r = Number(c.toFixed(dec));
+      var tone = r > 0 ? "up" : (r < 0 ? "down" : "flat");
+      var sign = tone === "up" ? "+" : (tone === "down" ? "\u2212" : "");
+      return h("div", { key: i, className: "ezm-heat__tile", role: "listitem", "data-tone": tone, style: { "--k": Math.min(1, Math.abs(c) / cap).toFixed(3) } },
+        h("span", { className: "ezm-heat__label" }, item.label),
+        h("span", { className: "ezm-heat__change" }, sign + Math.abs(r).toFixed(dec) + "%"));
+    }));
+  }
+  HeatGrid.displayName = "HeatGrid";
+
+  var FEED_LABEL = { live: "Live", delayed: "Delayed", offline: "Offline" };
+  function FeedStatus(props) {
+    var rest = omit(props, ["status", "latencyMs", "children", "className"]);
+    rest.className = cx("ezm-feed", props.className);
+    rest["data-status"] = props.status;
+    rest.role = "status";
+    return h("span", rest,
+      h("span", { className: "ezm-feed__dot", "aria-hidden": "true" }),
+      props.children != null ? props.children : FEED_LABEL[props.status],
+      isNum(props.latencyMs) ? h("span", { className: "ezm-feed__ms" }, Math.round(props.latencyMs) + " ms") : null);
+  }
+  FeedStatus.displayName = "FeedStatus";
+
+  window.EzyMap = { Button: Button, Card: Card, HeroPill: HeroPill, SignalFlag: SignalFlag, EzyMapLogo: EzyMapLogo, HudFrame: HudFrame, StatTile: StatTile, GridFloor: GridFloor, PriceTicker: PriceTicker, Tilt: Tilt, Reveal: Reveal, ProductIcon: ProductIcon, LiveBadge: LiveBadge, Marquee: Marquee, Skeleton: Skeleton, GlowCard: GlowCard, CardStack: CardStack, CursorSpotlight: CursorSpotlight, Carousel3D: Carousel3D, Coin3D: Coin3D, Parallax3D: Parallax3D, Sparkline: Sparkline, DeltaBadge: DeltaBadge, PriceFlash: PriceFlash, OrderBook: OrderBook, RiskMeter: RiskMeter, TradeCard: TradeCard, CandleStrip: CandleStrip, SessionClock: SessionClock, HeatGrid: HeatGrid, FeedStatus: FeedStatus };
 })();

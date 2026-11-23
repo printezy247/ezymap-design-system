@@ -301,7 +301,80 @@
   animation: ezm-blink 1.1s steps(1) infinite;
 }
 
+/* ---------- v2.6: Apple-inspired additions (blur entrances, pops, orbits, glows, bursts) ---------- */
+
+/* Spring-overshoot entrance for new stacks and entries. */
+.ezm-spring-pop { animation: ezm-spring-pop var(--duration-slow) var(--ease-spring-gentle) both; }
+@keyframes ezm-spring-pop {
+  from { opacity: 0; transform: scale(0.62); }
+}
+
+/* Blur crossfade entrance (Apple fade-through feel). */
+.ezm-blur-in { opacity: 0; filter: blur(6px); animation: ezm-blur-in var(--duration-base) var(--ease-standard) both; }
+@keyframes ezm-blur-in {
+  to { opacity: 1; filter: blur(0); }
+}
+
+/* Hover glow halo for live panels and featured cards (compositor opacity). */
+.ezm-hover-glow { position: relative; isolation: isolate; transition: opacity var(--duration-fast) var(--ease-standard); }
+.ezm-hover-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 50%, rgba(47, 191, 113, 0.32), rgba(47, 191, 113, 0) 70%);
+  filter: blur(22px);
+  opacity: 0;
+  pointer-events: none;
+}
+.ezm-hover-glow:hover::before,
+.ezm-hover-glow:focus-within::before { opacity: 0.8; }
+
+/* Particle burst with stagger: one child per particle (--i on each). */
+.ezm-particle-burst > .ezm-particle { animation: ezm-particle var(--duration-slow) var(--ease-standard) both; }
+@keyframes ezm-particle {
+  from { opacity: 0; transform: translateY(0) scale(0.4); }
+  50% { opacity: 1; transform: translateY(-30px) scale(1.1); }
+  to { opacity: 0; transform: translateY(-60px) scale(0.8); }
+}
+
+/* Dematerialization: collapses a group to a dot and opens it again.
+   Start with clip-path: circle(0 at 50% 50%) on the target element. */
+.ezm-dematerialize { clip-path: circle(0 at 50% 50%); transition: clip-path var(--duration-slow) var(--ease-emphasized); }
+.ezm-demat-open { clip-path: circle(100% at 50% 50%); }
+
+/* Radial orbit dots: dots travel around a centre on a vertical ring (CSS-only). */
+.ezm-orbit-dots { position: relative; width: 130px; height: 130px; }
+.ezm-orbit-dots > * {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translate(-50%, -60px);
+  animation: ezm-orbit-dots var(--orbit-duration, 8s) linear infinite;
+  animation-delay: calc(var(--i, 0) * 0.7s);
+}
+@keyframes ezm-orbit-dots {
+  0% { transform: translate(-50%, -60px); }
+  50% { transform: translate(-50%, 40px); }
+  100% { transform: translate(-50%, -60px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .ezm-spring-pop,
+  .ezm-blur-in,
+  .ezm-hover-glow::before,
+  .ezm-particle-burst > .ezm-particle,
+  .ezm-dematerialize,
+  .ezm-orbit-dots,
+  .ezm-orbit-dots > * {
+    animation: none !important;
+  }
+  .ezm-hover-glow::before { opacity: 0; }
+  .ezm-dematerialize { clip-path: circle(100% at 50% 50%); }
   .ezm-float,
   .ezm-float-slow,
   .ezm-float-x,

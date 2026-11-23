@@ -1,4 +1,4 @@
-# @ezymap/design-system — MCP server (v2.4.0)
+# @ezymap/design-system — MCP server (v2.7.0)
 
 Zero-dependency MCP server over stdio that lets AI agents query the design system:
 tokens, components, motion utilities and the asset catalog. No build step, no deps —

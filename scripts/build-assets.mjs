@@ -216,6 +216,41 @@ ${fintechCandles}`,
 );
 writeFileSync(join(logosDir, "ezymap-mark-fintech.svg"), fintech);
 
+// Macro Trader Bot: no gem — a dark rounded tile holding a fundamental-trading
+// glyph: a candlestick cluster (fundamentals) plus a rising macro line.
+// Variations as per the EzyAI set: base, gold, white, black.
+const macroTraderGlyph = (cfg) => `
+<g stroke-linecap="round">
+  <line x1="104" y1="410" x2="296" y2="296" stroke="${cfg.line}" stroke-width="4" opacity=".85"/>
+  <line x1="296" y1="296" x2="336" y2="296" stroke="${cfg.line}" stroke-width="3" opacity=".6"/>
+  <circle cx="296" cy="296" r="9" fill="#f4dc93"/>
+  <line x1="186" y1="392" x2="186" y2="350" stroke="${cfg.c1}" stroke-width="8"/>
+  <rect x="168" y1="360" width="36" height="32" rx="5" fill="${cfg.c1}"/>
+  <line x1="266" y1="364" x2="266" y2="334" stroke="${cfg.c2}" stroke-width="8"/>
+  <rect x="248" y1="344" width="36" height="20" rx="4" fill="${cfg.c2}"/>
+  <line x1="336" y1="400" x2="336" y2="346" stroke="${cfg.c3}" stroke-width="8"/>
+  <rect x1="318" y1="350" width="36" height="50" rx="5" fill="${cfg.c3}"/>
+</g>`;
+const macroTraderTile = (cfg) =>
+  `<rect width="512" height="512" rx="112" fill="${cfg.tile}"/><rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="${cfg.stroke}" stroke-opacity=".3"/>`;
+const macroTraderCfgs = {
+  "ezymap-mark-macro-trader-bot": { tile: "#0a0c0b", stroke: "#2fbf71", line: "url(#medge)", c1: "url(#mol)", c2: "url(#mgl)", c3: "url(#mgd)" },
+  "ezymap-mark-macro-trader-bot-gold": { tile: "#0a0c0b", stroke: "#2fbf71", line: "url(#medge)", c1: "url(#medge)", c2: "url(#medge)", c3: "url(#medge)" },
+  "ezymap-mark-macro-trader-bot-white": { tile: "#FFFFFF", stroke: "#1d1d1f", line: "#1d1d1f", c1: "#1d1d1f", c2: "#1d1d1f", c3: "#1d1d1f" },
+  "ezymap-mark-macro-trader-bot-black": { tile: "#050807", stroke: "#2fbf71", line: "url(#medge)", c1: "url(#medge)", c2: "url(#medge)", c3: "url(#medge)" },
+};
+for (const [name, cfg] of Object.entries(macroTraderCfgs)) {
+  const label = name.replace(/^ezymap-mark-macro-trader-bot-?(.*)$/, (_, v) => `Macro Trader Bot${v ? " " + v[0].toUpperCase() + v.slice(1) : ""}`);
+  writeFileSync(
+    join(logosDir, `${name}.svg`),
+    svg(
+      "0 0 512 512",
+      `${defs}${macroTraderTile(cfg)}${macroTraderGlyph(cfg)}`,
+      `role="img" aria-label="EzyMap ${label}"`
+    )
+  );
+}
+
 // Animated app icon: gem floats inside the dark tile while a gold comet
 // travels a small orbit — the app-icon sibling of ezymap-mark-animated.
 const appiconAnim = svg(
@@ -343,6 +378,18 @@ const products = {
 <path d="M34 24c4-1.6 8-1.6 12 0" opacity=".5"/>
 <path d="M18 33c4-1.6 8-1.6 12 0" opacity=".5"/>
 <path d="M34 33c4-1.6 8-1.6 12 0" opacity=".5"/>
+</g>`),
+  // Trading research (2026-11): stacked coins with a gold trend arrow.
+  "ezymap-crypto-icon": T(`<g ${stroke}>
+<circle cx="32" cy="21" r="10" fill="none"/>
+<circle cx="32" cy="30.5" r="7" fill="none" opacity=".7"/>
+<path d="M27 22.5l8 8 6-8" fill="none" stroke="@A@" stroke-width="2.4"/>
+</g>`),
+  // Forex: two currency bills crossing with a trend arrow.
+  "ezymap-forex-icon": T(`<g ${stroke}>
+<rect x="20" y="16" width="16" height="16" rx="3" fill="none"/>
+<rect x="30" y="26" width="14" height="14" rx="3" fill="none" opacity=".8"/>
+<path d="M18 44l8-7 8 7" fill="none" stroke="@A@" stroke-width="2.4"/>
 </g>`),
 };
 
@@ -509,7 +556,7 @@ const listSvgs = (dir) =>
     }));
 const manifest = {
   name: "EzyMap",
-  version: "2.3.0",
+  version: "2.7.0",
   generatedBy: "scripts/build-assets.mjs",
   categories: {
     logos: listSvgs(logosDir),

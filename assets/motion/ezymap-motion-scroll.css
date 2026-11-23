@@ -77,5 +77,16 @@
     @keyframes ezm-scroll-hero-out {
       to { opacity: 0; transform: translateY(-48px) scale(0.98); }
     }
+
+    /* Blur-through reveal for Apple-style fade-through entries. */
+    .ezm-scroll-blur {
+      animation: ezm-scroll-blur linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 30%;
+    }
+    @keyframes ezm-scroll-blur {
+      from { opacity: 0; filter: blur(8px); }
+      to { opacity: 1; filter: blur(0); }
+    }
   }
 }

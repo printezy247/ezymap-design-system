@@ -140,7 +140,9 @@ export type ProductIconName =
   | "exchanges"
   | "pro"
   | "ebooks"
-  | "macro-bot";
+  | "macro-bot"
+  | "crypto"
+  | "forex";
 export type ProductIconVariant = "default" | "animated" | "extrude" | "glass";
 /** Product app-icon tile from assets/products. */
 export interface ProductIconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -191,3 +193,157 @@ export interface GlowCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: React.ReactNode;
 }
 export declare function GlowCard(props: GlowCardProps): React.ReactElement;
+
+/** Deck of Apple-style 3D stacked glass cards; the front card springs up on hover. */
+export interface CardStackProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Cards front to back. Only the front is interactive; hover pops it. */
+  items: { title?: React.ReactNode; subtitle?: React.ReactNode }[];
+  /** Max cards shown, from front. Default 3. */
+  max?: number;
+  /** Vertical step between cards in px. Default 10. */
+  gap?: number;
+}
+export declare function CardStack(props: CardStackProps): React.ReactElement;
+
+/** Page-level pointer spotlight: a soft green glow follows the cursor. */
+export interface CursorSpotlightProps extends React.HTMLAttributes<HTMLDivElement> {}
+export declare function CursorSpotlight(props: CursorSpotlightProps): React.ReactElement;
+
+/** Slowly rotating 3D ring of glass cards. Pauses on hover and focus. */
+export interface Carousel3DItem {
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+}
+export interface Carousel3DProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Cards placed evenly around the ring. */
+  items: Carousel3DItem[];
+  /** Card width in px. Default 160. */
+  itemWidth?: number;
+  /** Card height in px. Default 200. */
+  itemHeight?: number;
+}
+export declare function Carousel3D(props: Carousel3DProps): React.ReactElement;
+
+/** Inline trend line that draws itself on mount. */
+export interface SparklineProps extends Omit<React.SVGAttributes<SVGSVGElement>, "values" | "width" | "height"> {
+  /** Series, oldest first. Non-finite values are skipped. Fewer than two points renders nothing. */
+  values: number[];
+  width?: number;
+  height?: number;
+  /** auto = up when the last value is at or above the first, otherwise down. */
+  tone?: "auto" | "up" | "down" | "neutral";
+  area?: boolean;
+  label?: string;
+}
+export declare function Sparkline(props: SparklineProps): React.ReactElement | null;
+
+/** Signed change pill with arrow, sign and colour. */
+export interface DeltaBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  value: number;
+  decimals?: number;
+  suffix?: string;
+}
+export declare function DeltaBadge(props: DeltaBadgeProps): React.ReactElement;
+
+/** Mono price that flashes green on a rise and gold on a fall. */
+export interface PriceFlashProps extends React.HTMLAttributes<HTMLSpanElement> {
+  value: number;
+  decimals?: number;
+}
+export declare function PriceFlash(props: PriceFlashProps): React.ReactElement;
+
+/** Depth ladder with cumulative depth bars. */
+export interface BookLevel {
+  price: number;
+  size: number;
+}
+export interface OrderBookProps extends React.HTMLAttributes<HTMLDivElement> {
+  bids: BookLevel[];
+  asks: BookLevel[];
+  levels?: number;
+  decimals?: number;
+  sizeDecimals?: number;
+}
+export declare function OrderBook(props: OrderBookProps): React.ReactElement;
+
+/** Half-circle risk gauge, 0 to 100. */
+export interface RiskMeterProps extends React.HTMLAttributes<HTMLDivElement> {
+  value: number;
+  label?: string;
+}
+export declare function RiskMeter(props: RiskMeterProps): React.ReactElement;
+
+/** Signal card: pair, side, entry, stop loss, targets and risk-to-reward. */
+export interface TradeCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  pair: React.ReactNode;
+  side: "buy" | "sell";
+  entry: number;
+  stopLoss: number;
+  targets?: number[];
+  status?: "pending" | "running" | "tp" | "be" | "sl" | "cancelled";
+  decimals?: number;
+}
+export declare function TradeCard(props: TradeCardProps): React.ReactElement;
+
+/** Mini candlestick chart. */
+export interface Candle {
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+}
+export interface CandleStripProps extends Omit<React.SVGAttributes<SVGSVGElement>, "width" | "height"> {
+  candles: Candle[];
+  width?: number;
+  height?: number;
+  label?: string;
+}
+export declare function CandleStrip(props: CandleStripProps): React.ReactElement | null;
+
+/** 24-hour UTC strip of forex sessions. */
+export interface MarketSession {
+  name: string;
+  /** Open hour in UTC, 0 to 24. */
+  open: number;
+  /** Close hour in UTC, 0 to 24. A close before the open wraps past midnight. */
+  close: number;
+}
+export interface SessionClockProps extends React.HTMLAttributes<HTMLDivElement> {
+  sessions?: MarketSession[];
+  /** Fixed time for tests. Without it the clock follows real time. */
+  now?: Date;
+}
+export declare function SessionClock(props: SessionClockProps): React.ReactElement;
+
+/** Market heat map, one tile per instrument. */
+export interface HeatItem {
+  label: React.ReactNode;
+  change: number;
+}
+export interface HeatGridProps extends React.HTMLAttributes<HTMLDivElement> {
+  items: HeatItem[];
+  columns?: number;
+  max?: number;
+  decimals?: number;
+}
+export declare function HeatGrid(props: HeatGridProps): React.ReactElement;
+
+/** Data-feed health pill. */
+export type FeedState = "live" | "delayed" | "offline";
+export interface FeedStatusProps extends React.HTMLAttributes<HTMLSpanElement> {
+  status: FeedState;
+  latencyMs?: number;
+  children?: React.ReactNode;
+}
+export declare function FeedStatus(props: FeedStatusProps): React.ReactElement;
+
+/** Gold coin that spins on its vertical axis. Children render on the face. */
+export interface Coin3DProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Coin diameter in px. Default 72. */
+  size?: number;
+}
+export declare function Coin3D(props: Coin3DProps): React.ReactElement;
+
+/** Pointer-driven depth container. Sets --px and --py on the root. */
+export interface Parallax3DProps extends React.HTMLAttributes<HTMLDivElement> {}
+export declare function Parallax3D(props: Parallax3DProps): React.ReactElement;
