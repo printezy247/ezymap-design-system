@@ -240,7 +240,7 @@ const macroTraderCfgs = {
   "ezymap-mark-macro-trader-bot-black": { tile: "#050807", stroke: "#2fbf71", line: "url(#medge)", c1: "url(#medge)", c2: "url(#medge)", c3: "url(#medge)" },
 };
 for (const [name, cfg] of Object.entries(macroTraderCfgs)) {
-  const label = name.replace(/^ezymap-mark-macro-trader-bot-?(.*)$/, (_, v) => `Macro Trader Bot${v ? " " + v[0].toUpperCase() + v.slice(1) : ""}`);
+  const label = name.replace(/^ezymap-mark-macro-trader-bot-?(.*)$/, (_, v) => `Macro Fundamentals${v ? " " + v[0].toUpperCase() + v.slice(1) : ""}`);
   writeFileSync(
     join(logosDir, `${name}.svg`),
     svg(
