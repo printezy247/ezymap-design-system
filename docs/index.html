@@ -88,7 +88,7 @@
 
   <section class="block" id="whats-new"><p class="eyebrow" style="color:var(--primary);margin:0">v2.7.0</p><h2>What's new</h2>
     <ul class="lede" style="padding-left:20px">
-      <li><strong>Macro Trader Bot redesign</strong>: the gem is replaced by a fundamental-trading glyph (candlestick cluster + rising macro line). New variations: gold, white, black. See the <a href="../assets/logos/ezymap-mark-macro-trader-bot.svg">base mark</a> and the bottom logo area.</li>
+      <li><strong>Macro Fundamentals glyph</strong>: the gem is replaced by a fundamental-trading glyph (candlestick cluster + rising macro line). New variations: gold, white, black. See the <a href="../assets/logos/ezymap-mark-macro-trader-bot.svg">base mark</a> and the bottom logo area.</li>
       <li><strong>Apple-inspired motion growth</strong>: spring pops and blur entrances, particle bursts, orbit dots, a rotating cube, 3D marker orbits and a pulsing brand glow (CardStack, CursorSpotlight). New products `crypto` + `forex` from trading research. More at <a href="motion.html" style="color:var(--primary)">the motion playground</a>.</li>
       <li><strong>Apple-inspired language</strong>: pill buttons, larger section gaps (56/96px), cards at 16–24px, display heads at weight 400–500 with −0.022em tracking, nearer-black foreground on light mode.</li>
       <li><strong>Four new components</strong> (16 total): <code>LiveBadge</code> (live status pill with ping ring), <code>Marquee</code> (seamless scroll strip with direction/duration controls), <code>Skeleton</code> (shimmer loading placeholder) and <code>GlowCard</code> (card with breathing glow or rotating border beam) — in React, vanilla bundle and typings.</li>
@@ -101,7 +101,7 @@
     </ul>
   </section>
   <section class="block" id="colour"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Colour</h2><div class="grid swatches" id="colours"></div></section>
-  <section class="block" id="type"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Type scale</h2><p class="lede">Clash Display for headlines, General Sans for text, JetBrains Mono for figures, Instrument Serif for editorial accents. Space Grotesk, Inter Tight and IBM Plex Mono stay loaded as fallbacks.</p><div id="types"></div></section>
+  <section class="block" id="type"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Type scale</h2><p class="lede">Clash Display for headlines, General Sans for text, JetBrains Mono for figures, Instrument Serif for editorial accents. Space Grotesk and Inter Tight remain in the font stacks as fallbacks.</p><div id="types"></div></section>
   <section class="block" id="spacing"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Spacing</h2><div id="spaces"></div></section>
   <section class="block" id="radii"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Radii</h2><div class="grid radii" id="radius"></div></section>
   <section class="block" id="shadows"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Shadows and gradients</h2><div class="grid shadows" id="shadow"></div><h3>Gradients</h3><div class="grid grads" id="gradient"></div></section>
@@ -151,9 +151,9 @@
 
   <section class="block" id="products"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Product icons</h2><p class="lede">One app-icon tile per ready product, from <code>assets/products/</code>. Every product also ships <code>-animated</code>, <code>-extrude</code> and <code>-glass</code> variants in SVG and 256px PNG — see the variant grid below.</p><div class="grid logos" id="product-grid"></div><h3>Variants</h3><div class="grid logos" id="product-variant-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))"></div></section>
 
-  <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logo families (2)</h2><p class="lede">The logo area shows two categories: the main EzyMap mark and the Macro Trader logo variations.</p>
+  <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logo families</h2><p class="lede">The main EzyMap mark, the Macro Fundamentals logo set, and the EzyAI files kept as reference.</p>
     <h3>EzyMap — main mark</h3><div class="grid logos" id="logo-grid"></div>
-    <h3>Macro Trader — logo variations</h3><div class="grid logos" id="macro-trader-grid"></div>
+    <h3>Macro Fundamentals — glyph variations</h3><div class="grid logos" id="macro-trader-grid"></div>
     <h3>Macro Fundamentals — logo set</h3>
     <div class="grid logos">
       <figure><img src="../assets/logos/macro-fundamentals/macro-mark-fullcolour.svg" alt="Macro Fundamentals mark, full colour" width="160" height="160" loading="lazy"><figcaption>Mark, full colour</figcaption></figure>
@@ -270,10 +270,10 @@
 
 
   var macroTraderFiles = [
-["ezymap-mark-macro-trader-bot.svg", "Macro Trader mark, base"],
-  ["ezymap-mark-macro-trader-bot-gold.svg", "Macro Trader mark, gold"],
-  ["ezymap-mark-macro-trader-bot-white.svg", "Macro Trader mark, white"],
-  ["ezymap-mark-macro-trader-bot-black.svg", "Macro Trader mark, black"]
+["ezymap-mark-macro-trader-bot.svg", "Macro Fundamentals glyph, base"],
+  ["ezymap-mark-macro-trader-bot-gold.svg", "Macro Fundamentals glyph, gold"],
+  ["ezymap-mark-macro-trader-bot-white.svg", "Macro Fundamentals glyph, white"],
+  ["ezymap-mark-macro-trader-bot-black.svg", "Macro Fundamentals glyph, black"]
   ].forEach(function (l) {
     $("macro-trader-grid").appendChild(el("div", "logo", '<div class="art"><img src="../assets/logos/' + l[0] + '" alt="' + esc(l[1]) + '"></div><div class="cap"><b style="font-size:14px">' + esc(l[1]) + '</b><br><code class="mono">' + esc(l[0]) + '</code></div>'));
   });
