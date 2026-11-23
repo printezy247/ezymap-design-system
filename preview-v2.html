@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EzyMap Design System v2.5 — Preview</title>
+<title>EzyMap Design System v2.7.0 — Preview</title>
 <link rel="icon" type="image/svg+xml" href="./assets/logos/ezymap-3d-favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="./tokens/tokens.css">
@@ -20,9 +20,12 @@
   h2 { font-family: var(--font-display); font-size: 30px; line-height: 1.15; font-weight: 400; letter-spacing: -.01em; margin: 0 0 6px; }
   .sub { color: var(--body-text); font-size: 15px; max-width: 720px; margin: 0 0 28px; }
   .grid { display: grid; gap: 16px; }
-  .g4 { grid-template-columns: repeat(4, 1fr); }
-  .g3 { grid-template-columns: repeat(3, 1fr); }
-  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 960px) { .g4, .g3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .g4, .g3 { grid-template-columns: minmax(0, 1fr); } }
+  .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 720px) { .g2 { grid-template-columns: minmax(0, 1fr); } }
   .card-box { border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--surface); padding: 20px; }
   .card-box h3 { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-foreground); margin: 0 0 14px; }
   .swatch { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
@@ -65,7 +68,7 @@
       <p class="sub" style="margin-bottom:0">EzyMap-only brand. Four new components (LiveBadge, Marquee, Skeleton, GlowCard), spring easings and an agent surface — llms.txt + a zero-dep MCP server — on top of the v2/v3 motion and 3D layers.</p>
     </div>
     <div class="chips">
-      <span class="chip"><b>16</b> components · Apple-inspired language</span>
+      <span class="chip"><b>31</b> components · Apple-inspired language</span>
       <span class="chip"><b>9</b> products ×4 variants</span>
       <span class="chip"><b>36</b> product PNGs</span>
       <span class="chip"><b>6</b> motion layers</span>
@@ -117,7 +120,7 @@
   <section>
     <p class="eyebrow">Components</p>
     <h2>Components</h2>
-    <p class="sub">All sixteen, rendered from <code>components/bundle.js</code>. Install snippets live in each component README; agent docs in <code>docs/llms.txt</code>.</p>
+    <p class="sub">The 31 components exported by <code>components/bundle.js</code>. Install snippets live in each component README; agent docs in <code>docs/llms.txt</code>.</p>
     <div id="components"></div>
   </section>
 
