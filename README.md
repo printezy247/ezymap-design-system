@@ -263,7 +263,7 @@ EzyMap is a premium trading desk that lives inside Telegram. Everything built on
 #### Spacing, radii, layout
 - Use the 4px Tailwind scale. Pad cards with `space-6`, gap grids with `space-8` and pad sections vertically with `space-20`. On phones, use a `space-4` gutter.
 - Controls are at least `control-md` (44px) tall.
-- Radii: buttons are pills (`radius-button-lg` 9999px; sm/md 9999px), cards use `radius-xl` (16px), hero panels and modals use `radius-2xl` (20px), and pills and flags use `radius-full`.
+- Radii: buttons use 8px corners at sm and md and 10px at lg (`radius-button-lg`), cards use `radius-xl` (16px), hero panels and modals use `radius-2xl` (20px), and pills and flags use `radius-full`.
 - Centre content in a max-width column. Section headers are centred, with a max width of about 672px.
 
 #### Motion
