@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EzyMap 3D asset preview</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0a0c0b; color: #f2f4f2; font-family: system-ui, sans-serif; }
+  body { display: flex; flex-direction: column; }
+  header { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid #1f2622; }
+  header h1 { font-size: 16px; font-weight: 600; margin: 0 auto 0 0; }
+  select, button { background: #151a17; color: #f2f4f2; border: 1px solid #2c3530; border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer; }
+  button:hover, select:hover { border-color: #e0bc63; }
+  button:focus-visible, select:focus-visible { outline: 2px solid #e0bc63; outline-offset: 2px; }
+  #status { color: #a8b0ab; font-size: 13px; }
+  #error { color: #f2a48a; padding: 12px 16px; }
+  #stage { flex: 1; min-height: 0; position: relative; }
+  #stage canvas { display: block; width: 100%; height: 100%; }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<header>
+  <h1>EzyMap 3D preview</h1>
+  <label for="set">Set</label>
+  <select id="set">
+    <option value="ezymap-set-1-golden-mascot">1. Golden mascot</option>
+    <option value="ezymap-set-2-map-pin-beacon">2. Logo beacon</option>
+    <option value="ezymap-set-3-orbit-globe">3. Orbit globe</option>
+  </select>
+  <button id="reset" type="button">Reset view</button>
+  <button id="motion" type="button" aria-pressed="true">Pause motion</button>
+  <span id="status">Loading…</span>
+</header>
+<div id="error" hidden></div>
+<div id="stage"></div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+
+const TAU = Math.PI * 2;
+// Sam-style easing: 0 to 1 and back to 0 over `period` seconds.
+const wave = (t, period) => 0.5 - 0.5 * Math.cos((TAU * t) / period);
+const mod = (a, b) => ((a % b) + b) % b;
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const smooth = (x) => x * x * (3 - 2 * x);
+
+// Gaze story on an 8 s loop: read the logo, scan left and right like searching a map,
+// come back, then nod down at LOCK_AT. The nod triggers the logo bounce, ring pulse and route dots.
+// Each key is [time, yaw, pitch] in radians; positive pitch looks down.
+const GAZE_LOOP = 8;
+const LOCK_AT = 6.9;
+const GAZE_KEYS = [
+  [0, 0, 0.3],
+  [1.2, 0, 0.3],
+  [2.6, -0.45, 0.12],
+  [3.2, -0.45, 0.12],
+  [4.8, 0.45, 0.12],
+  [5.4, 0.45, 0.12],
+  [6.4, 0, 0.18],
+  [6.9, 0, 0.4],
+  [7.3, 0, 0.3],
+  [8, 0, 0.3],
+];
+// Pose used when motion is off (reduced motion or paused on load): head down at the logo.
+const CLEAN_POSE_TIME = 0.8;
+
+function sampleGaze(c, out) {
+  for (let i = 1; i < GAZE_KEYS.length; i++) {
+    const a = GAZE_KEYS[i - 1];
+    const b = GAZE_KEYS[i];
+    if (c <= b[0]) {
+      const k = smooth(clamp01((c - a[0]) / (b[0] - a[0])));
+      out.yaw = a[1] + (b[1] - a[1]) * k;
+      out.pitch = a[2] + (b[2] - a[2]) * k;
+      return out;
+    }
+  }
+  const last = GAZE_KEYS[GAZE_KEYS.length - 1];
+  out.yaw = last[1];
+  out.pitch = last[2];
+  return out;
+}
+
+// Must match ROAD_START and ROAD_LENGTH in scripts/generate-3d-assets.py.
+const ROAD_START = 0.42;
+const ROAD_LENGTH = 1.2;
+
+const stage = document.getElementById('stage');
+const select = document.getElementById('set');
+const resetButton = document.getElementById('reset');
+const motionButton = document.getElementById('motion');
+const statusText = document.getElementById('status');
+const errorBox = document.getElementById('error');
+
+// ?t=7.2 renders a single frozen pose at that time in seconds (used for screenshots).
+const fixedTime = (() => {
+  const raw = new URLSearchParams(location.search).get('t');
+  const value = raw === null ? NaN : Number(raw);
+  return Number.isFinite(value) ? value : null;
+})();
+
+// Pointer position inside the stage, -1 to 1. Positive y is down the screen.
+const pointer = { x: 0, y: 0 };
+stage.addEventListener('pointermove', (e) => {
+  const r = stage.getBoundingClientRect();
+  pointer.x = Math.max(-1, Math.min(1, ((e.clientX - r.left) / (r.width || 1)) * 2 - 1));
+  pointer.y = Math.max(-1, Math.min(1, ((e.clientY - r.top) / (r.height || 1)) * 2 - 1));
+});
+const resetPointer = () => {
+  pointer.x = 0;
+  pointer.y = 0;
+};
+stage.addEventListener('pointerleave', resetPointer);
+stage.addEventListener('pointercancel', resetPointer);
+
+// Skip rendering while the hero is scrolled off-screen or the tab is hidden.
+let inView = true;
+new IntersectionObserver((entries) => {
+  inView = entries[entries.length - 1].isIntersecting;
+}).observe(stage);
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let motionOn = !reduceMotion && fixedTime === null;
+motionButton.setAttribute('aria-pressed', String(motionOn));
+motionButton.textContent = motionOn ? 'Pause motion' : 'Play motion';
+motionButton.addEventListener('click', () => {
+  motionOn = !motionOn;
+  motionButton.setAttribute('aria-pressed', String(motionOn));
+  motionButton.textContent = motionOn ? 'Pause motion' : 'Play motion';
+});
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x0a0c0b, 1);
+stage.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
+camera.position.set(0, 0.4, 2.6);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+scene.add(new THREE.HemisphereLight(0xf4dc93, 0x0a0c0b, 1.1));
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(2, 3, 4);
+scene.add(key);
+const fill = new THREE.DirectionalLight(0x9fb4d6, 0.5);
+fill.position.set(-3, 1, -2);
+scene.add(fill);
+
+let current = null;
+let animate = null;
+const clock = new THREE.Clock();
+
+function resize() {
+  const w = stage.clientWidth || 1;
+  const h = stage.clientHeight || 1;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+
+function frame(object) {
+  const box = new THREE.Box3().setFromObject(object);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const radius = Math.max(size.x, size.y, size.z) / 2 || 1;
+  controls.target.copy(center);
+  camera.position.copy(center).add(new THREE.Vector3(0, radius * 0.35, radius * 2.6));
+  camera.near = radius / 100;
+  camera.far = radius * 100;
+  camera.updateProjectionMatrix();
+  controls.update();
+}
+
+function disposeObject(object) {
+  object.traverse((node) => {
+    if (node.geometry) node.geometry.dispose();
+    if (node.material) {
+      const mats = Array.isArray(node.material) ? node.material : [node.material];
+      mats.forEach((m) => {
+        if (m.map) m.map.dispose();
+        m.dispose();
+      });
+    }
+  });
+}
+
+function loadMaterials(name) {
+  return new Promise((resolve, reject) => {
+    new MTLLoader().setPath('./').load(name + '.mtl', resolve, undefined, reject);
+  });
+}
+
+function loadObject(name, materials) {
+  return new Promise((resolve, reject) => {
+    const loader = new OBJLoader();
+    loader.setMaterials(materials);
+    loader.load(name + '.obj', resolve, undefined, reject);
+  });
+}
+
+// Soft gold glow behind the mascot, like the halo in the gold hero SVG.
+function makeHalo() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+  const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gradient.addColorStop(0, 'rgba(224, 188, 99, 0.32)');
+  gradient.addColorStop(1, 'rgba(224, 188, 99, 0)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 256, 256);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  const material = new THREE.MeshBasicMaterial({
+    map: texture,
+    transparent: true,
+    depthWrite: false,
+    opacity: 0.6,
+  });
+  return new THREE.Mesh(new THREE.PlaneGeometry(1.6, 1.6), material);
+}
+
+// Common trading pairs that float around the golden mascot. Positions are local to the mascot.
+const TRADING_PAIRS = [
+  { text: 'XAUUSD', x: 0.78, y: 0.62, z: 0.25, phase: 0, highlight: true },
+  { text: 'EURUSD', x: -0.82, y: 0.78, z: 0.1, phase: 1.2, highlight: false },
+  { text: 'GBPUSD', x: -0.7, y: 0.12, z: 0.35, phase: 2.4, highlight: false },
+  { text: 'USDJPY', x: 0.8, y: -0.2, z: -0.1, phase: 3.6, highlight: false },
+  { text: 'BTCUSD', x: -0.2, y: 1.05, z: -0.45, phase: 4.8, highlight: false },
+];
+
+function roundRectPath(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+// Pill-shaped label rendered to a canvas texture, so it always faces the camera.
+function makePairSprite(text, highlight) {
+  const scale = 2;
+  const font = `600 ${(highlight ? 40 : 32) * scale}px ui-monospace, Menlo, Consolas, monospace`;
+  const measure = document.createElement('canvas').getContext('2d');
+  measure.font = font;
+  const padX = 22 * scale;
+  const height = (highlight ? 74 : 60) * scale;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.ceil(measure.measureText(text).width + padX * 2);
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  const inset = 3 * scale;
+  roundRectPath(ctx, inset, inset, canvas.width - inset * 2, height - inset * 2, height / 2 - inset);
+  ctx.fillStyle = 'rgba(10, 12, 11, 0.84)';
+  ctx.fill();
+  ctx.lineWidth = 3 * scale;
+  ctx.strokeStyle = highlight ? '#e0bc63' : '#5be39a';
+  ctx.stroke();
+
+  // Resizing the canvas resets the context state, so the font is set again here.
+  ctx.font = font;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = highlight ? '#e0bc63' : '#f2f4f2';
+  ctx.fillText(text, canvas.width / 2, height / 2 + scale);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  const sprite = new THREE.Sprite(
+    new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false }),
+  );
+  const worldHeight = highlight ? 0.17 : 0.13;
+  sprite.scale.set((worldHeight * canvas.width) / canvas.height, worldHeight, 1);
+  return sprite;
+}
+
+// Returns a per-frame update function for the loaded set, or null if the set has no motion.
+function buildAnimator(setName, object) {
+  const base = object.position.clone();
+  const named = (prefix) => {
+    const found = [];
+    object.traverse((node) => {
+      if (node.isMesh && node.name.startsWith(prefix)) found.push(node);
+    });
+    return found;
+  };
+
+  if (setName === 'ezymap-set-1-golden-mascot') {
+    // Pivot at the plaque centre, so the logo can turn in place like the SVG's turn animation.
+    const pivot = new THREE.Group();
+    pivot.position.set(0, 0.08, 0.24);
+    object.add(pivot);
+    named('logo_').forEach((m) => pivot.attach(m));
+
+    // The head carries the green EzyMap wordmark visor. It looks down at the logo, then scans
+    // left and right, like someone reading a map to find the way.
+    const head = new THREE.Group();
+    head.position.set(0, 0.5, 0);
+    object.add(head);
+    // Merge the single-pixel eye boxes into one mesh (one draw call instead of one per pixel),
+    // and make the wordmark emissive so it glows on the black lens.
+    const pixels = named('eye_px');
+    let glowMat = null;
+    if (pixels.length > 0) {
+      const source = Array.isArray(pixels[0].material) ? pixels[0].material[0] : pixels[0].material;
+      glowMat = source.clone();
+      glowMat.emissive.set(0x5be39a);
+      glowMat.emissiveIntensity = 0.9;
+      const merged = pixels.length > 1 ? mergeGeometries(pixels.map((m) => m.geometry), false) : null;
+      if (merged) {
+        const text = new THREE.Mesh(merged, glowMat);
+        text.name = 'eye_text';
+        pixels.forEach((m) => {
+          m.removeFromParent();
+          m.geometry.dispose();
+        });
+        object.add(text);
+      } else {
+        pixels.forEach((m) => {
+          m.material = glowMat;
+        });
+      }
+    }
+
+    // The lens and wordmark sit in their own group, so a blink squashes the lens around its centre.
+    const eyeGroup = new THREE.Group();
+    eyeGroup.position.set(0, 0.02, 0);
+    head.add(eyeGroup);
+    named('head').forEach((m) => head.attach(m));
+    named('eye_').forEach((m) => eyeGroup.attach(m));
+
+    // Floating trading-pair tags around the mascot. Each one bobs on its own phase.
+    const tags = TRADING_PAIRS.map((pair) => {
+      const sprite = makePairSprite(pair.text, pair.highlight);
+      sprite.position.set(pair.x, pair.y, pair.z);
+      object.add(sprite);
+      return { sprite, baseY: pair.y, phase: pair.phase };
+    });
+
+    const torso = named('torso')[0] || null;
+
+    // Road dashes and the traveller slide toward the viewer and wrap at the road end.
+    const moving = [];
+    for (const m of [...named('road_dash_'), ...named('road_traveler')]) {
+      const box = new THREE.Box3().setFromObject(m);
+      moving.push({
+        mesh: m,
+        z0: (box.min.z + box.max.z) / 2,
+        speed: m.name.startsWith('road_traveler') ? 0.3 : 0.25,
+      });
+    }
+
+    const halo = makeHalo();
+    halo.position.set(0, 0.02, -0.5);
+    object.add(halo);
+
+    // Faint polar grid under the feet: a map context with no text.
+    const grid = new THREE.PolarGridHelper(1.7, 16, 6, 64, 0xe0bc63, 0x5be39a);
+    grid.position.y = -0.69;
+    grid.material.transparent = true;
+    grid.material.opacity = 0.16;
+    grid.material.depthWrite = false;
+    object.add(grid);
+
+    // Ring that pulses outward from the plinth when the gaze locks onto the logo.
+    const ring = new THREE.Mesh(
+      new THREE.RingGeometry(0.96, 1, 64),
+      new THREE.MeshBasicMaterial({
+        color: 0xe0bc63,
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+      }),
+    );
+    ring.rotation.x = -Math.PI / 2;
+    ring.position.set(0, -0.68, 0);
+    object.add(ring);
+
+    // Dotted route that draws from the lens down to the logo at lock-on, then fades.
+    const DOTS = 14;
+    const curve = new THREE.QuadraticBezierCurve3(
+      new THREE.Vector3(0, 0.4, 0.3),
+      new THREE.Vector3(0, 0.38, 0.78),
+      new THREE.Vector3(0, 0.2, 0.34),
+    );
+    const dotPoints = Array.from({ length: DOTS }, (_, i) => curve.getPoint(i / (DOTS - 1)));
+    const dots = new THREE.InstancedMesh(
+      new THREE.SphereGeometry(0.014, 8, 6),
+      new THREE.MeshBasicMaterial({ color: 0x5be39a, transparent: true, opacity: 0.9, depthWrite: false }),
+      DOTS,
+    );
+    dots.frustumCulled = false;
+    object.add(dots);
+    const dummy = new THREE.Object3D();
+
+    const gaze = { yaw: 0, pitch: 0 };
+    const smoothPointer = { x: 0, y: 0 };
+    let smoothScroll = 0;
+
+    return (t, dt = 0) => {
+      const c = mod(t, GAZE_LOOP);
+
+      // Pointer and scroll follow with lag. dt is 0 for a frozen pose, so both stay at rest.
+      const follow = 1 - Math.exp(-dt * 3);
+      smoothPointer.x += (pointer.x - smoothPointer.x) * follow;
+      smoothPointer.y += (pointer.y - smoothPointer.y) * follow;
+      const scrollTarget = clamp01(window.scrollY / Math.max(1, window.innerHeight));
+      smoothScroll += (scrollTarget - smoothScroll) * follow;
+
+      object.position.y = base.y - 0.012 * wave(t, 6);
+      object.rotation.y = 0.6 * smoothScroll;
+      if (torso) torso.scale.setScalar(1 + 0.015 * wave(t, 4));
+
+      sampleGaze(c, gaze);
+      head.rotation.y = gaze.yaw + 0.25 * smoothPointer.x;
+      head.rotation.x = gaze.pitch + 0.15 * smoothPointer.y;
+
+      // Blink every 4.3 s, 0.18 s long.
+      const bp = mod(t, 4.3);
+      const blink = bp < 0.18 ? Math.sin((Math.PI * bp) / 0.18) : 0;
+      eyeGroup.scale.y = 1 - 0.92 * blink;
+      if (glowMat) glowMat.emissiveIntensity = 0.8 + 0.25 * wave(t, 2.4);
+
+      // Lock-on: the logo hops, a ring pulses, and the route dots draw in and fade.
+      const bump = Math.sin(Math.PI * clamp01((c - LOCK_AT) / 0.5));
+      pivot.position.y = 0.08 + 0.025 * bump;
+      pivot.rotation.y = 0.25 * Math.sin((TAU * t) / 4.5);
+
+      const ringK = clamp01((c - LOCK_AT) / 1.1);
+      ring.scale.setScalar(0.6 + 0.9 * (1 - (1 - ringK) * (1 - ringK)));
+      ring.material.opacity = c >= LOCK_AT ? 0.7 * (1 - ringK) : 0;
+
+      const drawn = clamp01((c - 6.3) / 0.9);
+      const fade = c > 7.4 ? clamp01(1 - (c - 7.4) / 0.6) : 1;
+      for (let i = 0; i < DOTS; i++) {
+        const size = clamp01(drawn * DOTS - i) * fade;
+        dummy.position.copy(dotPoints[i]);
+        dummy.scale.setScalar(Math.max(size, 0.0001));
+        dummy.updateMatrix();
+        dots.setMatrixAt(i, dummy.matrix);
+      }
+      dots.instanceMatrix.needsUpdate = true;
+
+      for (const tag of tags) {
+        tag.sprite.position.y = tag.baseY + 0.025 * Math.sin((TAU * t) / 5 + tag.phase);
+      }
+
+      halo.scale.setScalar(0.92 + 0.14 * wave(t, 4));
+      halo.material.opacity = 0.6 + 0.4 * wave(t, 4);
+      grid.rotation.y = t * 0.04;
+      for (const item of moving) {
+        const z = ROAD_START + mod(item.z0 - ROAD_START + t * item.speed, ROAD_LENGTH);
+        item.mesh.position.z = z - item.z0;
+      }
+    };
+  }
+
+  if (setName === 'ezymap-set-2-map-pin-beacon') {
+    // Each logo mesh gets its own material so the green/gold flash does not touch other sets.
+    const flashing = named('logo_');
+    flashing.forEach((m) => {
+      m.material = m.material.clone();
+    });
+    const green = new THREE.Color(0x2fbf71);
+    const gold = new THREE.Color(0xe0bc63);
+    const mix = new THREE.Color();
+    return (t) => {
+      object.position.y = base.y - 0.012 * wave(t, 6);
+      object.rotation.y = 0.35 * Math.sin((TAU * t) / 9);
+      // Emissive glow fades between green and gold on a 2.4 s cycle.
+      const phase = wave(t, 2.4);
+      mix.copy(green).lerp(gold, phase);
+      flashing.forEach((m) => {
+        m.material.emissive.copy(mix);
+        m.material.emissiveIntensity = 0.1 + 0.35 * phase;
+      });
+    };
+  }
+
+  if (setName === 'ezymap-set-3-orbit-globe') {
+    return (t) => {
+      object.position.y = base.y - 0.012 * wave(t, 6);
+      object.rotation.y = mod(t * 0.2, TAU);
+    };
+  }
+
+  return null;
+}
+
+async function load(name) {
+  statusText.textContent = 'Loading ' + name + '…';
+  errorBox.hidden = true;
+  try {
+    const materials = await loadMaterials(name);
+    materials.preload();
+    const object = await loadObject(name, materials);
+
+    if (current) {
+      scene.remove(current);
+      disposeObject(current);
+    }
+    animate = null;
+    current = object;
+    scene.add(object);
+    frame(object);
+    animate = buildAnimator(name, object);
+    // With motion off, show a clean pose instead of the raw model.
+    if (animate && !motionOn) animate(fixedTime === null ? CLEAN_POSE_TIME : fixedTime, 0);
+
+    let meshes = 0;
+    object.traverse((node) => {
+      if (node.isMesh) meshes++;
+    });
+    statusText.textContent = meshes + ' meshes, drag to orbit, scroll to zoom';
+  } catch (err) {
+    errorBox.textContent = 'Could not load ' + name + ': ' + (err && err.message ? err.message : err);
+    errorBox.hidden = false;
+    statusText.textContent = 'Error';
+  }
+}
+
+select.addEventListener('change', () => load(select.value));
+resetButton.addEventListener('click', () => {
+  if (current) frame(current);
+});
+
+let time = 0;
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), 0.1);
+  if (!inView || document.hidden) return;
+  if (animate && motionOn) {
+    time += dt;
+    animate(time, dt);
+  }
+  controls.update();
+  renderer.render(scene, camera);
+});
+
+load(select.value);
+</script>
+</body>
+</html>

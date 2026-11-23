@@ -1,0 +1,105 @@
+# EzyMap 3D materials (palette from SamBangGoldMascot_v1.mtl and tokens/tokens.json)
+
+newmtl graphite
+Ka 0.0185 0.0232 0.0343
+Kd 0.0185 0.0232 0.0343
+Ks 0.2000 0.2000 0.2000
+Ns 116
+d 1.0000
+illum 2
+
+newmtl gold
+Ka 0.8070 0.5149 0.0595
+Kd 0.8070 0.5149 0.0595
+Ks 0.2000 0.2000 0.2000
+Ns 156
+d 1.0000
+illum 2
+
+newmtl gold_deep
+Ka 0.4793 0.2502 0.0103
+Kd 0.4793 0.2502 0.0103
+Ks 0.2000 0.2000 0.2000
+Ns 140
+d 1.0000
+illum 2
+
+newmtl chrome
+Ka 0.7157 0.7529 0.8070
+Kd 0.7157 0.7529 0.8070
+Ks 0.2000 0.2000 0.2000
+Ns 172
+d 1.0000
+illum 2
+
+newmtl green
+Ka 0.0284 0.5210 0.1651
+Kd 0.0284 0.5210 0.1651
+Ks 0.2000 0.2000 0.2000
+Ns 150
+d 1.0000
+illum 2
+
+newmtl green_deep
+Ka 0.0048 0.1946 0.0685
+Kd 0.0048 0.1946 0.0685
+Ks 0.2000 0.2000 0.2000
+Ns 140
+d 1.0000
+illum 2
+
+newmtl logo_light
+Ka 0.9301 0.7682 0.3515
+Kd 0.9301 0.7682 0.3515
+Ks 0.2000 0.2000 0.2000
+Ns 156
+d 1.0000
+illum 2
+
+newmtl logo_gold
+Ka 0.7454 0.5029 0.1248
+Kd 0.7454 0.5029 0.1248
+Ks 0.2000 0.2000 0.2000
+Ns 156
+d 1.0000
+illum 2
+
+newmtl logo_mid
+Ka 0.5841 0.3564 0.0423
+Kd 0.5841 0.3564 0.0423
+Ks 0.2000 0.2000 0.2000
+Ns 156
+d 1.0000
+illum 2
+
+newmtl logo_ink
+Ka 0.0423 0.0232 0.0018
+Kd 0.0423 0.0232 0.0018
+Ks 0.2000 0.2000 0.2000
+Ns 120
+d 1.0000
+illum 2
+
+newmtl logo_shine
+Ka 1.0000 0.9216 0.6724
+Kd 1.0000 0.9216 0.6724
+Ks 0.2000 0.2000 0.2000
+Ns 172
+d 1.0000
+illum 2
+
+newmtl fin_light
+Ka 0.1046 0.7682 0.3231
+Kd 0.1046 0.7682 0.3231
+Ks 0.2000 0.2000 0.2000
+Ns 150
+d 1.0000
+illum 2
+
+newmtl lens_black
+Ka 0.0000 0.0000 0.0000
+Kd 0.0000 0.0000 0.0000
+Ks 0.2000 0.2000 0.2000
+Ns 120
+d 1.0000
+illum 2
