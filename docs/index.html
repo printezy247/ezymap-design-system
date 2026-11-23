@@ -151,9 +151,8 @@
 
   <section class="block" id="products"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Product icons</h2><p class="lede">One app-icon tile per ready product, from <code>assets/products/</code>. Every product also ships <code>-animated</code>, <code>-extrude</code> and <code>-glass</code> variants in SVG and 256px PNG — see the variant grid below.</p><div class="grid logos" id="product-grid"></div><h3>Variants</h3><div class="grid logos" id="product-variant-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))"></div></section>
 
-  <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logo families (3)</h2><p class="lede">The logo area shows three categories: the main EzyMap mark, the EzyAI logo variations (ingested from the EzyMap designresources, untouched), and the Macro Trader logo variations.</p>
+  <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logo families (2)</h2><p class="lede">The logo area shows two categories: the main EzyMap mark and the Macro Trader logo variations.</p>
     <h3>EzyMap — main mark</h3><div class="grid logos" id="logo-grid"></div>
-    <h3>EzyAI — logo variations</h3><div class="grid logos" id="ezyai-grid"></div>
     <h3>Macro Trader — logo variations</h3><div class="grid logos" id="macro-trader-grid"></div>
   </section>
 
@@ -244,29 +243,9 @@
     $("logo-grid").appendChild(el("div", "logo", '<div class="art ' + l[2] + '"><img src="../assets/logos/' + l[0] + '" alt="' + esc(l[1]) + '"></div><div class="cap"><b style="font-size:14px">' + esc(l[1]) + '</b><br><code class="mono">' + esc(l[0]) + '</code></div>'));
   });
 
-  var ezyaiFiles = [
-    ["ezyai-mark.png", "Mark"],
-    ["ezyai-lockup-horizontal.png", "Lockup, horizontal"],
-    ["ezyai-lockup-stacked.png", "Lockup, stacked"],
-    ["ezyai-banner-1280x320.png", "Banner, 1280×320"],
-    ["ezyai-avatar-512.png", "Avatar, 512"],
-    ["mark-E-fullcolour-1024.png", "Mark, full colour (v2.2)"],
-    ["mark-F-gold-1024.png", "Mark, gold"],
-    ["mark-G-white-1024.png", "Mark, white"],
-    ["mark-H-black-1024.png", "Mark, black"],
-    ["lockup-I-horizontal-light.png", "Lockup, horizontal, light"],
-    ["lockup-J-horizontal-dark.png", "Lockup, horizontal, dark"],
-    ["lockup-K-stacked.png", "Lockup, stacked"],
-    ["pfp-A-green-512.png", "PFP, green"],
-    ["pfp-B-black-512.png", "PFP, black"],
-    ["pfp-C-wordmark-512.png", "PFP, wordmark"],
-    ["pfp-D-gold-512.png", "PFP, gold"]
-  ];
-  ezyaiFiles.forEach(function (l) {
-    $("ezyai-grid").appendChild(el("div", "logo", '<div class="art"><img src="../assets/ezyai-logos/' + l[0] + '" alt="' + esc(l[1]) + '"></div><div class="cap"><b style="font-size:14px">' + esc(l[1]) + '</b><br><code class="mono">' + esc(l[0]) + '</code></div>'));
-  });
 
-  ["ezymap-mark-macro-trader-bot.svg", "Macro Trader mark, base"],
+  var macroTraderFiles = [
+["ezymap-mark-macro-trader-bot.svg", "Macro Trader mark, base"],
   ["ezymap-mark-macro-trader-bot-gold.svg", "Macro Trader mark, gold"],
   ["ezymap-mark-macro-trader-bot-white.svg", "Macro Trader mark, white"],
   ["ezymap-mark-macro-trader-bot-black.svg", "Macro Trader mark, black"]

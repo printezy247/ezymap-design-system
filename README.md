@@ -174,6 +174,8 @@ Motion utilities ship as plain CSS in six files under `assets/motion/` (`ezymap-
 - [`mcp/server.mjs`](mcp/server.mjs) — zero-dependency MCP server (`ezymap_summary`, `ezymap_tokens`, `ezymap_components`, `ezymap_motion`, `ezymap_assets`, `ezymap_rules`); see [mcp/README.md](mcp/README.md).
 - `node scripts/manifest.mjs` — CLI asset resolver (`--product`, `--logo`, `--motion`, `--list`).
 
+Motion utilities (`ezm-float`, `ezm-blink`, `ezm-shimmer`, `ezm-pulse-ring`, `ezm-marquee`, `ezm-rise`, `ezm-spin-slow`) ship as plain CSS in `assets/motion/ezymap-motion.css` — import it after `tokens.css` on any page, React or not.
+
 ## How it fits together
 
 ```mermaid
@@ -196,7 +198,7 @@ flowchart LR
 ezymap-design-system/
 ├── tokens/        tokens.json (source) · tokens.css · tokens.ts · tailwind-preset.js
 ├── components/    bundle.js/.css · index.d.ts · react/*.tsx · <Name>/README.md
-├── assets/        logos · ezyai-logos · products · motion · telegram · social · website · ambassador · imagery · illustrations
+├── assets/        logos · products · motion · telegram · social · website · ambassador · imagery · illustrations
 ├── docs/          index.html showcase · voice.md · brand-brief.md · palette.svg
 ├── scripts/       build-tokens.mjs · build-assets.mjs
 └── .github/       workflows/pages.yml
