@@ -112,6 +112,19 @@
   will-change: transform;
 }
 
+.ezm-parallax-3d__layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: var(--space-6, 24px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl, 20px);
+  background: var(--surface);
+  box-shadow: var(--shadow-elevated);
+  color: var(--text, inherit);
+}
+
 /* ---------- Touch ripple ----------
    The Ripple component appends .ezm-ripple__wave at the press point and sets
    --ripple-size to cover the element. */
