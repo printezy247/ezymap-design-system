@@ -218,7 +218,7 @@ writeFileSync(join(logosDir, "ezymap-mark-fintech.svg"), fintech);
 
 // Macro Trader Bot: no gem — a dark rounded tile holding a fundamental-trading
 // glyph: a candlestick cluster (fundamentals) plus a rising macro line.
-// Variations as per the EzyAI set: base, gold, white, black.
+// Variations: base, gold, white, black.
 const macroTraderGlyph = (cfg) => `
 <g stroke-linecap="round">
   <line x1="104" y1="410" x2="296" y2="296" stroke="${cfg.line}" stroke-width="4" opacity=".85"/>

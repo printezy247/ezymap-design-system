@@ -1,6 +1,6 @@
 # Logos
 
-EzyMap only — the Macro Desk marks were retired in v2, and the new Macro Trader Bot mark lives here (`ezymap-mark-macro-trader-bot.svg`). The EzyAI marks live in `../ezyai-logos/`, ingested from the EzyMap designresources as-is. The brand mark is the 3D gem: a faceted diamond with a green crown and gold base, a gold rising route line inside, and an orbit ring. It is full colour, so never tint it.
+EzyMap only — the Macro Desk marks were retired in v2, and the new Macro Trader Bot mark lives here (`ezymap-mark-macro-trader-bot.svg`). The Macro Fundamentals logo set lives in `macro-fundamentals/`. The brand mark is the 3D gem: a faceted diamond with a green crown and gold base, a gold rising route line inside, and an orbit ring. It is full colour, so never tint it.
 
 ## Mark
 
@@ -14,7 +14,7 @@ EzyMap only — the Macro Desk marks were retired in v2, and the new Macro Trade
 - `ezymap-mark-animated-orbit.svg` — gem floats while a dashed gold ring rotates around it. Stops under `prefers-reduced-motion`.
 - `ezymap-mark-hero.svg` — flagship hero animation: float, counter-rotating rings, comet, halo pulse and a sheen sweep. One per view.
 - `ezymap-mark-fintech.svg` — gem floating over a candlestick cluster with a gold trend line; for trading and markets surfaces.
-- `ezymap-mark-macro-trader-bot.svg` — dark rounded tile with a fundamental-trading glyph: a candlestick cluster (fundamentals) plus a rising macro line. Variations as per the EzyAI set: `ezymap-mark-macro-trader-bot-gold.svg`, `-white.svg` and `-black.svg`.
+- `ezymap-mark-macro-trader-bot.svg` — dark rounded tile with a fundamental-trading glyph: a candlestick cluster (fundamentals) plus a rising macro line. Variations: `ezymap-mark-macro-trader-bot-gold.svg`, `-white.svg` and `-black.svg`.
 - `ezymap-mark-gold.svg` — all-metal gold variant of the gem for premium, one-per-view moments.
 - `ezymap-horizontal-animated.svg` — animated lockup: floating gem, sheen wordmark and a marching gold rule.
 - `ezymap-appicon-animated.svg` — animated app-icon tile (float + orbiting comet) for heroes and store pages.
@@ -22,6 +22,16 @@ EzyMap only — the Macro Desk marks were retired in v2, and the new Macro Trade
 - `ezymap-3d-favicon.svg` / `.png` — ring-less gem for sizes below 48px.
 - `ezymap-appicon-glass.svg` — gem on a frosted translucent tile for glassmorphism heroes and the Mini App.
 - `ezymap-appicon-neon.svg` — gem with a phosphor drop-shadow and green halo on black, for stream overlays.
+
+## Macro Fundamentals (`macro-fundamentals/`)
+
+Logo set for the Macro product, covering fundamentals and macro analysis. Its glyph is a globe with a meridian, parallels and a rising trend line that ends in a node. It never embeds the EzyMap mark. Generate it with `node scripts/build-macro-logos.mjs`.
+
+- `macro-mark-fullcolour.svg`, `-gold.svg`, `-white.svg`, `-black.svg`, `-green.svg`: the glyph on a transparent background.
+- `macro-lockup-horizontal-dark.svg` / `macro-lockup-horizontal-light.svg`: glyph and wordmark for dark and light grounds.
+- `macro-lockup-stacked.svg`: glyph above the wordmark.
+- `macro-avatar-green.svg`, `-gold.svg`, `-black.svg`, `-light.svg`: square avatars.
+- `macro-banner-1280x320.svg`: banner.
 
 ## Lockups
 

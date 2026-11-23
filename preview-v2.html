@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="./tokens/tokens.css">
 <link rel="stylesheet" href="./components/bundle.css">
 <link rel="stylesheet" href="./assets/motion/ezymap-motion.css">
+<link rel="stylesheet" href="./assets/motion/ezymap-motion-depth.css">
 <style>
   html { background: var(--background); }
   body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
@@ -177,6 +178,128 @@
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 <script src="./components/bundle.js"></script>
+<script>
+(function () {
+  if (!window.React || !window.ReactDOM || !window.EzyMap) { return; }
+  var E = window.EzyMap;
+  var h = React.createElement;
+  var host = document.getElementById("components") || document.body;
+
+  var head = document.createElement("div");
+  head.style.marginTop = "48px";
+  head.innerHTML = '<p class="eyebrow">Upgrade · v2.7.0</p><h2>Trading pack, 3D and depth motion</h2><p class="sub">Rendered live from <code>components/bundle.js</code>. Trading components, 3D depth components and the Macro Fundamentals logo set.</p>';
+  host.appendChild(head);
+
+  var grid = document.createElement("div");
+  grid.style.cssText = "display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:start;margin-top:24px";
+  host.appendChild(grid);
+
+  function cell(label, name, props, kids) {
+    var C = E[name];
+    var wrap = document.createElement("div");
+    var cap = document.createElement("p");
+    cap.className = "eyebrow";
+    cap.textContent = label;
+    var box = document.createElement("div");
+    wrap.appendChild(cap);
+    wrap.appendChild(box);
+    grid.appendChild(wrap);
+    if (typeof C !== "function") { box.textContent = name + " is not exported"; return; }
+    ReactDOM.createRoot(box).render(h(C, props, kids));
+  }
+
+  var bids = [
+    { price: 1.0841, size: 2.5 },
+    { price: 1.0840, size: 4.0 },
+    { price: 1.0839, size: 1.2 }
+  ];
+  var asks = [
+    { price: 1.0843, size: 1.8 },
+    { price: 1.0844, size: 3.0 },
+    { price: 1.0845, size: 0.9 }
+  ];
+  var candles = [
+    { open: 1.0820, high: 1.0838, low: 1.0812, close: 1.0834 },
+    { open: 1.0834, high: 1.0849, low: 1.0829, close: 1.0841 },
+    { open: 1.0841, high: 1.0846, low: 1.0822, close: 1.0826 },
+    { open: 1.0826, high: 1.0833, low: 1.0808, close: 1.0815 },
+    { open: 1.0815, high: 1.0839, low: 1.0811, close: 1.0837 },
+    { open: 1.0837, high: 1.0852, low: 1.0832, close: 1.0846 }
+  ];
+  var heat = [
+    { label: "EURUSD", change: 0.42 },
+    { label: "GBPUSD", change: -0.31 },
+    { label: "USDJPY", change: 0.88 },
+    { label: "XAUUSD", change: -1.12 },
+    { label: "US30", change: 0.17 },
+    { label: "NAS100", change: 0.64 },
+    { label: "BTCUSD", change: -0.05 },
+    { label: "ETHUSD", change: 1.4 }
+  ];
+  var cards = [
+    { title: "EURUSD", subtitle: "Trend" },
+    { title: "XAUUSD", subtitle: "Macro" },
+    { title: "NAS100", subtitle: "Index" },
+    { title: "BTCUSD", subtitle: "Crypto" },
+    { title: "USDJPY", subtitle: "Carry" }
+  ];
+
+  cell("Sparkline", "Sparkline", { values: [1.02, 1.05, 1.03, 1.08, 1.07, 1.12], tone: "auto", area: true, label: "EURUSD trend" });
+  cell("DeltaBadge", "DeltaBadge", { value: 1.24, suffix: "%", decimals: 2 });
+  cell("PriceFlash", "PriceFlash", { value: 1.0842, decimals: 4 });
+  cell("OrderBook", "OrderBook", { bids: bids, asks: asks, levels: 3, decimals: 4, sizeDecimals: 1 });
+  cell("RiskMeter", "RiskMeter", { value: 42, label: "Risk" });
+  cell("TradeCard", "TradeCard", { pair: "EURUSD", side: "buy", entry: 1.084, stopLoss: 1.081, targets: [1.088, 1.092], status: "running", decimals: 4 });
+  cell("CandleStrip", "CandleStrip", { candles: candles, label: "EURUSD H1" });
+  cell("SessionClock", "SessionClock", {});
+  cell("HeatGrid", "HeatGrid", { items: heat, columns: 4, max: 1, decimals: 2 });
+  cell("FeedStatus", "FeedStatus", { status: "live", latencyMs: 120 }, "Live feed");
+  cell("Carousel3D", "Carousel3D", { items: cards });
+  cell("Coin3D", "Coin3D", { size: 72 }, "E");
+  cell("Parallax3D", "Parallax3D", { style: { minHeight: "160px" } }, h("div", { className: "ezm-parallax-3d__layer" }, "Depth layer"));
+
+  var macroHead = document.createElement("div");
+  macroHead.style.marginTop = "48px";
+  macroHead.innerHTML = '<p class="eyebrow">Macro Fundamentals</p><h2>Macro logo set</h2><p class="sub">Globe and trend-line mark in full colour, gold, white, black and green, with lockups, avatars and a banner.</p>';
+  host.appendChild(macroHead);
+
+  var macroGrid = document.createElement("div");
+  macroGrid.style.cssText = "display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:24px";
+  host.appendChild(macroGrid);
+
+  var macroFiles = [
+    ["macro-mark-fullcolour.svg", "Mark · full colour"],
+    ["macro-mark-gold.svg", "Mark · gold"],
+    ["macro-mark-white.svg", "Mark · white"],
+    ["macro-mark-green.svg", "Mark · green"],
+    ["macro-mark-black.svg", "Mark · black"],
+    ["macro-lockup-horizontal-dark.svg", "Lockup · horizontal dark"],
+    ["macro-lockup-horizontal-light.svg", "Lockup · horizontal light"],
+    ["macro-lockup-stacked.svg", "Lockup · stacked"],
+    ["macro-avatar-gold.svg", "Avatar · gold"],
+    ["macro-avatar-green.svg", "Avatar · green"],
+    ["macro-avatar-light.svg", "Avatar · light"],
+    ["macro-avatar-black.svg", "Avatar · black"],
+    ["macro-banner-1280x320.svg", "Banner 1280×320"]
+  ];
+  macroFiles.forEach(function (item) {
+    var fig = document.createElement("figure");
+    var light = /light|black/.test(item[0]);
+    fig.style.cssText = "margin:0;padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:10px;background:" + (light ? "#f2f4f2" : "#1e2321");
+    var img = document.createElement("img");
+    img.src = "./assets/logos/macro-fundamentals/" + item[0];
+    img.alt = item[1];
+    img.style.cssText = "width:100%;height:auto;display:block";
+    img.onerror = function () { img.alt = item[1] + " (missing)"; };
+    var cap = document.createElement("figcaption");
+    cap.textContent = item[1];
+    cap.style.cssText = "font-size:13px;color:#a8b0ab";
+    fig.appendChild(img);
+    fig.appendChild(cap);
+    macroGrid.appendChild(fig);
+  });
+})();
+</script>
 <script>
 (function () {
   var names = ["background","surface","surface-elevated","foreground","body-text","primary","primary-glow","accent","accent-glow","market-up","market-down","status-stop"];
