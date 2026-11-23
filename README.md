@@ -276,7 +276,7 @@ EzyMap is a premium trading desk that lives inside Telegram. Everything built on
 
 ### Iconography
 - Use Lucide icons at stroke width 1.75, coloured with `primary` or `accent` and sized 14–20px beside text. No emoji and no filled icon sets.
-- Logos live in `assets/logos`. The primary mark is the 3D EzyMap gem: a faceted diamond with a green crown and gold base, carrying a gold rising route line and wrapped in a gold orbit ring. Use `ezymap-3d-horizontal-on-dark.svg` as the default lockup, the app icon for avatars and Telegram, and the ring-less favicon below 48px. EzyMap is the only brand — the retired EzyAI and Macro Desk marks are not part of this system. One icon tile per ready product (channel, Mini App, gated bot, live ticker, calculators, exchanges & bots, EzyMapPro, ebooks, Macro Bot) lives in `assets/products` — each in four variants (base, animated, extruded 3D, glass) as SVG plus a 256px PNG.
+- Logos live in `assets/logos`. The primary mark is the 3D EzyMap gem: a faceted diamond with a green crown and gold base, carrying a gold rising route line and wrapped in a gold orbit ring. Use `ezymap-3d-horizontal-on-dark.svg` as the default lockup, the app icon for avatars and Telegram, and the ring-less favicon below 48px. EzyMap is the only brand. Earlier brand marks are not part of this system. One icon tile per ready product (channel, Mini App, gated bot, live ticker, calculators, exchanges & bots, EzyMapPro, ebooks, Macro Bot) lives in `assets/products` — each in four variants (base, animated, extruded 3D, glass) as SVG plus a 256px PNG.
 
 ### Imagery
 - Product photography is cinematic, dark and low-key, lit in green and gold, showing trading desks, monitors and devices. See `assets/imagery`.

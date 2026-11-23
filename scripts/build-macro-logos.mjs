@@ -9,7 +9,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = join(root, "assets", "logos", "macro-fundamentals");
 mkdirSync(outDir, { recursive: true });
 
-const FONT = "'Space Grotesk','Inter Tight',system-ui,-apple-system,'Segoe UI',sans-serif";
+const FONT = "'Clash Display','General Sans','Space Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif";
 
 // Palette values come from tokens/tokens.json (primary green, gold, background).
 const palettes = {
