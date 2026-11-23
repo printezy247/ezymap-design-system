@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased — trading and live-data pack
+
+### Added
+- Ten components for trading and live-data screens, in `components/react/*.tsx`, the vanilla `components/bundle.js`, `components/index.d.ts` and `components/bundle.css`, each with a README under `components/<Name>/`:
+  - `Sparkline`: inline trend line that draws itself.
+  - `DeltaBadge`: signed change pill with arrow, sign and colour.
+  - `PriceFlash`: mono price that flashes green on a rise and gold on a fall.
+  - `OrderBook`: depth ladder with cumulative depth bars and spread row.
+  - `RiskMeter`: half-circle 0 to 100 gauge with `role="meter"`.
+  - `TradeCard`: signal card with entry, stop loss, targets and risk-to-reward.
+  - `CandleStrip`: mini candlestick chart.
+  - `SessionClock`: 24-hour UTC strip of Sydney, Tokyo, London and New York sessions.
+  - `HeatGrid`: market heat map, tint follows the size of the move.
+  - `FeedStatus`: data-feed health pill (live, delayed, offline) with latency.
+- All new animation is off under `prefers-reduced-motion`.
+
 ## 2.7.0 — depth motion pack, 3D components
 
 ### Added
