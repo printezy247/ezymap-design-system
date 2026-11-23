@@ -43,6 +43,10 @@
   box-shadow: var(--shadow-elevated);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  min-width: 0;
+  padding: var(--space-3, 12px);
+  text-align: center;
+  overflow-wrap: anywhere;
   transform: rotateY(calc(var(--i, 0) * 360deg / var(--n))) translateZ(var(--r));
 }
 @keyframes ezm-carousel-3d-spin {
