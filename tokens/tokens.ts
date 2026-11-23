@@ -1,7 +1,7 @@
 // EzyMap design tokens — generated from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit.
 export const tokens = {
   "name": "EzyMap",
-  "version": "2.6.1",
+  "version": "2.7.0",
   "color": {
     "background": "#0a0c0b",
     "foreground": "#f2f4f2",

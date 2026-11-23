@@ -1,4 +1,4 @@
-# EzyMap design system — full reference (v2.6.1)
+# EzyMap design system — full reference (v2.7.0)
 
 Private system for EzyMap (trading signals on Telegram). EzyMap is the only brand.
 Palette: green #2fbf71 leads, gold #c9a13a is the premium accent (~20% of a view max),
@@ -19,7 +19,7 @@ The only red in the system is `status-stop`, used solely by SignalFlag "Stopped"
 
 ## Install
 
-Private package: `npm install "github:printezy247/ezymap-design-system#v2.6.1"`
+Private package: `npm install "github:printezy247/ezymap-design-system#v2.7.0"`
 
 ```css
 @import "@ezymap/design-system/tokens.css";

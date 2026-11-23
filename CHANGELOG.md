@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.7.0 — depth motion pack, 3D components
+
+### Added
+- `assets/motion/ezymap-motion-depth.css`: depth and 3D motion utilities, imported by `components/bundle.css` and listed in `assets/manifest.json`.
+- Components `Carousel3D`, `Coin3D` and `Parallax3D`, in `components/react/*.tsx`, the vanilla `components/bundle.js`, and `components/index.d.ts`.
+
+### Changed
+- Product icons and logos refreshed, including the Macro Trader Bot marks.
+- Version strings in `package.json`, `assets/manifest.json`, `scripts/build-assets.mjs`, README and docs bumped to 2.7.0.
+
 ## 2.6.1 — Macro Trader Bot: fundamental glyph, EzyAI-style variations
 
 ### Changed

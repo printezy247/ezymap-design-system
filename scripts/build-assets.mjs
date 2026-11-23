@@ -556,7 +556,7 @@ const listSvgs = (dir) =>
     }));
 const manifest = {
   name: "EzyMap",
-  version: "2.6.1",
+  version: "2.7.0",
   generatedBy: "scripts/build-assets.mjs",
   categories: {
     logos: listSvgs(logosDir),

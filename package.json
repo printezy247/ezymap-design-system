@@ -1,6 +1,6 @@
 {
   "name": "@ezymap/design-system",
-  "version": "2.6.1",
+  "version": "2.7.0",
   "description": "EzyMap design system: tokens, React components and brand assets.",
   "private": true,
   "license": "UNLICENSED",

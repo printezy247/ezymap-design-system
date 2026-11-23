@@ -9,7 +9,7 @@
 
 **Green and gold on black, with white type. Tokens, React components and brand assets for the EzyMap Algo desk.**
 
-![version](https://img.shields.io/badge/version-2.5.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
+![version](https://img.shields.io/badge/version-2.7.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
 ![license](https://img.shields.io/badge/license-proprietary-c9a13a?style=for-the-badge&labelColor=0a0c0b)
 ![react](https://img.shields.io/badge/React-18-2fbf71?style=for-the-badge&logo=react&logoColor=white&labelColor=0a0c0b)
 ![tailwind](https://img.shields.io/badge/Tailwind-v4-c9a13a?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=0a0c0b)
@@ -51,10 +51,10 @@
 
 ## Quick start
 
-Install from the private GitHub repo named in `package.json` (`repository`), pinned to the `v2.5.0` tag:
+Install from the private GitHub repo named in `package.json` (`repository`), pinned to the `v2.7.0` tag:
 
 ```bash
-npm install "github:<owner>/ezymap-design-system#v2.5.0"
+npm install "github:<owner>/ezymap-design-system#v2.7.0"
 ```
 
 <details open>
