@@ -17,19 +17,26 @@ const v = (n) => `var(--${cssName(n)})`;
 // The first theme is the default and goes on :root. Other themes apply under [data-theme="<id>"].
 // A token without a value for a theme falls back to the default theme's value.
 const [defaultTheme, ...altThemes] = src.color.themes.map((t) => t.id);
-const colorVal = (t, id) => (typeof t.value === "string" ? t.value : t.value[id] ?? t.value[defaultTheme] ?? Object.values(t.value)[0]);
-
-const colors = src.color.tokens.map((t) => ({ name: t.name, value: colorVal(t, defaultTheme), usage: t.usage }));
-const altColors = Object.fromEntries(
-  altThemes.map((id) => [id, src.color.tokens.map((t) => ({ name: t.name, value: colorVal(t, id) }))])
-);
+const themeVal = (token, id) =>
+  typeof token.value === "string" ? token.value : token.value[id] ?? token.value[defaultTheme];
+const resolve = (list, id) => list.map((token) => ({ ...token, value: themeVal(token, id) }));
+const colors = resolve(src.color.tokens, defaultTheme);
+const altColors = Object.fromEntries(altThemes.map((id) => [id, resolve(src.color.tokens, id)]));
+const themedDepth = [...src.shadow.tokens, ...src.gradient.tokens].filter((t) => typeof t.value !== "string");
 const themeBlocks = altThemes
-  .map((id) => `\n[data-theme="${id}"] {\n${altColors[id].map((t) => `  --${cssName(t.name)}: ${t.value};`).join("\n")}\n}\n`)
+  .map((id) => {
+    const tokens = [...altColors[id], ...resolve(themedDepth, id)];
+    return `
+[data-theme="${id}"] {
+${tokens.map((t) => `  --${cssName(t.name)}: ${t.value};`).join("\n")}
+}
+`;
+  })
   .join("");
 const spacing = src.spacing.tokens;
 const radius = src.radius.tokens;
-const shadow = src.shadow.tokens;
-const gradient = src.gradient.tokens;
+const shadow = resolve(src.shadow.tokens, defaultTheme);
+const gradient = resolve(src.gradient.tokens, defaultTheme);
 const motion = src.motion?.tokens ?? [];
 const breakpoints = src.breakpoint?.tokens ?? [];
 const families = src.type.families;
@@ -72,8 +79,9 @@ const classes = styles.map((s) => {
 out(
   "tokens.css",
   `/* EzyMap design tokens — generated from tokens/tokens.json by scripts/build-tokens.mjs. Do not edit. */
-@import url("https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
 :root {
 ${decl.join("\n")}
@@ -95,6 +103,10 @@ const tokens = {
   radius: map(radius),
   shadow: map(shadow),
   gradient: map(gradient),
+  depthThemes: Object.fromEntries(altThemes.map((id) => [id, {
+    shadow: map(resolve(src.shadow.tokens, id)),
+    gradient: map(resolve(src.gradient.tokens, id)),
+  }])),
   motion: map(motion),
   breakpoint: map(breakpoints),
   fontFamily: { ...families },
@@ -165,19 +177,19 @@ export default ${JSON.stringify(preset, null, 2)};
 );
 
 /* ---------- docs/palette.svg (README swatch strip) ---------- */
-const pick = ["background", "surface", "surface-elevated", "foreground", "body-text", "primary", "primary-glow", "accent", "accent-glow", "status-stop"];
+const pick = ["background", "surface-quiet", "surface-elevated", "selected-bg", "foreground", "body-text", "primary", "primary-glow", "accent", "status-stop"];
 const cell = 112, gap = 12;
 const sw = pick
   .map((n, i) => {
-    const t = colors.find((c) => c.name === n);
+    const t = altColors.light.find((c) => c.name === n);
     const x = gap + i * (cell + gap);
-    const light = ["foreground", "body-text", "primary", "accent"].includes(n);
-    return `<g transform="translate(${x} 12)"><rect width="${cell}" height="88" rx="12" fill="${t.value}" stroke="#ffffff" stroke-opacity=".18"/><text x="10" y="74" font-family="monospace" font-size="11" fill="${light ? "#06120c" : "#f2f4f2"}">${t.value}</text></g><text x="${x}" y="122" font-family="monospace" font-size="11" fill="#a8b0ab">${n}</text>`;
+    const light = ["background", "surface-quiet", "surface-elevated", "selected-bg"].includes(n);
+    return `<g transform="translate(${x} 12)"><rect width="${cell}" height="88" rx="12" fill="${t.value}" stroke="#1d1d1f" stroke-opacity=".15"/><text x="10" y="74" font-family="monospace" font-size="11" fill="${light ? "#06120c" : "#f2f4f2"}">${t.value}</text></g><text x="${x}" y="122" font-family="monospace" font-size="11" fill="#3b4540">${n}</text>`;
   })
   .join("");
 writeFileSync(
   join(root, "docs/palette.svg"),
-  `<svg xmlns="http://www.w3.org/2000/svg" width="${gap + pick.length * (cell + gap)}" height="136" viewBox="0 0 ${gap + pick.length * (cell + gap)} 136" role="img" aria-label="EzyMap colour palette"><rect width="100%" height="100%" rx="14" fill="#0a0c0b"/>${sw}</svg>\n`
+  `<svg xmlns="http://www.w3.org/2000/svg" width="${gap + pick.length * (cell + gap)}" height="136" viewBox="0 0 ${gap + pick.length * (cell + gap)} 136" role="img" aria-label="EzyMap colour palette"><rect width="100%" height="100%" rx="14" fill="#ffffff"/>${sw}</svg>\n`
 );
 
 console.log(

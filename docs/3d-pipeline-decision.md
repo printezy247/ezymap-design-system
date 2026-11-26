@@ -42,3 +42,11 @@ Reasons:
 
 Either way: keep SVG/PNG variants as the always-available fallback and list any new
 runtime assets in `assets/manifest.json` with their format and weight.
+
+## Light-first scenes
+
+The [motion studio](studio.html) provides CSS illustrations for lightweight
+live use and fixed landscape or portrait frames for video. Signal stack and
+Range gate also have editable OBJ and MTL pairs for the [3D viewer](../assets/3d/preview.html)
+and offline rendering. Use regular SVG and PNG artwork for logos and icons.
+See the [scene and capture guide](studio.md) for the asset entry points.

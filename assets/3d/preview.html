@@ -1,21 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EzyMap 3D asset preview</title>
+<link rel="stylesheet" href="../../tokens/tokens.css">
 <style>
-  html, body { margin: 0; height: 100%; background: #0a0c0b; color: #f2f4f2; font-family: system-ui, sans-serif; }
+  html, body { margin: 0; height: 100%; background: var(--background); color: var(--foreground); font-family: var(--font-sans); }
   body { display: flex; flex-direction: column; }
-  header { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid #1f2622; }
+  header { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--border); }
   header h1 { font-size: 16px; font-weight: 600; margin: 0 auto 0 0; }
-  select, button { background: #151a17; color: #f2f4f2; border: 1px solid #2c3530; border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer; }
-  button:hover, select:hover { border-color: #e0bc63; }
-  button:focus-visible, select:focus-visible { outline: 2px solid #e0bc63; outline-offset: 2px; }
-  #status { color: #a8b0ab; font-size: 13px; }
-  #error { color: #f2a48a; padding: 12px 16px; }
+  select, button { background: var(--surface); color: var(--foreground); border: 1px solid var(--control-border); border-radius: 8px; padding: 6px 10px; min-height: 44px; font: inherit; cursor: pointer; }
+  button:hover, select:hover { border-color: var(--primary); }
+  button:focus-visible, select:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  #status { color: var(--body-text); font-size: 13px; }
+  #error { color: var(--status-stop); padding: 12px 16px; }
   #stage { flex: 1; min-height: 0; position: relative; }
   #stage canvas { display: block; width: 100%; height: 100%; }
+  header a, #fallback a { color: var(--primary); text-underline-offset: .18em; }
+  a:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+  #fallback { padding: 16px; }
 </style>
 <script type="importmap">
 {
@@ -29,18 +33,22 @@
 <body>
 <header>
   <h1>EzyMap 3D preview</h1>
-  <label for="set">Set</label>
+  <a href="../../docs/studio.html">Motion studio</a>
+  <label for="set">Model</label>
   <select id="set">
     <option value="ezymap-set-1-golden-mascot">1. Golden mascot</option>
     <option value="ezymap-set-2-map-pin-beacon">2. Logo beacon</option>
     <option value="ezymap-set-3-orbit-globe">3. Orbit globe</option>
+    <option value="ezymap-signal-stack">Signal stack</option>
+    <option value="ezymap-range-gate">Range gate</option>
   </select>
   <button id="reset" type="button">Reset view</button>
-  <button id="motion" type="button" aria-pressed="true">Pause motion</button>
-  <span id="status">Loading…</span>
+  <button id="motion" type="button">Pause motion</button>
+  <span id="status" role="status">Loading…</span>
 </header>
 <div id="error" hidden></div>
 <div id="stage"></div>
+<p id="fallback">If the 3D viewer is unavailable, preview the scenes and download the models in the <a href="../../docs/studio.html">motion studio</a>.</p>
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -104,8 +112,11 @@ const statusText = document.getElementById('status');
 const errorBox = document.getElementById('error');
 
 // ?t=7.2 renders a single frozen pose at that time in seconds (used for screenshots).
+const query = new URLSearchParams(location.search);
+const initialModel = query.get('model');
+if ([...select.options].some(option => option.value === initialModel)) select.value = initialModel;
 const fixedTime = (() => {
-  const raw = new URLSearchParams(location.search).get('t');
+  const raw = query.get('t');
   const value = raw === null ? NaN : Number(raw);
   return Number.isFinite(value) ? value : null;
 })();
@@ -130,19 +141,29 @@ new IntersectionObserver((entries) => {
   inView = entries[entries.length - 1].isIntersecting;
 }).observe(stage);
 
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let motionOn = !reduceMotion && fixedTime === null;
-motionButton.setAttribute('aria-pressed', String(motionOn));
-motionButton.textContent = motionOn ? 'Pause motion' : 'Play motion';
-motionButton.addEventListener('click', () => {
-  motionOn = !motionOn;
-  motionButton.setAttribute('aria-pressed', String(motionOn));
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let motionOn = !reduceMotion.matches && fixedTime === null;
+function setMotion(enabled) {
+  motionOn = enabled;
   motionButton.textContent = motionOn ? 'Pause motion' : 'Play motion';
-});
+}
+setMotion(motionOn);
+motionButton.disabled = fixedTime !== null;
+motionButton.addEventListener('click', () => setMotion(!motionOn));
+reduceMotion.addEventListener('change', () => setMotion(!reduceMotion.matches && fixedTime === null));
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  document.getElementById('fallback').hidden = true;
+} catch {
+  statusText.textContent = 'WebGL unavailable';
+  select.disabled = resetButton.disabled = motionButton.disabled = true;
+  document.getElementById('stage').hidden = true;
+}
+if (!renderer) throw new Error("WebGL unavailable");
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setClearColor(0x0a0c0b, 1);
+renderer.setClearColor(0xf5f7f5, 1);
 stage.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
@@ -152,7 +173,8 @@ camera.position.set(0, 0.4, 2.6);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-scene.add(new THREE.HemisphereLight(0xf4dc93, 0x0a0c0b, 1.1));
+const ambient = new THREE.HemisphereLight(0xf4dc93, 0x0a0c0b, 1.1);
+scene.add(ambient);
 const key = new THREE.DirectionalLight(0xffffff, 1.6);
 key.position.set(2, 3, 4);
 scene.add(key);
@@ -180,7 +202,8 @@ function frame(object) {
   const center = box.getCenter(new THREE.Vector3());
   const radius = Math.max(size.x, size.y, size.z) / 2 || 1;
   controls.target.copy(center);
-  camera.position.copy(center).add(new THREE.Vector3(0, radius * 0.35, radius * 2.6));
+  const distance = radius * 3.8 / Math.min(camera.aspect, 1);
+  camera.position.copy(center).add(new THREE.Vector3(distance * 0.32, distance * 0.40, distance));
   camera.near = radius / 100;
   camera.far = radius * 100;
   camera.updateProjectionMatrix();
@@ -477,6 +500,21 @@ function buildAnimator(setName, object) {
     };
   }
 
+  if (setName === 'ezymap-signal-stack') {
+    const top = [...named('plate_2'), ...named('bar_')];
+    const [middle] = named('plate_1');
+    return (t) => {
+      const spread = wave(t, 4);
+      middle.position.y = spread * 0.06;
+      top.forEach(mesh => { mesh.position.y = spread * 0.16; });
+    };
+  }
+
+  if (setName === 'ezymap-range-gate') {
+    const [cursor] = named('scan_cursor');
+    return (t) => { cursor.position.x = -0.4 + 0.8 * wave(t, 4); };
+  }
+
   if (setName === 'ezymap-set-2-map-pin-beacon') {
     // Each logo mesh gets its own material so the green/gold flash does not touch other sets.
     const flashing = named('logo_');
@@ -509,14 +547,23 @@ function buildAnimator(setName, object) {
   return null;
 }
 
+let loadId = 0;
+let time = 0;
+
 async function load(name) {
+  const id = ++loadId;
   statusText.textContent = 'Loading ' + name + '…';
   errorBox.hidden = true;
   try {
     const materials = await loadMaterials(name);
     materials.preload();
     const object = await loadObject(name, materials);
+    if (id !== loadId) {
+      disposeObject(object);
+      return;
+    }
 
+    time = 0;
     if (current) {
       scene.remove(current);
       disposeObject(current);
@@ -524,6 +571,9 @@ async function load(name) {
     animate = null;
     current = object;
     scene.add(object);
+    const lightModel = name === 'ezymap-signal-stack' || name === 'ezymap-range-gate';
+    ambient.color.setHex(lightModel ? 0xffffff : 0xf4dc93);
+    ambient.groundColor.setHex(lightModel ? 0xa8b9ae : 0x0a0c0b);
     frame(object);
     animate = buildAnimator(name, object);
     // With motion off, show a clean pose instead of the raw model.
@@ -535,6 +585,7 @@ async function load(name) {
     });
     statusText.textContent = meshes + ' meshes, drag to orbit, scroll to zoom';
   } catch (err) {
+    if (id !== loadId) return;
     errorBox.textContent = 'Could not load ' + name + ': ' + (err && err.message ? err.message : err);
     errorBox.hidden = false;
     statusText.textContent = 'Error';
@@ -546,7 +597,6 @@ resetButton.addEventListener('click', () => {
   if (current) frame(current);
 });
 
-let time = 0;
 renderer.setAnimationLoop(() => {
   const dt = Math.min(clock.getDelta(), 0.1);
   if (!inView || document.hidden) return;

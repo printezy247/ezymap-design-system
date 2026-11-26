@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,14 +40,14 @@
   .scroll-card { width: min(560px, 90%); }
   footer { padding: var(--space-12) 0; color: var(--muted-foreground); font-size: 14px; }
   a { color: var(--primary); }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
   @media (max-width: 640px) { h1 { font-size: 34px; } h2 { font-size: 26px; } nav { display: none; } }
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a href="index.html"><img src="../assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap"></a>
+    <a href="index.html"><img src="../assets/logos/ezymap-3d-horizontal-on-light.svg" alt="EzyMap"></a>
     <nav aria-label="Sections">
       <a href="index.html">Showcase</a><a href="#core">Core</a><a href="#3d">3D</a><a href="#scroll">Scroll</a><a href="#text">Text</a><a href="#hero">Hero</a><a href="#product">Product</a>
     </nav>
@@ -58,6 +58,7 @@
   <div class="intro">
     <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Motion · v2.7.0</p>
     <h1>Motion playground</h1>
+    <p><a href="studio.html">Open the motion studio for scenes, video frames and 3D downloads</a></p>
     <p class="lede">Every EzyMap motion utility, live. Each class is plain CSS — copy the class name, the stylesheet already ships in <code>bundle.css</code>. Everything stops under <code>prefers-reduced-motion</code>.</p>
   </div>
 
@@ -102,7 +103,7 @@
       <div class="tile"><div class="stage ezm-stage"><div class="ezm-3d-turn demo-box demo-gold"></div></div><div class="meta"><b>ezm-3d-turn</b><code>.ezm-3d-turn</code><p>Y-axis turn.</p></div></div>
       <div class="tile"><div class="stage ezm-stage"><div class="ezm-3d-wobble demo-box demo-green"></div></div><div class="meta"><b>ezm-3d-wobble</b><code>.ezm-3d-wobble</code><p>X/Y wobble + lift.</p></div></div>
       <div class="tile"><div class="stage ezm-stage" style="perspective:600px"><div style="position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center"><div class="ezm-ring-3d" style="position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent)"></div><div class="demo-box demo-metal" style="width:32px;height:32px;border-radius:9px"></div></div></div><div class="meta"><b>ezm-ring-3d</b><code>.ezm-ring-3d</code><p>Tilted orbit ring.</p></div></div>
-      <div class="tile"><div class="stage"><div class="ezm-flip" tabindex="0" style="position:relative;width:140px;height:80px"><div class="ezm-flip__inner" style="position:relative;width:100%;height:100%;transform-style:preserve-3d"><div class="ezm-flip__face" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--border);background:var(--surface-elevated)"><span class="mono">front</span></div><div class="ezm-flip__face ezm-flip__back" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--gradient-gold);color:#0a0c0b"><span class="mono">back</span></div></div></div></div><div class="meta"><b>ezm-flip</b><code>.ezm-flip</code><p>Hover/focus flip.</p></div></div>
+      <div class="tile"><div class="stage"><div class="ezm-flip" tabindex="0" style="position:relative;width:140px;height:80px"><div class="ezm-flip__inner" style="position:relative;width:100%;height:100%;transform-style:preserve-3d"><div class="ezm-flip__face" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--border);background:var(--surface-elevated)"><span class="mono">front</span></div><div class="ezm-flip__face ezm-flip__back" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--accent);color:var(--accent-foreground)"><span style="font:500 12px var(--font-mono);color:inherit">back</span></div></div></div></div><div class="meta"><b>ezm-flip</b><code>.ezm-flip</code><p>Hover/focus flip.</p></div></div>
       <div class="tile"><div class="stage"><div class="ezm-depth" tabindex="0" style="width:130px;height:76px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">hover</span></div></div><div class="meta"><b>ezm-depth</b><code>.ezm-depth</code><p>Lifts toward viewer.</p></div></div>
       <div class="tile"><div class="stage"><div class="ezm-beam" style="width:130px;height:76px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">beam</span></div></div><div class="meta"><b>ezm-beam</b><code>.ezm-beam</code><p>Rotating border beam.</p></div></div>
       <div class="tile"><div class="stage"><div class="ezm-glow" style="width:130px;height:76px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">live</span></div></div><div class="meta"><b>ezm-glow</b><code>.ezm-glow</code><p>Breathing glow.</p></div></div>
@@ -177,6 +178,6 @@
   </section>
 </main>
 
-<footer><div class="wrap">EzyMap design system v2.7.0 · <a href="index.html">Showcase</a> · <a href="../llms.txt">llms.txt</a></div></footer>
+<footer><div class="wrap">EzyMap design system v2.7.0 · <a href="index.html">Showcase</a> · <a href="llms.txt">llms.txt</a></div></footer>
 </body>
 </html>

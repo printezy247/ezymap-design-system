@@ -1,0 +1,193 @@
+/* Decorative market scenes. Motion starts when data-motion="ready" is present. */
+.ezm-scene {
+  --scene-ink: var(--foreground);
+  --scene-green: var(--primary);
+  --scene-edge: var(--control-border);
+  --scene-cycle: 4s;
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-inline-size: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--gradient-hero);
+  color: var(--scene-ink);
+}
+
+.ezm-scene[data-format="portrait"] { aspect-ratio: 9 / 16; }
+
+.ezm-scene__visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(72%, 28rem);
+  aspect-ratio: 4 / 3;
+  perspective: 680px;
+  container-type: inline-size;
+}
+
+.ezm-scene__visual::before {
+  position: absolute;
+  inset: 9% 0 0;
+  content: "";
+  background-image: radial-gradient(circle, var(--scene-edge) 0.8px, transparent 1px);
+  background-size: 12px 12px;
+  mask-image: radial-gradient(ellipse, black 10%, transparent 70%);
+  opacity: 0.35;
+}
+
+.ezm-scene__stack {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 64%;
+  aspect-ratio: 5 / 3;
+  transform-style: preserve-3d;
+  transform: rotateX(35deg) rotateZ(-20deg);
+}
+
+.ezm-scene__plate {
+  --plate-depth: 0cqi;
+  position: absolute;
+  box-sizing: border-box;
+  inset: 0;
+  border: 1px solid var(--border-hover);
+  border-radius: 5cqi;
+  transform: translateZ(var(--plate-depth));
+  background: var(--gradient-metal);
+  box-shadow: var(--shadow-elevated);
+}
+
+.ezm-scene__plate:nth-child(2) { --plate-depth: 5cqi; }
+.ezm-scene__plate:nth-child(3) { --plate-depth: 10cqi; }
+
+.ezm-scene__plate:last-child {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: end;
+  gap: 6%;
+  padding: 7% 12%;
+  border-color: var(--holo-edge);
+}
+
+.ezm-scene__plate i {
+  height: var(--bar);
+  border-radius: 3px 3px 0 0;
+  background: var(--gradient-green);
+}
+
+.ezm-scene__range {
+  position: relative;
+  width: 76%;
+  aspect-ratio: 5 / 3;
+  border: 1px solid var(--border-hover);
+  border-radius: 4cqi;
+  background: var(--card);
+  box-shadow: var(--shadow-elevated);
+}
+
+.ezm-scene__zone {
+  position: absolute;
+  inset: 26% 0 24%;
+  border-block: 1px dashed var(--scene-edge);
+  background: var(--selected-bg);
+}
+
+.ezm-scene__range svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  stroke: var(--scene-green);
+}
+
+.ezm-scene__marker {
+  position: absolute;
+  inset: 12% auto 12% 50%;
+  width: 2px;
+  background: var(--scene-green);
+  transform: translateX(0);
+}
+
+.ezm-scene__marker::before {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: inherit;
+  content: "";
+}
+
+.ezm-scene__relay {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 78%;
+  aspect-ratio: 2;
+}
+
+.ezm-scene__rail {
+  position: absolute;
+  inset: auto 5%;
+  height: 2px;
+  background: var(--scene-edge);
+}
+
+.ezm-scene__node {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 18%;
+  aspect-ratio: 1;
+  border: 1px solid var(--border-hover);
+  border-radius: 26%;
+  background: var(--gradient-metal);
+  box-shadow: var(--shadow-glass);
+}
+
+.ezm-scene__node:first-of-type { left: 0; }
+.ezm-scene__node:last-of-type { right: 0; }
+
+.ezm-scene__node::before {
+  width: 28%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--scene-green);
+  content: "";
+}
+
+.ezm-scene__pulse {
+  position: absolute;
+  width: 4cqi;
+  aspect-ratio: 1;
+  border: 2px solid var(--card);
+  border-radius: 50%;
+  background: var(--scene-green);
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ezm-scene[data-motion="ready"] .ezm-scene__plate { animation: ezm-scene-stack var(--scene-cycle) var(--ease-standard) infinite; }
+  .ezm-scene[data-motion="ready"] .ezm-scene__marker { animation: ezm-scene-range var(--scene-cycle) var(--ease-standard) infinite; }
+  .ezm-scene[data-motion="ready"] .ezm-scene__pulse { animation: ezm-scene-relay var(--scene-cycle) var(--ease-standard) infinite; }
+}
+
+@keyframes ezm-scene-stack {
+  0%, 100% { transform: translateZ(var(--plate-depth)); }
+  50% { transform: translateZ(calc(var(--plate-depth) * 2.25)); }
+}
+
+@keyframes ezm-scene-range {
+  0%, 100% { transform: translateX(-22cqi); }
+  50% { transform: translateX(22cqi); }
+}
+
+@keyframes ezm-scene-relay {
+  0%, 100% { transform: translateX(-23cqi); opacity: 0; }
+  12% { opacity: 1; }
+  66% { transform: translateX(23cqi); opacity: 1; }
+  77% { transform: translateX(23cqi); opacity: 0; }
+}

@@ -545,6 +545,7 @@ ${glassBody}
 // Catalog every shipped asset so consumers can discover variants without
 // scraping the directories. Motion utilities are CSS, listed by class name.
 const motionDir = join(root, "assets/motion");
+const modelDir = join(root, "assets/3d");
 const listSvgs = (dir) =>
   readdirSync(dir)
     .filter((f) => f.endsWith(".svg"))
@@ -561,12 +562,16 @@ const manifest = {
   categories: {
     logos: listSvgs(logosDir),
     products: listSvgs(productsDir),
+    models: readdirSync(modelDir)
+      .filter((file) => file.endsWith(".obj") && existsSync(join(modelDir, file.replace(/\.obj$/, ".mtl"))))
+      .sort()
+      .map((file) => ({ file: `assets/3d/${file}`, formats: ["obj", "mtl"], material: `assets/3d/${file.replace(/\.obj$/, ".mtl")}` })),
     motion: readdirSync(motionDir)
       .filter((f) => f.endsWith(".css"))
       .sort()
       .map((f) => ({ file: `assets/motion/${f}`, format: "css" })),
   },
-  totals: { logoFiles: listSvgs(logosDir).length, productFiles: listSvgs(productsDir).length, pngRenders: pngCount },
+  totals: { logoFiles: listSvgs(logosDir).length, productFiles: listSvgs(productsDir).length, pngRenders: listSvgs(productsDir).filter((file) => file.formats.includes("png")).length },
 };
 writeFileSync(join(root, "assets/manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
 

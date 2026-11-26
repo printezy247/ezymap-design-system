@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,15 +21,15 @@
   nav a:hover, nav a:focus-visible { color: var(--primary); }
   section.block { padding: var(--space-20) 0 var(--space-12); border-bottom: 1px solid var(--border); }
   h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; margin: 0; color: var(--foreground); }
-  h1 { font-size: 44px; line-height: 1.1; font-weight: 500; letter-spacing: -.022em; }
-  h2 { font-size: 30px; line-height: 1.15; font-weight: 400; letter-spacing: -.01em; margin: 8px 0 var(--space-3); }
+  h1 { font-size: clamp(2rem, 5vw, 3.75rem); line-height: 1.08; font-weight: 500; letter-spacing: -.022em; }
+  h2 { font-size: 30px; line-height: 1.15; font-weight: 500; letter-spacing: -.01em; margin: 8px 0 var(--space-3); }
   h3 { font-size: 20px; font-weight: 600; margin: var(--space-8) 0 var(--space-4); }
   .intro { padding: var(--space-20) 0 var(--space-12); }
   .lede { max-width: 640px; color: var(--body-text); font-size: 18px; }
   .grid { display: grid; gap: var(--space-4); }
   .swatches { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
   .sw { border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; background: var(--surface); }
-  .sw .chip { height: 72px; border-bottom: 1px solid var(--border); background-image: linear-gradient(45deg, #1e2321 25%, transparent 25%, transparent 75%, #1e2321 75%), linear-gradient(45deg, #1e2321 25%, #141817 25%, #141817 75%, #1e2321 75%); background-size: 16px 16px; background-position: 0 0, 8px 8px; }
+  .sw .chip { height: 72px; border-bottom: 1px solid var(--border); background: var(--surface-quiet); }
   .sw .chip i { display: block; height: 100%; }
   .sw .meta { padding: 10px 12px; }
   .sw b { display: block; font-size: 14px; color: var(--foreground); }
@@ -58,22 +58,29 @@
   .logos { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   .logo { border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; background: var(--surface); }
   .logo .art { display: flex; align-items: center; justify-content: center; height: 180px; padding: var(--space-4); background: var(--background); }
-  .logo .art.light { background: #ffffff; }
+  #logos .art:has(img:is([src*="-white"], [src*="on-dark"], [src*="horizontal-dark"], [src*="horizontal-animated"], [src*="-ghost"])),
+  #logos:has(#dark-proofs:checked) .art:not(.light, :has(img[src*="-black"])) { background:#0a0c0b; }
+  .logo .cap { background: var(--surface-quiet); }
+  .swatches .chip { background: repeating-conic-gradient(var(--surface-elevated) 0 25%, white 0 50%) 0 0 / 16px 16px; }
+  .comp .stage { background: var(--surface-quiet); overflow-wrap: anywhere; }
+  .bar { max-width: 100%; }
   .logo .art img { max-width: 100%; max-height: 100%; object-fit: contain; }
   .logo .cap { padding: 10px 12px; border-top: 1px solid var(--border); }
   footer { padding: var(--space-12) 0; color: var(--muted-foreground); font-size: 14px; }
   a { color: var(--primary); }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
   #load-error { display: none; border: 1px solid var(--accent); border-radius: var(--radius-lg); padding: var(--space-4); color: var(--accent); }
-  @media (max-width: 640px) { h1 { font-size: 32px; } h2 { font-size: 26px; } .type-row { grid-template-columns: 1fr; gap: 4px; } .space-row { grid-template-columns: 110px 56px 1fr; } nav { display: none; } }
+  @media (max-width: 640px) { h2 { font-size: 26px; } .type-row { grid-template-columns: 1fr; gap: 4px; } .space-row { grid-template-columns: 110px 56px 1fr; } nav { display: none; } }
+  @media(max-width:640px){header.top nav{display:flex;max-width:100%;overflow:auto}nav a{white-space:nowrap;padding-block:12px}.intro{padding-top:40px}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <img src="../assets/logos/ezymap-3d-horizontal-on-dark.svg" alt="EzyMap">
+    <img src="../assets/logos/ezymap-3d-horizontal-on-light.svg" alt="EzyMap">
     <nav aria-label="Sections">
-      <a href="#whats-new">What's new</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#spacing">Spacing</a><a href="#radii">Radii</a><a href="#shadows">Shadows</a><a href="#components">Components</a><a href="#motion">Motion</a><a href="motion.html">Motion playground</a><a href="#products">Products</a><a href="#logos">Logos</a><a href="#accessibility">Accessibility</a>
+      <a href="#whats-new">What's new</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#spacing">Spacing</a><a href="#radii">Radii</a><a href="#shadows">Shadows</a><a href="#components">Components</a><a href="#motion">Motion</a><a href="studio.html">Motion studio</a><a href="#products">Products</a><a href="#logos">Logos</a><a href="#accessibility">Accessibility</a>
     </nav>
   </div>
 </header>
@@ -81,34 +88,31 @@
 <main class="wrap">
   <div class="intro">
     <p class="eyebrow" style="color:var(--primary);margin:0 0 8px">Design system · v2.7.0</p>
-    <h1>EzyMap design system</h1>
-    <p class="lede">Green and gold on black, with white type. Tokens, components and logos for the EzyMap Algo desk.</p>
-    <p id="load-error" role="alert">Tokens could not be loaded. Serve this folder over http (for example <code>npx serve</code>) instead of opening the file directly.</p>
+    <h1>See the move.<br>Understand the signal.</h1>
+    <p class="lede">Explore the EzyMap trading desk, then see the typography, components and motion behind it.</p>
+    <a class="ezm-btn ezm-btn--md ezm-btn--primary" href="desk.html">Explore the desk →</a>
+    <a class="ezm-btn ezm-btn--md ezm-btn--outline" href="studio.html">Open motion studio</a>
+    <a href="desk.html" aria-label="Open sample market overview"><img src="../assets/social/desk-preview.png" alt="Sample market overview showing instrument prices, daily moves and last updates" width="1200" height="630" style="display:block;width:100%;height:auto;margin-top:32px;border:1px solid var(--border);border-radius:16px;box-sizing:border-box"></a>
+    <p id="load-error" role="alert">Tokens could not be loaded. Run <code>npm run docs</code> from the repository root and open <code>/docs/</code> on the local server.</p>
   </div>
 
   <section class="block" id="whats-new"><p class="eyebrow" style="color:var(--primary);margin:0">Overview</p><h2>What's new</h2>
     <ul class="lede" style="padding-left:20px">
-      <li><strong>Macro Fundamentals glyph</strong>: the gem is replaced by a fundamental-trading glyph (candlestick cluster + rising macro line). New variations: gold, white, black. See the <a href="../assets/logos/ezymap-mark-macro-trader-bot.svg">base mark</a> and the bottom logo area.</li>
-      <li><strong>Apple-inspired motion growth</strong>: spring pops and blur entrances, particle bursts, orbit dots, a rotating cube, 3D marker orbits and a pulsing brand glow (CardStack, CursorSpotlight). New products <code>crypto</code> + <code>forex</code> from trading research. More at <a href="motion.html" style="color:var(--primary)">the motion playground</a>.</li>
-      <li><strong>Apple-inspired language</strong>: 8px and 10px button corners, larger section gaps (56/96px), cards at 16–24px, display heads at weight 400–500 with −0.022em tracking, nearer-black foreground on light mode.</li>
-      <li><strong>Four new components</strong> (16 total): <code>LiveBadge</code> (live status pill with ping ring), <code>Marquee</code> (seamless scroll strip with direction/duration controls), <code>Skeleton</code> (shimmer loading placeholder) and <code>GlowCard</code> (card with breathing glow or rotating border beam) — in React, vanilla bundle and typings.</li>
-      <li><strong>Spring motion tokens</strong>: <code>ease-spring-snappy</code> and <code>ease-spring-gentle</code> join <code>ease-spring</code> — cubic-bezier approximations of Motion-style springs for CSS-only consumers.</li>
-      <li><strong>Agent ergonomics</strong>: <code>docs/llms.txt</code> + <code>docs/llms-full.txt</code> (LLM-readable system reference), <code>docs/motion.html</code> (live motion playground), <code>scripts/manifest.mjs</code> (asset resolver CLI, also <code>npm run manifest</code>) and <code>mcp/server.mjs</code> (zero-dependency MCP server exposing tokens, components, motion and assets to AI agents).</li>
-      <li><strong>Install snippets</strong>: every component README now opens with a copy-paste React + vanilla install block.</li>
-      <li><strong>3D pipeline decision</strong> (<code>docs/3d-pipeline-decision.md</code>): SVG/PNG stays canonical; Spline/Rive documented as the revisit path for real-time 3D.</li>
-      <li><strong>Accessibility section</strong> below documents reduced-motion, no-script and focus behaviour.</li>
-      <li>Marquee tracks now honour <code>--marquee-duration</code> and <code>.ezm-marquee--always</code>.</li>
+      <li>White workspace surfaces, forest-green actions and distinct borders for fields and controls.</li>
+      <li>A responsive heading scale and tabular prices, with Clash Display, General Sans and JetBrains Mono.</li>
+      <li>Three scenes in the <a href="studio.html">motion studio</a>, with a scrubber and fixed frames for landscape and vertical video.</li>
+      <li>Signal stack and Range gate join the existing mascot, beacon and globe in the <a href="../assets/3d/preview.html">interactive 3D viewer</a>.</li>
     </ul>
   </section>
   <section class="block" id="colour"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Colour</h2><div class="grid swatches" id="colours"></div></section>
-  <section class="block" id="type"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Type scale</h2><p class="lede">Clash Display for headlines, General Sans for text, JetBrains Mono for figures, Instrument Serif for editorial accents. Space Grotesk and Inter Tight remain in the font stacks as fallbacks.</p><div id="types"></div></section>
+  <section class="block" id="type"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Type scale</h2><p class="lede">Clash Display for headlines, General Sans for text, JetBrains Mono for figures, Instrument Serif for occasional editorial accents. System fonts provide fallback when hosted fonts are unavailable.</p><div id="types"></div></section>
   <section class="block" id="spacing"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Spacing</h2><div id="spaces"></div></section>
   <section class="block" id="radii"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Radii</h2><div class="grid radii" id="radius"></div></section>
   <section class="block" id="shadows"><p class="eyebrow" style="color:var(--primary);margin:0">Foundations</p><h2>Shadows and gradients</h2><div class="grid shadows" id="shadow"></div><h3>Gradients</h3><div class="grid grads" id="gradient"></div></section>
 
   <section class="block" id="components"><p class="eyebrow" style="color:var(--primary);margin:0">Components</p><h2>Components</h2><div id="root"></div></section>
 
-  <section class="block" id="motion"><p class="eyebrow" style="color:var(--primary);margin:0">Components</p><h2>Motion utilities</h2><p class="lede">From <code>assets/motion/ezymap-motion.css</code>, <code>ezymap-motion-3d.css</code>, <code>ezymap-motion-scroll.css</code>, <code>ezymap-motion-text.css</code>, <code>ezymap-motion-hero.css</code> and <code>ezymap-motion-product.css</code>. Every animation stops under <code>prefers-reduced-motion</code>.</p><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+  <section class="block" id="motion"><p class="eyebrow" style="color:var(--primary);margin:0">Components</p><h2>Motion utilities</h2><p class="lede">From <code>assets/motion/ezymap-motion.css</code>, <code>ezymap-motion-3d.css</code>, <code>ezymap-motion-scroll.css</code>, <code>ezymap-motion-text.css</code>, <code>ezymap-motion-hero.css</code> and <code>ezymap-motion-product.css</code>. See the <a href="motion.html">motion playground</a> for live utilities and the <a href="studio.html">motion studio</a> for reusable scenes.</p><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
     <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><img src="../assets/logos/ezymap-mark-animated.svg" alt="Animated EzyMap mark" style="height:88px;width:auto"></div><div class="meta"><b>ezm-mark-animated</b><code>assets/logos/ezymap-mark-animated.svg</code><p>Float + orbit comet, once per view.</p></div></div>
     <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><div class="ezm-float"><div style="width:56px;height:56px;border-radius:14px;background:var(--gradient-metal);border:1px solid var(--border)"></div></div></div><div class="meta"><b>ezm-float</b><code>.ezm-float</code><p>Gentle 8px bob, 6s cycle.</p></div></div>
     <div class="sw"><div class="chip" style="display:flex;align-items:center;justify-content:center;height:120px"><span class="ezm-blink" style="width:14px;height:14px;border-radius:9999px;background:var(--primary);box-shadow:0 0 12px var(--primary)"></span></div><div class="meta"><b>ezm-blink</b><code>.ezm-blink</code><p>Live-dot pulse for badges.</p></div></div>
@@ -138,7 +142,7 @@
     <div class="sw"><div class="chip ezm-stage" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-3d-turn" style="width:56px;height:56px;border-radius:14px;background:var(--gradient-gold);border:1px solid var(--border)"></div></div><div class="meta"><b>ezm-3d-turn</b><code>.ezm-3d-turn</code><p>Continuous Y-axis turn, like a gem on a stand.</p></div></div>
     <div class="sw"><div class="chip ezm-stage" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-3d-wobble" style="width:56px;height:56px;border-radius:14px;background:var(--gradient-green);border:1px solid var(--border)"></div></div><div class="meta"><b>ezm-3d-wobble</b><code>.ezm-3d-wobble</code><p>Slow X/Y wobble with a small lift for hero objects.</p></div></div>
     <div class="sw"><div class="chip ezm-stage" style="height:120px;display:flex;align-items:center;justify-content:center"><div style="position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center"><div class="ezm-ring-3d" style="position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent)"></div><div style="width:32px;height:32px;border-radius:9px;background:var(--gradient-metal);border:1px solid var(--border)"></div></div></div><div class="meta"><b>ezm-ring-3d</b><code>.ezm-ring-3d</code><p>Tilted orbit ring spinning around a centre object.</p></div></div>
-    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-flip" tabindex="0" style="position:relative;width:120px;height:72px"><div class="ezm-flip__inner" style="position:relative;width:100%;height:100%"><div class="ezm-flip__face" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--border);background:var(--surface-elevated)"><span class="mono">front</span></div><div class="ezm-flip__face ezm-flip__back" style="display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--gradient-gold);color:#0a0c0b"><span class="mono">back</span></div></div></div></div><div class="meta"><b>ezm-flip</b><code>.ezm-flip</code><p>3D card flip on hover or keyboard focus.</p></div></div>
+    <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-flip" tabindex="0" style="position:relative;width:120px;height:72px"><div class="ezm-flip__inner" style="position:relative;width:100%;height:100%"><div class="ezm-flip__face" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--border);background:var(--surface-elevated)"><span class="mono">front</span></div><div class="ezm-flip__face ezm-flip__back" style="display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--accent);color:var(--accent-foreground)"><span style="font:500 12px var(--font-mono);color:inherit">back</span></div></div></div></div><div class="meta"><b>ezm-flip</b><code>.ezm-flip</code><p>3D card flip on hover or keyboard focus.</p></div></div>
     <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-depth" tabindex="0" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">hover</span></div></div><div class="meta"><b>ezm-depth</b><code>.ezm-depth</code><p>Lifts toward the viewer on hover or focus.</p></div></div>
     <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-beam" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated)"><span class="mono">beam</span></div></div><div class="meta"><b>ezm-beam</b><code>.ezm-beam</code><p>Rotating conic border beam.</p></div></div>
     <div class="sw"><div class="chip" style="height:120px;display:flex;align-items:center;justify-content:center"><div class="ezm-glow" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface-elevated);border:1px solid var(--border)"><span class="mono">live</span></div></div><div class="meta"><b>ezm-glow</b><code>.ezm-glow</code><p>Breathing green and gold glow for live surfaces.</p></div></div>
@@ -152,6 +156,8 @@
   <section class="block" id="products"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Product icons</h2><p class="lede">One app-icon tile per ready product, from <code>assets/products/</code>. Every product also ships <code>-animated</code>, <code>-extrude</code> and <code>-glass</code> variants in SVG and 256px PNG — see the variant grid below.</p><div class="grid logos" id="product-grid"></div><h3>Variants</h3><div class="grid logos" id="product-variant-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))"></div></section>
 
   <section class="block" id="logos"><p class="eyebrow" style="color:var(--primary);margin:0">Brand</p><h2>Logo families</h2><p class="lede">The main EzyMap mark, the Macro Fundamentals logo set, and the EzyAI files kept as reference.</p>
+    <label style="display:inline-flex;align-items:center;gap:8px;min-height:44px"><input type="checkbox" id="dark-proofs"> Use a dark surface for compatible logo proofs</label>
+    <p>White is the default canvas. Switch backgrounds to inspect white and gold variants. Select a filename to open the original artwork.</p>
     <h3>EzyMap — main mark</h3><div class="grid logos" id="logo-grid"></div>
     <h3>Macro Fundamentals — glyph variations</h3><div class="grid logos" id="macro-trader-grid"></div>
     <h3>Macro Fundamentals — logo set</h3>
@@ -204,7 +210,7 @@
   <section class="block" id="accessibility"><p class="eyebrow" style="color:var(--primary);margin:0">Accessibility</p><h2>Built to be usable by everyone</h2>
     <div class="lede" style="font-size:16px">
       <ul style="padding-left:20px">
-        <li><strong>Reduced motion.</strong> Every animation in the six motion stylesheets stops under <code>prefers-reduced-motion: reduce</code> — loops freeze at rest, entrances show the final frame, scroll-driven classes don't run. Try it: enable "reduce motion" in your OS accessibility settings and reload this page.</li>
+        <li><strong>Reduced motion.</strong> The motion utilities provide static poses under <code>prefers-reduced-motion: reduce</code> — loops freeze at rest, entrances show the final frame, scroll-driven classes don't run. Try it: enable "reduce motion" in your OS accessibility settings and reload this page.</li>
         <li><strong>No JavaScript.</strong> Content is never hidden without scripting. The Reveal component's hidden state only applies after mount adds <code>html.js</code>; scroll-driven motion is gated behind <code>@supports (animation-timeline)</code> and <code>no-preference</code>.</li>
         <li><strong>Keyboard.</strong> All interactive elements show a 2px <code>accent</code> focus ring offset from the background; product tiles, flip cards and depth cards are focusable and respond to <code>:focus-visible</code>.</li>
         <li><strong>Colour.</strong> Text pairs are AA-checked per surface (see token usage notes); up/down market states always pair colour with a sign or arrow, and the only red is SignalFlag "Stopped".</li>
@@ -228,7 +234,7 @@
   var cssName = function (n) { return n.replace(/\./g, "\\."); };
 
   fetch("../tokens/tokens.json").then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (t) {
-    var theme = t.color.themes[0].id;
+    var theme = document.documentElement.dataset.theme;
     t.color.tokens.forEach(function (c) {
       var val = typeof c.value === "string" ? c.value : c.value[theme];
       var sw = el("div", "sw", '<div class="chip"><i style="background:var(--' + cssName(c.name) + ')"></i></div><div class="meta"><b>' + esc(c.name) + '</b><code>' + esc(val) + '</code><p>' + esc(c.usage) + '</p></div>');
@@ -257,9 +263,10 @@
   }).catch(function () { $("load-error").style.display = "block"; });
 
   var logos = [
-    ["ezymap-3d-horizontal-on-dark.svg", "Horizontal, on dark", ""],
     ["ezymap-3d-horizontal-on-light.svg", "Horizontal, on light", "light"],
-    ["ezymap-3d-stacked-on-dark.svg", "Stacked, on dark", ""],
+    ["ezymap-stacked-on-light.svg", "Stacked, on light", "light"],
+    ["ezymap-3d-horizontal-on-dark.svg", "Horizontal, for dark backgrounds", ""],
+    ["ezymap-3d-stacked-on-dark.svg", "Stacked, for dark backgrounds", ""],
     ["ezymap-3d-mark.svg", "Mark", ""],
     ["ezymap-mark-animated.svg", "Mark, animated", ""],
     ["ezymap-mark-animated-orbit.svg", "Mark, orbit ring", ""],
@@ -298,6 +305,12 @@
     $("macro-trader-grid").appendChild(el("div", "logo", '<div class="art"><img src="../assets/logos/' + l[0] + '" alt="' + esc(l[1]) + '"></div><div class="cap"><b style="font-size:14px">' + esc(l[1]) + '</b><br><code class="mono">' + esc(l[0]) + '</code></div>'));
   });
 
+  document.querySelectorAll('#logos .logo').forEach(function (card) {
+    var code = card.querySelector('code'), link = document.createElement('a');
+    link.href = card.querySelector('img').src;
+    code.replaceWith(link); link.appendChild(code);
+  });
+
   var products = [
     ["ezymap-channel-icon.svg", "Channel"],
     ["ezymap-miniapp-icon.svg", "Mini App"],
@@ -320,6 +333,10 @@
     });
   });
 
+  if (!window.EzyMap || !window.React || !window.ReactDOM) {
+    $("root").textContent = "Component previews are unavailable. The tokens, asset galleries and motion studio can still be viewed.";
+    return;
+  }
   var E = window.EzyMap, h = React.createElement;
   function Comp(name, note, node) {
     return h("div", { className: "comp", key: name },
@@ -332,9 +349,9 @@
     Comp("Button", "primary, outline and ghost in sm, md and lg.", h("div", null,
       h("div", { className: "ezm-row" }, h(E.Button, { size: "lg" }, "Join Free Channel"), h(E.Button, { variant: "outline", size: "lg" }, "See packages"), h(E.Button, { variant: "ghost", size: "lg" }, "Ask Sarah")),
       h("div", { className: "ezm-row" }, h(E.Button, { size: "sm" }, "Small"), h(E.Button, null, "Medium"), h(E.Button, { variant: "outline", disabled: true }, "Disabled")))),
-    Comp("Card", "Brushed-metal panel; lift for clickable cards, holo for the one key panel per view.", h("div", { className: "ezm-row", style: { alignItems: "stretch" } },
+    Comp("Card", "White panel with a quiet outline. Use holo for a featured panel.", h("div", { className: "ezm-row", style: { alignItems: "stretch" } },
       h(E.Card, { eyebrow: "Inside the desk", title: "Full transparency" }, h("p", { className: "ezm-card__body" }, "Entry, stop and targets, posted live.")),
-      h(E.Card, { lift: true, eyebrow: "Lift", title: "Hover me" }, h("p", { className: "ezm-card__body" }, "Rises 3px with a green underglow.")),
+      h(E.Card, { lift: true, eyebrow: "Lift", title: "Hover me" }, h("p", { className: "ezm-card__body" }, "The border strengthens on hover.")),
       h(E.Card, { holo: true, eyebrow: "Holo", title: "Key panel" }, h("p", { className: "ezm-card__body" }, "One per view.")))),
     Comp("HeroPill", "Hero badge or live stat.", h("div", { className: "ezm-row" }, h(E.HeroPill, { icon: up, value: "12,400" }, "members"), h(E.HeroPill, null, "Live format"))),
     Comp("SignalFlag", "Running pulses, waiting blinks, closed states hold still.", h("div", { className: "ezm-row" },

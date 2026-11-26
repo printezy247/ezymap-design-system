@@ -3,7 +3,7 @@
    and every animation has a prefers-reduced-motion fallback. */
 
 .ezm-float {
-  animation: ezm-float var(--duration-slow) var(--ease-standard) infinite;
+  animation: ezm-float 6s ease-in-out infinite;
 }
 @keyframes ezm-float {
   0%, 100% { transform: translateY(0); }

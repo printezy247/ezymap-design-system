@@ -156,3 +156,9 @@ agent-facing twins of those pages.
   hidden states require html.js.
 - Don't tint the full-colour logo; don't use status-stop red outside SignalFlag;
   don't promise trading returns in copy.
+
+## Light-first assets
+
+- Motion studio and capture guide: docs/studio.html and docs/studio.md.
+- Editable models: assets/3d/ezymap-signal-stack.obj and assets/3d/ezymap-range-gate.obj, each with a paired MTL.
+- Use data-theme="light" for white product surfaces and themed shadows and gradients.

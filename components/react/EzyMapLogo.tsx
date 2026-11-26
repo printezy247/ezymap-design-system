@@ -104,7 +104,7 @@ export function EzyMapLogo({ className, style, withWordmark = false, animated = 
         <circle cx="420" cy="296" r="9" fill="#f4dc93" />
         <circle cx="420" cy="296" r="18" fill="#f4dc93" opacity=".2" />
         {animated ? (
-          <circle r="9" fill="#f4dc93">
+          <circle className="ezm-logo-comet" r="9" fill="#f4dc93">
             <animateMotion dur="3.2s" repeatCount="indefinite" path="M50 262 A206 58 0 0 1 462 262 A206 58 0 0 1 50 262" />
           </circle>
         ) : null}
@@ -119,8 +119,8 @@ export function EzyMapLogo({ className, style, withWordmark = false, animated = 
           letterSpacing={-1}
           style={{ fontFamily: "var(--font-display)" }}
         >
-          <tspan fill="#f7faf8">Ezy</tspan>
-          <tspan fill="#e3bd5e">Map</tspan>
+          <tspan fill="var(--wordmark-ink, #f7faf8)">Ezy</tspan>
+          <tspan fill="var(--wordmark-accent, #e3bd5e)">Map</tspan>
         </text>
       ) : null}
     </svg>

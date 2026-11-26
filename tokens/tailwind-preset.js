@@ -6,6 +6,8 @@ export default {
   "theme": {
     "extend": {
       "colors": {
+        "wordmark-ink": "var(--wordmark-ink)",
+        "wordmark-accent": "var(--wordmark-accent)",
         "background": "var(--background)",
         "foreground": "var(--foreground)",
         "body-text": "var(--body-text)",
@@ -38,6 +40,12 @@ export default {
         "market-down": "var(--market-down)",
         "status-neutral": "var(--status-neutral)",
         "status-stop": "var(--status-stop)",
+        "surface-quiet": "var(--surface-quiet)",
+        "control-border": "var(--control-border)",
+        "selected-bg": "var(--selected-bg)",
+        "feed-live": "var(--feed-live)",
+        "feed-delayed": "var(--feed-delayed)",
+        "feed-offline": "var(--feed-offline)",
         "grid-line": "var(--grid-line)",
         "frame-line": "var(--frame-line)",
         "holo-edge": "var(--holo-edge)"

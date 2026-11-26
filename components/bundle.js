@@ -68,7 +68,7 @@
       h("circle", { key: "c3", cx: 420, cy: 296, r: 9, fill: "#f4dc93" }),
       h("circle", { key: "c4", cx: 420, cy: 296, r: 18, fill: "#f4dc93", opacity: ".2" })
     ];
-    if (anim) gem.push(h("circle", { key: "comet", r: 9, fill: "#f4dc93" },
+    if (anim) gem.push(h("circle", { key: "comet", className: "ezm-logo-comet", r: 9, fill: "#f4dc93" },
       h("animateMotion", { dur: "3.2s", repeatCount: "indefinite", path: "M50 262 A206 58 0 0 1 462 262 A206 58 0 0 1 50 262" })));
     return h("svg", { viewBox: "0 0 512 512", className: cx(anim && "ezm-logo-anim", props.className), style: props.style, role: title ? "img" : "presentation", "aria-label": title, "aria-hidden": title ? undefined : true },
       title ? h("title", null, title) : null,
@@ -87,7 +87,7 @@
           h("stop", { offset: "0", stopColor: "#ffffff", stopOpacity: ".55" }), h("stop", { offset: "1", stopColor: "#ffffff", stopOpacity: "0" }))),
       h("g", { className: anim ? "ezm-logo-float" : undefined }, gem),
       ww ? h("text", { x: 256, y: 505, textAnchor: "middle", fontSize: 58, fontWeight: 700, letterSpacing: -1, style: { fontFamily: "var(--font-display)" } },
-        h("tspan", { fill: "#f7faf8" }, "Ezy"), h("tspan", { fill: "#e3bd5e" }, "Map")) : null);
+        h("tspan", { fill: "var(--wordmark-ink, #f7faf8)" }, "Ezy"), h("tspan", { fill: "var(--wordmark-accent, #e3bd5e)" }, "Map")) : null);
   }
 
   function PriceTicker(props) {
