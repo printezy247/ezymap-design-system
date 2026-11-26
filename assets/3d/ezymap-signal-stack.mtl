@@ -1,0 +1,25 @@
+# EzyMap 3D materials (palette from SamBangGoldMascot_v1.mtl and tokens/tokens.json)
+
+newmtl porcelain
+Ka 0.9294 0.9412 0.9294
+Kd 0.9294 0.9412 0.9294
+Ks 0.2000 0.2000 0.2000
+Ns 44
+d 1.0000
+illum 2
+
+newmtl mint
+Ka 0.6588 0.8431 0.7294
+Kd 0.6588 0.8431 0.7294
+Ks 0.2000 0.2000 0.2000
+Ns 54
+d 1.0000
+illum 2
+
+newmtl forest
+Ka 0.0588 0.4784 0.2902
+Kd 0.0588 0.4784 0.2902
+Ks 0.2000 0.2000 0.2000
+Ns 72
+d 1.0000
+illum 2

@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased — trading and live-data pack
+## Unreleased — light-first foundations, motion studio and live data
 
 ### Added
+- Motion studio scenes for the signal stack, range scan and signal relay. The scrubber produces fixed 16:9 and 9:16 frames for video capture.
+- Editable Signal stack and Range gate OBJ/MTL models in the asset manifest and interactive 3D viewer.
 - Ten components for trading and live-data screens, in `components/react/*.tsx`, the vanilla `components/bundle.js`, `components/index.d.ts` and `components/bundle.css`, each with a README under `components/<Name>/`:
   - `Sparkline`: inline trend line that draws itself.
   - `DeltaBadge`: signed change pill with arrow, sign and colour.
@@ -15,6 +17,9 @@
   - `HeatGrid`: market heat map, tint follows the size of the move.
   - `FeedStatus`: data-feed health pill (live, delayed, offline) with latency.
 - All new animation is off under `prefers-reduced-motion`.
+
+### Changed
+- White documentation and preview surfaces, forest-green controls, quieter elevation, a responsive type scale and higher-contrast market states. Existing unthemed integrations keep their v2.7.0 dark defaults.
 
 ## 2.7.0 — depth motion pack, 3D components
 

@@ -51,9 +51,9 @@ function motionClasses(file) {
 }
 
 function resolveAssets({ kind, name, variant, format }) {
-  const catKey = { logo: "logos", product: "products", motion: "motion" }[kind];
+  const catKey = { logo: "logos", product: "products", motion: "motion", model: "models" }[kind];
   const cat = manifest.categories[catKey];
-  if (!cat) return err(`unknown kind "${kind}". Expected: logo, product, motion`);
+  if (!cat) return err(`unknown kind "${kind}". Expected: logo, product, motion, model`);
   let hits = cat;
   if (kind === "product" || catKey === "products") {
     if (!PRODUCTS[name]) return err(`unknown product "${name}". Expected: ${Object.keys(PRODUCTS).join(", ")}`);
@@ -68,7 +68,8 @@ function resolveAssets({ kind, name, variant, format }) {
   if (format) hits = hits.filter((h) => (h.formats ?? [h.format]).includes(format));
   if (!hits.length) return err(`no ${format} format available`);
   return hits.map((h) => ({
-    file: format ? h.file.replace(/\.svg$/, `.${format}`) : h.file,
+    file: format === "mtl" ? h.material : format ? h.file.replace(/\.svg$/, `.${format}`) : h.file,
+    ...(h.material ? { material: h.material } : {}),
     formats: h.formats ?? [h.format],
     animated: h.animated ?? false,
   }));
@@ -97,14 +98,14 @@ const TOOLS = [
   },
   {
     name: "ezymap_assets",
-    description: "Resolve assets from the manifest. kind: logo|product|motion; name/variant/format optional.",
+    description: "Resolve assets from the manifest. kind: logo|product|motion|model; name/variant/format optional.",
     inputSchema: {
       type: "object",
       properties: {
-        kind: { type: "string", enum: ["logo", "product", "motion"] },
+        kind: { type: "string", enum: ["logo", "product", "motion", "model"] },
         name: { type: "string" },
         variant: { type: "string", enum: VARIANTS },
-        format: { type: "string", enum: ["svg", "png", "css"] },
+        format: { type: "string", enum: ["svg", "png", "css", "obj", "mtl"] },
       },
       required: ["kind"],
     },

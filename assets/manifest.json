@@ -575,6 +575,48 @@
         "animated": false
       }
     ],
+    "models": [
+      {
+        "file": "assets/3d/ezymap-range-gate.obj",
+        "formats": [
+          "obj",
+          "mtl"
+        ],
+        "material": "assets/3d/ezymap-range-gate.mtl"
+      },
+      {
+        "file": "assets/3d/ezymap-set-1-golden-mascot.obj",
+        "formats": [
+          "obj",
+          "mtl"
+        ],
+        "material": "assets/3d/ezymap-set-1-golden-mascot.mtl"
+      },
+      {
+        "file": "assets/3d/ezymap-set-2-map-pin-beacon.obj",
+        "formats": [
+          "obj",
+          "mtl"
+        ],
+        "material": "assets/3d/ezymap-set-2-map-pin-beacon.mtl"
+      },
+      {
+        "file": "assets/3d/ezymap-set-3-orbit-globe.obj",
+        "formats": [
+          "obj",
+          "mtl"
+        ],
+        "material": "assets/3d/ezymap-set-3-orbit-globe.mtl"
+      },
+      {
+        "file": "assets/3d/ezymap-signal-stack.obj",
+        "formats": [
+          "obj",
+          "mtl"
+        ],
+        "material": "assets/3d/ezymap-signal-stack.mtl"
+      }
+    ],
     "motion": [
       {
         "file": "assets/motion/ezymap-motion-3d.css",
@@ -594,6 +636,10 @@
       },
       {
         "file": "assets/motion/ezymap-motion-scroll.css",
+        "format": "css"
+      },
+      {
+        "file": "assets/motion/ezymap-motion-studio.css",
         "format": "css"
       },
       {

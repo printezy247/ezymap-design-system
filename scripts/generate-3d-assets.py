@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate three EzyMap 3D asset sets (OBJ + MTL) from procedural primitives.
+"""Generate EzyMap 3D asset sets (OBJ + MTL) from procedural primitives.
 
 Output: assets/3d/ in the workspace root. Standard library only.
 Run: python3 scripts/generate-3d-assets.py
@@ -48,6 +48,13 @@ MATERIALS = {
     "lens_black": ((0.0, 0.0, 0.0), 120),
 }
 
+
+# The light-scene MTL colors use sRGB, which the viewer's MTLLoader linearizes.
+LIGHT_MATERIALS = {
+    "porcelain": ((0.9294, 0.9412, 0.9294), 44),
+    "mint": ((0.6588, 0.8431, 0.7294), 54),
+    "forest": ((0.0588, 0.4784, 0.2902), 72),
+}
 
 # ---------------------------------------------------------------- vector math
 
@@ -103,7 +110,7 @@ class Part:
     """One named OBJ object with one material and flat-shaded triangles."""
 
     def __init__(self, name, material):
-        if material not in MATERIALS:
+        if material not in MATERIALS and material not in LIGHT_MATERIALS:
             raise ValueError(f"unknown material {material!r}")
         self.name = name
         self.material = material
@@ -492,14 +499,54 @@ def build_orbit_globe():
     return parts
 
 
+# ------------------------------------------------------------ light-first sets
+
+def build_signal_stack():
+    parts = []
+    for i, material in enumerate(("porcelain", "mint", "porcelain")):
+        plate = Part(f"plate_{i}", material)
+        box(plate, (0, i * 0.12, 0), (1.18, 0.052, 0.72))
+        parts.append(plate)
+
+    for i, height in enumerate((0.14, 0.23, 0.19, 0.32, 0.43)):
+        bar = Part(f"bar_{i}", "forest")
+        box(bar, ((i - 2) * 0.17, 0.266 + height / 2, 0), (0.105, height, 0.15))
+        parts.append(bar)
+    return parts
+
+
+def build_range_gate():
+    parts = []
+    base = Part("base", "porcelain")
+    box(base, (0, 0, 0), (1.34, 0.065, 0.76))
+    parts.append(base)
+
+    for i, z in enumerate((-0.24, 0.24)):
+        rail = Part(f"range_edge_{i}", "forest")
+        box(rail, (0, 0.052, z), (1.25, 0.04, 0.03))
+        parts.append(rail)
+
+    for i, x in enumerate((-0.48, 0.48)):
+        gate = Part(f"gate_{i}", "mint")
+        for z in (-0.24, 0.24):
+            box(gate, (x, 0.24, z), (0.075, 0.38, 0.065))
+        box(gate, (x, 0.46, 0), (0.075, 0.065, 0.55))
+        parts.append(gate)
+
+    cursor = Part("scan_cursor", "forest")
+    box(cursor, (0, 0.15, 0), (0.064, 0.20, 0.43))
+    parts.append(cursor)
+    return parts
+
+
 # ---------------------------------------------------------------- writing
 
-def _write_mtl(path):
+def _write_mtl(path, materials):
     lines = [
         "# EzyMap 3D materials (palette from SamBangGoldMascot_v1.mtl and tokens/tokens.json)",
         "",
     ]
-    for name, (kd, ns) in MATERIALS.items():
+    for name, (kd, ns) in materials.items():
         lines += [
             f"newmtl {name}",
             f"Ka {kd[0]:.4f} {kd[1]:.4f} {kd[2]:.4f}",
@@ -539,7 +586,9 @@ def write_set(set_name, title, parts):
 
     with open(obj_path, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines))
-    _write_mtl(mtl_path)
+    used = {part.material for part in parts}
+    materials = {name: value for name, value in LIGHT_MATERIALS.items() if name in used}
+    _write_mtl(mtl_path, materials or MATERIALS)
 
 
 def verify(set_name):
@@ -597,6 +646,8 @@ SETS = [
         "EzyMap set 3: graphite globe with a logo plaque and fintech elements",
         build_orbit_globe,
     ),
+    ("ezymap-signal-stack", "EzyMap Signal stack", build_signal_stack),
+    ("ezymap-range-gate", "EzyMap Range gate", build_range_gate),
 ]
 
 

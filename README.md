@@ -2,12 +2,12 @@
 
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="assets/logos/ezymap-3d-horizontal-on-light.png">
-  <img src="assets/logos/ezymap-3d-horizontal-on-dark.png" alt="EzyMap" width="360">
+  <img src="assets/logos/ezymap-3d-horizontal-on-light.png" alt="EzyMap" width="360">
 </picture>
 
 # EzyMap design system
 
-**Green and gold on black, with white type. Tokens, React components and brand assets for the EzyMap Algo desk.**
+**White canvas, forest-green actions and ink typography for the EzyMap trading desk.** [Explore the sample desk](docs/desk.html) or read the [light-first brand brief](docs/brand-brief.md). For the new interface, set `data-theme="light"` on `html`. Existing integrations retain their dark default. Browse the [motion studio](docs/studio.html), [capture guide](docs/studio.md) and [3D viewer](assets/3d/preview.html).
 
 ![version](https://img.shields.io/badge/version-2.7.0-2fbf71?style=for-the-badge&labelColor=0a0c0b)
 ![license](https://img.shields.io/badge/license-proprietary-c9a13a?style=for-the-badge&labelColor=0a0c0b)
@@ -17,7 +17,7 @@
 
 [**Showcase**](docs/index.html) · [**Motion playground**](docs/motion.html) · [**Tokens**](tokens/tokens.json) · [**Components**](components/) · [**Assets**](assets/) · [**Voice**](docs/voice.md) · [**Changelog**](CHANGELOG.md)
 
-<img src="assets/social/banner-og-1200x630.png" alt="EzyMap Algo" width="720">
+<img src="assets/social/desk-preview.png" alt="EzyMap sample market overview" width="720">
 
 </div>
 
@@ -134,7 +134,7 @@ Writes the animated mark, light app icon, line mark, stacked-on-light lockup and
 </details>
 
 > [!TIP]
-> Open [`docs/index.html`](docs/index.html) over http (for example `npx serve`) to see every token, component and logo rendered.
+> Run `npm run docs` from the repository root and open `/docs/` on the local server to browse the tokens, components, logos and motion scenes.
 
 ## Palette
 
@@ -210,7 +210,7 @@ ezymap-design-system/
 
 ## Brand book
 
-EzyMap is a premium trading desk that lives inside Telegram. Everything built on this system should feel like a private, institutional trading desk from a few years ahead: dark, precise, three-dimensional and quietly futuristic, green and gold on black, with white type.
+EzyMap is a trading desk that lives inside Telegram. The public interface follows the [light-first brand brief](docs/brand-brief.md). The following guidance documents the original dark art direction for legacy integrations and campaign artwork.
 
 ### Brand facts
 

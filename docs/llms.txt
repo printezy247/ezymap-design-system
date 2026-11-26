@@ -29,3 +29,9 @@ Repo: https://github.com/printezy247/ezymap-design-system (private; install via 
 - Build tokens: `node scripts/build-tokens.mjs`
 - Build assets: `node scripts/build-assets.mjs`
 - Resolve an asset: `node scripts/manifest.mjs --product pro --variant glass --format png`
+
+## Light-first assets
+
+- Motion studio and capture guide: docs/studio.html and docs/studio.md.
+- Editable models: assets/3d/ezymap-signal-stack.obj and assets/3d/ezymap-range-gate.obj, each with a paired MTL.
+- Use data-theme="light" for white product surfaces and themed shadows and gradients.

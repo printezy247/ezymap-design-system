@@ -3,7 +3,7 @@
 // Node only, no dependencies.
 //
 //   node scripts/manifest.mjs                          summary
-//   node scripts/manifest.mjs --list [logos|products|motion]
+//   node scripts/manifest.mjs --list [logos|products|models|motion]
 //   node scripts/manifest.mjs --product pro [--variant glass] [--format png]
 //   node scripts/manifest.mjs --logo ezymap-mark-aurora [--format svg]
 //   node scripts/manifest.mjs --motion [file.css]

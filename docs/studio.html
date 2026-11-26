@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motion studio · EzyMap</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components/bundle.css">
+  <link rel="stylesheet" href="studio.css">
+  <script defer src="studio.js"></script>
+</head>
+<body>
+  <main class="studio">
+    <header class="studio-header">
+      <a href="./"><img src="../assets/logos/ezymap-3d-horizontal-on-light.svg" alt="EzyMap design system" width="112" height="32"></a>
+      <nav aria-label="Related examples"><a href="motion.html">Motion playground</a><a href="../assets/3d/preview.html?model=ezymap-signal-stack">3D viewer</a></nav>
+    </header>
+    <h1 class="hero">Motion studio</h1>
+    <p class="lead">Preview, scrub, and frame trading scenes for live interfaces and video.</p>
+    <div class="studio-controls" hidden>
+      <label>Scene
+        <select id="scene">
+          <option value="stack">Signal stack</option>
+          <option value="range">Range scan</option>
+          <option value="relay">Signal relay</option>
+        </select>
+      </label>
+      <label>Format
+        <select id="format">
+          <option value="landscape">Landscape · 16:9</option>
+          <option value="portrait">Portrait · 9:16</option>
+        </select>
+      </label>
+      <button type="button" id="play" class="ezm-btn ezm-btn--md ezm-btn--outline">Play</button>
+      <label class="studio-timeline">Time
+        <input id="time" type="range" aria-label="Scene time" min="0" max="3999" step="1" value="0">
+        <output id="time-label" for="time" aria-live="off">0.00 s</output>
+      </label>
+    </div>
+    <div class="studio-preview">
+      <div class="ezm-scene" data-scene="stack" aria-hidden="true">
+        <div class="ezm-scene__visual">
+          <div class="ezm-scene__stack">
+            <div class="ezm-scene__plate"></div><div class="ezm-scene__plate"></div>
+            <div class="ezm-scene__plate">
+              <i style="--bar:35%"></i><i style="--bar:52%"></i><i style="--bar:46%"></i><i style="--bar:68%"></i><i style="--bar:88%"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ezm-scene" data-scene="range" aria-hidden="true" hidden>
+        <div class="ezm-scene__visual">
+          <div class="ezm-scene__range">
+            <div class="ezm-scene__zone"></div>
+            <svg viewBox="0 0 300 180" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M0 135L29 118L57 128L85 93L113 105L145 79L172 89L206 58L234 73L268 60L300 34" stroke-width="3" vector-effect="non-scaling-stroke"/></svg>
+            <div class="ezm-scene__marker"></div>
+          </div>
+        </div>
+      </div>
+      <div class="ezm-scene" data-scene="relay" aria-hidden="true" hidden>
+        <div class="ezm-scene__visual">
+          <div class="ezm-scene__relay">
+            <div class="ezm-scene__rail"></div>
+            <span class="ezm-scene__node"></span><span class="ezm-scene__node"></span><span class="ezm-scene__node"></span>
+            <div class="ezm-scene__pulse"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="studio-summary" id="scene-summary">Signal stack. Three layers fan out to reveal the market bars.</p>
+    <div class="studio-links">
+      <a id="frame-link" hidden>Open current frame</a>
+      <a href="studio.md">Scene and capture guide</a>
+    </div>
+    <section class="studio-assets" aria-labelledby="models">
+      <h2 id="models" class="section-title">Editable 3D models</h2>
+      <p>Import both files from each pair into Blender or another OBJ editor.</p>
+      <ul>
+        <li>Signal stack <a href="../assets/3d/ezymap-signal-stack.obj" download>OBJ</a> <a href="../assets/3d/ezymap-signal-stack.mtl" download>MTL</a></li>
+        <li>Range gate <a href="../assets/3d/ezymap-range-gate.obj" download>OBJ</a> <a href="../assets/3d/ezymap-range-gate.mtl" download>MTL</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
